@@ -122,7 +122,7 @@
       <p>Towny uses a grid system (chunks = 16×16 blocks). To claim more land near your town:</p>
       <p><code>/town claim</code></p>
       <p>Or to claim multiple chunks at once:</p>
-      <p><code>/town claim outpost</code> (if outposts are enabled)</p>
+      <p><code>/town claim auto (amount of chunks)</code></p>
       <p>Claiming costs money from the **town bank**.</p>
       <p>Add money using:</p>
       <p><code>/town deposit &lt;amount&gt;</code></p>
@@ -132,13 +132,13 @@
     <div class="card">
       <h2>3. Managing Residents</h2>
       <p>Invite members to your town:</p>
-      <p><code>/town add &lt;player&gt;</code></p>
+      <p><code>/town invite &lt;player&gt;</code></p>
 
       <p>Remove members:</p>
       <p><code>/town kick &lt;player&gt;</code></p>
 
       <p>Give ranks (assistant, helper, etc):</p>
-      <p><code>/town rank add &lt;player&gt; &lt;rank&gt;</code></p>
+      <p><code>/town rank add &lt;player&gt; &lt;rank&gt;</code></p>      
     </div>
 
     <!-- SECTION 4 -->
@@ -157,19 +157,22 @@
       <h2>5. Town Permissions</h2>
       <p>Control who can build, break, switch, use items, etc.</p>
       <p>Global permissions:</p>
-      <p><code>/town set perm &lt;type&gt; &lt;on/off&gt;</code></p>
+      <p><code>/town set perm &lt;who&gt; &lt;type&gt; &lt;on/off&gt;</code></p>
 
       <p>Examples:</p>
       <ul>
-        <li><code>/town set perm outsider off</code> — outsiders can’t edit</li>
-        <li><code>/plot set perm resident on</code> — let residents build in your plot</li>
+        <li><code>/town set perm outsider build off</code> — outsiders can’t build</li>
+        <li><code>/town set perm resident build on</code> — let residents build in your town</li>
       </ul>
     </div>
 
     <!-- SECTION 6 -->
     <div class="card">
       <h2>6. Plot Management</h2>
-      <p>Plots are 16×16 inside your town. Stand on a plot and use:</p>
+      <p>Plots are chunks (16x16) inside your town. To put a plot up for sale:</p>
+      <p><code>/plot fs (amount)</code></p>
+
+      <p>To claim for sale plots, stand within the plot and type:</p>
       <p><code>/plot claim</code></p>
 
       <p>Unclaim a plot:</p>
@@ -177,12 +180,15 @@
 
       <p>Set plot type (shop, farm, embassy, etc):</p>
       <p><code>/plot set type &lt;type&gt;</code></p>
+
+      <p>Similarily to Section 5, you can edit perms for specific plots you own by standing inside and running:</p>
+      <p><code>/plot set perm &lt;who&gt; &lt;type&gt; &lt;on/off&gt;</code></p>
     </div>
 
     <!-- SECTION 7 -->
     <div class="card">
       <h2>7. Creating or Joining a Nation</h2>
-      <p>Once you have a stable town, join a nation for protection, allies, and diplomacy.</p>
+      <p>Once you have a stable town, join a nation for protection, allies, and diplomacy. View the Nation guide under "Guides" to see how to manage them, including wars.</p>
 
       <p>Create a nation:</p>
       <p><code>/nation new &lt;name&gt;</code></p>
@@ -190,6 +196,7 @@
       <p>Join a nation:</p>
       <p><code>/nation join &lt;name&gt;</code></p>
     </div>
+    
 
     <!-- SECTION 8 -->
     <div class="card">
@@ -197,8 +204,7 @@
       <p>
         <code>/town</code> — main town menu  
         <br><code>/resident</code> — see your info  
-        <br><code>/map</code> — shows claim map  
-        <br><code>/town here</code> — info about your current chunk  
+        <br><code>/plot ?</code> — info about your current chunk  
         <br><code>/town spawn</code> — teleport to town spawn  
         <br><code>/town set spawn</code> — set spawn point  
       </p>
