@@ -59,92 +59,21 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav style="
-    width:100%;
-    background:#0f172a;
-    color:white;
-    font-family: Inter, Arial, sans-serif;
-  ">
-    <div class="nav-inner" style="
-      max-width:900px;
-      margin:0 auto;
-      padding:14px 20px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    ">
-      
-      <!-- LEFT: JOIN -->
-      <a href="join.html" style="
-        font-size:1.05rem;
-        font-weight:600;
-        text-decoration:none;
-        color:#38bdf8;
-      ">JOIN</a>
+<div id="navbar-container"></div>
 
-      <!-- RIGHT LINKS -->
-      <div style="
-        display:flex;
-        gap:24px;
-        font-size:0.95rem;
-        align-items:center;
-      ">
-        <a href="index.html" style="color:white; text-decoration:none; opacity:0.9;">Home</a>
-        <a href="updates.html" style="color:white; text-decoration:none; opacity:0.9;">Dev Updates</a>
-        <a href="vote.html" style="color:white; text-decoration:none; opacity:1; font-weight:600;">Vote</a>
+<script>
+  fetch("/components/navbar.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("navbar-container").innerHTML = html;
 
-        <!-- GUIDES DROPDOWN -->
-        <div class="dropdown" style="position:relative;">
-          <span id="guideToggle" style="
-            cursor:pointer;
-            color:white;
-            opacity:0.9;
-            user-select:none;
-          ">Guides ▾</span>
-
-          <div id="dropdownMenu" style="
-            display:none;
-            position:absolute;
-            top:28px;
-            left:0;
-            background:#1e293b;
-            padding:10px 0;
-            border-radius:8px;
-            min-width:160px;
-            box-shadow:0 5px 16px rgba(0,0,0,0.25);
-            z-index:50;
-          ">
-            <a href="guide-towny.html" style="
-              display:block;
-              padding:10px 16px;
-              color:white;
-              text-decoration:none;
-              font-size:0.9rem;
-              opacity:0.9;
-            ">Towny Guide</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </nav>
-
-  <!-- SCRIPT FOR DROPDOWN -->
-  <script>
-    const toggle = document.getElementById("guideToggle");
-    const menu = document.getElementById("dropdownMenu");
-
-    toggle.addEventListener("click", () => {
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
+      // Highlight active page
+      const path = window.location.pathname.split("/").pop();
+      const link = document.querySelector(`[data-nav="${path.replace('.html','')}"]`);
+      if (link) link.classList.add("active");
     });
+</script>
 
-    window.addEventListener("click", (e) => {
-      if (!toggle.contains(e.target) && !menu.contains(e.target)) {
-        menu.style.display = "none";
-      }
-    });
-  </script>
 
   <!-- MAIN CONTENT -->
   <div class="container">
