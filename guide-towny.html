@@ -63,28 +63,47 @@
     justify-content:space-between;
     align-items:center;
   ">
-    <div style="font-size:1.2rem; font-weight:600;">GeoFrontier</div>
+    
+    <!-- LEFT: JOIN -->
+    <a href="join.html" style="
+      font-size:1.05rem;
+      font-weight:600;
+      text-decoration:none;
+      color:#38bdf8;
+    ">JOIN</a>
 
-    <div style="display:flex; gap:24px; font-size:0.95rem; align-items:center;">
+    <!-- RIGHT LINKS -->
+    <div style="
+      display:flex;
+      gap:24px;
+      font-size:0.95rem;
+      align-items:center;
+    ">
 
       <a href="index.html" style="color:white; text-decoration:none; opacity:0.9;">Home</a>
       <a href="updates.html" style="color:white; text-decoration:none; opacity:0.9;">Dev Updates</a>
       <a href="vote.html" style="color:white; text-decoration:none; opacity:0.9;">Vote</a>
 
-      <!-- GUIDES DROPDOWN -->
+      <!-- GUIDES DROPDOWN (CLICK TO OPEN) -->
       <div class="dropdown" style="position:relative;">
-        <span style="cursor:pointer; color:white; opacity:0.9;">Guides ▾</span>
+        <span id="guideToggle" style="
+          cursor:pointer; 
+          color:white; 
+          opacity:0.9;
+          user-select:none;
+        ">Guides ▾</span>
 
-        <div class="dropdown-content" style="
+        <div id="dropdownMenu" style="
           display:none;
           position:absolute;
-          top:24px;
+          top:28px;
           left:0;
           background:#1e293b;
           padding:10px 0;
           border-radius:8px;
           min-width:160px;
           box-shadow:0 5px 16px rgba(0,0,0,0.25);
+          z-index:50;
         ">
           <a href="guide-towny.html" style="
             display:block;
@@ -97,18 +116,28 @@
           ">Towny Guide</a>
         </div>
       </div>
+
     </div>
   </div>
 </nav>
 
-<style>
-  .dropdown:hover .dropdown-content {
-    display:block !important;
-  }
-  .dropdown-content a:hover {
-    background:#334155;
-  }
-</style>
+<!-- DROPDOWN SCRIPT -->
+<script>
+  const toggle = document.getElementById("guideToggle");
+  const menu = document.getElementById("dropdownMenu");
+
+  toggle.addEventListener("click", () => {
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  });
+
+  // Close menu if user clicks outside
+  window.addEventListener("click", (e) => {
+    if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+      menu.style.display = "none";
+    }
+  });
+</script>
+
 
 
   <header>
