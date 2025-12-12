@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoFrontier — Towny Guide</title>
+
+  <style>
+    body { margin:0; font-family: Inter, Arial, sans-serif; background:#f3f3f3; color:#111; }
+
+    header {
+      background:#1e293b;
+      color:white;
+      padding:40px 20px;
+      text-align:center;
+    }
+
+    header h1 { margin:0; font-size:2.3rem; }
+    header p { opacity:0.9; margin-top:8px; }
+
+    .container {
+      max-width:900px;
+      margin:40px auto;
+      padding:0 20px;
+    }
+
+    .card {
+      background:white;
+      padding:24px;
+      border-radius:12px;
+      box-shadow:0 5px 16px rgba(0,0,0,0.08);
+      margin-bottom:24px;
+    }
+
+    .card h2 {
+      margin-top:0;
+      font-size:1.5rem;
+    }
+
+    code {
+      background:#e2e8f0;
+      padding:3px 6px;
+      border-radius:6px;
+      font-size:0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav style="
+    width:100%; 
+    background:#0f172a; 
+    color:white; 
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center; 
+    padding:14px 28px;
+    position:relative;
+    font-family: Inter, Arial, sans-serif;
+  ">
+    <div style="font-size:1.2rem; font-weight:600;">GeoFrontier</div>
+
+    <div style="display:flex; gap:24px; font-size:0.95rem; align-items:center;">
+      <a href="index.html" style="color:white; text-decoration:none; opacity:0.9;">Home</a>
+      <a href="updates.html" style="color:white; text-decoration:none; opacity:0.9;">Dev Updates</a>
+
+      <!-- GUIDES DROPDOWN -->
+      <div class="dropdown" style="position:relative;">
+        <span style="cursor:pointer; color:white; opacity:1; font-weight:600;">Guides ▾</span>
+
+        <div class="dropdown-content" style="
+          display:none;
+          position:absolute;
+          top:24px;
+          left:0;
+          background:#1e293b;
+          padding:10px 0;
+          border-radius:8px;
+          min-width:160px;
+          box-shadow:0 5px 16px rgba(0,0,0,0.25);
+        ">
+          <a href="guide-towny.html" style="
+            display:block;
+            padding:10px 16px;
+            color:white;
+            text-decoration:none;
+            font-size:0.9rem;
+            opacity:0.9;
+          ">Towny Guide</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <style>
+    .dropdown:hover .dropdown-content {
+      display:block !important;
+    }
+    .dropdown-content a:hover {
+      background:#334155;
+    }
+  </style>
+
+  <header>
+    <h1>Towny Guide</h1>
+    <p>Everything you need to start a town, claim land, expand, and manage residents.</p>
+  </header>
+
+  <div class="container">
+
+    <!-- SECTION 1 -->
+    <div class="card">
+      <h2>1. Creating a Town</h2>
+      <p>To create a town, you only need enough money (usually $250–$500 depending on server config).</p>
+      <p>Use:</p>
+      <p><code>/town new &lt;name&gt;</code></p>
+      <p>This creates a town centered on your current chunk.</p>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="card">
+      <h2>2. Claiming Land</h2>
+      <p>Towny uses a grid system (chunks = 16×16 blocks). To claim more land near your town:</p>
+      <p><code>/town claim</code></p>
+      <p>Or to claim multiple chunks at once:</p>
+      <p><code>/town claim outpost</code> (if outposts are enabled)</p>
+      <p>Claiming costs money from the **town bank**.</p>
+      <p>Add money using:</p>
+      <p><code>/town deposit &lt;amount&gt;</code></p>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="card">
+      <h2>3. Managing Residents</h2>
+      <p>Invite members to your town:</p>
+      <p><code>/town add &lt;player&gt;</code></p>
+
+      <p>Remove members:</p>
+      <p><code>/town kick &lt;player&gt;</code></p>
+
+      <p>Give ranks (assistant, helper, etc):</p>
+      <p><code>/town rank add &lt;player&gt; &lt;rank&gt;</code></p>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="card">
+      <h2>4. Town Taxes & Upkeep</h2>
+      <p>Each town pays a daily upkeep based on the number of claimed chunks.</p>
+      <p>Set resident taxes:</p>
+      <p><code>/town set tax &lt;amount&gt;</code></p>
+
+      <p>Set plot-specific taxes:</p>
+      <p><code>/town set plottax &lt;amount&gt;</code></p>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="card">
+      <h2>5. Town Permissions</h2>
+      <p>Control who can build, break, switch, use items, etc.</p>
+      <p>Global permissions:</p>
+      <p><code>/town set perm &lt;type&gt; &lt;on/off&gt;</code></p>
+
+      <p>Examples:</p>
+      <ul>
+        <li><code>/town set perm outsider off</code> — outsiders can’t edit</li>
+        <li><code>/plot set perm resident on</code> — let residents build in your plot</li>
+      </ul>
+    </div>
+
+    <!-- SECTION 6 -->
+    <div class="card">
+      <h2>6. Plot Management</h2>
+      <p>Plots are 16×16 inside your town. Stand on a plot and use:</p>
+      <p><code>/plot claim</code></p>
+
+      <p>Unclaim a plot:</p>
+      <p><code>/plot unclaim</code></p>
+
+      <p>Set plot type (shop, farm, embassy, etc):</p>
+      <p><code>/plot set type &lt;type&gt;</code></p>
+    </div>
+
+    <!-- SECTION 7 -->
+    <div class="card">
+      <h2>7. Creating or Joining a Nation</h2>
+      <p>Once you have a stable town, join a nation for protection, allies, and diplomacy.</p>
+
+      <p>Create a nation:</p>
+      <p><code>/nation new &lt;name&gt;</code></p>
+
+      <p>Join a nation:</p>
+      <p><code>/nation join &lt;name&gt;</code></p>
+    </div>
+
+    <!-- SECTION 8 -->
+    <div class="card">
+      <h2>8. Useful Towny Commands</h2>
+      <p>
+        <code>/town</code> — main town menu  
+        <br><code>/resident</code> — see your info  
+        <br><code>/map</code> — shows claim map  
+        <br><code>/town here</code> — info about your current chunk  
+        <br><code>/town spawn</code> — teleport to town spawn  
+        <br><code>/town set spawn</code> — set spawn point  
+      </p>
+    </div>
+
+  </div>
+
+</body>
+</html>
