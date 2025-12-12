@@ -56,23 +56,62 @@
 
 <body>
 
-  <!-- NAVBAR -->
-  <nav style="
-    width:100%; 
-    background:#0f172a; 
-    color:white; 
-    display:flex; 
-    justify-content:space-between; 
-    align-items:center; 
-    padding:14px 28px;
-  ">
-    <div style="font-size:1.2rem; font-weight:600;">GeoFrontier</div>
+<!-- NAVBAR -->
+<nav style="
+  width:100%; 
+  background:#0f172a; 
+  color:white; 
+  display:flex; 
+  justify-content:space-between; 
+  align-items:center; 
+  padding:14px 28px;
+  position:relative;
+  font-family: Inter, Arial, sans-serif;
+">
+  <div style="font-size:1.2rem; font-weight:600;">GeoFrontier</div>
 
-    <div style="display:flex; gap:24px; font-size:0.95rem;">
-      <a href="index.html" style="color:white; text-decoration:none; opacity:1; font-weight:600;">Home</a>
-      <a href="updates.html" style="color:white; text-decoration:none; opacity:0.9;">Dev Updates</a>
+  <div style="display:flex; gap:24px; font-size:0.95rem; align-items:center;">
+
+    <a href="index.html" style="color:white; text-decoration:none; opacity:0.9;">Home</a>
+    <a href="updates.html" style="color:white; text-decoration:none; opacity:0.9;">Dev Updates</a>
+
+    <!-- GUIDES DROPDOWN -->
+    <div class="dropdown" style="position:relative;">
+      <span style="cursor:pointer; color:white; opacity:0.9;">Guides ▾</span>
+
+      <div class="dropdown-content" style="
+        display:none;
+        position:absolute;
+        top:24px;
+        left:0;
+        background:#1e293b;
+        padding:10px 0;
+        border-radius:8px;
+        min-width:160px;
+        box-shadow:0 5px 16px rgba(0,0,0,0.25);
+      ">
+        <a href="guide-towny.html" style="
+          display:block;
+          padding:10px 16px;
+          color:white;
+          text-decoration:none;
+          font-size:0.9rem;
+          opacity:0.9;
+        ">Towny Guide</a>
+      </div>
     </div>
-  </nav>
+  </div>
+</nav>
+
+<!-- DROPDOWN HOVER SCRIPT -->
+<style>
+  .dropdown:hover .dropdown-content {
+    display:block !important;
+  }
+  .dropdown-content a:hover {
+    background:#334155;
+  }
+</style>
 
   <!-- HERO SECTION -->
   <section class="hero">
@@ -102,3 +141,4 @@
 
 </body>
 </html>
+
