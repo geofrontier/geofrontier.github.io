@@ -1,0 +1,132 @@
+<!-- NAVBAR -->
+<nav style="
+  width:100%;
+  background:#0f172a;
+  color:white;
+  font-family: Inter, Arial, sans-serif;
+">
+  <div class="nav-inner" style="
+    max-width:900px;
+    margin:0 auto;
+    padding:14px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  ">
+    
+    <!-- LEFT: JOIN -->
+    <a href="join.html" style="
+      font-size:1.05rem;
+      font-weight:600;
+      text-decoration:none;
+      color:#38bdf8;
+    ">JOIN</a>
+
+    <!-- RIGHT LINKS -->
+    <div style="
+      display:flex;
+      gap:24px;
+      font-size:0.95rem;
+      align-items:center;
+    ">
+
+      <a href="index.html" data-nav="index">Home</a>
+      <a href="updates.html" data-nav="updates">Dev Updates</a>
+      <a href="vote.html" data-nav="vote">Vote</a>
+
+      <!-- GUIDES DROPDOWN -->
+      <div class="dropdown" style="position:relative;">
+        <span id="guideToggle" class="nav-dropdown">Guides ▾</span>
+
+        <div id="dropdownMenu" class="dropdown-menu">
+          <a href="guide-towny.html">Towny Guide</a>
+        </div>
+      </div>
+
+      <!-- SUPPORT DROPDOWN -->
+      <div class="dropdown" style="position:relative;">
+        <span id="supportToggle" class="nav-dropdown">Support ▾</span>
+
+        <div id="supportMenu" class="dropdown-menu">
+          <a href="apply.html">Staff Application</a>
+          <a href="appeal.html">Appeal</a>
+          <a href="report.html">Report a Player</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<style>
+  nav a {
+    color:white;
+    text-decoration:none;
+    opacity:0.9;
+  }
+  nav a.active {
+    font-weight:600;
+    opacity:1;
+  }
+  .dropdown-menu {
+    display:none;
+    position:absolute;
+    top:28px;
+    left:0;
+    background:#1e293b;
+    padding:10px 0;
+    border-radius:8px;
+    min-width:160px;
+    box-shadow:0 5px 16px rgba(0,0,0,0.25);
+    z-index:50;
+  }
+  .dropdown-menu a {
+    display:block;
+    padding:10px 16px;
+    color:white;
+    font-size:0.9rem;
+    opacity:0.9;
+  }
+  .nav-dropdown {
+    cursor:pointer;
+    opacity:0.9;
+    user-select:none;
+  }
+</style>
+
+<script>
+  /* Dropdown logic */
+  const guideToggle = document.getElementById("guideToggle");
+  const guideMenu = document.getElementById("dropdownMenu");
+
+  const supportToggle = document.getElementById("supportToggle");
+  const supportMenu = document.getElementById("supportMenu");
+
+  function closeAll() {
+    guideMenu.style.display = "none";
+    supportMenu.style.display = "none";
+  }
+
+  guideToggle.addEventListener("click", () => {
+    const open = guideMenu.style.display === "block";
+    closeAll();
+    guideMenu.style.display = open ? "none" : "block";
+  });
+
+  supportToggle.addEventListener("click", () => {
+    const open = supportMenu.style.display === "block";
+    closeAll();
+    supportMenu.style.display = open ? "none" : "block";
+  });
+
+  window.addEventListener("click", (e) => {
+    if (
+      !guideToggle.contains(e.target) &&
+      !guideMenu.contains(e.target) &&
+      !supportToggle.contains(e.target) &&
+      !supportMenu.contains(e.target)
+    ) {
+      closeAll();
+    }
+  });
+</script>
