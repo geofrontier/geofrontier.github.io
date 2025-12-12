@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GeoFrontier — Nations of the Month</title>
+  <style>
+    body { margin:0; font-family:Inter, Arial, sans-serif; background:#f3f3f3; }
+    .section { max-width:900px; margin:40px auto; padding:0 20px; }
+    .card {
+      background:white;
+      padding:24px;
+      border-radius:12px;
+      box-shadow:0 5px 16px rgba(0,0,0,0.08);
+      margin-bottom:28px;
+    }
+    img { width:100%; border-radius:10px; margin:12px 0; }
+  </style>
+</head>
+<body>
+
+<div id="navbar-container"></div>
+
+<div class="section">
+  <h1>🏆 Nations of the Month</h1>
+  <div id="nation-list"></div>
+</div>
+
+<script src="components/nation-data.js"></script>
+<script>
+  const container = document.getElementById("nation-list");
+
+  nationsOfTheMonth.forEach(n => {
+    container.innerHTML += `
+      <div class="card">
+        <h2>${n.name}</h2>
+        <p style="opacity:0.7;">${n.month}</p>
+        <img src="${n.image}" alt="${n.name}">
+        <p>${n.description}</p>
+        <p style="font-size:0.85rem; opacity:0.8;">
+          Population: ${n.population} · Towns: ${n.towns} · Ideology: ${n.ideology}
+        </p>
+      </div>
+    `;
+  });
+</script>
+
+</body>
+</html>
