@@ -116,6 +116,24 @@
   </section>
 
   <!-- MAIN CONTENT -->
+<div class="card" id="featured-nation"></div>
+
+<script src="components/nation-data.js"></script>
+<script>
+  const latest = nationsOfTheMonth[0];
+
+  document.getElementById("featured-nation").innerHTML = `
+    <h2>🏆 Nation of the Month</h2>
+    <img src="${latest.image}" alt="${latest.name}">
+    <h3>${latest.name}</h3>
+    <p>${latest.description}</p>
+    <p style="font-size:0.85rem; opacity:0.8;">
+      Population: ${latest.population} · Towns: ${latest.towns} · Ideology: ${latest.ideology}
+    </p>
+    <a href="nations.html" class="btn">View All Nations →</a>
+  `;
+</script>
+
   <div class="section">
     <div class="card">
       <h2>🌍 Player-Driven Nations</h2>
@@ -135,6 +153,7 @@
 
 </body>
 </html>
+
 
 
 
