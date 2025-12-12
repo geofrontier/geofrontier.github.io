@@ -1,1 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoFrontier — Towny Guide</title>
 
+  <style>
+    body { margin:0; font-family: Inter, Arial, sans-serif; background:#f3f3f3; color:#111; }
+
+    header {
+      background:#1e293b;
+      color:white;
+      padding:40px 20px;
+      text-align:center;
+    }
+
+    header h1 { margin:0; font-size:2.3rem; }
+    header p { opacity:0.9; margin-top:8px; }
+
+    .container {
+      max-width:900px;
+      margin:40px auto;
+      padding:0 20px;
+    }
+
+    .card {
+      background:white;
+      padding:24px;
+      border-radius:12px;
+      box-shadow:0 5px 16px rgba(0,0,0,0.08);
+      margin-bottom:24px;
+    }
+
+    .card h2 {
+      margin-top:0;
+      font-size:1.5rem;
+    }
+
+    code {
+      background:#e2e8f0;
+      padding:3px 6px;
+      border-radius:6px;
+      font-size:0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="navbar-container"></div>
+
+<script>
+  fetch("/components/navbar.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("navbar-container").innerHTML = html;
+
+      // Highlight active page
+      const path = window.location.pathname.split("/").pop();
+      const link = document.querySelector(`[data-nav="${path.replace('.html','')}"]`);
+      if (link) link.classList.add("active");
+
+      // After navbar loads, bind dropdown logic:
+      const guideToggle = document.getElementById("guideToggle");
+      const guideMenu = document.getElementById("dropdownMenu");
+
+      const supportToggle = document.getElementById("supportToggle");
+      const supportMenu = document.getElementById("supportMenu");
+
+      function closeAll() {
+        guideMenu.style.display = "none";
+        supportMenu.style.display = "none";
+      }
+
+      guideToggle.addEventListener("click", () => {
+        const open = guideMenu.style.display === "block";
+        closeAll();
+        guideMenu.style.display = open ? "none" : "block";
+      });
+
+      supportToggle.addEventListener("click", () => {
+        const open = supportMenu.style.display === "block";
+        closeAll();
+        supportMenu.style.display = open ? "none" : "block";
+      });
+
+      window.addEventListener("click", (e) => {
+        if (
+          !guideToggle.contains(e.target) &&
+          !guideMenu.contains(e.target) &&
+          !supportToggle.contains(e.target) &&
+          !supportMenu.contains(e.target)
+        ) {
+          closeAll();
+        }
+      });
+    });
+</script>
+
+
+
+  <header>
+    <h1>Towny Guide</h1>
+    <p>Everything you need to start a town, claim land, expand, and manage residents.</p>
+  </header>
+
+  <div class="container">
+
+    <!-- SECTION 1 -->
+    <div class="card">
+      <h2>1. Creating a Nation</h2>
+      <p>To create a nation, you must be the mayor or co-mayor of a town and have $5000.</p>
+      <p>Use:</p>
+      <p><code>/nation new &lt;name&gt;</code></p>
+    </div>
+
+</body>
+</html>
