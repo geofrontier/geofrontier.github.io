@@ -11,7 +11,7 @@
 <div id="navbar-container"></div>
 
 <script>
-  fetch("/components/navbar.html")
+  fetch("./components/navbar.html")
     .then(res => res.text())
     .then(html => {
       document.getElementById("navbar-container").innerHTML = html;
@@ -57,7 +57,6 @@
       });
     });
 </script>
-
 
 <div style="max-width:900px; margin:40px auto; padding:0 20px;">
   <h1 style="font-size:2rem; margin-bottom:16px;">Report a Player</h1>
