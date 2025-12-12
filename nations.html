@@ -32,8 +32,10 @@
   nationsOfTheMonth.forEach(n => {
     container.innerHTML += `
       <div class="card">
-        <h2>${n.name}</h2>
-        <p style="opacity:0.7;">${n.month}</p>
+        <h2>${n.name}</h2> <p style="opacity:0.7;"> · ${n.month}</p>
+        <p style="font-size:0.85rem; opacity:0.8;">
+          Leader(s): ${n.leader}
+        </p>
         <img src="${n.image}" alt="${n.name}">
         <p>${n.description}</p>
         <p style="font-size:0.85rem; opacity:0.8;">
