@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>GeoFrontier — Nations of the Month</title>
+  <title>GeoFrontier — Towns of the Month</title>
   <style>
     body { margin:0; font-family:Inter, Arial, sans-serif; background:#f3f3f3; }
     .section { max-width:900px; margin:40px auto; padding:0 20px; }
@@ -69,25 +69,22 @@
 </script>
 
 <div class="section">
-  <h1>🏆 Nations of the Month</h1>
-  <div id="nation-list"></div>
+  <h1>🏆 Towns of the Month</h1>
+  <div id="town-list"></div>
 </div>
 
-<script src="components/nation-data.js"></script>
+<script src="components/town-data.js"></script>
 <script>
   const container = document.getElementById("nation-list");
 
-  nationsOfTheMonth.forEach(n => {
+  townsOfTheMonth.forEach(n => {
     container.innerHTML += `
       <div class="card">
         <h2>${n.name}</h2> <p style="opacity:0.7;"> · ${n.month}</p>
-        <p style="font-size:0.85rem; opacity:0.8;">
-          Leader(s): ${n.leader}
-        </p>
         <img src="${n.image}" alt="${n.name}">
         <p>${n.description}</p>
         <p style="font-size:0.85rem; opacity:0.8;">
-          Population: ${n.population} · Towns: ${n.towns} · Ideology: ${n.ideology}
+          Population: ${n.population} · Leader(s): ${n.towns} · Ideology: ${n.ideology}
         </p>
       </div>
     `;
