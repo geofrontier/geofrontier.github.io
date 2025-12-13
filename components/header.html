@@ -1,8 +1,16 @@
 <!-- GLOBAL HEADER -->
+<script>
+  function copyText(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      alert("Copied: " + text);
+    });
+  }
+</script>
+
 <header style="
   width:100%;
   background:linear-gradient(180deg, #020617, #020617ee),
-             url('/assets/header-bg.jpg') center/cover no-repeat;
+             url('/images/MapChart_Map.png') center/cover no-repeat;
   color:white;
   font-family: Inter, Arial, sans-serif;
 ">
@@ -18,7 +26,9 @@
   ">
 
     <!-- LEFT: SERVER IP -->
-    <div style="display:flex; align-items:center; gap:14px;">
+    <div style="display:flex; align-items:center; gap:14px; cursor:pointer;"
+      onclick="copyText('COMING SOON')"
+      >
       <div style="font-size:1.3rem;">🟠</div>
       <div>
         <div style="font-size:0.8rem; opacity:0.75;">PLAY</div>
@@ -39,7 +49,9 @@
     </div>
 
     <!-- RIGHT: DISCORD -->
-    <div style="display:flex; align-items:center; gap:14px;">
+    <div style="display:flex; align-items:center; gap:14px; cursor:pointer;"
+      onclick="copyText('COMING SOON')"
+      >
       <div>
         <div style="font-size:0.8rem; opacity:0.75;">DISCORD</div>
         <div style="font-weight:600; font-size:1.05rem;">
