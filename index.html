@@ -12,6 +12,44 @@
     margin: 12px 0;
     display: block;
   }
+    .card-title {
+  margin-bottom: 14px;
+}
+
+.town-name {
+  margin: 14px 0 6px;
+  font-size: 1.35rem;
+}
+
+.town-desc {
+  margin: 6px 0 14px;
+  line-height: 1.55;
+  color: #374151;
+}
+
+.town-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.town-meta span {
+  background: #f1f5f9;
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+.town-image {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 10px 0;
+}
+
 </style>
   <title>Geofrontier — Minecraft Geopolitical Server</title>
 
@@ -133,16 +171,24 @@
   const latest = townsOfTheMonth[0];
 
   document.getElementById("featured-town").innerHTML = `
-    <h2>🏆 Town of the Month</h2>
+    <h2 class="card-title">🏆 Town of the Month</h2>
+
     <img class="town-image" src="${latest.image}" alt="${latest.name}">
-    <h3>${latest.name}</h3>
-    <p>${latest.description}</p>
-    <p style="font-size:0.85rem; opacity:0.8;">
-      Population: ${latest.population} · Leader(s): ${latest.leader} · Ideology: ${latest.ideology}
-    </p>
+
+    <h3 class="town-name">${latest.name}</h3>
+
+    <p class="town-desc">${latest.description}</p>
+
+    <div class="town-meta">
+      <span>👥 ${latest.population}</span>
+      <span>👑 ${latest.leader}</span>
+      <span>🏛 ${latest.ideology}</span>
+    </div>
+
     <a href="towns.html" class="btn">View All Towns →</a>
   `;
 </script>
+
 
 
   <div class="section">
@@ -164,6 +210,7 @@
 
 </body>
 </html>
+
 
 
 
