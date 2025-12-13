@@ -80,15 +80,11 @@
 
 <body>
 
+<div id="header-container"></div>
 <div id="navbar-container"></div>
 
-<script>
-  fetch("./components/navbar.html")
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById("navbar-container").innerHTML = html;
-    });
-</script>
+<script src="/components/layout-loader.js"></script>
+
 
 <div class="section">
   <h1>🏆 Towns of the Month</h1>
