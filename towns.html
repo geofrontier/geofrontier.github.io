@@ -5,7 +5,6 @@
   <title>GeoFrontier — Towns of the Month</title>
 
   <style>
-    
     body {
       margin: 0;
       font-family: Inter, Arial, sans-serif;
@@ -20,7 +19,7 @@
     }
 
     h1 {
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
     .card {
@@ -31,18 +30,16 @@
       margin-bottom: 32px;
     }
 
-    /* HEADER AREA */
     .town-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       gap: 12px;
-      margin-bottom: 6px;
     }
 
-    .town-header h2 {
+    .town-name {
       margin: 0;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
     }
 
     .town-month {
@@ -51,32 +48,33 @@
       white-space: nowrap;
     }
 
-    /* IMAGE */
     .town-image {
       width: 100%;
-      max-height: 260px;
+      height: 240px;
       object-fit: cover;
       border-radius: 12px;
-      margin: 14px 0 16px;
-      display: block;
+      margin: 14px 0;
     }
 
-    /* DESCRIPTION */
-    .town-description {
-      font-size: 0.95rem;
+    .town-desc {
+      margin: 6px 0 14px;
       line-height: 1.55;
-      margin-bottom: 14px;
+      color: #374151;
     }
 
-    /* META INFO */
     .town-meta {
       display: flex;
-      gap: 16px;
+      gap: 14px;
       font-size: 0.85rem;
       color: #6b7280;
-      margin-bottom: 16px;
       flex-wrap: wrap;
-    }    
+    }
+
+    .town-meta span {
+      background: #f1f5f9;
+      padding: 6px 12px;
+      border-radius: 999px;
+    }
   </style>
 </head>
 
@@ -89,39 +87,6 @@
     .then(res => res.text())
     .then(html => {
       document.getElementById("navbar-container").innerHTML = html;
-
-      const guideToggle = document.getElementById("guideToggle");
-      const guideMenu = document.getElementById("dropdownMenu");
-      const supportToggle = document.getElementById("supportToggle");
-      const supportMenu = document.getElementById("supportMenu");
-
-      function closeAll() {
-        guideMenu.style.display = "none";
-        supportMenu.style.display = "none";
-      }
-
-      guideToggle.addEventListener("click", () => {
-        const open = guideMenu.style.display === "block";
-        closeAll();
-        guideMenu.style.display = open ? "none" : "block";
-      });
-
-      supportToggle.addEventListener("click", () => {
-        const open = supportMenu.style.display === "block";
-        closeAll();
-        supportMenu.style.display = open ? "none" : "block";
-      });
-
-      window.addEventListener("click", (e) => {
-        if (
-          !guideToggle.contains(e.target) &&
-          !guideMenu.contains(e.target) &&
-          !supportToggle.contains(e.target) &&
-          !supportMenu.contains(e.target)
-        ) {
-          closeAll();
-        }
-      });
     });
 </script>
 
@@ -137,18 +102,16 @@
   townsOfTheMonth.forEach(town => {
     container.innerHTML += `
       <div class="card">
-        
+
         <div class="town-header">
-          <h2>${town.name}</h2>
+          <h2 class="town-name">${town.name}</h2>
           <span class="town-month">${town.month}</span>
         </div>
 
         <img class="town-image" src="${town.image}" alt="${town.name}">
 
-        <p class="town-description">
-          ${town.description}
-        </p>
-        
+        <p class="town-desc">${town.description}</p>
+
         <div class="town-meta">
           <span>👥 ${town.population}</span>
           <span>👑 ${town.leader}</span>
