@@ -8,55 +8,11 @@
 
 <body style="margin:0; background:#0f172a; font-family:Inter, Arial, sans-serif; color:white;">
 
+<div id="header-container"></div>
 <div id="navbar-container"></div>
 
-<script>
-  fetch("./components/navbar.html")
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById("navbar-container").innerHTML = html;
+<script src="/components/layout-loader.js"></script>
 
-      // Highlight active page
-      const path = window.location.pathname.split("/").pop();
-      const link = document.querySelector(`[data-nav="${path.replace('.html','')}"]`);
-      if (link) link.classList.add("active");
-
-      // After navbar loads, bind dropdown logic:
-      const guideToggle = document.getElementById("guideToggle");
-      const guideMenu = document.getElementById("dropdownMenu");
-
-      const supportToggle = document.getElementById("supportToggle");
-      const supportMenu = document.getElementById("supportMenu");
-
-      function closeAll() {
-        guideMenu.style.display = "none";
-        supportMenu.style.display = "none";
-      }
-
-      guideToggle.addEventListener("click", () => {
-        const open = guideMenu.style.display === "block";
-        closeAll();
-        guideMenu.style.display = open ? "none" : "block";
-      });
-
-      supportToggle.addEventListener("click", () => {
-        const open = supportMenu.style.display === "block";
-        closeAll();
-        supportMenu.style.display = open ? "none" : "block";
-      });
-
-      window.addEventListener("click", (e) => {
-        if (
-          !guideToggle.contains(e.target) &&
-          !guideMenu.contains(e.target) &&
-          !supportToggle.contains(e.target) &&
-          !supportMenu.contains(e.target)
-        ) {
-          closeAll();
-        }
-      });
-    });
-</script>
 
 <div style="max-width:900px; margin:40px auto; padding:0 20px;">
   <h1 style="font-size:2rem; margin-bottom:16px;">Report a Player</h1>
