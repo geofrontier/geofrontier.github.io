@@ -1,3 +1,4 @@
+// navbar-loader.js (robust + defensive)
 fetch("/components/navbar.html")
   .then(res => res.text())
   .then(html => {
@@ -5,12 +6,11 @@ fetch("/components/navbar.html")
 
     // Active page highlighting
     const path = window.location.pathname.split("/").pop();
-    const link = document.querySelector(
-      `[data-nav="${path.replace(".html", "")}"]`
-    );
+    const page = path ? path.replace(".html", "") : "index";
+    const link = document.querySelector(`[data-nav="${page}"]`);
     if (link) link.classList.add("active");
 
-    // Dropdown elements
+    // Grab elements (may be null on some pages; handle gracefully)
     const guideToggle = document.getElementById("guideToggle");
     const guideMenu = document.getElementById("dropdownMenu");
 
@@ -21,39 +21,59 @@ fetch("/components/navbar.html")
     const moreMenu = document.getElementById("moreMenu");
 
     function closeAll() {
-      guideMenu.style.display = "none";
-      supportMenu.style.display = "none";
-      moreMenu.style.display = "none";
+      if (guideMenu) guideMenu.classList.remove("open");
+      if (supportMenu) supportMenu.classList.remove("open");
+      if (moreMenu) moreMenu.classList.remove("open");
     }
 
-    guideToggle.addEventListener("click", () => {
-      const open = guideMenu.style.display === "block";
+    // helper to toggle a single menu
+    function toggle(menu) {
+      if (!menu) return;
+      const isOpen = menu.classList.contains("open");
       closeAll();
-      guideMenu.style.display = open ? "none" : "block";
-    });
+      if (!isOpen) menu.classList.add("open");
+    }
 
-    supportToggle.addEventListener("click", () => {
-      const open = supportMenu.style.display === "block";
-      closeAll();
-      supportMenu.style.display = open ? "none" : "block";
-    });
+    // Attach safe listeners (only if elements exist)
+    if (guideToggle) {
+      guideToggle.addEventListener("click", (e) => {
+        e.stopPropagation(); // <-- prevents document click from immediately closing it
+        toggle(guideMenu);
+      });
+    }
 
-    moreToggle.addEventListener("click", () => {
-      const open = moreMenu.style.display === "block";
-      closeAll();
-      moreMenu.style.display = open ? "none" : "block";
-    });
+    if (supportToggle) {
+      supportToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggle(supportMenu);
+      });
+    }
 
-    window.addEventListener("click", e => {
-      if (
-        !guideToggle.contains(e.target) &&
-        !guideMenu.contains(e.target) &&
-        !supportToggle.contains(e.target) &&
-        !supportMenu.contains(e.target) &&
-        !moreToggle.contains(e.target) &&
-        !moreMenu.contains(e.target)
-      ) {
+    if (moreToggle) {
+      moreToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggle(moreMenu);
+      });
+    }
+
+    // clicking anywhere outside a dropdown closes them
+    document.addEventListener("click", (e) => {
+      // if click is inside any open menu or its toggle, do nothing
+      const insideGuide = guideToggle && guideToggle.contains(e.target) || guideMenu && guideMenu.contains(e.target);
+      const insideSupport = supportToggle && supportToggle.contains(e.target) || supportMenu && supportMenu.contains(e.target);
+      const insideMore = moreToggle && moreToggle.contains(e.target) || moreMenu && moreMenu.contains(e.target);
+
+      if (!insideGuide && !insideSupport && !insideMore) {
         closeAll();
       }
     });
+
+    // optional: close on ESC
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeAll();
+    });
+  })
+  .catch(err => {
+    // friendly fallback logging (won't crash the rest of the page)
+    console.error("Failed to load navbar:", err);
   });
