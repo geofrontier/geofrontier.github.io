@@ -6,66 +6,61 @@
   font-family: Inter, Arial, sans-serif;
 ">
   <div class="nav-inner" style="
-    max-width:900px;
+    max-width:1100px;
     margin:0 auto;
     padding:14px 20px;
     display:flex;
-    justify-content:space-between;
+    justify-content:center;
     align-items:center;
   ">
-    
-    <!-- LEFT: JOIN -->
-    <a href="join.html" style="
-      font-size:1.05rem;
-      font-weight:600;
-      text-decoration:none;
-      color:#38bdf8;
-    ">JOIN</a>
 
-  <!-- RIGHT LINKS -->
-<div style="
-  display:flex;
-  gap:24px;
-  font-size:0.95rem;
-  align-items:center;
-">
+    <!-- CENTER LINKS -->
+    <div style="
+      display:flex;
+      gap:26px;
+      font-size:0.95rem;
+      align-items:center;
+    ">
 
-  <a href="index.html" data-nav="index">Home</a>
-  <a href="updates.html" data-nav="updates">Dev Updates</a>
-  <a href="vote.html" data-nav="vote">Vote</a>
+      <a href="index.html" data-nav="index">Home</a>
+      <a href="updates.html" data-nav="updates">Dev Updates</a>
+      <a href="vote.html" data-nav="vote">Vote</a>
 
-  <!-- GUIDES DROPDOWN -->
-  <div class="dropdown" style="position:relative;">
-    <span id="guideToggle" class="nav-dropdown">Guides ▾</span>
+      <!-- SHOP (HIGHLIGHTED) -->
+      <a href="shop.html" data-nav="shop" class="shop-btn">
+        SHOP
+      </a>
 
-    <div id="dropdownMenu" class="dropdown-menu">
-      <a href="guide-towny.html">Towny Guide</a>
-      <a href="guide-nation.html">Nation Guide</a>
-    </div>
-  </div>
+      <!-- GUIDES DROPDOWN -->
+      <div class="dropdown" style="position:relative;">
+        <span id="guideToggle" class="nav-dropdown">Guides ▾</span>
 
-  <!-- SUPPORT DROPDOWN -->
-  <div class="dropdown" style="position:relative;">
-    <span id="supportToggle" class="nav-dropdown">Support ▾</span>
+        <div id="dropdownMenu" class="dropdown-menu">
+          <a href="guide-towny.html">Towny Guide</a>
+          <a href="guide-nation.html">Nation Guide</a>
+        </div>
+      </div>
 
-    <div id="supportMenu" class="dropdown-menu">
-      <a href="rules.html">Rules</a>
-      <a href="apply.html">Staff Application</a>
-      <a href="appeal.html">Appeal</a>
-      <a href="report.html">Report a Player</a>
-    </div>
-  </div>
+      <!-- SUPPORT DROPDOWN -->
+      <div class="dropdown" style="position:relative;">
+        <span id="supportToggle" class="nav-dropdown">Support ▾</span>
 
-  <!-- MORE / MISC DROPDOWN -->
-  <div class="dropdown" style="position:relative;">
-    <span id="moreToggle" class="nav-dropdown">More ▾</span>
+        <div id="supportMenu" class="dropdown-menu">
+          <a href="rules.html">Rules</a>
+          <a href="apply.html">Staff Application</a>
+          <a href="appeal.html">Appeal</a>
+          <a href="report.html">Report a Player</a>
+        </div>
+      </div>
 
-    <div id="moreMenu" class="dropdown-menu">
-      <!-- empty for now -->
-    </div>
-  </div>
+      <!-- MORE DROPDOWN -->
+      <div class="dropdown" style="position:relative;">
+        <span id="moreToggle" class="nav-dropdown">More ▾</span>
 
-</div>
+        <div id="moreMenu" class="dropdown-menu">
+          <!-- empty for now -->
+        </div>
+      </div>
 
     </div>
   </div>
@@ -77,14 +72,32 @@
     text-decoration:none;
     opacity:0.9;
   }
+
   nav a.active {
     font-weight:600;
     opacity:1;
   }
+
+  /* SHOP BUTTON */
+  .shop-btn {
+    background:linear-gradient(135deg, #f59e0b, #f97316);
+    color:#111;
+    padding:8px 16px;
+    border-radius:999px;
+    font-weight:700;
+    letter-spacing:0.4px;
+    box-shadow:0 4px 12px rgba(249,115,22,0.35);
+    opacity:1 !important;
+  }
+
+  .shop-btn:hover {
+    filter:brightness(1.08);
+  }
+
   .dropdown-menu {
     display:none;
     position:absolute;
-    top:28px;
+    top:30px;
     left:0;
     background:#1e293b;
     padding:10px 0;
@@ -93,6 +106,7 @@
     box-shadow:0 5px 16px rgba(0,0,0,0.25);
     z-index:50;
   }
+
   .dropdown-menu a {
     display:block;
     padding:10px 16px;
@@ -100,58 +114,10 @@
     font-size:0.9rem;
     opacity:0.9;
   }
+
   .nav-dropdown {
     cursor:pointer;
     opacity:0.9;
     user-select:none;
   }
 </style>
-
-<script>
-  const guideToggle = document.getElementById("guideToggle");
-  const guideMenu = document.getElementById("dropdownMenu");
-
-  const supportToggle = document.getElementById("supportToggle");
-  const supportMenu = document.getElementById("supportMenu");
-
-  const moreToggle = document.getElementById("moreToggle");
-  const moreMenu = document.getElementById("moreMenu");
-
-  function closeAll() {
-    guideMenu.style.display = "none";
-    supportMenu.style.display = "none";
-    moreMenu.style.display = "none";
-  }
-
-  guideToggle.addEventListener("click", () => {
-    const open = guideMenu.style.display === "block";
-    closeAll();
-    guideMenu.style.display = open ? "none" : "block";
-  });
-
-  supportToggle.addEventListener("click", () => {
-    const open = supportMenu.style.display === "block";
-    closeAll();
-    supportMenu.style.display = open ? "none" : "block";
-  });
-
-  moreToggle.addEventListener("click", () => {
-    const open = moreMenu.style.display === "block";
-    closeAll();
-    moreMenu.style.display = open ? "none" : "block";
-  });
-
-  window.addEventListener("click", (e) => {
-    if (
-      !guideToggle.contains(e.target) &&
-      !guideMenu.contains(e.target) &&
-      !supportToggle.contains(e.target) &&
-      !supportMenu.contains(e.target) &&
-      !moreToggle.contains(e.target) &&
-      !moreMenu.contains(e.target)
-    ) {
-      closeAll();
-    }
-  });
-</script>
-
