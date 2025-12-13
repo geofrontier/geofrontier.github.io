@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-  .nation-image {
+  .town-image {
     width: 100%;
     max-height: 260px;
     object-fit: cover;
@@ -126,21 +126,21 @@
   </section>
 
   <!-- MAIN CONTENT -->
-<div class="card" id="featured-nation"></div>
+<div class="card" id="featured-town"></div>
 
-<script src="components/nation-data.js"></script>
+<script src="components/town-data.js"></script>
 <script>
-  const latest = nationsOfTheMonth[0];
+  const latest = townsOfTheMonth[0];
 
-  document.getElementById("featured-nation").innerHTML = `
-    <h2>🏆 Nation of the Month</h2>
-    <img class="nation-image" src="${latest.image}" alt="${latest.name}">
+  document.getElementById("featured-town").innerHTML = `
+    <h2>🏆 Town of the Month</h2>
+    <img class="town-image" src="${latest.image}" alt="${latest.name}">
     <h3>${latest.name}</h3>
     <p>${latest.description}</p>
     <p style="font-size:0.85rem; opacity:0.8;">
-      Population: ${latest.population} · Towns: ${latest.towns} · Ideology: ${latest.ideology}
+      Population: ${latest.population} · Leader(s): ${latest.leader} · Ideology: ${latest.ideology}
     </p>
-    <a href="nations.html" class="btn">View All Nations →</a>
+    <a href="towns.html" class="btn">View All Towns →</a>
   `;
 </script>
 
@@ -164,6 +164,7 @@
 
 </body>
 </html>
+
 
 
 
