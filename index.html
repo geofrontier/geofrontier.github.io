@@ -111,14 +111,8 @@
 <body>
 
 <div id="navbar-container"></div>
+<script src="/components/navbar-loader.js"></script>
 
-<script>
-  fetch("/components/navbar.html")
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById("navbar-container").innerHTML = html;
-    });
-</script>
 
 <!-- HERO -->
 <section class="hero">
@@ -182,3 +176,4 @@
 
 </body>
 </html>
+
