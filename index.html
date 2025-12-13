@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+  .nation-image {
+    width: 100%;
+    max-height: 260px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 12px 0;
+    display: block;
+  }
+</style>
   <title>Geofrontier — Minecraft Geopolitical Server</title>
 
   <style>
@@ -124,7 +134,7 @@
 
   document.getElementById("featured-nation").innerHTML = `
     <h2>🏆 Nation of the Month</h2>
-    <img src="${latest.image}" alt="${latest.name}">
+    <img class="nation-image" src="${latest.image}" alt="${latest.name}">
     <h3>${latest.name}</h3>
     <p>${latest.description}</p>
     <p style="font-size:0.85rem; opacity:0.8;">
@@ -154,6 +164,7 @@
 
 </body>
 </html>
+
 
 
 
