@@ -94,30 +94,33 @@
     filter:brightness(1.08);
   }
 
-  .dropdown-menu {
-    display:none;
-    position:absolute;
-    top:30px;
-    left:0;
-    background:#1e293b;
-    padding:10px 0;
-    border-radius:8px;
-    min-width:160px;
-    box-shadow:0 5px 16px rgba(0,0,0,0.25);
-    z-index:50;
-  }
+nav { position: relative; z-index: 100; } /* ensures nav & dropdowns sit above other stuff */
 
-  .dropdown-menu a {
-    display:block;
-    padding:10px 16px;
-    color:white;
-    font-size:0.9rem;
-    opacity:0.9;
-  }
+.dropdown-menu {
+  display: none;            /* hidden by default */
+  position: absolute;
+  top: 100%;                /* anchor directly under the toggle */
+  left: 0;
+  background: #1e293b;
+  padding: 6px 0;
+  border-radius: 8px;
+  min-width: 160px;
+  box-shadow: 0 5px 16px rgba(0,0,0,0.25);
+  z-index: 50;
+}
 
-  .nav-dropdown {
-    cursor:pointer;
-    opacity:0.9;
-    user-select:none;
-  }
+/* show via class, not inline styles */
+.dropdown-menu.open {
+  display: block;
+}
+
+/* slightly smaller padding for items */
+.dropdown-menu a {
+  display: block;
+  padding: 8px 14px;
+  color: white;
+  font-size: 0.9rem;
+  opacity: 0.95;
+}
+
 </style>
