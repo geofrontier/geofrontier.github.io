@@ -1,5 +1,5 @@
-// components/nation-data.js
-const nationsOfTheMonth = [
+// components/town-data.js
+const townsOfTheMonth = [
   {
     month: "September 2025",
     name: "Salzburg",
@@ -17,7 +17,6 @@ const nationsOfTheMonth = [
     description: "N/A",
     leader: "N/A",
     population: 31,
-    towns: 4,
     ideology: "Absolute Monarchy"
   }
 ];
