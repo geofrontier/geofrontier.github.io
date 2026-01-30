@@ -2,162 +2,797 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>GeoFrontier — Towny Guide</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Towny Guide — GeoFrontier Minecraft Server</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Page-specific styles -->
   <style>
-    body { margin:0; font-family: Inter, Arial, sans-serif; background:#f3f3f3; color:#111; }
-
-    header {
-      background:#1e293b;
-      color:white;
-      padding:40px 20px;
-      text-align:center;
+    /* Guide-specific styles */
+    .guide-header {
+      position: relative;
+      background: 
+        linear-gradient(rgba(11, 17, 32, 0.9), rgba(11, 17, 32, 0.95)),
+        url('/images/MapChart_Map.png') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      border-bottom: 2px solid var(--accent-gold);
     }
-
-    header h1 { margin:0; font-size:2.3rem; }
-    header p { opacity:0.9; margin-top:8px; }
-
-    .container {
-      max-width:900px;
-      margin:40px auto;
-      padding:0 20px;
+    
+    .guide-header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
-
-    .card {
-      background:white;
-      padding:24px;
-      border-radius:12px;
-      box-shadow:0 5px 16px rgba(0,0,0,0.08);
-      margin-bottom:24px;
+    
+    .guide-header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      margin-bottom: 15px;
+      background: linear-gradient(to right, #f5e6ca, #d4af37);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
-
-    .card h2 {
-      margin-top:0;
-      font-size:1.5rem;
+    
+    .guide-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--accent-teal);
+      font-weight: 500;
     }
-
-    code {
-      background:#e2e8f0;
-      padding:3px 6px;
-      border-radius:6px;
-      font-size:0.9rem;
+    
+    .guide-icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: var(--accent-gold);
+    }
+    
+    .guide-container {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+    
+    .guide-section {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+      padding: 35px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-heavy);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .guide-section:hover {
+      transform: translateY(-3px);
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+    
+    .guide-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--accent-gold), var(--accent-rust));
+    }
+    
+    .guide-section h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .guide-section h2 i {
+      font-size: 1.4rem;
+      opacity: 0.8;
+    }
+    
+    .guide-section p {
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+    }
+    
+    .guide-section ul, .guide-section ol {
+      padding-left: 25px;
+      margin-bottom: 20px;
+    }
+    
+    .guide-section li {
+      margin-bottom: 10px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    
+    .guide-section li strong {
+      color: var(--accent-teal);
+    }
+    
+    .command-box {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      position: relative;
+    }
+    
+    .command-box:before {
+      content: '$';
+      position: absolute;
+      left: 10px;
+      top: 20px;
+      color: var(--accent-gold);
+      font-weight: bold;
+    }
+    
+    .command {
+      color: var(--accent-teal);
+      font-size: 1.1rem;
+      padding-left: 15px;
+      display: block;
+      margin-bottom: 8px;
+    }
+    
+    .command-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      padding-left: 15px;
+      margin-bottom: 5px;
+    }
+    
+    .example-box {
+      background: rgba(45, 212, 191, 0.05);
+      border-left: 3px solid var(--accent-teal);
+      padding: 15px 20px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .example-box p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    .example-box code {
+      background: rgba(45, 212, 191, 0.1);
+      color: var(--accent-teal);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'Consolas', monospace;
+    }
+    
+    .warning-box {
+      background: rgba(183, 65, 14, 0.1);
+      border-left: 3px solid var(--accent-rust);
+      padding: 15px 20px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .warning-box i {
+      color: var(--accent-rust);
+      font-size: 1.2rem;
+      margin-top: 2px;
+    }
+    
+    .warning-box p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    .tip-box {
+      background: rgba(212, 175, 55, 0.1);
+      border-left: 3px solid var(--accent-gold);
+      padding: 15px 20px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .tip-box i {
+      color: var(--accent-gold);
+      font-size: 1.2rem;
+      margin-top: 2px;
+    }
+    
+    .tip-box p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    .section-number {
+      display: inline-block;
+      background: var(--accent-gold);
+      color: var(--primary-dark);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 36px;
+      font-weight: 700;
+      margin-right: 12px;
+      font-family: 'Cinzel', serif;
+    }
+    
+    .table-of-contents {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-heavy);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      margin-bottom: 40px;
+    }
+    
+    .table-of-contents h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--accent-gold);
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .toc-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    
+    .toc-item {
+      padding: 12px 15px;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .toc-item:hover {
+      border-color: var(--accent-gold);
+      background: rgba(212, 175, 55, 0.05);
+      transform: translateX(5px);
+    }
+    
+    .toc-item a {
+      color: var(--text-light);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .toc-item i {
+      color: var(--accent-gold);
+      font-size: 0.9rem;
+    }
+    
+    .guide-progress {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      width: 10px;
+      height: calc(100vh - 120px);
+      background: rgba(30, 41, 59, 0.5);
+      border-radius: 5px;
+      z-index: 90;
+      overflow: hidden;
+    }
+    
+    .guide-progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(to bottom, var(--accent-gold), var(--accent-rust));
+      border-radius: 5px;
+      transition: height 0.3s ease;
+    }
+    
+    @media (max-width: 768px) {
+      .guide-header {
+        padding: 60px 20px;
+      }
+      
+      .guide-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .guide-section {
+        padding: 25px;
+      }
+      
+      .guide-progress {
+        display: none;
+      }
+      
+      .toc-list {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
-
 <body>
+  <!-- Navbar container -->
+  <div id="navbar-container"></div>
+  
+  <!-- Header container -->
+  <div id="header-container"></div>
+  
+  <!-- Guide progress indicator -->
+  <div class="guide-progress">
+    <div class="guide-progress-bar" id="progressBar"></div>
+  </div>
 
-<div id="navbar-container"></div>
-<div id="header-container"></div>
-<script src="/components/layout-loader.js"></script>
+  <!-- Guide Header -->
+  <header class="guide-header">
+    <div class="guide-header-content">
+      <div class="guide-icon">
+        <i class="fas fa-city"></i>
+      </div>
+      <h1>Towny Guide</h1>
+      <p>Master the art of settlement, governance, and territorial expansion on GeoFrontier</p>
+      <div style="margin-top: 25px;">
+        <a href="#toc" class="btn btn-outline" style="margin: 5px;">Jump to Sections</a>
+        <a href="guide-nation.html" class="btn" style="margin: 5px;">Nation Guide →</a>
+      </div>
+    </div>
+  </header>
 
-
-  <div class="container">
-
-    <!-- SECTION 1 -->
-    <div class="card">
-      <h2>1. Creating a Town</h2>
-      <p>To create a town, you only need enough money (usually $250–$500 depending on server config).</p>
-      <p>Use:</p>
-      <p><code>/town new &lt;name&gt;</code></p>
-      <p>This creates a town centered on your current chunk.</p>
+  <!-- Main Content -->
+  <div class="guide-container">
+    
+    <!-- Table of Contents -->
+    <div class="table-of-contents" id="toc">
+      <h3><i class="fas fa-list-ol"></i> Table of Contents</h3>
+      <div class="toc-list">
+        <div class="toc-item">
+          <a href="#section1">
+            <i class="fas fa-flag"></i>
+            <span>1. Creating a Town</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section2">
+            <i class="fas fa-expand-arrows-alt"></i>
+            <span>2. Claiming Land</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section3">
+            <i class="fas fa-users"></i>
+            <span>3. Managing Residents</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section4">
+            <i class="fas fa-coins"></i>
+            <span>4. Taxes & Upkeep</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section5">
+            <i class="fas fa-shield-alt"></i>
+            <span>5. Town Permissions</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section6">
+            <i class="fas fa-map"></i>
+            <span>6. Plot Management</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section7">
+            <i class="fas fa-landmark"></i>
+            <span>7. Joining a Nation</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section8">
+            <i class="fas fa-code"></i>
+            <span>8. Useful Commands</span>
+          </a>
+        </div>
+      </div>
     </div>
 
-    <!-- SECTION 2 -->
-    <div class="card">
-      <h2>2. Claiming Land</h2>
-      <p>Towny uses a grid system (chunks = 16×16 blocks). To claim more land near your town:</p>
-      <p><code>/town claim</code></p>
-      <p>Or to claim multiple chunks at once:</p>
-      <p><code>/town claim auto (amount of chunks)</code></p>
-      <p>Claiming costs money from the **town bank**.</p>
-      <p>Add money using:</p>
-      <p><code>/town deposit &lt;amount&gt;</code></p>
+    <!-- Section 1 -->
+    <div class="guide-section" id="section1">
+      <h2><span class="section-number">1</span> <i class="fas fa-flag"></i> Creating a Town</h2>
+      <p>Establishing your first settlement is the foundation of your journey on GeoFrontier. A town provides protection, organization, and a home for your citizens.</p>
+      
+      <div class="command-box">
+        <span class="command">/town new &lt;TownName&gt;</span>
+        <span class="command-desc">Creates a new town with your current location as the town center</span>
+      </div>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Tip:</strong> Choose a strategic location near resources but defensible. Consider proximity to water, mountains for natural defenses, and resource availability.</p>
+      </div>
+      
+      <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Requirement:</strong> You need sufficient funds (typically $500 in the server economy) and must be in an unclaimed area. Check available funds with <code>/balance</code>.</p>
+      </div>
     </div>
 
-    <!-- SECTION 3 -->
-    <div class="card">
-      <h2>3. Managing Residents</h2>
-      <p>Invite members to your town:</p>
-      <p><code>/town invite &lt;player&gt;</code></p>
-
-      <p>Remove members:</p>
-      <p><code>/town kick &lt;player&gt;</code></p>
-
-      <p>Give ranks (assistant, helper, etc):</p>
-      <p><code>/town rank add &lt;player&gt; &lt;rank&gt;</code></p>      
+    <!-- Section 2 -->
+    <div class="guide-section" id="section2">
+      <h2><span class="section-number">2</span> <i class="fas fa-expand-arrows-alt"></i> Claiming Land</h2>
+      <p>Expand your town's territory to secure resources and build defensive perimeters. Towny uses a chunk-based system (16×16 blocks).</p>
+      
+      <div class="command-box">
+        <span class="command">/town claim</span>
+        <span class="command-desc">Claims the chunk you're standing in for your town</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/town claim auto &lt;number&gt;</span>
+        <span class="command-desc">Claims multiple adjacent chunks at once</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/town deposit &lt;amount&gt;</span>
+        <span class="command-desc">Adds money to your town bank for claiming costs</span>
+      </div>
+      
+      <div class="example-box">
+        <p><strong>Example:</strong> To claim 5 chunks at once with $50 each, first deposit $250: <code>/town deposit 250</code> then <code>/town claim auto 5</code></p>
+      </div>
+      
+      <p>Claiming costs money from your <strong>town bank</strong>, not your personal balance. Each chunk has a daily upkeep cost based on server settings.</p>
     </div>
 
-    <!-- SECTION 4 -->
-    <div class="card">
-      <h2>4. Town Taxes & Upkeep</h2>
-      <p>Each town pays a daily upkeep based on the number of claimed chunks.</p>
-      <p>Set resident taxes:</p>
-      <p><code>/town set tax &lt;amount&gt;</code></p>
-
-      <p>Set plot-specific taxes:</p>
-      <p><code>/town set plottax &lt;amount&gt;</code></p>
-    </div>
-
-    <!-- SECTION 5 -->
-    <div class="card">
-      <h2>5. Town Permissions</h2>
-      <p>Control who can build, break, switch, use items, etc.</p>
-      <p>Global permissions:</p>
-      <p><code>/town set perm &lt;who&gt; &lt;type&gt; &lt;on/off&gt;</code></p>
-
-      <p>Examples:</p>
+    <!-- Section 3 -->
+    <div class="guide-section" id="section3">
+      <h2><span class="section-number">3</span> <i class="fas fa-users"></i> Managing Residents</h2>
+      <p>A thriving town needs citizens. Invite players, assign ranks, and build your community.</p>
+      
+      <div class="command-box">
+        <span class="command">/town invite &lt;PlayerName&gt;</span>
+        <span class="command-desc">Invites a player to join your town</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/town kick &lt;PlayerName&gt;</span>
+        <span class="command-desc">Removes a player from your town</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/town rank add &lt;PlayerName&gt; &lt;rank&gt;</span>
+        <span class="command-desc">Assigns a special rank to a resident</span>
+      </div>
+      
+      <p><strong>Available Ranks:</strong></p>
       <ul>
-        <li><code>/town set perm outsider build off</code> — outsiders can’t build</li>
-        <li><code>/town set perm resident build on</code> — let residents build in your town</li>
+        <li><strong>assistant</strong> - Can invite/kick residents, claim/unclaim land</li>
+        <li><strong>helper</strong> - Can set permissions on town/plots</li>
+        <li><strong>jailer</strong> - Can jail players within town</li>
+        <li><strong>taxexempt</strong> - Exempt from town taxes</li>
       </ul>
     </div>
 
-    <!-- SECTION 6 -->
-    <div class="card">
-      <h2>6. Plot Management</h2>
-      <p>Plots are chunks (16x16) inside your town. To put a plot up for sale:</p>
-      <p><code>/plot fs (amount)</code></p>
-
-      <p>To claim for sale plots, stand within the plot and type:</p>
-      <p><code>/plot claim</code></p>
-
-      <p>Unclaim a plot:</p>
-      <p><code>/plot unclaim</code></p>
-
-      <p>Set plot type (shop, farm, embassy, etc):</p>
-      <p><code>/plot set type &lt;type&gt;</code></p>
-
-      <p>Similarily to Section 5, you can edit perms for specific plots you own by standing inside and running:</p>
-      <p><code>/plot set perm &lt;who&gt; &lt;type&gt; &lt;on/off&gt;</code></p>
+    <!-- Section 4 -->
+    <div class="guide-section" id="section4">
+      <h2><span class="section-number">4</span> <i class="fas fa-coins"></i> Taxes & Upkeep</h2>
+      <p>Manage your town's economy to ensure long-term survival and growth.</p>
+      
+      <div class="command-box">
+        <span class="command">/town set tax &lt;amount&gt;</span>
+        <span class="command-desc">Sets daily tax collected from each resident</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/town set plottax &lt;amount&gt;</span>
+        <span class="command-desc">Sets tax for individual plot owners</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/town withdraw &lt;amount&gt;</span>
+        <span class="command-desc">Withdraws money from town bank to yourself</span>
+      </div>
+      
+      <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Important:</strong> If your town bank cannot pay the daily upkeep (based on claimed chunks), your town will enter "bankrupt" status. After 7 days bankrupt, chunks will be unclaimed automatically!</p>
+      </div>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Strategy:</strong> Balance taxes to cover upkeep without driving residents away. Use <code>/town</code> to check your town's daily costs and current balance.</p>
+      </div>
     </div>
 
-    <!-- SECTION 7 -->
-    <div class="card">
-      <h2>7. Creating or Joining a Nation</h2>
-      <p>Once you have a stable town, join a nation for protection, allies, and diplomacy. View the Nation guide under "Guides" to see how to manage them, including wars.</p>
+    <!-- Section 5 -->
+    <div class="guide-section" id="section5">
+      <h2><span class="section-number">5</span> <i class="fas fa-shield-alt"></i> Town Permissions</h2>
+      <p>Control what players can do within your town's borders for security and organization.</p>
+      
+      <div class="command-box">
+        <span class="command">/town set perm &lt;who&gt; &lt;type&gt; &lt;on/off&gt;</span>
+        <span class="command-desc">Sets town-wide permissions for different groups</span>
+      </div>
+      
+      <p><strong>Permission Groups:</strong></p>
+      <ul>
+        <li><strong>resident</strong> - Town members</li>
+        <li><strong>ally</strong> - Members of allied nations</li>
+        <li><strong>outsider</strong> - Everyone else</li>
+        <li><strong>nation</strong> - Members of your nation</li>
+      </ul>
+      
+      <p><strong>Permission Types:</strong></p>
+      <ul>
+        <li><strong>build</strong> - Place blocks</li>
+        <li><strong>destroy</strong> - Break blocks</li>
+        <li><strong>switch</strong> - Use buttons, levers, etc.</li>
+        <li><strong>itemuse</strong> - Use items (buckets, flint & steel)</li>
+        <li><strong>pvp</strong> - Player vs player combat</li>
+      </ul>
+      
+      <div class="example-box">
+        <p><strong>Common Setup:</strong><br>
+          <code>/town set perm outsider build off</code> - Prevents outsiders from building<br>
+          <code>/town set perm resident pvp off</code> - Prevents PvP between residents<br>
+          <code>/town set perm ally switch on</code> - Allows allies to use switches</p>
+      </div>
+    </div>
 
-      <p>Create a nation:</p>
-      <p><code>/nation new &lt;name&gt;</code></p>
+    <!-- Section 6 -->
+    <div class="guide-section" id="section6">
+      <h2><span class="section-number">6</span> <i class="fas fa-map"></i> Plot Management</h2>
+      <p>Divide your town into specialized districts and manage individual land plots.</p>
+      
+      <div class="command-box">
+        <span class="command">/plot fs &lt;price&gt;</span>
+        <span class="command-desc">Puts your current plot up for sale</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/plot claim</span>
+        <span class="command-desc">Claims a plot that's for sale (stand in it)</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/plot set type &lt;type&gt;</span>
+        <span class="command-desc">Sets the plot type (affects permissions)</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/plot set perm &lt;who&gt; &lt;type&gt; &lt;on/off&gt;</span>
+        <span class="command-desc">Sets permissions for this specific plot</span>
+      </div>
+      
+      <p><strong>Plot Types:</strong></p>
+      <ul>
+        <li><strong>shop</strong> - Commercial area (often tax-exempt)</li>
+        <li><strong>farm</strong> - Agricultural zone</li>
+        <li><strong>embassy</strong> - For foreign diplomats</li>
+        <li><strong>arena</strong> - PvP enabled area</li>
+        <li><strong>wilds</strong> - Unrestricted building</li>
+      </ul>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Strategy:</strong> Create commercial districts with shop plots near town spawn, residential areas with build permissions for residents only, and embassy plots near borders for diplomatic relations.</p>
+      </div>
+    </div>
 
-      <p>Join a nation:</p>
-      <p><code>/nation join &lt;name&gt;</code></p>
+    <!-- Section 7 -->
+    <div class="guide-section" id="section7">
+      <h2><span class="section-number">7</span> <i class="fas fa-landmark"></i> Joining a Nation</h2>
+      <p>Forge alliances and gain protection by forming or joining a nation with other towns.</p>
+      
+      <div class="command-box">
+        <span class="command">/nation new &lt;NationName&gt;</span>
+        <span class="command-desc">Creates a new nation with your town as capital</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation join &lt;NationName&gt;</span>
+        <span class="command-desc">Requests to join an existing nation</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation ally &lt;NationName&gt;</span>
+        <span class="command-desc">Proposes an alliance with another nation</span>
+      </div>
+      
+      <p><strong>Nation Benefits:</strong></p>
+      <ul>
+        <li>Shared protection and military support</li>
+        <li>Reduced upkeep costs for towns</li>
+        <li>Ability to declare war and conduct diplomacy</li>
+        <li>Access to nation-only chat channels</li>
+        <li>Collective bargaining power in server politics</li>
+      </ul>
+      
+      <div style="text-align: center; margin-top: 25px;">
+        <a href="guide-nation.html" class="btn">
+          <i class="fas fa-book"></i> Read Full Nation Guide
+        </a>
+      </div>
+    </div>
+
+    <!-- Section 8 -->
+    <div class="guide-section" id="section8">
+      <h2><span class="section-number">8</span> <i class="fas fa-code"></i> Useful Commands</h2>
+      <p>Essential commands for daily town management and navigation.</p>
+      
+      <div class="command-box">
+        <span class="command">/town</span>
+        <span class="command-desc">Opens town management interface</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/resident</span>
+        <span class="command-desc">Shows your resident information</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/town spawn</span>
+        <span class="command-desc">Teleports to your town spawn point</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/town set spawn</span>
+        <span class="command-desc">Sets town spawn to your location</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/town here</span>
+        <span class="command-desc">Shows information about current town</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/town list</span>
+        <span class="command-desc">Lists all towns on the server</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/town toggle fire</span>
+        <span class="command-desc">Toggles fire spread in your town</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/town toggle explosion</span>
+        <span class="command-desc">Toggles explosion damage in your town</span>
+      </div>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Pro Tip:</strong> Use <code>/town ?</code> to see all available town commands. Many commands have tab-completion - press TAB to see options!</p>
+      </div>
     </div>
     
-
-    <!-- SECTION 8 -->
-    <div class="card">
-      <h2>8. Useful Towny Commands</h2>
-      <p>
-        <code>/town</code> — main town menu  
-        <br><code>/resident</code> — see your info  
-        <br><code>/plot ?</code> — info about your current chunk  
-        <br><code>/town spawn</code> — teleport to town spawn  
-        <br><code>/town set spawn</code> — set spawn point  
-      </p>
+    <!-- Navigation Footer -->
+    <div style="display: flex; justify-content: space-between; margin: 50px 0 30px; padding: 20px; background: rgba(30, 41, 59, 0.5); border-radius: 12px;">
+      <a href="index.html" class="btn btn-outline">
+        <i class="fas fa-home"></i> Back to Home
+      </a>
+      <a href="guide-nation.html" class="btn">
+        Next: Nation Guide <i class="fas fa-arrow-right"></i>
+      </a>
     </div>
-
   </div>
 
+  <!-- Footer container -->
+  <div id="footer-container"></div>
+
+  <!-- Load component loader -->
+  <script src="js/components-loader.js"></script>
+  
+  <!-- Page-specific JavaScript -->
+  <script>
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Load all components
+      await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
+      await window.ComponentLoader.loadComponent('header', 'header-container');
+      await window.ComponentLoader.loadComponent('footer', 'footer-container');
+      
+      // Set active navigation for this page
+      window.ComponentLoader.setActiveNav('guides');
+      
+      // Highlight current guide in navbar (if needed)
+      highlightCurrentGuide();
+      
+      // Initialize scroll progress
+      initScrollProgress();
+      
+      // Smooth scroll for table of contents
+      initSmoothScroll();
+    });
+    
+    function highlightCurrentGuide() {
+      // This could be used to highlight "Guides" dropdown as active
+      const guideLinks = document.querySelectorAll('a[href*="guide-towny"]');
+      guideLinks.forEach(link => {
+        link.classList.add('active');
+      });
+    }
+    
+    function initScrollProgress() {
+      const progressBar = document.getElementById('progressBar');
+      if (!progressBar) return;
+      
+      const updateProgress = () => {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight - windowHeight;
+        const scrolled = window.scrollY;
+        
+        const progress = (scrolled / documentHeight) * 100;
+        progressBar.style.height = `${Math.min(100, progress)}%`;
+      };
+      
+      window.addEventListener('scroll', updateProgress);
+      updateProgress(); // Initial call
+    }
+    
+    function initSmoothScroll() {
+      // Smooth scroll for table of contents links
+      document.querySelectorAll('.toc-item a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            const headerOffset = 80;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    }
+    
+    // Make copyText function available if needed
+    if (typeof copyText !== 'function') {
+      window.copyText = function(text) {
+        navigator.clipboard.writeText(text).then(() => {
+          // Simple notification
+          alert(`Copied: ${text}`);
+        });
+      };
+    }
+  </script>
 </body>
 </html>
