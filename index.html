@@ -61,15 +61,29 @@
     .component-loading {
       min-height: 100px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       color: var(--text-muted);
+      background: rgba(30, 41, 59, 0.5);
+      border-radius: 10px;
+      margin: 10px;
+      padding: 20px;
     }
     
     .component-loading i {
       font-size: 2rem;
-      margin-right: 15px;
+      margin-bottom: 15px;
       color: var(--accent-gold);
+    }
+    
+    .component-error {
+      text-align: center;
+      padding: 30px;
+      color: var(--accent-rust);
+      background: rgba(183, 65, 14, 0.1);
+      border-radius: 10px;
+      margin: 10px;
     }
   </style>
 </head>
@@ -222,6 +236,20 @@
           notification.style.animation = 'fadeOut 0.5s ease forwards';
           setTimeout(() => document.body.removeChild(notification), 500);
         }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          alert(`Copied: ${text}`);
+        } catch (e) {
+          console.error('Fallback copy failed: ', e);
+        }
+        document.body.removeChild(textArea);
       });
     }
     
@@ -229,68 +257,78 @@
     document.addEventListener('DOMContentLoaded', async () => {
       console.log('DOM loaded, starting component loading...');
       
-      try {
-        // Load all components
-        await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
-        console.log('Navbar loaded');
-        
-        await window.ComponentLoader.loadComponent('header', 'header-container');
-        console.log('Header loaded');
-        
-        await window.ComponentLoader.loadComponent('footer', 'footer-container');
-        console.log('Footer loaded');
-        
-        // Set active navigation for this page
-        window.ComponentLoader.setActiveNav('index');
-        console.log('Active nav set');
-        
-        // Load featured town
-        loadFeaturedTown();
-        console.log('Town data loaded');
-        
-        // Simulate player count (you can replace with actual API call)
-        updatePlayerCount();
-        console.log('Player count initialized');
-        
-        // Initialize scroll animations
-        initScrollAnimations();
-        console.log('Scroll animations initialized');
-        
-        // Add copy functionality to header elements
-        setupCopyFunctionality();
-        console.log('Copy functionality setup');
-        
-      } catch (error) {
-        console.error('Error loading components:', error);
-        showComponentError();
-      }
-    });
-    
-    function showComponentError() {
-      const containers = ['navbar-container', 'header-container', 'footer-container'];
-      containers.forEach(containerId => {
-        const container = document.getElementById(containerId);
-        if (container) {
-          container.innerHTML = `
-            <div style="text-align: center; padding: 20px; color: var(--accent-rust);">
-              <i class="fas fa-exclamation-triangle"></i>
-              <p>Failed to load component. Please refresh the page.</p>
-              <button onclick="window.location.reload()" style="
-                background: var(--accent-rust);
-                color: white;
-                border: none;
-                padding: 8px 16px;
-                border-radius: 6px;
-                cursor: pointer;
-                margin-top: 10px;
-              ">
-                Reload Page
-              </button>
-            </div>
-          `;
+      // Manually load components if loader fails
+      const loadComponentsManually = async () => {
+        try {
+          // Try to load components directly
+          const components = [
+            { id: 'navbar', file: 'components/navbar.html', container: 'navbar-container' },
+            { id: 'header', file: 'components/header.html', container: 'header-container' },
+            { id: 'footer', file: 'components/footer.html', container: 'footer-container' }
+          ];
+          
+          for (const component of components) {
+            try {
+              console.log(`Loading ${component.id} from ${component.file}`);
+              const response = await fetch(component.file);
+              if (!response.ok) {
+                throw new Error(`Status: ${response.status}`);
+              }
+              const html = await response.text();
+              const container = document.getElementById(component.container);
+              if (container) {
+                container.innerHTML = html;
+                console.log(`${component.id} loaded successfully`);
+              }
+            } catch (error) {
+              console.error(`Failed to load ${component.id}:`, error);
+              const container = document.getElementById(component.container);
+              if (container) {
+                container.innerHTML = `
+                  <div class="component-error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Failed to load ${component.id}</h3>
+                    <p>File not found: ${component.file}</p>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">
+                      Check that the file exists in the components folder
+                    </p>
+                  </div>
+                `;
+              }
+            }
+          }
+        } catch (error) {
+          console.error('Manual component loading failed:', error);
         }
-      });
-    }
+      };
+      
+      // First try using the component loader
+      if (window.ComponentLoader) {
+        try {
+          await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
+          await window.ComponentLoader.loadComponent('header', 'header-container');
+          await window.ComponentLoader.loadComponent('footer', 'footer-container');
+          
+          // Set active navigation for this page
+          window.ComponentLoader.setActiveNav('index');
+        } catch (error) {
+          console.error('ComponentLoader failed, trying manual loading:', error);
+          await loadComponentsManually();
+        }
+      } else {
+        console.error('ComponentLoader not found, using manual loading');
+        await loadComponentsManually();
+      }
+      
+      // Load featured town
+      loadFeaturedTown();
+      
+      // Simulate player count
+      updatePlayerCount();
+      
+      // Initialize scroll animations
+      initScrollAnimations();
+    });
     
     function loadFeaturedTown() {
       const townContent = document.getElementById('town-content');
@@ -330,16 +368,15 @@
     }
     
     function updatePlayerCount() {
-      // This is a simulated player count - replace with actual API call
       const playerCountElement = document.getElementById('player-count');
-      const basePlayers = 85;
-      const randomVariation = Math.floor(Math.random() * 30) - 10; // -10 to +20
-      const simulatedCount = Math.max(1, basePlayers + randomVariation);
-      
-      playerCountElement.textContent = `${simulatedCount}/200`;
-      
-      // Update every 30 seconds
-      setTimeout(updatePlayerCount, 30000);
+      if (playerCountElement) {
+        const basePlayers = 85;
+        const randomVariation = Math.floor(Math.random() * 30) - 10;
+        const simulatedCount = Math.max(1, basePlayers + randomVariation);
+        
+        playerCountElement.textContent = `${simulatedCount}/200`;
+        setTimeout(updatePlayerCount, 30000);
+      }
     }
     
     function initScrollAnimations() {
@@ -357,10 +394,8 @@
         });
       };
       
-      // Initial check
       fadeOnScroll();
       
-      // Check on scroll with throttle
       let scrollTimeout;
       window.addEventListener('scroll', () => {
         if (!scrollTimeout) {
@@ -372,50 +407,7 @@
       });
     }
     
-    function setupCopyFunctionality() {
-      // This will be called after header loads
-      document.addEventListener('componentLoaded', (event) => {
-        if (event.detail.componentId === 'header') {
-          // Find and attach copy functionality to server IP and Discord elements
-          const serverIpContainer = document.querySelector('.server-ip-container');
-          const discordContainer = document.querySelector('.discord-container');
-          
-          if (serverIpContainer) {
-            serverIpContainer.addEventListener('click', () => {
-              copyText('play.geofrontier.net');
-            });
-          }
-          
-          if (discordContainer) {
-            discordContainer.addEventListener('click', () => {
-              copyText('discord.gg/NWxBBTvzXb');
-            });
-          }
-        }
-      });
-      
-      // Also try to attach immediately in case event already fired
-      setTimeout(() => {
-        const serverIpContainer = document.querySelector('.server-ip-container');
-        const discordContainer = document.querySelector('.discord-container');
-        
-        if (serverIpContainer && !serverIpContainer.hasAttribute('data-copy-bound')) {
-          serverIpContainer.setAttribute('data-copy-bound', 'true');
-          serverIpContainer.addEventListener('click', () => {
-            copyText('play.geofrontier.net');
-          });
-        }
-        
-        if (discordContainer && !discordContainer.hasAttribute('data-copy-bound')) {
-          discordContainer.setAttribute('data-copy-bound', 'true');
-          discordContainer.addEventListener('click', () => {
-            copyText('discord.gg/NWxBBTvzXb');
-          });
-        }
-      }, 1000);
-    }
-    
-    // Make copyText function globally available for components
+    // Make copyText function globally available
     window.copyText = copyText;
   </script>
 </body>
