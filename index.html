@@ -56,14 +56,35 @@
       from { opacity: 1; transform: translateY(0); }
       to { opacity: 0; transform: translateY(-20px); }
     }
+    
+    /* Loading states for components */
+    .component-loading {
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+    }
+    
+    .component-loading i {
+      font-size: 2rem;
+      margin-right: 15px;
+      color: var(--accent-gold);
+    }
   </style>
 </head>
 <body>
   <!-- Navbar container (will be populated by loader) -->
-  <div id="navbar-container"></div>
+  <div id="navbar-container" class="component-loading">
+    <i class="fas fa-spinner fa-spin"></i>
+    <span>Loading navigation...</span>
+  </div>
   
   <!-- Header container (will be populated by loader) -->
-  <div id="header-container"></div>
+  <div id="header-container" class="component-loading">
+    <i class="fas fa-spinner fa-spin"></i>
+    <span>Loading header...</span>
+  </div>
 
   <!-- HERO SECTION -->
   <section class="hero">
@@ -136,9 +157,9 @@
         <h2><i class="fas fa-crown"></i> Town of the Month</h2>
         <div id="town-content">
           <!-- Loading state -->
-          <div class="loading-town">
+          <div class="loading-town" style="text-align: center; padding: 20px;">
             <i class="fas fa-compass fa-spin" style="font-size: 2rem; color: var(--accent-gold); margin: 20px 0;"></i>
-            <p>Loading featured town...</p>
+            <p style="color: var(--text-muted);">Loading featured town...</p>
           </div>
         </div>
         <a href="towns.html" class="btn">View All Featured Towns →</a>
@@ -159,7 +180,10 @@
   </div>
 
   <!-- Footer container (will be populated by loader) -->
-  <div id="footer-container"></div>
+  <div id="footer-container" class="component-loading" style="min-height: 150px;">
+    <i class="fas fa-spinner fa-spin"></i>
+    <span>Loading footer...</span>
+  </div>
 
   <!-- COMPASS (BACK TO TOP) -->
   <div class="compass" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
@@ -203,26 +227,70 @@
     
     // Initialize the page
     document.addEventListener('DOMContentLoaded', async () => {
-      // Load all components
-      await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
-      await window.ComponentLoader.loadComponent('header', 'header-container');
-      await window.ComponentLoader.loadComponent('footer', 'footer-container');
+      console.log('DOM loaded, starting component loading...');
       
-      // Set active navigation for this page
-      window.ComponentLoader.setActiveNav('index');
-      
-      // Load featured town
-      loadFeaturedTown();
-      
-      // Simulate player count (you can replace with actual API call)
-      updatePlayerCount();
-      
-      // Initialize scroll animations
-      initScrollAnimations();
-      
-      // Add copy functionality to header elements
-      setupCopyFunctionality();
+      try {
+        // Load all components
+        await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
+        console.log('Navbar loaded');
+        
+        await window.ComponentLoader.loadComponent('header', 'header-container');
+        console.log('Header loaded');
+        
+        await window.ComponentLoader.loadComponent('footer', 'footer-container');
+        console.log('Footer loaded');
+        
+        // Set active navigation for this page
+        window.ComponentLoader.setActiveNav('index');
+        console.log('Active nav set');
+        
+        // Load featured town
+        loadFeaturedTown();
+        console.log('Town data loaded');
+        
+        // Simulate player count (you can replace with actual API call)
+        updatePlayerCount();
+        console.log('Player count initialized');
+        
+        // Initialize scroll animations
+        initScrollAnimations();
+        console.log('Scroll animations initialized');
+        
+        // Add copy functionality to header elements
+        setupCopyFunctionality();
+        console.log('Copy functionality setup');
+        
+      } catch (error) {
+        console.error('Error loading components:', error);
+        showComponentError();
+      }
     });
+    
+    function showComponentError() {
+      const containers = ['navbar-container', 'header-container', 'footer-container'];
+      containers.forEach(containerId => {
+        const container = document.getElementById(containerId);
+        if (container) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 20px; color: var(--accent-rust);">
+              <i class="fas fa-exclamation-triangle"></i>
+              <p>Failed to load component. Please refresh the page.</p>
+              <button onclick="window.location.reload()" style="
+                background: var(--accent-rust);
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 6px;
+                cursor: pointer;
+                margin-top: 10px;
+              ">
+                Reload Page
+              </button>
+            </div>
+          `;
+        }
+      });
+    }
     
     function loadFeaturedTown() {
       const townContent = document.getElementById('town-content');
@@ -325,6 +393,26 @@
           }
         }
       });
+      
+      // Also try to attach immediately in case event already fired
+      setTimeout(() => {
+        const serverIpContainer = document.querySelector('.server-ip-container');
+        const discordContainer = document.querySelector('.discord-container');
+        
+        if (serverIpContainer && !serverIpContainer.hasAttribute('data-copy-bound')) {
+          serverIpContainer.setAttribute('data-copy-bound', 'true');
+          serverIpContainer.addEventListener('click', () => {
+            copyText('play.geofrontier.net');
+          });
+        }
+        
+        if (discordContainer && !discordContainer.hasAttribute('data-copy-bound')) {
+          discordContainer.setAttribute('data-copy-bound', 'true');
+          discordContainer.addEventListener('click', () => {
+            copyText('discord.gg/NWxBBTvzXb');
+          });
+        }
+      }, 1000);
     }
     
     // Make copyText function globally available for components
