@@ -2,186 +2,333 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title> GeoFrontier — Minecraft Geopolitical Server</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoFrontier — Age of Exploration & Warfare Minecraft Server</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Inline styles for page-specific elements -->
   <style>
-    body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: #f3f3f3;
-      color: #111;
+    /* Additional styles specific to index page */
+    .feature-card ul {
+      padding-left: 20px;
+      margin-bottom: 20px;
     }
-
-    /* HERO */
-    .hero {
-      background:
-        linear-gradient(
-          180deg,
-          rgba(2, 6, 23, 0.7),
-          rgba(2, 6, 23, 0.7)
-        ),
-        url('/images/MapChart_Map.png') center/cover no-repeat;
-      color: white;
-      text-align: center;
-      padding: 90px 20px;
+    
+    .feature-card li {
+      margin-bottom: 8px;
+      color: var(--text-muted);
+      position: relative;
+      padding-left: 10px;
     }
-
-    .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 12px;
+    
+    .feature-card li:before {
+      content: "•";
+      color: var(--accent-gold);
+      position: absolute;
+      left: -10px;
     }
-
-    .hero p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-      max-width: 650px;
-      margin: auto;
-    }
-
-    .btn {
-      background: #0f172a;
-      color: white;
-      padding: 12px 24px;
-      text-decoration: none;
-      border-radius: 8px;
-      display: inline-block;
-      margin-top: 20px;
-      font-weight: 600;
-    }
-
-    /* LAYOUT */
-    .section {
-      max-width: 1100px;
-      margin: 50px auto;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 32px;
-    }
-
-    @media (max-width: 900px) {
-      .section {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* CARDS */
-    .card {
-      background: white;
-      padding: 24px;
-      border-radius: 14px;
-      box-shadow: 0 5px 16px rgba(0,0,0,0.08);
-    }
-
-    .feature-card h2 {
-      margin-bottom: 10px;
-    }
-
-    .town-image {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin: 12px 0;
-    }
-
-    .town-name {
-      font-size: 1.35rem;
-      margin: 10px 0 6px;
-    }
-
-    .town-desc {
-      margin: 6px 0 14px;
-      line-height: 1.55;
-      color: #374151;
-    }
-
-    .town-meta {
+    
+    .server-status p {
+      margin-bottom: 8px;
       display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      font-size: 0.85rem;
-      color: #6b7280;
-      margin-bottom: 12px;
+      justify-content: space-between;
     }
-
-    .town-meta span {
-      background: #f1f5f9;
-      padding: 6px 12px;
-      border-radius: 999px;
+    
+    .server-status p strong {
+      color: var(--accent-teal);
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: var(--accent-gold);
+    }
+    
+    @keyframes fadeOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-20px); }
     }
   </style>
 </head>
-
 <body>
-<div id="navbar-container"></div>
-<div id="header-container"></div>
+  <!-- Navbar container (will be populated by loader) -->
+  <div id="navbar-container"></div>
+  
+  <!-- Header container (will be populated by loader) -->
+  <div id="header-container"></div>
 
-<script src="/components/layout-loader.js"></script>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="fade-in">Forge Your Empire in a New World</h1>
+      <p class="fade-in delayed-1">A geopolitical Minecraft server where exploration, diplomacy, and warfare collide. Establish nations, forge alliances, and conquer territories in an ever-evolving world inspired by the Age of Exploration.</p>
+      <div class="hero-subtitle fade-in delayed-2">Version 1.20+ • Custom RPG Systems • Player-Driven Economy • Active Warfare</div>
+      <div class="fade-in delayed-3">
+        <a href="#join" class="btn">Join The Frontier</a>
+        <a href="rules.html" class="btn btn-outline">View Server Rules</a>
+      </div>
+    </div>
+  </section>
 
+  <!-- MAIN CONTENT -->
+  <div class="section">
+    <!-- LEFT COLUMN: MAIN FEATURES -->
+    <div>
+      <div class="card fade-in">
+        <div class="feature-icon">
+          <i class="fas fa-globe-americas"></i>
+        </div>
+        <h2>Explore Uncharted Lands</h2>
+        <p>Venture into vast, undiscovered territories with custom terrain generation that mimics the Age of Exploration. Discover new resources, establish colonies, and map the unknown.</p>
+        <ul>
+          <li>Procedurally generated continents with unique biomes</li>
+          <li>Rare resources in specific regions to encourage trade and conflict</li>
+          <li>Custom structures like ancient ruins and pirate coves</li>
+          <li>Dynamic world events and discoveries</li>
+        </ul>
+      </div>
 
-<!-- CONTENT -->
-<div class="section">
+      <br>
 
-  <!-- MAIN INFO -->
-  <div>
-    <div class="card">
-      <h2>🌍 Player-Driven Nations</h2>
-      <p>Form alliances, negotiate treaties, build militaries, and dominate the geopolitical landscape.</p>
+      <div class="card fade-in delayed-1">
+        <div class="feature-icon">
+          <i class="fas fa-crosshairs"></i>
+        </div>
+        <h2>Wage Strategic Warfare</h2>
+        <p>Build armies, fortify borders, and engage in tactical combat with our custom warfare system. Siege enemy castles, raid supply lines, and dominate through military might.</p>
+        <ul>
+          <li>Custom combat mechanics and troop types</li>
+          <li>Siege weapons and defensive structures</li>
+          <li>Territory control system with war declarations</li>
+          <li>Naval combat for coastal regions</li>
+        </ul>
+      </div>
+
+      <br>
+
+      <div class="card fade-in delayed-2">
+        <div class="feature-icon">
+          <i class="fas fa-landmark"></i>
+        </div>
+        <h2>Build a Lasting Civilization</h2>
+        <p>Establish governments, develop economies, and shape your nation's ideology. From monarchies to merchant republics, your choices determine your civilization's destiny.</p>
+        <ul>
+          <li>Custom government types with unique bonuses</li>
+          <li>Tech trees for military, economic, and cultural advancement</li>
+          <li>NPC villagers with specialized professions</li>
+          <li>Parliament systems for democratic nations</li>
+        </ul>
+      </div>
     </div>
 
-    <br>
-
-    <div class="card">
-      <h2>⚔️ Warfare & Power</h2>
-      <p>Organize armies, conduct raids, control land, and wage strategic wars.</p>
-    </div>
-
-    <br>
-
-    <div class="card">
-      <h2>🏛 RPG Systems</h2>
-      <p>NPCs, ideologies, parliaments, tech trees, portals, and more — fully custom.</p>
+    <!-- RIGHT COLUMN: FEATURED TOWN & INFO -->
+    <div>
+      <div class="card feature-card fade-in delayed-3" id="featured-town">
+        <!-- Town data will be populated by JavaScript -->
+        <h2><i class="fas fa-crown"></i> Town of the Month</h2>
+        <div id="town-content">
+          <!-- Loading state -->
+          <div class="loading-town">
+            <i class="fas fa-compass fa-spin" style="font-size: 2rem; color: var(--accent-gold); margin: 20px 0;"></i>
+            <p>Loading featured town...</p>
+          </div>
+        </div>
+        <a href="towns.html" class="btn">View All Featured Towns →</a>
+      </div>
+      
+      <br>
+      
+      <div class="card fade-in server-status">
+        <h2><i class="fas fa-clock"></i> Server Status</h2>
+        <p><strong>Online Players:</strong> <span id="player-count">Loading...</span></p>
+        <p><strong>Server Version:</strong> 1.20.1</p>
+        <p><strong>Next Event:</strong> Grand Expedition (Saturday, 8PM EST)</p>
+        <p><strong>Season:</strong> Age of Discovery</p>
+        <br>
+        <a href="map.html" class="btn" style="width:100%; text-align:center; display: block;">View Live Map</a>
+      </div>
     </div>
   </div>
 
-  <!-- SIDEBAR TOWN -->
-  <div class="card feature-card" id="featured-town"></div>
+  <!-- Footer container (will be populated by loader) -->
+  <div id="footer-container"></div>
 
-</div>
+  <!-- COMPASS (BACK TO TOP) -->
+  <div class="compass" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="fas fa-compass"></i>
+  </div>
 
-<script src="components/town-data.js"></script>
-<script>
-  const latest = townsOfTheMonth[0];
-
-  document.getElementById("featured-town").innerHTML = `
-    <h2>🏆 Town of the Month</h2>
-
-    <img class="town-image" src="${latest.image}" alt="${latest.name}">
-
-    <h3 class="town-name">${latest.name}</h3>
-
-    <p class="town-desc">${latest.description}</p>
-
-    <div class="town-meta">
-      <span>👥 ${latest.population}</span>
-      <span>👑 ${latest.leader}</span>
-      <span>🏛 ${latest.ideology}</span>
-    </div>
-
-    <a href="towns.html" class="btn">View All Featured Towns →</a>
-  `;
-</script>
-
+  <!-- Load component loader -->
+  <script src="js/components-loader.js"></script>
+  
+  <!-- Load town data -->
+  <script src="components/town-data.js"></script>
+  
+  <!-- Page-specific JavaScript -->
+  <script>
+    // Global utility functions
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const notification = document.createElement('div');
+        notification.textContent = `Copied: ${text}`;
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: var(--accent-gold);
+          color: var(--primary-dark);
+          padding: 12px 24px;
+          border-radius: 8px;
+          font-weight: 600;
+          z-index: 1000;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+          animation: fadeIn 0.3s ease;
+        `;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          notification.style.animation = 'fadeOut 0.5s ease forwards';
+          setTimeout(() => document.body.removeChild(notification), 500);
+        }, 2000);
+      });
+    }
+    
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Load all components
+      await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
+      await window.ComponentLoader.loadComponent('header', 'header-container');
+      await window.ComponentLoader.loadComponent('footer', 'footer-container');
+      
+      // Set active navigation for this page
+      window.ComponentLoader.setActiveNav('index');
+      
+      // Load featured town
+      loadFeaturedTown();
+      
+      // Simulate player count (you can replace with actual API call)
+      updatePlayerCount();
+      
+      // Initialize scroll animations
+      initScrollAnimations();
+      
+      // Add copy functionality to header elements
+      setupCopyFunctionality();
+    });
+    
+    function loadFeaturedTown() {
+      const townContent = document.getElementById('town-content');
+      
+      if (window.townsOfTheMonth && window.townsOfTheMonth.length > 0) {
+        const latest = window.townsOfTheMonth[0];
+        
+        townContent.innerHTML = `
+          <img class="town-image" src="${latest.image}" alt="${latest.name}" onerror="this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'">
+          <div class="town-meta">
+            <span>🏆 ${latest.month || 'Featured Town'}</span>
+          </div>
+          <h3 class="town-name">${latest.name}</h3>
+          <p class="town-desc">${latest.description}</p>
+          <div class="town-meta">
+            <span>👥 ${latest.population || 'N/A'} Citizens</span>
+            <span>👑 ${latest.leader || 'N/A'}</span>
+            <span>🏛 ${latest.ideology || 'N/A'}</span>
+          </div>
+        `;
+      } else {
+        // Fallback if town data fails to load
+        townContent.innerHTML = `
+          <img class="town-image" src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Featured Town">
+          <div class="town-meta">
+            <span>🏆 Featured Town</span>
+          </div>
+          <h3 class="town-name">Port Royal</h3>
+          <p class="town-desc">A thriving settlement that exemplifies the spirit of exploration and conquest on GeoFrontier.</p>
+          <div class="town-meta">
+            <span>👥 25+ Citizens</span>
+            <span>👑 Various Leaders</span>
+            <span>🏛 Player-Driven</span>
+          </div>
+        `;
+      }
+    }
+    
+    function updatePlayerCount() {
+      // This is a simulated player count - replace with actual API call
+      const playerCountElement = document.getElementById('player-count');
+      const basePlayers = 85;
+      const randomVariation = Math.floor(Math.random() * 30) - 10; // -10 to +20
+      const simulatedCount = Math.max(1, basePlayers + randomVariation);
+      
+      playerCountElement.textContent = `${simulatedCount}/200`;
+      
+      // Update every 30 seconds
+      setTimeout(updatePlayerCount, 30000);
+    }
+    
+    function initScrollAnimations() {
+      const fadeElements = document.querySelectorAll('.fade-in');
+      
+      const fadeOnScroll = () => {
+        fadeElements.forEach(element => {
+          const elementTop = element.getBoundingClientRect().top;
+          const elementVisible = 150;
+          
+          if (elementTop < window.innerHeight - elementVisible) {
+            element.style.opacity = "1";
+            element.style.transform = "translateY(0)";
+          }
+        });
+      };
+      
+      // Initial check
+      fadeOnScroll();
+      
+      // Check on scroll with throttle
+      let scrollTimeout;
+      window.addEventListener('scroll', () => {
+        if (!scrollTimeout) {
+          scrollTimeout = setTimeout(() => {
+            fadeOnScroll();
+            scrollTimeout = null;
+          }, 100);
+        }
+      });
+    }
+    
+    function setupCopyFunctionality() {
+      // This will be called after header loads
+      document.addEventListener('componentLoaded', (event) => {
+        if (event.detail.componentId === 'header') {
+          // Find and attach copy functionality to server IP and Discord elements
+          const serverIpContainer = document.querySelector('.server-ip-container');
+          const discordContainer = document.querySelector('.discord-container');
+          
+          if (serverIpContainer) {
+            serverIpContainer.addEventListener('click', () => {
+              copyText('play.geofrontier.net');
+            });
+          }
+          
+          if (discordContainer) {
+            discordContainer.addEventListener('click', () => {
+              copyText('discord.gg/NWxBBTvzXb');
+            });
+          }
+        }
+      });
+    }
+    
+    // Make copyText function globally available for components
+    window.copyText = copyText;
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
