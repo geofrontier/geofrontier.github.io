@@ -1,3 +1,35 @@
+<head>
+  ...
+  <style>
+    :root {
+      --bg: #f3f3f3;
+      --text: #111;
+      --card: #ffffff;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #ffffff;
+        --text: #000000;
+        --card: #f3f3f3;
+      }
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #0b0b0b;
+        --text: #f5f5f5;
+        --card: #161616;
+      }
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+    }
+  </style>
+</head>
+
 <!-- GLOBAL HEADER -->
 <script>
   function copyText(text) {
