@@ -19,21 +19,26 @@ class ComponentLoader {
       console.log(`Loading component from: ${componentPath}`);
       const response = await fetch(componentPath);
       if (!response.ok) {
-        // Try with leading slash if relative path fails
-        const alternativePath = `/${componentPath}`;
-        console.log(`Trying alternative path: ${alternativePath}`);
-        const altResponse = await fetch(alternativePath);
-        if (!altResponse.ok) {
-          throw new Error(`Failed to load ${componentPath}: ${response.status}`);
-        }
-        const html = await altResponse.text();
-        this.insertComponent(html, targetElementId, componentId);
-        return;
+        throw new Error(`Failed to load ${componentPath}: ${response.status}`);
       }
 
       const html = await response.text();
-      this.insertComponent(html, targetElementId, componentId);
+      const targetElement = document.getElementById(targetElementId);
       
+      if (targetElement) {
+        targetElement.innerHTML = html;
+        
+        // Execute scripts within the component
+        await this.executeScripts(targetElement);
+        
+        // Dispatch event for component-specific initialization
+        document.dispatchEvent(new CustomEvent('componentLoaded', {
+          detail: { componentId, targetElement }
+        }));
+        
+        console.log(`Component ${componentId} loaded successfully into #${targetElementId}`);
+        return true;
+      }
     } catch (error) {
       console.error(`Error loading component ${componentId}:`, error);
       this.showComponentError(targetElementId, componentId, error);
@@ -41,36 +46,37 @@ class ComponentLoader {
     }
   }
 
-  insertComponent(html, targetElementId, componentId) {
-    const targetElement = document.getElementById(targetElementId);
-    
-    if (targetElement) {
-      targetElement.innerHTML = html;
-      
-      // Reinitialize scripts within the component
-      this.executeScripts(targetElement);
-      
-      // Dispatch event for component-specific initialization
-      document.dispatchEvent(new CustomEvent('componentLoaded', {
-        detail: { componentId, targetElement }
-      }));
-      
-      console.log(`Component ${componentId} loaded successfully into #${targetElementId}`);
-      return true;
-    }
-    return false;
-  }
-
-  executeScripts(container) {
+  async executeScripts(container) {
     const scripts = container.querySelectorAll('script');
+    const scriptPromises = [];
+    
     scripts.forEach(oldScript => {
       const newScript = document.createElement('script');
+      
+      // Copy all attributes
       Array.from(oldScript.attributes).forEach(attr => {
         newScript.setAttribute(attr.name, attr.value);
       });
-      newScript.textContent = oldScript.textContent;
+      
+      // Handle inline scripts
+      if (oldScript.src) {
+        // External script - load it
+        const promise = new Promise((resolve, reject) => {
+          newScript.onload = resolve;
+          newScript.onerror = reject;
+        });
+        scriptPromises.push(promise);
+      } else {
+        // Inline script - execute it
+        newScript.textContent = oldScript.textContent;
+      }
+      
+      // Replace the old script with the new one
       oldScript.parentNode.replaceChild(newScript, oldScript);
     });
+    
+    // Wait for all external scripts to load
+    await Promise.all(scriptPromises);
   }
 
   setActiveNav(pageName) {
@@ -84,16 +90,7 @@ class ComponentLoader {
           link.classList.remove('active');
         }
       });
-      
-      // Also update any other nav elements
-      const allNavLinks = document.querySelectorAll('nav a[data-nav]');
-      allNavLinks.forEach(link => {
-        if (link.getAttribute('href') === `${pageName}.html` || 
-            link.getAttribute('data-nav') === pageName) {
-          link.classList.add('active');
-        }
-      });
-    }, 500);
+    }, 100);
   }
 
   showComponentError(targetElementId, componentId, error) {
@@ -119,6 +116,54 @@ class ComponentLoader {
         </div>
       `;
     }
+  }
+  
+  // Helper to reinitialize dropdowns if needed
+  reinitializeDropdowns() {
+    const dropdownScript = document.createElement('script');
+    dropdownScript.textContent = `
+      // Reinitialize dropdowns
+      const dropdowns = document.querySelectorAll('.dropdown');
+      
+      function closeAllDropdowns() {
+        dropdowns.forEach(dropdown => {
+          dropdown.classList.remove('active');
+          const menu = dropdown.querySelector('.dropdown-menu');
+          if (menu) menu.classList.remove('show');
+        });
+      }
+      
+      dropdowns.forEach(dropdown => {
+        const toggle = dropdown.querySelector('.nav-dropdown');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        
+        if (toggle && menu) {
+          // Remove existing listeners and add new ones
+          const newToggle = toggle.cloneNode(true);
+          toggle.parentNode.replaceChild(newToggle, toggle);
+          
+          newToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            
+            const isActive = dropdown.classList.contains('active');
+            closeAllDropdowns();
+            
+            if (!isActive) {
+              dropdown.classList.add('active');
+              menu.classList.add('show');
+            }
+          });
+        }
+      });
+      
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+          closeAllDropdowns();
+        }
+      });
+    `;
+    document.head.appendChild(dropdownScript);
   }
 }
 
