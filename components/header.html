@@ -1,102 +1,149 @@
-<head>
-  ...
-  <style>
-    :root {
-      --bg: #f3f3f3;
-      --text: #111;
-      --card: #ffffff;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #ffffff;
-        --text: #000000;
-        --card: #f3f3f3;
-      }
-    }
-
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #0b0b0b;
-        --text: #f5f5f5;
-        --card: #161616;
-      }
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-    }
-  </style>
-</head>
-
-<!-- GLOBAL HEADER -->
-<script>
-  function copyText(text) {
-    navigator.clipboard.writeText(text).then(() => {
-      alert("Copied: " + text);
-    });
-  }
-</script>
-
-<header style="
-  width:100%;
-  background: linear-gradient(
-    180deg,
-    #0f172a 0%,
-    #1e293b 100%
-  ),
-  url('/images/MapChart_Map.png') center/cover no-repeat;
-  color:white;
-  font-family: Inter, Arial, sans-serif;
-">
-
-
-  <div style="
-    max-width:1100px;
-    margin:0 auto;
-    padding:22px 20px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:24px;
-  ">
-
+<!-- header.html -->
+<header class="main-header">
+  <div class="header-content">
     <!-- LEFT: SERVER IP -->
-    <div style="display:flex; align-items:center; gap:14px; cursor:pointer;"
-      onclick="copyText('COMING SOON')"
-      >
-      <div style="font-size:1.3rem;">🟠</div>
+    <div class="server-ip-container" onclick="copyText('play.geofrontier.net')">
+      <div class="ip-icon">⚔️</div>
       <div>
-        <div style="font-size:0.8rem; opacity:0.75;">PLAY</div>
-        <div style="font-weight:600; font-size:1.05rem;">
-          COMING SOON . . .
-        </div>
+        <div class="ip-text">JOIN THE SERVER</div>
+        <div class="ip-address">play.geofrontier.net</div>
       </div>
     </div>
 
-    <!-- CENTER: LOGO / TITLE -->
-    <div style="text-align:center;">
-      <div style="font-size:1.7rem; font-weight:700; letter-spacing:1px;">
-        GEOFRONTIER
-      </div>
-      <div style="font-size:0.75rem; opacity:0.7;">
-        A Geopolitical Minecraft Server
-      </div>
+    <!-- CENTER: LOGO -->
+    <div class="logo-container">
+      <div class="server-name">GEOFRONTIER</div>
+      <div class="server-tagline">AGE OF EXPLORATION & WARFARE</div>
     </div>
 
     <!-- RIGHT: DISCORD -->
-    <div style="display:flex; align-items:center; gap:14px; cursor:pointer;"
-      onclick="copyText('discord.gg/NWxBBTvzXb')"
-      >
+    <div class="discord-container" onclick="copyText('discord.gg/NWxBBTvzXb')">
       <div>
-        <div style="font-size:0.8rem; opacity:0.75;">DISCORD</div>
-        <div style="font-weight:600; font-size:1.05rem;">
-          discord.gg/NWxBBTvzXb
-        </div>
+        <div class="discord-text">JOIN OUR DISCORD</div>
+        <div class="discord-link">discord.gg/NWxBBTvzXb</div>
       </div>
-      <div style="font-size:1.3rem;">💬</div>
+      <div class="discord-icon">💬</div>
     </div>
-
   </div>
 </header>
+
+<style>
+  /* HEADER STYLES - Only what's needed for the header */
+  .main-header {
+    width: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(11, 17, 32, 0.95) 0%,
+      rgba(30, 41, 59, 0.9) 100%
+    );
+    color: white;
+    position: relative;
+    border-bottom: 2px solid var(--accent-gold);
+    box-shadow: var(--shadow-heavy);
+    overflow: hidden;
+  }
+
+  .main-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      url('/images/MapChart_Map.png') center/cover no-repeat,
+      linear-gradient(rgba(11, 17, 32, 0.85), rgba(11, 17, 32, 0.85));
+    background-blend-mode: overlay;
+    opacity: 0.6;
+    z-index: 0;
+  }
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .logo-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .server-name {
+    font-family: 'Cinzel', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: linear-gradient(to right, #d4af37, #f5e6ca, #b7410e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 4px;
+  }
+
+  .server-tagline {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent-teal);
+    font-weight: 600;
+  }
+
+  .server-ip-container, .discord-container {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 20px;
+    background: rgba(15, 23, 42, 0.7);
+    border-radius: 10px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 220px;
+  }
+
+  .server-ip-container:hover, .discord-container:hover {
+    background: rgba(15, 23, 42, 0.9);
+    border-color: var(--accent-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+  }
+
+  .ip-icon, .discord-icon {
+    font-size: 1.8rem;
+    color: var(--accent-gold);
+  }
+
+  .ip-text, .discord-text {
+    font-size: 0.75rem;
+    opacity: 0.8;
+    letter-spacing: 1px;
+  }
+
+  .ip-address, .discord-link {
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 900px) {
+    .header-content {
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .server-ip-container, .discord-container {
+      min-width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
