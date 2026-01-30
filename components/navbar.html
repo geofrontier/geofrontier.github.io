@@ -1,4 +1,4 @@
-<!-- navbar.html -->
+<!-- components/navbar.html -->
 <nav class="main-nav">
   <div class="nav-inner">
     <!-- CENTER LINKS -->
@@ -13,7 +13,7 @@
       </a>
 
       <!-- GUIDES DROPDOWN -->
-      <div class="dropdown">
+      <div class="dropdown" id="guides-dropdown">
         <span class="nav-dropdown guide-toggle">
           <i class="fas fa-book"></i> Guides <i class="fas fa-chevron-down"></i>
         </span>
@@ -27,7 +27,7 @@
       </div>
 
       <!-- SUPPORT DROPDOWN -->
-      <div class="dropdown">
+      <div class="dropdown" id="support-dropdown">
         <span class="nav-dropdown support-toggle">
           <i class="fas fa-life-ring"></i> Support <i class="fas fa-chevron-down"></i>
         </span>
@@ -42,7 +42,7 @@
       </div>
 
       <!-- MORE DROPDOWN -->
-      <div class="dropdown">
+      <div class="dropdown" id="more-dropdown">
         <span class="nav-dropdown more-toggle">
           <i class="fas fa-ellipsis-h"></i> More <i class="fas fa-chevron-down"></i>
         </span>
@@ -174,31 +174,38 @@
     display: none;
     position: absolute;
     top: calc(100% + 5px);
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     background: rgba(15, 23, 42, 0.95);
     padding: 12px 0;
     border-radius: 10px;
     min-width: 200px;
-    box-shadow: var(--shadow-heavy);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     z-index: 1001;
     border: 1px solid rgba(212, 175, 55, 0.2);
     backdrop-filter: blur(10px);
-    animation: dropdownFade 0.2s ease;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
   }
 
-  @keyframes dropdownFade {
+  .dropdown-menu.show {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    animation: dropdownSlide 0.3s ease forwards;
+  }
+
+  @keyframes dropdownSlide {
     from {
       opacity: 0;
-      transform: translateY(-10px);
+      transform: translateX(-50%) translateY(-10px);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(-50%) translateY(0);
     }
-  }
-
-  .dropdown-menu.open {
-    display: block;
   }
 
   .dropdown-menu a {
@@ -219,12 +226,12 @@
   }
 
   /* Dropdown arrow animation */
-  .nav-dropdown i {
+  .nav-dropdown i.fa-chevron-down {
     transition: transform 0.3s ease;
     font-size: 0.8em;
   }
 
-  .dropdown.active .nav-dropdown i {
+  .dropdown.active .nav-dropdown i.fa-chevron-down {
     transform: rotate(180deg);
   }
 
@@ -239,42 +246,86 @@
       position: static;
       width: 100%;
       margin-top: 5px;
+      transform: none;
+      left: 0;
+    }
+    
+    .dropdown-menu.show {
+      transform: none;
+      animation: none;
     }
   }
 </style>
 
 <script>
-  // Navbar-specific JavaScript
-  document.addEventListener('DOMContentLoaded', () => {
+  // Navbar-specific JavaScript - This will be executed when the component loads
+  (function initNavbarDropdowns() {
+    console.log('Initializing navbar dropdowns...');
+    
     const dropdowns = document.querySelectorAll('.dropdown');
     
+    // Function to close all dropdowns
+    function closeAllDropdowns() {
+      dropdowns.forEach(dropdown => {
+        dropdown.classList.remove('active');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        if (menu) {
+          menu.classList.remove('show');
+        }
+      });
+    }
+    
+    // Initialize each dropdown
     dropdowns.forEach(dropdown => {
       const toggle = dropdown.querySelector('.nav-dropdown');
       const menu = dropdown.querySelector('.dropdown-menu');
       
-      toggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        
-        // Close all other dropdowns
-        dropdowns.forEach(otherDropdown => {
-          if (otherDropdown !== dropdown) {
-            otherDropdown.classList.remove('active');
-            otherDropdown.querySelector('.dropdown-menu').classList.remove('open');
+      if (toggle && menu) {
+        // Click handler for dropdown toggle
+        toggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+          
+          const isActive = dropdown.classList.contains('active');
+          
+          // Close all other dropdowns
+          closeAllDropdowns();
+          
+          // Toggle this dropdown
+          if (!isActive) {
+            dropdown.classList.add('active');
+            menu.classList.add('show');
           }
         });
         
-        // Toggle this dropdown
-        dropdown.classList.toggle('active');
-        menu.classList.toggle('open');
-      });
+        // Prevent clicks inside dropdown from closing it
+        menu.addEventListener('click', function(e) {
+          e.stopPropagation();
+        });
+      }
     });
     
     // Close dropdowns when clicking outside
-    document.addEventListener('click', () => {
-      dropdowns.forEach(dropdown => {
-        dropdown.classList.remove('active');
-        dropdown.querySelector('.dropdown-menu').classList.remove('open');
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown')) {
+        closeAllDropdowns();
+      }
+    });
+    
+    // Close dropdowns on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeAllDropdowns();
+      }
+    });
+    
+    // Close dropdowns when clicking a link inside them
+    document.querySelectorAll('.dropdown-menu a').forEach(link => {
+      link.addEventListener('click', function() {
+        closeAllDropdowns();
       });
     });
-  });
+    
+    console.log('Navbar dropdowns initialized');
+  })();
 </script>
