@@ -2,121 +2,593 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GeoFrontier — Towns of the Month</title>
-
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Inline styles for towns page -->
   <style>
-    body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: #f3f3f3;
-      color: #111;
+    /* Hero section for towns page */
+    .towns-hero {
+      background: linear-gradient(rgba(2, 6, 23, 0.9), rgba(15, 23, 42, 0.85)), 
+                  url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+      margin-bottom: 40px;
+      border-bottom: 2px solid var(--accent-gold);
     }
-
-    .section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
+    
+    .towns-hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: var(--accent-gold);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
-
-    h1 {
-      margin-bottom: 28px;
+    
+    .towns-hero p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      color: var(--text-light);
+      opacity: 0.9;
     }
-
-    .card {
-      background: white;
-      padding: 26px;
-      border-radius: 14px;
-      box-shadow: 0 5px 16px rgba(0,0,0,0.08);
-      margin-bottom: 32px;
+    
+    /* Town grid layout */
+    .towns-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin: 40px 0;
     }
-
+    
+    .town-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      overflow: hidden;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .town-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
+      border-color: var(--accent-gold);
+    }
+    
+    .town-image-container {
+      height: 200px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .town-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .town-card:hover .town-image {
+      transform: scale(1.05);
+    }
+    
+    .town-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(135deg, var(--accent-gold), #b7410e);
+      color: var(--primary-dark);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    .town-content {
+      padding: 25px;
+    }
+    
     .town-header {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 15px;
     }
-
+    
     .town-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      color: var(--text-light);
       margin: 0;
-      font-size: 1.4rem;
     }
-
+    
     .town-month {
       font-size: 0.85rem;
-      opacity: 0.65;
+      color: var(--accent-gold);
+      opacity: 0.9;
       white-space: nowrap;
     }
-
-    .town-image {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin: 14px 0;
-    }
-
+    
     .town-desc {
-      margin: 6px 0 14px;
-      line-height: 1.55;
-      color: #374151;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
     }
-
-    .town-meta {
+    
+    .town-stats {
       display: flex;
-      gap: 14px;
-      font-size: 0.85rem;
-      color: #6b7280;
+      gap: 15px;
+      margin-bottom: 20px;
       flex-wrap: wrap;
     }
-
-    .town-meta span {
-      background: #f1f5f9;
-      padding: 6px 12px;
-      border-radius: 999px;
+    
+    .town-stat {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      background: rgba(30, 41, 59, 0.5);
+      padding: 8px 15px;
+      border-radius: 20px;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+    }
+    
+    .town-stat i {
+      color: var(--accent-gold);
+    }
+    
+    .town-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .btn-small {
+      padding: 8px 15px;
+      font-size: 0.85rem;
+      flex: 1;
+      text-align: center;
+    }
+    
+    .page-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      padding: 0 20px;
+    }
+    
+    .page-intro h2 {
+      font-family: 'Cinzel', serif;
+      color: var(--accent-gold);
+      margin-bottom: 20px;
+    }
+    
+    /* Loading states */
+    .towns-loading {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    
+    .towns-loading i {
+      font-size: 3rem;
+      color: var(--accent-gold);
+      margin-bottom: 20px;
+    }
+    
+    /* Empty state */
+    .no-towns {
+      text-align: center;
+      padding: 60px 20px;
+      background: rgba(30, 41, 59, 0.3);
+      border-radius: 15px;
+      border: 2px dashed rgba(212, 175, 55, 0.3);
+    }
+    
+    .no-towns i {
+      font-size: 3rem;
+      color: var(--accent-gold);
+      margin-bottom: 20px;
+      opacity: 0.5;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .towns-hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .towns-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .town-stats {
+        justify-content: center;
+      }
+      
+      .town-actions {
+        flex-direction: column;
+      }
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease forwards;
     }
   </style>
 </head>
-
 <body>
+  <!-- Navbar container -->
+  <div id="navbar-container" class="component-loading">
+    <i class="fas fa-spinner fa-spin"></i>
+    <span>Loading navigation...</span>
+  </div>
+  
+  <!-- Header container -->
+  <div id="header-container" class="component-loading">
+    <i class="fas fa-spinner fa-spin"></i>
+    <span>Loading header...</span>
+  </div>
 
-<div id="navbar-container"></div>
-<div id="header-container"></div>
-<script src="/components/layout-loader.js"></script>
+  <!-- HERO SECTION -->
+  <section class="towns-hero">
+    <h1>Towns of the Month</h1>
+    <p>Discover the most impressive settlements on GeoFrontier. Each month we feature towns that exemplify creativity, community, and strategic brilliance in our ever-evolving world.</p>
+    <a href="#towns-grid" class="btn">Explore Featured Towns</a>
+  </section>
 
-
-<div class="section">
-  <h1>🏆 Towns of the Month</h1>
-  <div id="town-list"></div>
-</div>
-
-<script src="components/town-data.js"></script>
-<script>
-  const container = document.getElementById("town-list");
-
-  townsOfTheMonth.forEach(town => {
-    container.innerHTML += `
-      <div class="card">
-
-        <div class="town-header">
-          <h2 class="town-name">${town.name}</h2>
-          <span class="town-month">${town.month}</span>
-        </div>
-
-        <img class="town-image" src="${town.image}" alt="${town.name}">
-
-        <p class="town-desc">${town.description}</p>
-
-        <div class="town-meta">
-          <span>👥 ${town.population}</span>
-          <span>👑 ${town.leader}</span>
-          <span>🏛 ${town.ideology}</span>
-        </div>
-
+  <!-- MAIN CONTENT -->
+  <div class="section">
+    <div class="page-intro">
+      <h2>Celebrating Excellence</h2>
+      <p>From mighty fortresses to bustling trade ports, these towns represent the pinnacle of player creativity and cooperation. Explore their stories and draw inspiration for your own settlements.</p>
+    </div>
+    
+    <!-- Towns will be loaded here -->
+    <div id="towns-container">
+      <!-- Loading state -->
+      <div class="towns-loading">
+        <i class="fas fa-compass fa-spin"></i>
+        <h3>Loading Featured Towns</h3>
+        <p>Discovering the greatest settlements...</p>
       </div>
-    `;
-  });
-</script>
+    </div>
+  </div>
 
+  <!-- Footer container -->
+  <div id="footer-container" class="component-loading" style="min-height: 150px;">
+    <i class="fas fa-spinner fa-spin"></i>
+    <span>Loading footer...</span>
+  </div>
+
+  <!-- COMPASS (BACK TO TOP) -->
+  <div class="compass" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="fas fa-compass"></i>
+  </div>
+
+  <!-- Load component loader -->
+  <script src="js/components-loader.js"></script>
+  
+  <!-- Load town data -->
+  <script src="components/town-data.js"></script>
+  
+  <!-- Page-specific JavaScript -->
+  <script>
+    // ============================================
+    // GLOBAL UTILITY FUNCTIONS
+    // ============================================
+    
+    // Copy text to clipboard
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const notification = document.createElement('div');
+        notification.textContent = `Copied: ${text}`;
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: var(--accent-gold);
+          color: var(--primary-dark);
+          padding: 12px 24px;
+          border-radius: 8px;
+          font-weight: 600;
+          z-index: 1000;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+          animation: fadeIn 0.3s ease;
+        `;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          notification.style.animation = 'fadeOut 0.5s ease forwards';
+          setTimeout(() => document.body.removeChild(notification), 500);
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    }
+    
+    // Initialize dropdowns globally
+    function initializeDropdowns() {
+      const dropdowns = document.querySelectorAll('.dropdown');
+      
+      function closeAllDropdowns() {
+        dropdowns.forEach(dropdown => {
+          dropdown.classList.remove('active');
+          const menu = dropdown.querySelector('.dropdown-menu');
+          if (menu) {
+            menu.classList.remove('show');
+          }
+        });
+      }
+      
+      dropdowns.forEach(dropdown => {
+        const toggle = dropdown.querySelector('.nav-dropdown');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        
+        if (toggle && menu) {
+          toggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            
+            const isActive = dropdown.classList.contains('active');
+            closeAllDropdowns();
+            
+            if (!isActive) {
+              dropdown.classList.add('active');
+              menu.classList.add('show');
+            }
+          });
+          
+          menu.addEventListener('click', function(e) {
+            e.stopPropagation();
+          });
+          
+          menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+              setTimeout(closeAllDropdowns, 100);
+            });
+          });
+        }
+      });
+      
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+          closeAllDropdowns();
+        }
+      });
+      
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeAllDropdowns();
+        }
+      });
+    }
+    
+    window.copyText = copyText;
+    window.initializeDropdowns = initializeDropdowns;
+    
+    // ============================================
+    // TOWNS PAGE FUNCTIONS
+    // ============================================
+    
+    // Load and display towns from town-data.js
+    function loadTowns() {
+      const townsContainer = document.getElementById('towns-container');
+      
+      if (!window.townsOfTheMonth || window.townsOfTheMonth.length === 0) {
+        townsContainer.innerHTML = `
+          <div class="no-towns">
+            <i class="fas fa-city"></i>
+            <h3>No Towns Available</h3>
+            <p>Check back later for featured towns, or join the server to create your own!</p>
+            <a href="index.html#join" class="btn" style="margin-top: 20px;">Join the Server</a>
+          </div>
+        `;
+        return;
+      }
+      
+      // Create towns grid
+      let townsHTML = '<div class="towns-grid" id="towns-grid">';
+      
+      window.townsOfTheMonth.forEach((town, index) => {
+        townsHTML += `
+          <div class="town-card fade-in-up" style="animation-delay: ${index * 0.1}s">
+            <div class="town-image-container">
+              <img class="town-image" src="${town.image}" alt="${town.name}" 
+                   onerror="this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'">
+              <div class="town-badge">${town.month}</div>
+            </div>
+            
+            <div class="town-content">
+              <div class="town-header">
+                <h3 class="town-name">${town.name}</h3>
+                <span class="town-month">${town.month}</span>
+              </div>
+              
+              <p class="town-desc">${town.description}</p>
+              
+              <div class="town-stats">
+                <div class="town-stat">
+                  <i class="fas fa-users"></i>
+                  <span>${town.population}</span>
+                </div>
+                <div class="town-stat">
+                  <i class="fas fa-crown"></i>
+                  <span>${town.leader}</span>
+                </div>
+                <div class="town-stat">
+                  <i class="fas fa-landmark"></i>
+                  <span>${town.ideology}</span>
+                </div>
+              </div>
+              
+              <div class="town-actions">
+                <a href="#" class="btn btn-small" onclick="copyText('${town.name}'); return false;">
+                  <i class="fas fa-copy"></i> Copy Name
+                </a>
+                <a href="map.html?town=${encodeURIComponent(town.name)}" class="btn btn-small btn-outline">
+                  <i class="fas fa-map"></i> Find on Map
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      
+      townsHTML += '</div>';
+      townsContainer.innerHTML = townsHTML;
+      
+      // Initialize scroll animations
+      initScrollAnimations();
+    }
+    
+    // Initialize scroll animations
+    function initScrollAnimations() {
+      const fadeElements = document.querySelectorAll('.fade-in-up');
+      
+      const fadeOnScroll = () => {
+        fadeElements.forEach(element => {
+          const elementTop = element.getBoundingClientRect().top;
+          const elementVisible = 150;
+          
+          if (elementTop < window.innerHeight - elementVisible) {
+            element.style.opacity = "1";
+            element.style.transform = "translateY(0)";
+          }
+        });
+      };
+      
+      fadeOnScroll();
+      
+      let scrollTimeout;
+      window.addEventListener('scroll', () => {
+        if (!scrollTimeout) {
+          scrollTimeout = setTimeout(() => {
+            fadeOnScroll();
+            scrollTimeout = null;
+          }, 100);
+        }
+      });
+    }
+    
+    // Manual component loading fallback
+    async function loadComponentsManually() {
+      const components = [
+        { id: 'navbar', file: 'components/navbar.html', container: 'navbar-container' },
+        { id: 'header', file: 'components/header.html', container: 'header-container' },
+        { id: 'footer', file: 'components/footer.html', container: 'footer-container' }
+      ];
+      
+      for (const component of components) {
+        try {
+          const response = await fetch(component.file);
+          if (response.ok) {
+            const html = await response.text();
+            const container = document.getElementById(component.container);
+            if (container) {
+              container.innerHTML = html;
+            }
+          }
+        } catch (error) {
+          console.error(`Failed to load ${component.id}:`, error);
+        }
+      }
+    }
+    
+    // Set active navigation
+    function setActiveNav(pageName) {
+      setTimeout(() => {
+        const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
+        navLinks.forEach(link => {
+          if (link.getAttribute('data-nav') === pageName) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }, 500);
+    }
+    
+    // ============================================
+    // PAGE INITIALIZATION
+    // ============================================
+    
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        // Load components
+        if (window.ComponentLoader) {
+          await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
+          await window.ComponentLoader.loadComponent('header', 'header-container');
+          await window.ComponentLoader.loadComponent('footer', 'footer-container');
+          
+          // Initialize dropdowns
+          setTimeout(() => {
+            if (window.initializeDropdowns) {
+              window.initializeDropdowns();
+            }
+          }, 100);
+          
+          // Set active navigation
+          setActiveNav('towns');
+          
+        } else {
+          await loadComponentsManually();
+          setTimeout(() => {
+            if (window.initializeDropdowns) {
+              window.initializeDropdowns();
+            }
+          }, 200);
+        }
+        
+        // Load towns
+        setTimeout(() => {
+          loadTowns();
+        }, 300);
+        
+      } catch (error) {
+        console.error('Error during page initialization:', error);
+      }
+    });
+    
+    // Reinitialize dropdowns when components are loaded
+    document.addEventListener('componentLoaded', (event) => {
+      if (event.detail.componentId === 'navbar') {
+        setTimeout(() => {
+          if (window.initializeDropdowns) {
+            window.initializeDropdowns();
+          }
+        }, 100);
+      }
+    });
+  </script>
 </body>
 </html>
