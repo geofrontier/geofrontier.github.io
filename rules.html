@@ -2,36 +2,979 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Geofrontier - Rules</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoFrontier — Server Rules</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Inline styles for rules page -->
+  <style>
+    /* Hero section for rules page */
+    .rules-hero {
+      background: linear-gradient(rgba(2, 6, 23, 0.9), rgba(15, 23, 42, 0.85)), 
+                  url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid var(--accent-gold);
+    }
+    
+    .rules-hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: var(--accent-gold);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .rules-hero p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 25px;
+      color: var(--text-light);
+      opacity: 0.9;
+    }
+    
+    /* Table of contents */
+    .toc-container {
+      background: rgba(30, 41, 59, 0.5);
+      border-radius: 15px;
+      padding: 30px;
+      margin: 30px 0;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    
+    .toc-container h2 {
+      color: var(--accent-gold);
+      font-family: 'Cinzel', serif;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    
+    .toc-item {
+      background: rgba(15, 23, 42, 0.7);
+      padding: 15px;
+      border-radius: 10px;
+      border-left: 4px solid var(--accent-teal);
+      transition: all 0.3s ease;
+    }
+    
+    .toc-item:hover {
+      transform: translateX(5px);
+      background: rgba(15, 23, 42, 0.9);
+      border-left-color: var(--accent-gold);
+    }
+    
+    .toc-item a {
+      color: var(--text-light);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+    }
+    
+    .toc-item a:hover {
+      color: var(--accent-gold);
+    }
+    
+    /* Rules content */
+    .rules-content {
+      margin: 40px 0;
+    }
+    
+    .rule-category {
+      margin-bottom: 50px;
+      scroll-margin-top: 100px;
+    }
+    
+    .rule-category h2 {
+      color: var(--accent-gold);
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .rule-category h2 i {
+      font-size: 1.8rem;
+    }
+    
+    .rule-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 25px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .rule-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .rule-title {
+      color: var(--text-light);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 0;
+    }
+    
+    .rule-severity {
+      background: linear-gradient(135deg, var(--accent-rust), #b7410e);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    
+    .rule-content {
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    
+    .rule-content p {
+      margin-bottom: 15px;
+    }
+    
+    .rule-content p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .rule-content ul, .rule-content ol {
+      padding-left: 20px;
+      margin-bottom: 15px;
+    }
+    
+    .rule-content li {
+      margin-bottom: 8px;
+      color: var(--text-muted);
+    }
+    
+    .rule-content strong {
+      color: var(--text-light);
+      font-weight: 600;
+    }
+    
+    .rule-examples {
+      background: rgba(30, 41, 59, 0.3);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 15px 0;
+      border-left: 4px solid var(--accent-teal);
+    }
+    
+    .rule-examples h4 {
+      color: var(--accent-teal);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    
+    .rule-examples p {
+      margin-bottom: 0;
+      color: var(--text-muted);
+    }
+    
+    .rule-penalty {
+      background: rgba(183, 65, 14, 0.1);
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 15px;
+      border-left: 4px solid var(--accent-rust);
+    }
+    
+    .rule-penalty h4 {
+      color: var(--accent-rust);
+      margin-bottom: 5px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    /* Severity levels legend */
+    .severity-legend {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 40px 0;
+    }
+    
+    .severity-item {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      border-top: 4px solid;
+    }
+    
+    .severity-minor { border-color: #3b82f6; }
+    .severity-mild { border-color: #10b981; }
+    .severity-moderate { border-color: #f59e0b; }
+    .severity-major { border-color: #ef4444; }
+    .severity-severe { border-color: #7c3aed; }
+    
+    .severity-level {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+    
+    .severity-description {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    
+    /* General guidelines */
+    .guidelines-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+      border-radius: 15px;
+      padding: 30px;
+      margin: 40px 0;
+      border: 2px solid var(--accent-gold);
+      position: relative;
+    }
+    
+    .guidelines-card h2 {
+      color: var(--accent-gold);
+      font-family: 'Cinzel', serif;
+      margin-bottom: 20px;
+    }
+    
+    .guidelines-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .guideline-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+    
+    .guideline-item i {
+      color: var(--accent-gold);
+    }
+    
+    /* Quick action buttons */
+    .quick-actions {
+      display: flex;
+      gap: 15px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+    
+    .quick-action-btn {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .rules-hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .rule-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .quick-actions {
+        flex-direction: column;
+      }
+      
+      .quick-action-btn {
+        min-width: 100%;
+      }
+      
+      .toc-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .severity-legend {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .rules-hero {
+        padding: 60px 20px;
+      }
+      
+      .rules-hero h1 {
+        font-size: 2rem;
+      }
+      
+      .rule-category h2 {
+        font-size: 1.5rem;
+      }
+      
+      .rule-title {
+        font-size: 1.1rem;
+      }
+    }
+    
+    /* Scroll animation for table of contents */
+    .toc-item a.active {
+      color: var(--accent-gold);
+      font-weight: 700;
+    }
+  </style>
 </head>
+<body>
+  <!-- Navbar container -->
+  <div id="navbar-container" class="component-loading">
+    <i class="fas fa-spinner fa-spin"></i>
+    <span>Loading navigation...</span>
+  </div>
+  
+  <!-- Header container -->
+  <div id="header-container" class="component-loading">
+    <i class="fas fa-spinner fa-spin"></i>
+    <span>Loading header...</span>
+  </div>
 
-<body style="margin:0; background:#f3f3f3; font-family:Inter, Arial, sans-serif; color:#111;">
+  <!-- HERO SECTION -->
+  <section class="rules-hero">
+    <h1>GeoFrontier Rulebook</h1>
+    <p>Season 2 • Updated for a fair and engaging gameplay experience</p>
+    <div class="hero-subtitle">Read carefully • Violations have consequences • Contact staff with questions</div>
+  </section>
 
-<div id="navbar-container"></div>
-<div id="header-container"></div>
-<script src="/components/layout-loader.js"></script>
+  <!-- MAIN CONTENT -->
+  <div class="section">
+    <!-- Guidelines Card -->
+    <div class="guidelines-card">
+      <h2><i class="fas fa-gavel"></i> General Guidelines</h2>
+      <p style="color: var(--text-light); margin-bottom: 20px;">Moderators will assign each rule violation a severity level based on intent, impact, and repeat history. Repeated offences will automatically result in a higher severity regardless of intent and impact.</p>
+      
+      <div class="guidelines-list">
+        <div class="guideline-item">
+          <i class="fas fa-ban"></i>
+          <span>No cheating or exploits</span>
+        </div>
+        <div class="guideline-item">
+          <i class="fas fa-users"></i>
+          <span>No bigotry or harassment</span>
+        </div>
+        <div class="guideline-item">
+          <i class="fas fa-eye-slash"></i>
+          <span>No NSFW/NSFL content</span>
+        </div>
+        <div class="guideline-item">
+          <i class="fas fa-shield-alt"></i>
+          <span>Respect the moderation team</span>
+        </div>
+        <div class="guideline-item">
+          <i class="fas fa-file-contract"></i>
+          <span>Follow Minecraft EULA and TOS</span>
+        </div>
+      </div>
+    </div>
 
+    <!-- Severity Legend -->
+    <div class="severity-legend">
+      <div class="severity-item severity-minor">
+        <div class="severity-level" style="color: #3b82f6;">Minor</div>
+        <div class="severity-description">Warning or up to 1 hour</div>
+      </div>
+      <div class="severity-item severity-mild">
+        <div class="severity-level" style="color: #10b981;">Mild</div>
+        <div class="severity-description">Up to 1 day</div>
+      </div>
+      <div class="severity-item severity-moderate">
+        <div class="severity-level" style="color: #f59e0b;">Moderate</div>
+        <div class="severity-description">Up to 1 week</div>
+      </div>
+      <div class="severity-item severity-major">
+        <div class="severity-level" style="color: #ef4444;">Major</div>
+        <div class="severity-description">Up to 1 month</div>
+      </div>
+      <div class="severity-item severity-severe">
+        <div class="severity-level" style="color: #7c3aed;">Severe</div>
+        <div class="severity-description">Permanent</div>
+      </div>
+    </div>
 
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <a href="#" class="btn" onclick="copyText('Report Forum')">
+        <i class="fas fa-flag"></i> Report Forum
+      </a>
+      <a href="#" class="btn btn-outline" onclick="copyText('Appeal Forum')">
+        <i class="fas fa-file-invoice"></i> Appeal Forum
+      </a>
+      <a href="#" class="btn" onclick="copyText('discord.gg/NWxBBTvzXb')">
+        <i class="fab fa-discord"></i> Discord Server
+      </a>
+    </div>
 
-<!-- PAGE CONTENT -->
-<div style="max-width:900px; margin:40px auto; padding:0 20px;">
+    <!-- Table of Contents -->
+    <div class="toc-container">
+      <h2><i class="fas fa-book"></i> Table of Contents</h2>
+      <div class="toc-grid">
+        <div class="toc-item">
+          <a href="#cheating">
+            <i class="fas fa-user-secret"></i> 1. Cheating and Exploiting
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#chat">
+            <i class="fas fa-comments"></i> 2. In-Game Behaviour - Chat
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#pvp">
+            <i class="fas fa-crosshairs"></i> 3. In-Game Behaviour - PvP
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#nations">
+            <i class="fas fa-landmark"></i> 4. General Nation Rules
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#war">
+            <i class="fas fa-fist-raised"></i> 5. War Rules
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#extra">
+            <i class="fas fa-clipboard-list"></i> 6. Extra Rules
+          </a>
+        </div>
+      </div>
+    </div>
 
-  <!-- GOOGLE WEB EMBED -->
-  <iframe 
-    src="https://docs.google.com/document/d/e/2PACX-1vR0sl2v_kkLfDuMZP5t4GnD0nzpkgrGsilBe_PSAWLvnjaatYfYsS3Wc1HL1ZUeJFloI_rTvgmgLYxt/pub?embedded=true" 
-    width="100%" 
-    height="1684" 
-    frameborder="0" 
-    marginheight="0" 
-    marginwidth="0"
-    style="
-      background:white;
-      border-radius:12px;
-      border:1px solid #ccc;
-    "
-  >Loading…</iframe>
+    <!-- Rules Content -->
+    <div class="rules-content">
+      <!-- Section 1: Cheating and Exploiting -->
+      <div class="rule-category" id="cheating">
+        <h2><i class="fas fa-user-secret"></i> 1. Cheating and Exploiting</h2>
+        
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">1.1 Unfair Gameplay Mods</h3>
+            <span class="rule-severity">Major - Severe</span>
+          </div>
+          <div class="rule-content">
+            <p>Clients, physical modifications, and resource packs that give you an unfair advantage in gameplay over others are forbidden.</p>
+            
+            <div class="rule-examples">
+              <h4>Allowed Mods:</h4>
+              <ul>
+                <li>Performance Mods</li>
+                <li>Visual Mods</li>
+                <li>Sound Mods</li>
+                <li>Interface Mods / Minimaps (No entity radar)</li>
+                <li>Quality of Life Mods</li>
+                <li>Schematic Mods</li>
+              </ul>
+              
+              <h4>Prohibited Mods:</h4>
+              <ul>
+                <li>Combat Cheats</li>
+                <li>ESP / X-Ray</li>
+                <li>Dupe Assisting</li>
+                <li>Hacked Clients</li>
+                <li>Movement Exploits</li>
+                <li>Automation & Macros (Excluding Schematics)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-</div>
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">1.2 Exploiting Bugs / Glitches</h3>
+            <span class="rule-severity">Major - Severe</span>
+          </div>
+          <div class="rule-content">
+            <p>Intentionally taking advantage of modpack or server glitches or otherwise technical oversights is punishable. On the other hand, notifying staff of a bug / exploit may be rewardable.</p>
+          </div>
+        </div>
 
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">1.3 Duplication</h3>
+            <span class="rule-severity">Major - Severe</span>
+          </div>
+          <div class="rule-content">
+            <p>You may not duplicate or find loopholes to generate an infinite or large amount of items, money, stats, etc.</p>
+            <div class="rule-penalty">
+              <h4>Additional Penalty:</h4>
+              <p>Economy wipe, ender chest wipe, & inventory wipe</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">1.4 Alternative Accounts</h3>
+            <span class="rule-severity">Moderate - Severe</span>
+          </div>
+          <div class="rule-content">
+            <p>Alternative accounts (AKA alts) are allowed unless they're used for malicious reasons.</p>
+            <p><strong>Examples:</strong> Using an alt to steal, sabotage, using an alt to evade punishment, etc.</p>
+            <div class="rule-penalty">
+              <h4>Additional Penalty:</h4>
+              <p>2x punishment on all accounts</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Chat -->
+      <div class="rule-category" id="chat">
+        <h2><i class="fas fa-comments"></i> 2. In-Game Behaviour - Chat</h2>
+        
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">2.1 Chat Language</h3>
+            <span class="rule-severity">Minor - Severe</span>
+          </div>
+          <div class="rule-content">
+            <p><strong>2.1-1 Respect and Civility:</strong> All members are expected to be respectful in their conduct. You are not allowed to:</p>
+            <ul>
+              <li>Harass other members</li>
+              <li>Be involved in bigotry (including racism, sexism, homophobia, transphobia, religious prejudice and ableism)</li>
+              <li>Personal attacks against other members</li>
+            </ul>
+            
+            <p><strong>2.1-2 Dehumanizing Language:</strong> To prevent dehumanizing remarks, you may not:</p>
+            <ul>
+              <li>Encourage self-harm</li>
+              <li>Use slurs and derogatory terms to insult another</li>
+              <li>Spread hate speeches</li>
+            </ul>
+            
+            <p><strong>2.1-3 Threats:</strong> You may not, under any circumstance, state cyber related threats including (but not limited to):</p>
+            <ul>
+              <li>Exposure of Private Information</li>
+              <li>Personal Injury</li>
+              <li>Terrorism</li>
+              <li>DDoSing, or otherwise Hacking</li>
+            </ul>
+            
+            <p><em>Note: Basic swearing is fine</em></p>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">2.2 Spam</h3>
+            <span class="rule-severity">Minor - Severe</span>
+          </div>
+          <div class="rule-content">
+            <p>Disrupting chat by sending consistent messages fast, sending wall of texts, encouraging or provoking spam, and constantly repeating similar messages is not allowed.</p>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">2.3 Prohibited Topics</h3>
+            <span class="rule-severity">Minor - Severe</span>
+          </div>
+          <div class="rule-content">
+            <p>Discussion of controversial topics including politics and religion, or dark topics such as suicide, self-harm, or trauma is prohibited for the comfort of all members. It disrupts chat and leads to complications.</p>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">2.4 NSFW / NSFL</h3>
+            <span class="rule-severity">Minor - Severe</span>
+          </div>
+          <div class="rule-content">
+            <p>Absolutely no NSFW (Not Safe For Work) or NSFL (Not Safe For Life) content or topics in any form whatsoever. Crude and suggestive jokes are also disallowed.</p>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">2.5 Sharing Personal Information</h3>
+            <span class="rule-severity">Severe</span>
+          </div>
+          <div class="rule-content">
+            <p>You are prohibited from sharing the personal information of another at all without explicit permission for public use.</p>
+            <p><strong>Examples:</strong> personal photos, age, address, social networks, relations, etc.</p>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">2.6 Advertising and Links</h3>
+            <span class="rule-severity">Moderate - Severe</span>
+          </div>
+          <div class="rule-content">
+            <p>Advertising another Minecraft server is forbidden. If you wish to share a server, you may private message the user on a social media platform.</p>
+            <p>Malicious links are not allowed, including links that: Log one's IP, download a virus, or lead to inappropriate content.</p>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">2.7 Respecting Authority</h3>
+            <span class="rule-severity">Minor - Major</span>
+          </div>
+          <div class="rule-content">
+            <p>The words / actions of a staff member are final. If a player has an issue with the decision, they may put in a complaint to a staff member of higher authority.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: PvP -->
+      <div class="rule-category" id="pvp">
+        <h2><i class="fas fa-crosshairs"></i> 3. In-Game Behaviour - PvP</h2>
+        
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">3.1 Camping</h3>
+            <span class="rule-severity">Minor - Major</span>
+          </div>
+          <div class="rule-content">
+            <p>Do not spawn kill players to the point where they're motivated to quit.</p>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">3.2 Griefing and Stealing</h3>
+            <span class="rule-severity">Minor - Severe</span>
+          </div>
+          <div class="rule-content">
+            <p>You are allowed to grief and / or steal against another player in the following situations:</p>
+            <ul>
+              <li>In unclaimed territory / wilderness (all realms)</li>
+              <li>During a raid</li>
+              <li>During a war</li>
+            </ul>
+            
+            <p>Stealing during a consenting transaction / trade, against a member of the town / nation you're in or an ally is prohibited.</p>
+            <p>Collecting the loot off a legally killed player is not stealing, unless an arrangement was made beforehand to disallow taking loot.</p>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">3.3 Farming Stats</h3>
+            <span class="rule-severity">Minor - Severe</span>
+          </div>
+          <div class="rule-content">
+            <p>Repeatedly killing alternative accounts or players who agree to let you kill them to gain stats including a higher number of Kill points in raids is strictly prohibited.</p>
+            <div class="rule-penalty">
+              <h4>Additional Penalty:</h4>
+              <p>Loot rollback</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Nations -->
+      <div class="rule-category" id="nations">
+        <h2><i class="fas fa-landmark"></i> 4. General Nation Rules</h2>
+        
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">4.1 Town and Nation Names</h3>
+            <span class="rule-severity">Minor - Moderate</span>
+          </div>
+          <div class="rule-content">
+            <p>If choosing a team name, keep it PG-13. A team's name cannot be the same or highly similar to another existing team without permission (This doesn't apply to historical regions your town or nation is primarily in).</p>
+            <div class="rule-penalty">
+              <h4>Additional Penalty:</h4>
+              <p>Town / nation removal</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">4.2 Group Discords</h3>
+            <span class="rule-severity">Moderate - Severe</span>
+          </div>
+          <div class="rule-content">
+            <p>Discord servers and group chats advertising a GeoFrontier town, nation or group must follow Discord's ToS and Community Guidelines as well as GeoFrontier's Rules.</p>
+            <p>This rule is only enforced in instances where said violations normally result in the termination of Discord account(s) or gameplay on our servers and occur in relatively public channels.</p>
+            <p><strong>Examples:</strong> Doxxing, encouraging suicide, distributing hacked clients or illegal NSFW / NSFL content in general chats.</p>
+            <div class="rule-penalty">
+              <h4>Additional Penalty:</h4>
+              <p>TOS Break - town / nation wipe + ban wave</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">4.3 Claiming Patterns</h3>
+          </div>
+          <div class="rule-content">
+            <p><strong>4.3-1 Snaking:</strong> Claims cannot be less than 3 chunks wide when spanning over 3 chunks in length for longer than 72 hours. This does not apply to historical borders or panhandles created by natural terrain.</p>
+            <div class="rule-penalty">
+              <h4>Penalty: Minor - Moderate + claim removal</h4>
+            </div>
+            
+            <p><strong>4.3-2 Claim Blocking:</strong> Claims may not entirely enclose another claim without permission. Claiming an area to block a maximum of 2 cardinal directions (North, East, South, West) of another town / nation's claims is considered reasonable.</p>
+            <div class="rule-penalty">
+              <h4>Penalty: Minor - Moderate + claim removal</h4>
+            </div>
+            
+            <p><strong>4.3-3 Unclaimed Pockets:</strong> Claimed areas must be filled. There cannot be any enclosed wilderness chunks.</p>
+            <div class="rule-penalty">
+              <h4>Penalty: Minor - Moderate + claim removal</h4>
+            </div>
+            
+            <p><strong>4.3-4 Empty Outposts:</strong> Claimed outposts must have some kind of structure with purpose built within the core chunk.</p>
+            <div class="rule-penalty">
+              <h4>Penalty: Minor - Moderate + claim removal</h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">4.4 Traps</h3>
+            <span class="rule-severity">Minor - Moderate</span>
+          </div>
+          <div class="rule-content">
+            <p>Traps within claims may only be permitted if the chunk holding the trap has BREAK and PLACE flags set to TRUE for all parties.</p>
+            <div class="rule-penalty">
+              <h4>Additional Penalty:</h4>
+              <p>Loot rollback</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5: War -->
+      <div class="rule-category" id="war">
+        <h2><i class="fas fa-fist-raised"></i> 5. War Rules</h2>
+        
+        <div class="rule-card">
+          <div class="rule-content" style="text-align: center; padding: 40px;">
+            <i class="fas fa-tools" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 20px;"></i>
+            <h3 style="color: var(--text-light); margin-bottom: 15px;">Rules Under Construction</h3>
+            <p style="color: var(--text-muted);">The writers of this rulebook currently haven't seen the server's war and raid plugins in action and as such, no rules can currently be written on them. This will (hopefully) be resolved in a playtest before the server releases.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 6: Extra Rules -->
+      <div class="rule-category" id="extra">
+        <h2><i class="fas fa-clipboard-list"></i> 6. Extra Rules</h2>
+        
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">6.1 Sales</h3>
+            <span class="rule-severity">Moderate - Severe</span>
+          </div>
+          <div class="rule-content">
+            <p>Do not offer, sell, or buy in-game items, ranks, information or donator perks for real-world currency.</p>
+            <p>Do not charge back any official payments to GeoFrontier.</p>
+            <div class="rule-penalty">
+              <h4>Chargeback Penalty:</h4>
+              <p>Severe</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">6.2 Minecraft Accounts</h3>
+          </div>
+          <div class="rule-content">
+            <p>Minecraft accounts may not have inappropriate usernames, nicknames or skins.</p>
+            <p>Minecraft accounts must additionally be legally bought by or gifted to the player as under Minecraft's Terms of Service.</p>
+            <div class="rule-penalty">
+              <h4>Penalties:</h4>
+              <p>[1] Mild - Ban until issues resolved</p>
+              <p>[2] Severe - Stolen account</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">6.3 Discord</h3>
+            <span class="rule-severity">Minor - Severe</span>
+          </div>
+          <div class="rule-content">
+            <p>Discord chat rules are equal to Chat rules (2.).</p>
+            <p>In voice chats, do not flood with music; there is alternative music to play. This rule applies once someone asks you to stop.</p>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-header">
+            <h3 class="rule-title">6.4 Adhere to Discord & Minecraft EULA</h3>
+            <span class="rule-severity">Severe</span>
+          </div>
+          <div class="rule-content">
+            <p>All members follow Discord's Terms of Service (including being 13+ or older depending on your region) and the Minecraft EULA and Terms of Service. Any violation will result in an immediate report and unappealable ban.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions (Bottom) -->
+    <div class="quick-actions">
+      <a href="#" class="btn" onclick="copyText('Report Forum')">
+        <i class="fas fa-flag"></i> Report a Violation
+      </a>
+      <a href="#" class="btn btn-outline" onclick="copyText('Appeal Forum')">
+        <i class="fas fa-file-invoice"></i> Submit an Appeal
+      </a>
+      <a href="index.html" class="btn">
+        <i class="fas fa-home"></i> Return to Home
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer container -->
+  <div id="footer-container" class="component-loading" style="min-height: 150px;">
+    <i class="fas fa-spinner fa-spin"></i>
+    <span>Loading footer...</span>
+  </div>
+
+  <!-- COMPASS (BACK TO TOP) -->
+  <div class="compass" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="fas fa-compass"></i>
+  </div>
+
+  <!-- Load component loader -->
+  <script src="js/components-loader.js"></script>
+  
+  <!-- Page-specific JavaScript -->
+  <script>
+    // Copy text function
+    window.copyText = window.copyText || function(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const notification = document.createElement('div');
+        notification.textContent = `Copied: ${text}`;
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: var(--accent-gold);
+          color: var(--primary-dark);
+          padding: 12px 24px;
+          border-radius: 8px;
+          font-weight: 600;
+          z-index: 1000;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+          animation: fadeIn 0.3s ease;
+        `;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          notification.style.animation = 'fadeOut 0.5s ease forwards';
+          setTimeout(() => document.body.removeChild(notification), 500);
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy:', err);
+        alert(`Copy this: ${text}`);
+      });
+    };
+
+    // Table of contents highlighting
+    function highlightActiveSection() {
+      const sections = document.querySelectorAll('.rule-category');
+      const tocLinks = document.querySelectorAll('.toc-item a');
+      
+      let currentSection = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        const scrollPosition = window.scrollY + 100;
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          currentSection = section.id;
+        }
+      });
+      
+      tocLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    // Initialize dropdowns if function exists
+    function initDropdowns() {
+      if (window.initializeDropdowns) {
+        window.initializeDropdowns();
+      }
+    }
+
+    // Page initialization
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Rules page loading...');
+      
+      // Initialize dropdowns
+      setTimeout(initDropdowns, 200);
+      
+      // Set active nav
+      setTimeout(() => {
+        const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
+        navLinks.forEach(link => {
+          if (link.getAttribute('data-nav') === 'rules') {
+            link.classList.add('active');
+          }
+        });
+      }, 500);
+      
+      // Setup scroll listener for TOC highlighting
+      window.addEventListener('scroll', highlightActiveSection);
+      highlightActiveSection(); // Initial call
+    });
+
+    // Listen for component loaded events
+    document.addEventListener('componentLoaded', function(event) {
+      if (event.detail.componentId === 'navbar') {
+        setTimeout(initDropdowns, 100);
+      }
+    });
+  </script>
 </body>
 </html>
