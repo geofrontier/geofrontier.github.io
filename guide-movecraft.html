@@ -48,11 +48,12 @@
     /* Guide content */
     .guide-content {
       margin: 40px 0;
+      position: relative;
     }
     
     .guide-section {
       margin-bottom: 60px;
-      scroll-margin-top: 100px;
+      scroll-margin-top: 120px;
     }
     
     .guide-section h2 {
@@ -237,17 +238,26 @@
       font-size: 0.9rem;
     }
     
-    /* Quick nav */
+    /* Quick nav - FIXED POSITION */
     .quick-nav {
-      position: sticky;
-      top: 100px;
+      position: fixed;
+      top: 200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 1200px;
       background: rgba(15, 23, 42, 0.95);
       border-radius: 10px;
       padding: 20px;
-      margin-bottom: 30px;
       border: 1px solid rgba(212, 175, 55, 0.2);
       backdrop-filter: blur(10px);
-      z-index: 100;
+      z-index: 1000;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      display: none; /* Hidden by default, shown by JS */
+    }
+    
+    .quick-nav.visible {
+      display: block;
     }
     
     .quick-nav h3 {
@@ -271,6 +281,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      cursor: pointer;
     }
     
     .nav-link:hover {
@@ -283,6 +294,30 @@
       background: rgba(212, 175, 55, 0.2);
       color: var(--accent-gold);
       border-left: 4px solid var(--accent-gold);
+    }
+    
+    /* Mobile quick nav trigger */
+    .mobile-nav-trigger {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--accent-gold);
+      color: var(--primary-dark);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+      display: none;
+    }
+    
+    .mobile-nav-trigger:hover {
+      transform: scale(1.1);
     }
     
     /* Requirements list */
@@ -305,13 +340,37 @@
     }
     
     /* Responsive design */
+    @media (max-width: 1024px) {
+      .quick-nav {
+        position: fixed;
+        top: 150px;
+        width: 95%;
+        max-width: 95%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+    
     @media (max-width: 768px) {
       .guide-hero h1 {
         font-size: 2.5rem;
       }
       
       .quick-nav {
-        position: static;
+        position: fixed;
+        top: 120px;
+        width: 90%;
+        left: 50%;
+        transform: translateX(-50%);
+        display: none;
+      }
+      
+      .quick-nav.visible {
+        display: block;
+      }
+      
+      .mobile-nav-trigger {
+        display: flex;
       }
       
       .ship-grid {
@@ -320,6 +379,11 @@
       
       .commands-grid {
         grid-template-columns: 1fr;
+      }
+      
+      .nav-links {
+        max-height: 300px;
+        overflow-y: auto;
       }
     }
     
@@ -337,6 +401,19 @@
       }
       
       .guide-card h3 {
+        font-size: 1.2rem;
+      }
+      
+      .quick-nav {
+        top: 100px;
+        width: 95%;
+      }
+      
+      .mobile-nav-trigger {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
         font-size: 1.2rem;
       }
     }
@@ -364,32 +441,37 @@
 
   <!-- MAIN CONTENT -->
   <div class="section">
-    <div class="guide-content">
-      <!-- Quick Navigation -->
-      <div class="quick-nav">
-        <h3><i class="fas fa-compass"></i> Quick Navigation</h3>
-        <div class="nav-links">
-          <a href="#basics" class="nav-link">
-            <i class="fas fa-anchor"></i> Basics
-          </a>
-          <a href="#building" class="nav-link">
-            <i class="fas fa-hammer"></i> Building Ships
-          </a>
-          <a href="#piloting" class="nav-link">
-            <i class="fas fa-ship"></i> Piloting Ships
-          </a>
-          <a href="#combat" class="nav-link">
-            <i class="fas fa-crosshairs"></i> Naval Combat
-          </a>
-          <a href="#types" class="nav-link">
-            <i class="fas fa-list"></i> Ship Types
-          </a>
-          <a href="#commands" class="nav-link">
-            <i class="fas fa-terminal"></i> Commands
-          </a>
-        </div>
+    <!-- Quick Navigation - Now fixed position -->
+    <div class="quick-nav" id="quickNav">
+      <h3><i class="fas fa-compass"></i> Quick Navigation</h3>
+      <div class="nav-links">
+        <a href="#basics" class="nav-link">
+          <i class="fas fa-anchor"></i> Basics
+        </a>
+        <a href="#building" class="nav-link">
+          <i class="fas fa-hammer"></i> Building Ships
+        </a>
+        <a href="#piloting" class="nav-link">
+          <i class="fas fa-ship"></i> Piloting Ships
+        </a>
+        <a href="#combat" class="nav-link">
+          <i class="fas fa-crosshairs"></i> Naval Combat
+        </a>
+        <a href="#types" class="nav-link">
+          <i class="fas fa-list"></i> Ship Types
+        </a>
+        <a href="#commands" class="nav-link">
+          <i class="fas fa-terminal"></i> Commands
+        </a>
       </div>
+    </div>
 
+    <!-- Mobile nav trigger -->
+    <div class="mobile-nav-trigger" id="mobileNavTrigger">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="guide-content">
       <!-- Section 1: Basics -->
       <div class="guide-section" id="basics">
         <h2><i class="fas fa-anchor"></i> Movecraft Basics</h2>
@@ -790,6 +872,10 @@
   
   <!-- Page-specific JavaScript -->
   <script>
+    // ============================================
+    // GLOBAL UTILITY FUNCTIONS
+    // ============================================
+    
     // Copy text function
     window.copyText = window.copyText || function(text) {
       navigator.clipboard.writeText(text).then(() => {
@@ -819,7 +905,22 @@
         alert(`Copy this: ${text}`);
       });
     };
-
+    
+    // Initialize dropdowns globally
+    function initializeDropdowns() {
+      if (typeof window.initializeDropdowns === 'function') {
+        window.initializeDropdowns();
+      }
+    }
+    
+    // Make functions globally available
+    window.copyText = copyText;
+    window.initializeDropdowns = initializeDropdowns;
+    
+    // ============================================
+    // GUIDE PAGE FUNCTIONS
+    // ============================================
+    
     // Navigation highlighting
     function highlightActiveSection() {
       const sections = document.querySelectorAll('.guide-section');
@@ -830,7 +931,7 @@
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        const scrollPosition = window.scrollY + 100;
+        const scrollPosition = window.scrollY + 150;
         
         if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
           currentSection = section.id;
@@ -843,37 +944,28 @@
           link.classList.add('active');
         }
       });
-    }
-
-    // Initialize dropdowns if function exists
-    function initDropdowns() {
-      if (window.initializeDropdowns) {
-        window.initializeDropdowns();
+      
+      // Show/hide quick nav based on scroll position
+      const quickNav = document.getElementById('quickNav');
+      if (quickNav) {
+        if (window.scrollY > 300) {
+          quickNav.classList.add('visible');
+        } else {
+          quickNav.classList.remove('visible');
+        }
       }
     }
-
-    // Page initialization
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('Guide page loading...');
-      
-      // Initialize dropdowns
-      setTimeout(initDropdowns, 200);
-      
-      // Set active nav
-      setTimeout(() => {
-        const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
-        navLinks.forEach(link => {
-          if (link.getAttribute('data-nav') === 'guides') {
-            link.classList.add('active');
-          }
-        });
-      }, 500);
-      
-      // Setup scroll listener for nav highlighting
-      window.addEventListener('scroll', highlightActiveSection);
-      highlightActiveSection(); // Initial call
-      
-      // Smooth scrolling for nav links
+    
+    // Toggle mobile nav
+    function toggleMobileNav() {
+      const quickNav = document.getElementById('quickNav');
+      if (quickNav) {
+        quickNav.classList.toggle('visible');
+      }
+    }
+    
+    // Smooth scrolling for nav links
+    function setupSmoothScrolling() {
       document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function(e) {
           e.preventDefault();
@@ -881,18 +973,180 @@
           const targetElement = document.querySelector(targetId);
           if (targetElement) {
             window.scrollTo({
-              top: targetElement.offsetTop - 80,
+              top: targetElement.offsetTop - 100,
               behavior: 'smooth'
             });
+            
+            // Close mobile nav if open
+            if (window.innerWidth <= 768) {
+              const quickNav = document.getElementById('quickNav');
+              if (quickNav) {
+                quickNav.classList.remove('visible');
+              }
+            }
           }
         });
       });
+    }
+    
+    // ============================================
+    // COMPONENT LOADING
+    // ============================================
+    
+    // Manual component loading fallback
+    async function loadComponentsManually() {
+      console.log('Loading components manually...');
+      
+      const components = [
+        { id: 'navbar', file: 'components/navbar.html', container: 'navbar-container' },
+        { id: 'header', file: 'components/header.html', container: 'header-container' },
+        { id: 'footer', file: 'components/footer.html', container: 'footer-container' }
+      ];
+      
+      for (const component of components) {
+        try {
+          console.log(`Loading ${component.id} from ${component.file}`);
+          const response = await fetch(component.file);
+          if (!response.ok) {
+            throw new Error(`Status: ${response.status}`);
+          }
+          const html = await response.text();
+          const container = document.getElementById(component.container);
+          if (container) {
+            container.innerHTML = html;
+            console.log(`${component.id} loaded successfully`);
+            
+            // Execute any scripts in the component
+            const scripts = container.querySelectorAll('script');
+            scripts.forEach(oldScript => {
+              const newScript = document.createElement('script');
+              Array.from(oldScript.attributes).forEach(attr => {
+                newScript.setAttribute(attr.name, attr.value);
+              });
+              newScript.textContent = oldScript.textContent;
+              oldScript.parentNode.replaceChild(newScript, oldScript);
+            });
+          }
+        } catch (error) {
+          console.error(`Failed to load ${component.id}:`, error);
+          const container = document.getElementById(component.container);
+          if (container) {
+            container.innerHTML = `
+              <div class="component-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Failed to load ${component.id}</h3>
+                <p>File not found: ${component.file}</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">
+                  Check that the file exists in the components folder
+                </p>
+              </div>
+            `;
+          }
+        }
+      }
+    }
+    
+    // Set active navigation
+    function setActiveNav(pageName) {
+      setTimeout(() => {
+        const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
+        navLinks.forEach(link => {
+          if (link.getAttribute('data-nav') === pageName) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }, 500);
+    }
+    
+    // ============================================
+    // PAGE INITIALIZATION
+    // ============================================
+    
+    document.addEventListener('DOMContentLoaded', async () => {
+      console.log('DOM loaded, starting guide page initialization...');
+      
+      try {
+        // Load components using ComponentLoader if available
+        if (window.ComponentLoader) {
+          console.log('Using ComponentLoader...');
+          
+          // Load navbar first
+          await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
+          console.log('Navbar loaded');
+          
+          // Initialize dropdowns after navbar loads
+          setTimeout(() => {
+            if (window.initializeDropdowns) {
+              window.initializeDropdowns();
+            }
+          }, 100);
+          
+          // Load other components
+          await window.ComponentLoader.loadComponent('header', 'header-container');
+          console.log('Header loaded');
+          
+          await window.ComponentLoader.loadComponent('footer', 'footer-container');
+          console.log('Footer loaded');
+          
+          // Set active navigation
+          setActiveNav('guides');
+          
+        } else {
+          console.log('ComponentLoader not found, loading manually');
+          await loadComponentsManually();
+          
+          // Initialize dropdowns after components load
+          setTimeout(() => {
+            if (window.initializeDropdowns) {
+              window.initializeDropdowns();
+            }
+          }, 200);
+        }
+        
+        // Setup guide-specific functionality
+        setupSmoothScrolling();
+        
+        // Setup scroll listener for nav highlighting
+        window.addEventListener('scroll', highlightActiveSection);
+        highlightActiveSection(); // Initial call
+        
+        // Setup mobile nav trigger
+        const mobileNavTrigger = document.getElementById('mobileNavTrigger');
+        if (mobileNavTrigger) {
+          mobileNavTrigger.addEventListener('click', toggleMobileNav);
+        }
+        
+        // Close mobile nav when clicking outside
+        document.addEventListener('click', function(e) {
+          const quickNav = document.getElementById('quickNav');
+          const mobileTrigger = document.getElementById('mobileNavTrigger');
+          
+          if (quickNav && quickNav.classList.contains('visible') && 
+              window.innerWidth <= 768 &&
+              !quickNav.contains(e.target) && 
+              !mobileTrigger.contains(e.target)) {
+            quickNav.classList.remove('visible');
+          }
+        });
+        
+        console.log('Guide page initialization complete!');
+        
+      } catch (error) {
+        console.error('Error during page initialization:', error);
+      }
     });
-
-    // Listen for component loaded events
-    document.addEventListener('componentLoaded', function(event) {
+    
+    // Reinitialize dropdowns when components are loaded via event
+    document.addEventListener('componentLoaded', (event) => {
       if (event.detail.componentId === 'navbar') {
-        setTimeout(initDropdowns, 100);
+        console.log('Navbar component loaded, initializing dropdowns...');
+        setTimeout(() => {
+          if (window.initializeDropdowns) {
+            window.initializeDropdowns();
+          }
+        }, 100);
       }
     });
   </script>
