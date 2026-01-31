@@ -185,6 +185,8 @@
     .towns-loading {
       text-align: center;
       padding: 60px 20px;
+      background: rgba(30, 41, 59, 0.3);
+      border-radius: 15px;
     }
     
     .towns-loading i {
@@ -207,26 +209,6 @@
       color: var(--accent-gold);
       margin-bottom: 20px;
       opacity: 0.5;
-    }
-    
-    /* Responsive design */
-    @media (max-width: 768px) {
-      .towns-hero h1 {
-        font-size: 2.5rem;
-      }
-      
-      .towns-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      
-      .town-stats {
-        justify-content: center;
-      }
-      
-      .town-actions {
-        flex-direction: column;
-      }
     }
     
     /* Animations */
@@ -304,99 +286,6 @@
   <!-- Page-specific JavaScript -->
   <script>
     // ============================================
-    // GLOBAL UTILITY FUNCTIONS
-    // ============================================
-    
-    // Copy text to clipboard
-    function copyText(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        const notification = document.createElement('div');
-        notification.textContent = `Copied: ${text}`;
-        notification.style.cssText = `
-          position: fixed;
-          top: 20px;
-          right: 20px;
-          background: var(--accent-gold);
-          color: var(--primary-dark);
-          padding: 12px 24px;
-          border-radius: 8px;
-          font-weight: 600;
-          z-index: 1000;
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-          animation: fadeIn 0.3s ease;
-        `;
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-          notification.style.animation = 'fadeOut 0.5s ease forwards';
-          setTimeout(() => document.body.removeChild(notification), 500);
-        }, 2000);
-      }).catch(err => {
-        console.error('Failed to copy text: ', err);
-      });
-    }
-    
-    // Initialize dropdowns globally
-    function initializeDropdowns() {
-      const dropdowns = document.querySelectorAll('.dropdown');
-      
-      function closeAllDropdowns() {
-        dropdowns.forEach(dropdown => {
-          dropdown.classList.remove('active');
-          const menu = dropdown.querySelector('.dropdown-menu');
-          if (menu) {
-            menu.classList.remove('show');
-          }
-        });
-      }
-      
-      dropdowns.forEach(dropdown => {
-        const toggle = dropdown.querySelector('.nav-dropdown');
-        const menu = dropdown.querySelector('.dropdown-menu');
-        
-        if (toggle && menu) {
-          toggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            e.preventDefault();
-            
-            const isActive = dropdown.classList.contains('active');
-            closeAllDropdowns();
-            
-            if (!isActive) {
-              dropdown.classList.add('active');
-              menu.classList.add('show');
-            }
-          });
-          
-          menu.addEventListener('click', function(e) {
-            e.stopPropagation();
-          });
-          
-          menu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function() {
-              setTimeout(closeAllDropdowns, 100);
-            });
-          });
-        }
-      });
-      
-      document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown')) {
-          closeAllDropdowns();
-        }
-      });
-      
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          closeAllDropdowns();
-        }
-      });
-    }
-    
-    window.copyText = copyText;
-    window.initializeDropdowns = initializeDropdowns;
-    
-    // ============================================
     // TOWNS PAGE FUNCTIONS
     // ============================================
     
@@ -404,11 +293,23 @@
     function loadTowns() {
       const townsContainer = document.getElementById('towns-container');
       
-      if (!window.townsOfTheMonth || window.townsOfTheMonth.length === 0) {
+      // Check if town data is available
+      if (!window.townsOfTheMonth) {
+        townsContainer.innerHTML = `
+          <div class="component-error" style="text-align: center; padding: 40px; margin: 20px;">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Failed to load town data</h3>
+            <p>Check that components/town-data.js exists and is properly formatted</p>
+          </div>
+        `;
+        return;
+      }
+      
+      if (window.townsOfTheMonth.length === 0) {
         townsContainer.innerHTML = `
           <div class="no-towns">
             <i class="fas fa-city"></i>
-            <h3>No Towns Available</h3>
+            <h3>No Towns Available Yet</h3>
             <p>Check back later for featured towns, or join the server to create your own!</p>
             <a href="index.html#join" class="btn" style="margin-top: 20px;">Join the Server</a>
           </div>
@@ -420,10 +321,13 @@
       let townsHTML = '<div class="towns-grid" id="towns-grid">';
       
       window.townsOfTheMonth.forEach((town, index) => {
+        // Use relative path for images
+        const imagePath = town.image.startsWith('http') ? town.image : town.image;
+        
         townsHTML += `
           <div class="town-card fade-in-up" style="animation-delay: ${index * 0.1}s">
             <div class="town-image-container">
-              <img class="town-image" src="${town.image}" alt="${town.name}" 
+              <img class="town-image" src="${imagePath}" alt="${town.name}" 
                    onerror="this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'">
               <div class="town-badge">${town.month}</div>
             </div>
@@ -439,7 +343,7 @@
               <div class="town-stats">
                 <div class="town-stat">
                   <i class="fas fa-users"></i>
-                  <span>${town.population}</span>
+                  <span>${town.population} Citizens</span>
                 </div>
                 <div class="town-stat">
                   <i class="fas fa-crown"></i>
@@ -452,12 +356,12 @@
               </div>
               
               <div class="town-actions">
-                <a href="#" class="btn btn-small" onclick="copyText('${town.name}'); return false;">
+                <button class="btn btn-small" onclick="copyText('${town.name}')">
                   <i class="fas fa-copy"></i> Copy Name
-                </a>
-                <a href="map.html?town=${encodeURIComponent(town.name)}" class="btn btn-small btn-outline">
+                </button>
+                <button class="btn btn-small btn-outline" onclick="alert('Map feature coming soon!')">
                   <i class="fas fa-map"></i> Find on Map
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -500,93 +404,48 @@
       });
     }
     
-    // Manual component loading fallback
-    async function loadComponentsManually() {
-      const components = [
-        { id: 'navbar', file: 'components/navbar.html', container: 'navbar-container' },
-        { id: 'header', file: 'components/header.html', container: 'header-container' },
-        { id: 'footer', file: 'components/footer.html', container: 'footer-container' }
-      ];
-      
-      for (const component of components) {
-        try {
-          const response = await fetch(component.file);
-          if (response.ok) {
-            const html = await response.text();
-            const container = document.getElementById(component.container);
-            if (container) {
-              container.innerHTML = html;
-            }
-          }
-        } catch (error) {
-          console.error(`Failed to load ${component.id}:`, error);
-        }
-      }
-    }
-    
-    // Set active navigation
-    function setActiveNav(pageName) {
-      setTimeout(() => {
-        const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
-        navLinks.forEach(link => {
-          if (link.getAttribute('data-nav') === pageName) {
-            link.classList.add('active');
-          } else {
-            link.classList.remove('active');
-          }
-        });
-      }, 500);
-    }
+    // Copy text function (reuse from index.html if available)
+    window.copyText = window.copyText || function(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const notification = document.createElement('div');
+        notification.textContent = `Copied: ${text}`;
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: var(--accent-gold);
+          color: var(--primary-dark);
+          padding: 12px 24px;
+          border-radius: 8px;
+          font-weight: 600;
+          z-index: 1000;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+          animation: fadeIn 0.3s ease;
+        `;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          notification.style.animation = 'fadeOut 0.5s ease forwards';
+          setTimeout(() => document.body.removeChild(notification), 500);
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy:', err);
+      });
+    };
     
     // ============================================
     // PAGE INITIALIZATION
     // ============================================
     
-    document.addEventListener('DOMContentLoaded', async () => {
-      try {
-        // Load components
-        if (window.ComponentLoader) {
-          await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
-          await window.ComponentLoader.loadComponent('header', 'header-container');
-          await window.ComponentLoader.loadComponent('footer', 'footer-container');
-          
-          // Initialize dropdowns
-          setTimeout(() => {
-            if (window.initializeDropdowns) {
-              window.initializeDropdowns();
-            }
-          }, 100);
-          
-          // Set active navigation
-          setActiveNav('towns');
-          
-        } else {
-          await loadComponentsManually();
-          setTimeout(() => {
-            if (window.initializeDropdowns) {
-              window.initializeDropdowns();
-            }
-          }, 200);
-        }
-        
-        // Load towns
-        setTimeout(() => {
-          loadTowns();
-        }, 300);
-        
-      } catch (error) {
-        console.error('Error during page initialization:', error);
-      }
-    });
-    
-    // Reinitialize dropdowns when components are loaded
-    document.addEventListener('componentLoaded', (event) => {
-      if (event.detail.componentId === 'navbar') {
-        setTimeout(() => {
-          if (window.initializeDropdowns) {
-            window.initializeDropdowns();
-          }
-        }, 100);
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Towns page loading...');
+      
+      // Load towns after a short delay to ensure town-data.js is loaded
+      setTimeout(loadTowns, 100);
+      
+      // Initialize dropdowns if function exists
+      if (window.initializeDropdowns) {
+        setTimeout(window.initializeDropdowns, 200);
       }
     });
   </script>
