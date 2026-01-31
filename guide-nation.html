@@ -2,65 +2,952 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>GeoFrontier — Nation Guide</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nation Guide — GeoFrontier Minecraft Server</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Page-specific styles -->
   <style>
-    body { margin:0; font-family: Inter, Arial, sans-serif; background:#f3f3f3; color:#111; }
-
-    header {
-      background:#1e293b;
-      color:white;
-      padding:40px 20px;
-      text-align:center;
+    /* Guide-specific styles */
+    .guide-header {
+      position: relative;
+      background: 
+        linear-gradient(rgba(11, 17, 32, 0.9), rgba(11, 17, 32, 0.95)),
+        url('/images/MapChart_Map.png') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      border-bottom: 2px solid var(--accent-gold);
     }
-
-    header h1 { margin:0; font-size:2.3rem; }
-    header p { opacity:0.9; margin-top:8px; }
-
-    .container {
-      max-width:900px;
-      margin:40px auto;
-      padding:0 20px;
+    
+    .guide-header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
-
-    .card {
-      background:white;
-      padding:24px;
-      border-radius:12px;
-      box-shadow:0 5px 16px rgba(0,0,0,0.08);
-      margin-bottom:24px;
+    
+    .guide-header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      margin-bottom: 15px;
+      background: linear-gradient(to right, #f5e6ca, #d4af37);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
-
-    .card h2 {
-      margin-top:0;
-      font-size:1.5rem;
+    
+    .guide-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--accent-teal);
+      font-weight: 500;
     }
-
-    code {
-      background:#e2e8f0;
-      padding:3px 6px;
-      border-radius:6px;
-      font-size:0.9rem;
+    
+    .guide-icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: var(--accent-gold);
+    }
+    
+    .guide-container {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+    
+    .guide-section {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+      padding: 35px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-heavy);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .guide-section:hover {
+      transform: translateY(-3px);
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+    
+    .guide-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--accent-gold), var(--accent-rust));
+    }
+    
+    .guide-section h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .guide-section h2 i {
+      font-size: 1.4rem;
+      opacity: 0.8;
+    }
+    
+    .guide-section p {
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+    }
+    
+    .guide-section ul, .guide-section ol {
+      padding-left: 25px;
+      margin-bottom: 20px;
+    }
+    
+    .guide-section li {
+      margin-bottom: 10px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    
+    .guide-section li strong {
+      color: var(--accent-teal);
+    }
+    
+    .command-box {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      position: relative;
+    }
+    
+    .command-box:before {
+      content: '$';
+      position: absolute;
+      left: 10px;
+      top: 20px;
+      color: var(--accent-gold);
+      font-weight: bold;
+    }
+    
+    .command {
+      color: var(--accent-teal);
+      font-size: 1.1rem;
+      padding-left: 15px;
+      display: block;
+      margin-bottom: 8px;
+    }
+    
+    .command-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      padding-left: 15px;
+      margin-bottom: 5px;
+    }
+    
+    .example-box {
+      background: rgba(45, 212, 191, 0.05);
+      border-left: 3px solid var(--accent-teal);
+      padding: 15px 20px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .example-box p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    .example-box code {
+      background: rgba(45, 212, 191, 0.1);
+      color: var(--accent-teal);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'Consolas', monospace;
+    }
+    
+    .warning-box {
+      background: rgba(183, 65, 14, 0.1);
+      border-left: 3px solid var(--accent-rust);
+      padding: 15px 20px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .warning-box i {
+      color: var(--accent-rust);
+      font-size: 1.2rem;
+      margin-top: 2px;
+    }
+    
+    .warning-box p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    .tip-box {
+      background: rgba(212, 175, 55, 0.1);
+      border-left: 3px solid var(--accent-gold);
+      padding: 15px 20px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .tip-box i {
+      color: var(--accent-gold);
+      font-size: 1.2rem;
+      margin-top: 2px;
+    }
+    
+    .tip-box p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    .section-number {
+      display: inline-block;
+      background: var(--accent-gold);
+      color: var(--primary-dark);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 36px;
+      font-weight: 700;
+      margin-right: 12px;
+      font-family: 'Cinzel', serif;
+    }
+    
+    .table-of-contents {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-heavy);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      margin-bottom: 40px;
+    }
+    
+    .table-of-contents h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--accent-gold);
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .toc-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    
+    .toc-item {
+      padding: 12px 15px;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .toc-item:hover {
+      border-color: var(--accent-gold);
+      background: rgba(212, 175, 55, 0.05);
+      transform: translateX(5px);
+    }
+    
+    .toc-item a {
+      color: var(--text-light);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .toc-item i {
+      color: var(--accent-gold);
+      font-size: 0.9rem;
+    }
+    
+    .nation-benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 25px 0;
+    }
+    
+    .benefit-card {
+      background: rgba(15, 23, 42, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-gold);
+    }
+    
+    .benefit-card i {
+      font-size: 2rem;
+      color: var(--accent-gold);
+      margin-bottom: 15px;
+    }
+    
+    .benefit-card h4 {
+      color: var(--accent-teal);
+      margin-bottom: 10px;
+      font-family: 'Cinzel', serif;
+    }
+    
+    .benefit-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    
+    .guide-progress {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      width: 10px;
+      height: calc(100vh - 120px);
+      background: rgba(30, 41, 59, 0.5);
+      border-radius: 5px;
+      z-index: 90;
+      overflow: hidden;
+    }
+    
+    .guide-progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(to bottom, var(--accent-gold), var(--accent-rust));
+      border-radius: 5px;
+      transition: height 0.3s ease;
+    }
+    
+    @media (max-width: 768px) {
+      .guide-header {
+        padding: 60px 20px;
+      }
+      
+      .guide-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .guide-section {
+        padding: 25px;
+      }
+      
+      .guide-progress {
+        display: none;
+      }
+      
+      .toc-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .nation-benefits {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
-
 <body>
+  <!-- Navbar container -->
+  <div id="navbar-container"></div>
+  
+  <!-- Header container -->
+  <div id="header-container"></div>
+  
+  <!-- Guide progress indicator -->
+  <div class="guide-progress">
+    <div class="guide-progress-bar" id="progressBar"></div>
+  </div>
 
-<div id="navbar-container"></div>
-<div id="header-container"></div>
-<script src="/components/layout-loader.js"></script>
+  <!-- Guide Header -->
+  <header class="guide-header">
+    <div class="guide-header-content">
+      <div class="guide-icon">
+        <i class="fas fa-landmark"></i>
+      </div>
+      <h1>Nation Guide</h1>
+      <p>Forge alliances, wage wars, and build empires through diplomatic mastery on GeoFrontier</p>
+      <div style="margin-top: 25px;">
+        <a href="#toc" class="btn btn-outline" style="margin: 5px;">Jump to Sections</a>
+        <a href="guide-towny.html" class="btn" style="margin: 5px;">Towny Guide →</a>
+      </div>
+    </div>
+  </header>
 
-
-  <div class="container">
-
-    <!-- SECTION 1 -->
-    <div class="card">
-      <h2>1. Creating a Nation</h2>
-      <p>To create a nation, you must be the mayor or co-mayor of a town and have $5000.</p>
-      <p>Use:</p>
-      <p><code>/nation new &lt;name&gt;</code></p>
+  <!-- Main Content -->
+  <div class="guide-container">
+    
+    <!-- Table of Contents -->
+    <div class="table-of-contents" id="toc">
+      <h3><i class="fas fa-list-ol"></i> Table of Contents</h3>
+      <div class="toc-list">
+        <div class="toc-item">
+          <a href="#section1">
+            <i class="fas fa-flag"></i>
+            <span>1. Creating a Nation</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section2">
+            <i class="fas fa-users"></i>
+            <span>2. Managing Members</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section3">
+            <i class="fas fa-handshake"></i>
+            <span>3. Diplomacy & Alliances</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section4">
+            <i class="fas fa-crosshairs"></i>
+            <span>4. Warfare & Defense</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section5">
+            <i class="fas fa-coins"></i>
+            <span>5. Economy & Taxes</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section6">
+            <i class="fas fa-gavel"></i>
+            <span>6. Government & Ranks</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section7">
+            <i class="fas fa-map-marked-alt"></i>
+            <span>7. Territory & Expansion</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section8">
+            <i class="fas fa-code"></i>
+            <span>8. Advanced Commands</span>
+          </a>
+        </div>
+      </div>
     </div>
 
+    <!-- Nation Benefits Overview -->
+    <div class="guide-section">
+      <h2><i class="fas fa-crown"></i> Why Form a Nation?</h2>
+      <p>A nation is more than just a collection of towns—it's a sovereign entity with the power to wage war, form alliances, and shape server politics. Nations provide military protection, economic benefits, and diplomatic influence.</p>
+      
+      <div class="nation-benefits">
+        <div class="benefit-card">
+          <i class="fas fa-shield-alt"></i>
+          <h4>Military Protection</h4>
+          <p>Collective defense, shared armies, and coordinated warfare against rival nations</p>
+        </div>
+        
+        <div class="benefit-card">
+          <i class="fas fa-handshake"></i>
+          <h4>Diplomatic Power</h4>
+          <p>Form alliances, negotiate treaties, and participate in server-wide politics</p>
+        </div>
+        
+        <div class="benefit-card">
+          <i class="fas fa-chart-line"></i>
+          <h4>Economic Advantages</h4>
+          <p>Reduced upkeep costs, nation-wide taxes, and shared economic resources</p>
+        </div>
+        
+        <div class="benefit-card">
+          <i class="fas fa-users"></i>
+          <h4>Community & Influence</h4>
+          <p>Greater visibility on the server, voting power in global decisions</p>
+        </div>
+      </div>
+      
+      <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Prerequisite:</strong> You must be the mayor or co-mayor of an established town before creating a nation. Ensure your town is stable with sufficient funds and claimed territory.</p>
+      </div>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="guide-section" id="section1">
+      <h2><span class="section-number">1</span> <i class="fas fa-flag"></i> Creating a Nation</h2>
+      <p>Establish your nation's sovereignty and claim your place on the geopolitical stage. Your town becomes the capital, and you become the nation's leader.</p>
+      
+      <div class="command-box">
+        <span class="command">/nation new &lt;NationName&gt;</span>
+        <span class="command-desc">Creates a new nation with your town as the capital</span>
+      </div>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Naming Strategy:</strong> Choose a name that reflects your nation's identity. Consider historical, geographical, or ideological themes that will attract like-minded towns.</p>
+      </div>
+      
+      <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Requirements:</strong> 
+          <ul>
+            <li>Must be mayor or co-mayor of a town</li>
+            <li>Requires $5,000 in your town bank</li>
+            <li>Your town must have at least 5 claimed chunks</li>
+            <li>Nation name must be unique and 3-20 characters</li>
+          </ul>
+        </p>
+      </div>
+      
+      <div class="example-box">
+        <p><strong>Example:</strong> If your town is named "Carthage" and you want to create a Mediterranean-themed nation:<br>
+          <code>/nation new CarthaginianRepublic</code></p>
+      </div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="guide-section" id="section2">
+      <h2><span class="section-number">2</span> <i class="fas fa-users"></i> Managing Members</h2>
+      <p>Expand your nation's influence by inviting other towns to join. A strong nation is built on trust and shared goals.</p>
+      
+      <div class="command-box">
+        <span class="command">/nation add &lt;TownName&gt;</span>
+        <span class="command-desc">Invites a town to join your nation</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation kick &lt;TownName&gt;</span>
+        <span class="command-desc">Removes a town from your nation</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation set capital &lt;TownName&gt;</span>
+        <span class="command-desc">Changes the nation's capital to another member town</span>
+      </div>
+      
+      <p><strong>Member Management Strategies:</strong></p>
+      <ul>
+        <li><strong>Vetting Process:</strong> Screen potential members for activity, alignment with your nation's goals, and geographical proximity</li>
+        <li><strong>Geographic Cohesion:</strong> Towns close together are easier to defend and coordinate</li>
+        <li><strong>Specialization:</strong> Invite towns that complement your nation's needs (mining towns, agricultural centers, trading hubs)</li>
+        <li><strong>Loyalty:</strong> Build trust through shared projects and regular communication</li>
+      </ul>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Pro Tip:</strong> Use <code>/nation list</code> to see all nations and their members. Research potential allies or rivals before making diplomatic moves.</p>
+      </div>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="guide-section" id="section3">
+      <h2><span class="section-number">3</span> <i class="fas fa-handshake"></i> Diplomacy & Alliances</h2>
+      <p>Master the art of diplomacy to secure your nation's future through alliances, treaties, and strategic relationships.</p>
+      
+      <div class="command-box">
+        <span class="command">/nation ally &lt;NationName&gt;</span>
+        <span class="command-desc">Proposes an alliance with another nation</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation enemy &lt;NationName&gt;</span>
+        <span class="command-desc">Declares another nation as an enemy</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation neutral &lt;NationName&gt;</span>
+        <span class="command-desc">Sets neutral relations with a nation</span>
+      </div>
+      
+      <p><strong>Diplomatic States:</strong></p>
+      <ul>
+        <li><strong>Ally:</strong> Full military cooperation, shared intelligence, economic bonuses</li>
+        <li><strong>Neutral:</strong> Non-aggression, limited interaction</li>
+        <li><strong>Enemy:</strong> Hostile relations, war possible</li>
+      </ul>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Diplomatic Strategy:</strong> Balance your alliances carefully. Too many allies can drag you into unwanted conflicts, while too few leave you vulnerable. Consider creating a "web of alliances" that deters aggression.</p>
+      </div>
+      
+      <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Warning:</strong> Breaking an alliance has serious consequences. You'll suffer a diplomatic reputation penalty, making it harder to form future alliances. Consider all outcomes before making diplomatic changes.</p>
+      </div>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="guide-section" id="section4">
+      <h2><span class="section-number">4</span> <i class="fas fa-crosshairs"></i> Warfare & Defense</h2>
+      <p>When diplomacy fails, a nation must be prepared for war. Master the mechanics of conflict to defend your lands and expand your territory.</p>
+      
+      <div class="command-box">
+        <span class="command">/nation declarewar &lt;NationName&gt;</span>
+        <span class="command-desc">Declares war on another nation</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation peace &lt;NationName&gt;</span>
+        <span class="command-desc">Proposes peace to end a war</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation set spawn</span>
+        <span class="command-desc">Sets the nation spawn point (king's location)</span>
+      </div>
+      
+      <p><strong>War Mechanics:</strong></p>
+      <ul>
+        <li><strong>War Declaration:</strong> 24-hour notice period before hostilities begin</li>
+        <li><strong>War Goals:</strong> Capture enemy towns, destroy infrastructure, force surrender</li>
+        <li><strong>Peace Terms:</strong> Negotiate reparations, territorial concessions, or alliances</li>
+        <li><strong>Truce Period:</strong> 7-day forced peace after war ends</li>
+      </ul>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Defensive Strategy:</strong> Fortify border towns, establish fallback positions, and coordinate with allies. Use natural terrain (mountains, rivers) as defensive barriers.</p>
+      </div>
+      
+      <div class="example-box">
+        <p><strong>Offensive Strategy:</strong> 
+          <ul>
+            <li>Scout enemy territory before declaring war</li>
+            <li>Target economic centers to cripple their finances</li>
+            <li>Use diversionary attacks to split enemy forces</li>
+            <li>Coordinate timing with your allies</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="guide-section" id="section5">
+      <h2><span class="section-number">5</span> <i class="fas fa-coins"></i> Economy & Taxes</h2>
+      <p>A strong economy fuels military campaigns, infrastructure projects, and nation growth. Master financial management to ensure your nation's prosperity.</p>
+      
+      <div class="command-box">
+        <span class="command">/nation set tax &lt;amount&gt;</span>
+        <span class="command-desc">Sets the tax rate for member towns</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation deposit &lt;amount&gt;</span>
+        <span class="command-desc">Deposits money into the nation bank</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation withdraw &lt;amount&gt;</span>
+        <span class="command-desc">Withdraws money from the nation bank</span>
+      </div>
+      
+      <p><strong>Economic Strategy:</strong></p>
+      <ul>
+        <li><strong>Taxation Balance:</strong> Set taxes high enough to fund nation projects but low enough to avoid member rebellion</li>
+        <li><strong>Infrastructure Investment:</strong> Use nation funds to build roads, defenses, and public facilities</li>
+        <li><strong>War Chest:</strong> Maintain a reserve fund for emergency military expenses</li>
+        <li><strong>Economic Specialization:</strong> Encourage member towns to specialize in different economic sectors</li>
+      </ul>
+      
+      <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Bankruptcy Risk:</strong> If your nation cannot pay its weekly upkeep (based on number of towns and chunks), member towns will automatically leave. Monitor your nation's finances with <code>/nation</code> regularly.</p>
+      </div>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="guide-section" id="section6">
+      <h2><span class="section-number">6</span> <i class="fas fa-gavel"></i> Government & Ranks</h2>
+      <p>Establish a government structure to manage your nation effectively. Assign roles, set permissions, and create a chain of command.</p>
+      
+      <div class="command-box">
+        <span class="command">/nation rank add &lt;player&gt; &lt;rank&gt;</span>
+        <span class="command-desc">Assigns a special rank to a player</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation set title &lt;title&gt;</span>
+        <span class="command-desc">Sets your nation's official title (Kingdom, Republic, etc.)</span>
+      </div>
+      
+      <p><strong>Available Nation Ranks:</strong></p>
+      <ul>
+        <li><strong>King/Queen:</strong> Nation leader, all permissions</li>
+        <li><strong>Chancellor:</strong> Can manage finances, diplomacy, and member towns</li>
+        <li><strong>General:</strong> Can declare war, manage military operations</li>
+        <li><strong>Senator:</strong> Can vote on nation decisions (if democracy enabled)</li>
+        <li><strong>Ambassador:</strong> Can negotiate with other nations</li>
+      </ul>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Government Types:</strong> 
+          <ul>
+            <li><strong>Monarchy:</strong> Single ruler with absolute power</li>
+            <li><strong>Republic:</strong> Elected officials, voting system</li>
+            <li><strong>Oligarchy:</strong> Rule by council of elites</li>
+            <li><strong>Federation:</strong> Member towns retain autonomy with shared defense</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 7 -->
+    <div class="guide-section" id="section7">
+      <h2><span class="section-number">7</span> <i class="fas fa-map-marked-alt"></i> Territory & Expansion</h2>
+      <p>Control strategic territory to secure resources, establish defensive borders, and project power across the server.</p>
+      
+      <div class="command-box">
+        <span class="command">/nation claim</span>
+        <span class="command-desc">Claims land for your nation (king only)</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation unclaim</span>
+        <span class="command-desc">Unclaims nation land</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation outpost &lt;TownName&gt;</span>
+        <span class="command-desc">Creates a military outpost in a town</span>
+      </div>
+      
+      <p><strong>Territorial Strategy:</strong></p>
+      <ul>
+        <li><strong>Natural Borders:</strong> Use mountains, rivers, and oceans as natural defenses</li>
+        <li><strong>Resource Control:</strong> Secure areas with rare resources (diamonds, emeralds, special ores)</li>
+        <li><strong>Strategic Chokepoints:</strong> Control mountain passes, narrow land bridges, and river crossings</li>
+        <li><strong>Buffer Zones:</strong> Maintain neutral territory between you and potential enemies</li>
+      </ul>
+      
+      <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Overextension Risk:</strong> Claiming too much territory spreads your defenses thin and increases upkeep costs. Focus on quality (strategic locations) over quantity.</p>
+      </div>
+    </div>
+
+    <!-- Section 8 -->
+    <div class="guide-section" id="section8">
+      <h2><span class="section-number">8</span> <i class="fas fa-code"></i> Advanced Commands</h2>
+      <p>Master these advanced commands to optimize your nation's management and gain an edge over your rivals.</p>
+      
+      <div class="command-box">
+        <span class="command">/nation rename &lt;newName&gt;</span>
+        <span class="command-desc">Renames your nation (costs $10,000)</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation merge &lt;NationName&gt;</span>
+        <span class="command-desc">Proposes a merger with another nation</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation set tag &lt;tag&gt;</span>
+        <span class="command-desc">Sets your nation's tag (3-4 characters)</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation stats</span>
+        <span class="command-desc">Shows detailed nation statistics</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation board &lt;message&gt;</span>
+        <span class="command-desc">Sets the nation's message board</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/nation list online</span>
+        <span class="command-desc">Lists all nations with online members</span>
+      </div>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Pro Tips:</strong> 
+          <ul>
+            <li>Use <code>/nation ?</code> to see all available commands</li>
+            <li>Regularly check <code>/nation stats</code> to monitor growth</li>
+            <li>Set a clear message board with <code>/nation board</code> to communicate with members</li>
+            <li>Use nation tags for quick identification in chat and on maps</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+    
+    <!-- Navigation Footer -->
+    <div style="display: flex; justify-content: space-between; margin: 50px 0 30px; padding: 20px; background: rgba(30, 41, 59, 0.5); border-radius: 12px;">
+      <a href="guide-towny.html" class="btn">
+        <i class="fas fa-arrow-left"></i> Back to Towny Guide
+      </a>
+      <a href="guide-economy.html" class="btn">
+        Next: Economy Guide <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer container -->
+  <div id="footer-container"></div>
+
+  <!-- Load component loader -->
+  <script src="js/components-loader.js"></script>
+  
+  <!-- Page-specific JavaScript -->
+  <script>
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', async () => {
+      console.log('DOM loaded, starting component loading...');
+      
+      try {
+        // Load components using ComponentLoader if available
+        if (window.ComponentLoader) {
+          console.log('Using ComponentLoader...');
+          
+          // Load navbar first
+          await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
+          console.log('Navbar loaded');
+          
+          // Initialize dropdowns after navbar loads
+          setTimeout(() => {
+            if (window.initializeDropdowns) {
+              window.initializeDropdowns();
+            }
+          }, 100);
+          
+          // Load other components
+          await window.ComponentLoader.loadComponent('header', 'header-container');
+          console.log('Header loaded');
+          
+          await window.ComponentLoader.loadComponent('footer', 'footer-container');
+          console.log('Footer loaded');
+          
+          // Set active navigation for this page
+          setTimeout(() => {
+            const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
+            navLinks.forEach(link => {
+              if (link.getAttribute('href') === 'guide-nation.html' || 
+                  link.getAttribute('data-nav') === 'guides') {
+                link.classList.add('active');
+              }
+            });
+            
+            // Also highlight the specific guide link in dropdown
+            const guideLinks = document.querySelectorAll('.dropdown-menu a[href="guide-nation.html"]');
+            guideLinks.forEach(link => {
+              link.classList.add('active');
+            });
+          }, 500);
+          
+        } else {
+          console.log('ComponentLoader not found, loading manually');
+          // Fallback manual loading would go here
+        }
+        
+        // Initialize scroll progress
+        initScrollProgress();
+        
+        // Smooth scroll for table of contents
+        initSmoothScroll();
+        
+        console.log('Nation guide initialization complete!');
+        
+      } catch (error) {
+        console.error('Error during page initialization:', error);
+      }
+    });
+    
+    function initScrollProgress() {
+      const progressBar = document.getElementById('progressBar');
+      if (!progressBar) return;
+      
+      const updateProgress = () => {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight - windowHeight;
+        const scrolled = window.scrollY;
+        
+        const progress = (scrolled / documentHeight) * 100;
+        progressBar.style.height = `${Math.min(100, progress)}%`;
+      };
+      
+      window.addEventListener('scroll', updateProgress);
+      updateProgress(); // Initial call
+    }
+    
+    function initSmoothScroll() {
+      // Smooth scroll for table of contents links
+      document.querySelectorAll('.toc-item a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            const headerOffset = 80;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    }
+    
+    // Make copyText function available if needed
+    if (typeof copyText !== 'function') {
+      window.copyText = function(text) {
+        navigator.clipboard.writeText(text).then(() => {
+          // Simple notification
+          alert(`Copied: ${text}`);
+        });
+      };
+    }
+    
+    // Global dropdown initialization function (if not already defined)
+    if (typeof initializeDropdowns !== 'function') {
+      window.initializeDropdowns = function() {
+        console.log('Initializing dropdowns...');
+        // Implementation from index.html
+      };
+    }
+  </script>
 </body>
 </html>
