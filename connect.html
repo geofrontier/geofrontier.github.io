@@ -125,11 +125,13 @@
       padding: 20px;
       border-left: 4px solid var(--accent-rust);
       transition: all 0.3s ease;
+      cursor: pointer;
     }
     
     .error-item:hover {
       background: rgba(15, 23, 42, 0.9);
       border-left-color: var(--accent-gold);
+      transform: translateX(5px);
     }
     
     .error-title {
@@ -533,14 +535,14 @@
           <p style="margin-bottom: 20px;">If you've tried all troubleshooting steps and still can't connect, reach out for help:</p>
           
           <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
-            <a href="#" class="btn" onclick="copyText('discord.gg/NWxBBTvzXb')">
+            <a href="https://discord.gg/NWxBBTvzXb" target="_blank" class="btn">
               <i class="fab fa-discord"></i> Discord Support
             </a>
-            <a href="#" class="btn btn-outline" onclick="copyText('Support Forum')">
-              <i class="fas fa-comments"></i> Support Forum
-            </a>
-            <a href="rules.html" class="btn">
+            <a href="rules.html" class="btn btn-outline">
               <i class="fas fa-book"></i> Server Rules
+            </a>
+            <a href="index.html" class="btn">
+              <i class="fas fa-home"></i> Return Home
             </a>
           </div>
           
@@ -629,34 +631,106 @@
       }
     }
 
+    // Load components manually if ComponentLoader not available
+    async function loadComponentsManually() {
+      const components = [
+        { id: 'navbar', file: 'components/navbar.html', container: 'navbar-container' },
+        { id: 'header', file: 'components/header.html', container: 'header-container' },
+        { id: 'footer', file: 'components/footer.html', container: 'footer-container' }
+      ];
+      
+      for (const component of components) {
+        try {
+          const response = await fetch(component.file);
+          if (response.ok) {
+            const html = await response.text();
+            const container = document.getElementById(component.container);
+            if (container) {
+              container.innerHTML = html;
+              console.log(`${component.id} loaded successfully`);
+              
+              // Execute any scripts in the component
+              const scripts = container.querySelectorAll('script');
+              scripts.forEach(oldScript => {
+                const newScript = document.createElement('script');
+                Array.from(oldScript.attributes).forEach(attr => {
+                  newScript.setAttribute(attr.name, attr.value);
+                });
+                newScript.textContent = oldScript.textContent;
+                oldScript.parentNode.replaceChild(newScript, oldScript);
+              });
+            }
+          }
+        } catch (error) {
+          console.error(`Failed to load ${component.id}:`, error);
+          const container = document.getElementById(component.container);
+          if (container) {
+            container.innerHTML = `
+              <div class="component-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Failed to load ${component.id}</h3>
+                <p>File not found: ${component.file}</p>
+              </div>
+            `;
+          }
+        }
+      }
+    }
+
     // Page initialization
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', async function() {
       console.log('Connect page loading...');
       
-      // Initialize dropdowns
-      setTimeout(initDropdowns, 200);
-      
-      // Set active nav
-      setTimeout(() => {
-        const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
-        navLinks.forEach(link => {
-          if (link.getAttribute('data-nav') === 'connect') {
-            link.classList.add('active');
+      try {
+        // Load components
+        if (window.ComponentLoader) {
+          await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
+          await window.ComponentLoader.loadComponent('header', 'header-container');
+          await window.ComponentLoader.loadComponent('footer', 'footer-container');
+        } else {
+          console.log('ComponentLoader not found, loading manually');
+          await loadComponentsManually();
+        }
+        
+        // Initialize dropdowns
+        setTimeout(() => {
+          if (window.initializeDropdowns) {
+            window.initializeDropdowns();
           }
-        });
-      }, 500);
-      
-      // Setup interactive elements
-      setupErrorItems();
-      
-      // Check server status
-      checkServerStatus();
+        }, 200);
+        
+        // Set active nav
+        setTimeout(() => {
+          const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
+          navLinks.forEach(link => {
+            if (link.getAttribute('data-nav') === 'connect') {
+              link.classList.add('active');
+            }
+          });
+        }, 500);
+        
+        // Setup interactive elements
+        setupErrorItems();
+        
+        // Check server status
+        checkServerStatus();
+        
+        console.log('Connect page initialization complete!');
+        
+      } catch (error) {
+        console.error('Error during page initialization:', error);
+      }
     });
 
-    // Listen for component loaded events
-    document.addEventListener('componentLoaded', function(event) {
+    // Reinitialize dropdowns when components are loaded via event
+    document.addEventListener('componentLoaded', (event) => {
       if (event.detail.componentId === 'navbar') {
-        setTimeout(initDropdowns, 100);
+        console.log('Navbar component loaded, initializing dropdowns...');
+        setTimeout(() => {
+          if (window.initializeDropdowns) {
+            window.initializeDropdowns();
+          }
+        }, 100);
       }
     });
   </script>
