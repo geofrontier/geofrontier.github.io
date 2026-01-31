@@ -2,127 +2,663 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>GeoFrontier — Connection Errors</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoFrontier — Connection Troubleshooting</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Inline styles for connect page -->
   <style>
-    body { margin:0; font-family: Inter, Arial, sans-serif; background:#f3f3f3; color:#111; }
-
-    header {
-      background:#1e293b;
-      color:white;
-      padding:40px 20px;
-      text-align:center;
+    /* Hero section for connect page */
+    .connect-hero {
+      background: linear-gradient(rgba(2, 6, 23, 0.9), rgba(15, 23, 42, 0.85)), 
+                  url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid var(--accent-gold);
     }
-
-    header h1 { margin:0; font-size:2.3rem; }
-    header p { opacity:0.9; margin-top:8px; }
-
-    .container {
-      max-width:900px;
-      margin:40px auto;
-      padding:0 20px;
+    
+    .connect-hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: var(--accent-gold);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
-
-    .card {
-      background:white;
-      padding:24px;
-      border-radius:12px;
-      box-shadow:0 5px 16px rgba(0,0,0,0.08);
-      margin-bottom:24px;
+    
+    .connect-hero p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 25px;
+      color: var(--text-light);
+      opacity: 0.9;
     }
-
-    .card h2 {
-      margin-top:0;
-      font-size:1.5rem;
+    
+    /* Main content */
+    .connect-content {
+      margin: 40px 0;
     }
-
+    
+    .connect-section {
+      margin-bottom: 40px;
+    }
+    
+    .connect-section h2 {
+      color: var(--accent-gold);
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .connect-section h2 i {
+      font-size: 1.8rem;
+    }
+    
+    /* Troubleshooting cards */
+    .troubleshooting-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+    
+    .troubleshooting-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 25px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .troubleshooting-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-gold);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.1);
+    }
+    
+    .troubleshooting-card h3 {
+      color: var(--accent-teal);
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .troubleshooting-card h3 i {
+      font-size: 1.2rem;
+    }
+    
+    .troubleshooting-card p {
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    
+    /* Error list */
+    .error-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .error-item {
+      background: rgba(15, 23, 42, 0.7);
+      border-radius: 10px;
+      padding: 20px;
+      border-left: 4px solid var(--accent-rust);
+      transition: all 0.3s ease;
+    }
+    
+    .error-item:hover {
+      background: rgba(15, 23, 42, 0.9);
+      border-left-color: var(--accent-gold);
+    }
+    
+    .error-title {
+      color: var(--accent-rust);
+      font-weight: 700;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .error-title i {
+      font-size: 1rem;
+    }
+    
+    .error-solution {
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+    
+    /* Server info box */
+    .server-info-box {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+      border-radius: 15px;
+      padding: 30px;
+      margin: 40px 0;
+      border: 2px solid var(--accent-gold);
+      text-align: center;
+    }
+    
+    .server-info-box h2 {
+      color: var(--accent-gold);
+      font-family: 'Cinzel', serif;
+      margin-bottom: 20px;
+    }
+    
+    .server-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .server-detail {
+      background: rgba(212, 175, 55, 0.1);
+      padding: 15px 25px;
+      border-radius: 10px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    
+    .server-detail h4 {
+      color: var(--accent-gold);
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .server-detail p {
+      color: var(--text-light);
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin: 0;
+    }
+    
+    /* Quick fixes */
+    .quick-fixes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .fix-card {
+      background: rgba(30, 41, 59, 0.5);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    
+    .fix-card i {
+      font-size: 2rem;
+      color: #10b981;
+      margin-bottom: 15px;
+    }
+    
+    .fix-card h4 {
+      color: #10b981;
+      margin-bottom: 10px;
+    }
+    
+    /* Code blocks */
     code {
-      background:#e2e8f0;
-      padding:3px 6px;
-      border-radius:6px;
-      font-size:0.9rem;
+      background: rgba(30, 41, 59, 0.7);
+      color: var(--accent-gold);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    
+    /* Status indicators */
+    .status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    
+    .status-online {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    
+    .status-offline {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    
+    .status-maintenance {
+      background: rgba(245, 158, 11, 0.2);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .connect-hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .connect-section h2 {
+        font-size: 1.5rem;
+      }
+      
+      .troubleshooting-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .quick-fixes {
+        grid-template-columns: 1fr;
+      }
+      
+      .server-details {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .connect-hero {
+        padding: 60px 20px;
+      }
+      
+      .connect-hero h1 {
+        font-size: 2rem;
+      }
+      
+      .error-item {
+        padding: 15px;
+      }
     }
   </style>
 </head>
-
 <body>
-
-<div id="navbar-container"></div>
-<div id="header-container"></div>
-<script src="/components/layout-loader.js"></script>
-
-
-  <div class="container">
-
-    <!-- SECTION 1 -->
-    <div class="card">
-      <h2>Internet and Network Troubleshooting</h2>
-      <p> Use a home/personal network</p>
-      <p> Check your internet connection: Verify that you can visit other websites without issues.</p>
-      <p> Pause other network traffic: Stop software downloads, video streams, or network-heavy tasks on your gaming device</p>
-      <p> Check your internet speed: Run an internet provider recommended speed test to check your internet connection speed and latency.</p>
-      <p> Verify wireless connection strength: If you’re playing on a wireless network, try moving your gaming device closer to your router.</p>
-      <p> Allow Minecraft through your firewall or VPN: If you have a firewall, antivirus software, or are using a VPN, check the settings to be sure that it is not blocking or slowing your connection.</p>
-    </div>
-
-      <h2>List of Errors</h2>
-      <p> 
-<strong>Connection refused: connect</strong>
-- Confirm you’ve entered the correct server address. If it still doesn’t work, restart your router, flush your DNS, and tweak your firewall, antivirus, or proxy settings.
-
-<strong>Creeper/ Error Code 221000</strong>
-- Ensure your internet connection is stable and working properly
-
-<strong>Crossbow</strong>
-- Close the game completely (ensure it isn’t running in the background either) and let it sit idle for around two minutes before starting it again.
-
-<strong>End of stream</strong>
-- Restart the application.
-
-<strong>Haybale</strong>
-- This indicates an Xbox authorization error. First, ensure the Xbox app is up to date. If it is, log out of your account and sign in again.
-
-<strong>Failed to login: Bad Login</strong>
-- Ensure the version of Minecraft you’re running is the same as the server. If it is, disconnect your wifi, wait a few minutes, and try again.
-
-<strong> Failed to login: invalid IP</strong>
-- This will either be an internal service error or an error related to your internet. If it’s the former, you’ll have to wait a while; if it’s your internet, you’ll have to troubleshoot it.
-
-<strong> Failed to login: the authentication servers are currently down for maintenance</strong>
-- Ensure your firewall isn’t causing issues by disabling it temporarily and trying again. If it still doesn’t work and your internet is working fine, then you’ll have to wait for the maintenance to be over.
-
-<strong> This server responded with an invalid server key</strong>
-- Two things might cause this. Either the server you’re connecting to is outdated, in which case you won’t be able to connect to it, or you will have to log in again.
-
-<strong> Took too long to log in</strong>
-- Most likely, your internet speed is either too slow or too inconsistent.
-
-
-<strong> Failed to check session lock, aborting</strong>
-- Go to the session folder and look for a file that says “.lock’. Delete it and try again.
-
-<strong> Code – 805306369</strong>
-- This usually happens because of a lack of memory in your system. Try making more space by deleting stuff or closing some background applications.
-
-<strong> Code – 1073740940</strong>
-- Allocate more RAM to the Java Virtual Machine that’s running the game. You’ll have to buy more if you don’t have RAM available.
-
-<strong> Code – 1073740791</strong>
-- Update all of your drivers, and this error code should go away.
-
-<strong> Code: – 1073741819</strong>
-- This error code is exclusive to Nvidia drivers. You’ll either have to get them updated automatically or manually from the Nvidia website.
-
-<strong> Game Ended with Bad State: Exit Code 1</strong>
-- Update JAVA, update all your drivers, and finally, update Minecraft. If the issue remains, uninstall the game and then reinstall it.
-
-<strong> java.lang.OutOfMemoryError</strong>
-- Allocate more RAM to the Java Virtual Machine that’s running the game. If you don’t have RAM available, then you’ll have to buy more.
-
-<strong> RuntimeException: No OpenGL context found in the current thread.</strong>
-- Ensure your drivers are up to date. If they are, you’ll likely have to get a better graphics card, as the current one is too weak.
-        </p> 
+  <!-- Navbar container -->
+  <div id="navbar-container" class="component-loading">
+    <i class="fas fa-spinner fa-spin"></i>
+    <span>Loading navigation...</span>
+  </div>
+  
+  <!-- Header container -->
+  <div id="header-container" class="component-loading">
+    <i class="fas fa-spinner fa-spin"></i>
+    <span>Loading header...</span>
   </div>
 
+  <!-- HERO SECTION -->
+  <section class="connect-hero">
+    <h1>Connection Troubleshooting</h1>
+    <p>Having issues connecting to GeoFrontier? Use this guide to diagnose and fix common connection problems.</p>
+    <div class="hero-subtitle">Network Issues • Error Codes • Quick Fixes • Support Resources</div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <div class="section">
+    <div class="connect-content">
+      <!-- Server Status -->
+      <div class="server-info-box">
+        <h2><i class="fas fa-server"></i> Server Information</h2>
+        <p style="color: var(--text-light); margin-bottom: 20px;">Before troubleshooting, verify our server status:</p>
+        
+        <div class="server-details">
+          <div class="server-detail">
+            <h4>Server Address</h4>
+            <p>play.geofrontier.net</p>
+          </div>
+          <div class="server-detail">
+            <h4>Status</h4>
+            <p><span class="status-indicator status-online">
+              <i class="fas fa-circle"></i> Online
+            </span></p>
+          </div>
+          <div class="server-detail">
+            <h4>Version</h4>
+            <p>Minecraft 1.20.1</p>
+          </div>
+          <div class="server-detail">
+            <h4>Direct IP</h4>
+            <p>216.173.77.69:25565</p>
+          </div>
+        </div>
+        
+        <button class="btn" onclick="copyText('play.geofrontier.net')" style="margin-top: 25px;">
+          <i class="fas fa-copy"></i> Copy Server Address
+        </button>
+      </div>
+
+      <!-- Section 1: Network Troubleshooting -->
+      <div class="connect-section">
+        <h2><i class="fas fa-wifi"></i> Network Troubleshooting</h2>
+        
+        <div class="troubleshooting-grid">
+          <div class="troubleshooting-card">
+            <h3><i class="fas fa-home"></i> Use a Personal Network</h3>
+            <p>Connect using a home or personal network. School, work, or public networks often block game servers.</p>
+          </div>
+          
+          <div class="troubleshooting-card">
+            <h3><i class="fas fa-satellite-dish"></i> Check Internet Connection</h3>
+            <p>Verify you can visit other websites without issues. Test your connection by browsing or streaming.</p>
+          </div>
+          
+          <div class="troubleshooting-card">
+            <h3><i class="fas fa-pause-circle"></i> Pause Network Traffic</h3>
+            <p>Stop software downloads, video streams, or network-heavy tasks on your gaming device.</p>
+          </div>
+          
+          <div class="troubleshooting-card">
+            <h3><i class="fas fa-tachometer-alt"></i> Test Internet Speed</h3>
+            <p>Run an internet speed test to check your connection speed and latency. Minimum recommended: 10 Mbps download, 5 Mbps upload.</p>
+          </div>
+          
+          <div class="troubleshooting-card">
+            <h3><i class="fas fa-signal"></i> Check Wireless Strength</h3>
+            <p>If playing on WiFi, move closer to your router or use an ethernet cable for a stable connection.</p>
+          </div>
+          
+          <div class="troubleshooting-card">
+            <h3><i class="fas fa-shield-alt"></i> Firewall & VPN Settings</h3>
+            <p>Allow Minecraft through your firewall, antivirus, or VPN. Temporarily disable them to test connection.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Fixes -->
+      <div class="connect-section">
+        <h2><i class="fas fa-bolt"></i> Quick Fixes</h2>
+        
+        <div class="quick-fixes">
+          <div class="fix-card">
+            <i class="fas fa-redo"></i>
+            <h4>Restart Everything</h4>
+            <p>Restart Minecraft, your computer, and your router in that order.</p>
+          </div>
+          
+          <div class="fix-card">
+            <i class="fas fa-sync-alt"></i>
+            <h4>Flush DNS</h4>
+            <p>Open Command Prompt as admin and type: <code>ipconfig /flushdns</code></p>
+          </div>
+          
+          <div class="fix-card">
+            <i class="fas fa-puzzle-piece"></i>
+            <h4>Update Java</h4>
+            <p>Ensure you have the latest Java version installed from java.com</p>
+          </div>
+          
+          <div class="fix-card">
+            <i class="fas fa-download"></i>
+            <h4>Reinstall Minecraft</h4>
+            <p>As a last resort, uninstall and reinstall Minecraft completely.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Common Errors -->
+      <div class="connect-section">
+        <h2><i class="fas fa-exclamation-triangle"></i> Common Error Solutions</h2>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Click on any error to copy its name to clipboard for further research.</p>
+        
+        <div class="error-list">
+          <div class="error-item" onclick="copyText('Connection refused: connect')">
+            <div class="error-title"><i class="fas fa-times-circle"></i> Connection refused: connect</div>
+            <p class="error-solution">Confirm you've entered the correct server address. If it still doesn't work, restart your router, flush your DNS, and tweak your firewall, antivirus, or proxy settings.</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('Error Code 221000 (Creeper)')">
+            <div class="error-title"><i class="fas fa-bug"></i> Error Code 221000 (Creeper)</div>
+            <p class="error-solution">Ensure your internet connection is stable and working properly. Check for ISP outages or network congestion.</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('Crossbow Error')">
+            <div class="error-title"><i class="fas fa-crosshairs"></i> Crossbow Error</div>
+            <p class="error-solution">Close the game completely (ensure it isn't running in the background) and let it sit idle for around two minutes before starting it again.</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('End of stream')">
+            <div class="error-title"><i class="fas fa-stream"></i> End of stream</div>
+            <p class="error-solution">Restart the application. If persistent, check your network connection and try using a different DNS server.</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('Haybale Error')">
+            <div class="error-title"><i class="fas fa-bale"></i> Haybale Error</div>
+            <p class="error-solution">Xbox authorization error. Ensure the Xbox app is up to date. If it is, log out of your account and sign in again.</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('Failed to login: Bad Login')">
+            <div class="error-title"><i class="fas fa-sign-in-alt"></i> Failed to login: Bad Login</div>
+            <p class="error-solution">Ensure the version of Minecraft you're running is the same as the server. If it is, disconnect your WiFi, wait a few minutes, and try again.</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('Failed to login: invalid IP')">
+            <div class="error-title"><i class="fas fa-globe"></i> Failed to login: invalid IP</div>
+            <p class="error-solution">This will either be an internal service error or an error related to your internet. If it's the former, you'll have to wait; if it's your internet, you'll need to troubleshoot it.</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('Failed to login: authentication servers down')">
+            <div class="error-title"><i class="fas fa-tools"></i> Failed to login: authentication servers down</div>
+            <p class="error-solution">Ensure your firewall isn't causing issues by disabling it temporarily. If it still doesn't work and your internet is fine, wait for Mojang maintenance to complete.</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('Invalid server key')">
+            <div class="error-title"><i class="fas fa-key"></i> This server responded with an invalid server key</div>
+            <p class="error-solution">Either the server you're connecting to is outdated (can't connect), or you need to log out and back into your Minecraft account.</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('Took too long to log in')">
+            <div class="error-title"><i class="fas fa-clock"></i> Took too long to log in</div>
+            <p class="error-solution">Most likely, your internet speed is either too slow or too inconsistent. Test your connection and consider upgrading your plan.</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('Failed to check session lock')">
+            <div class="error-title"><i class="fas fa-lock"></i> Failed to check session lock, aborting</div>
+            <p class="error-solution">Go to the session folder and look for a file that says ".lock". Delete it and try again. (Location varies by OS)</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('Code – 805306369')">
+            <div class="error-title"><i class="fas fa-memory"></i> Code – 805306369</div>
+            <p class="error-solution">Usually caused by insufficient memory. Free up space by deleting files or closing background applications.</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('Code – 1073740940')">
+            <div class="error-title"><i class="fas fa-microchip"></i> Code – 1073740940</div>
+            <p class="error-solution">Allocate more RAM to the Java Virtual Machine. In Minecraft launcher settings, increase allocated RAM to at least 4GB.</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('Code – 1073740791')">
+            <div class="error-title"><i class="fas fa-download"></i> Code – 1073740791</div>
+            <p class="error-solution">Update all of your drivers (graphics, chipset, network), and this error code should go away.</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('Code – 1073741819')">
+            <div class="error-title"><i class="fas fa-desktop"></i> Code – 1073741819</div>
+            <p class="error-solution">Exclusive to Nvidia drivers. Update them automatically via GeForce Experience or manually from the Nvidia website.</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('Exit Code 1')">
+            <div class="error-title"><i class="fas fa-door-closed"></i> Game Ended with Bad State: Exit Code 1</div>
+            <p class="error-solution">Update Java, update all drivers, and update Minecraft. If the issue remains, uninstall and reinstall the game.</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('java.lang.OutOfMemoryError')">
+            <div class="error-title"><i class="fas fa-database"></i> java.lang.OutOfMemoryError</div>
+            <p class="error-solution">Allocate more RAM to Minecraft. In launcher settings, increase to 4-8GB depending on your system's available memory.</p>
+          </div>
+          
+          <div class="error-item" onclick="copyText('No OpenGL context found')">
+            <div class="error-title"><i class="fas fa-video"></i> RuntimeException: No OpenGL context found</div>
+            <p class="error-solution">Ensure your graphics drivers are up to date. If they are, your current graphics card may be too weak for the game's requirements.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Support Section -->
+      <div class="connect-section">
+        <h2><i class="fas fa-life-ring"></i> Still Need Help?</h2>
+        
+        <div class="troubleshooting-card" style="text-align: center;">
+          <h3><i class="fas fa-hands-helping"></i> Contact Support</h3>
+          <p style="margin-bottom: 20px;">If you've tried all troubleshooting steps and still can't connect, reach out for help:</p>
+          
+          <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+            <a href="#" class="btn" onclick="copyText('discord.gg/NWxBBTvzXb')">
+              <i class="fab fa-discord"></i> Discord Support
+            </a>
+            <a href="#" class="btn btn-outline" onclick="copyText('Support Forum')">
+              <i class="fas fa-comments"></i> Support Forum
+            </a>
+            <a href="rules.html" class="btn">
+              <i class="fas fa-book"></i> Server Rules
+            </a>
+          </div>
+          
+          <p style="margin-top: 20px; color: var(--text-muted); font-size: 0.9rem;">
+            When contacting support, include: Your error message, steps you've tried, and your internet provider.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer container -->
+  <div id="footer-container" class="component-loading" style="min-height: 150px;">
+    <i class="fas fa-spinner fa-spin"></i>
+    <span>Loading footer...</span>
+  </div>
+
+  <!-- COMPASS (BACK TO TOP) -->
+  <div class="compass" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="fas fa-compass"></i>
+  </div>
+
+  <!-- Load component loader -->
+  <script src="js/components-loader.js"></script>
+  
+  <!-- Page-specific JavaScript -->
+  <script>
+    // Copy text function
+    window.copyText = window.copyText || function(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const notification = document.createElement('div');
+        notification.textContent = `Copied: ${text}`;
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: var(--accent-gold);
+          color: var(--primary-dark);
+          padding: 12px 24px;
+          border-radius: 8px;
+          font-weight: 600;
+          z-index: 1000;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+          animation: fadeIn 0.3s ease;
+        `;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          notification.style.animation = 'fadeOut 0.5s ease forwards';
+          setTimeout(() => document.body.removeChild(notification), 500);
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy:', err);
+        alert(`Copy this: ${text}`);
+      });
+    };
+
+    // Initialize dropdowns if function exists
+    function initDropdowns() {
+      if (window.initializeDropdowns) {
+        window.initializeDropdowns();
+      }
+    }
+
+    // Add click effects to error items
+    function setupErrorItems() {
+      document.querySelectorAll('.error-item').forEach(item => {
+        item.style.cursor = 'pointer';
+        item.addEventListener('click', function() {
+          this.style.transform = 'scale(0.98)';
+          setTimeout(() => {
+            this.style.transform = '';
+          }, 200);
+        });
+      });
+    }
+
+    // Simulate server status check
+    function checkServerStatus() {
+      const statusElement = document.querySelector('.status-indicator');
+      if (statusElement) {
+        // In a real implementation, you would fetch this from an API
+        // For now, we'll simulate online status
+        statusElement.className = 'status-indicator status-online';
+        statusElement.innerHTML = '<i class="fas fa-circle"></i> Online';
+      }
+    }
+
+    // Page initialization
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Connect page loading...');
+      
+      // Initialize dropdowns
+      setTimeout(initDropdowns, 200);
+      
+      // Set active nav
+      setTimeout(() => {
+        const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
+        navLinks.forEach(link => {
+          if (link.getAttribute('data-nav') === 'connect') {
+            link.classList.add('active');
+          }
+        });
+      }, 500);
+      
+      // Setup interactive elements
+      setupErrorItems();
+      
+      // Check server status
+      checkServerStatus();
+    });
+
+    // Listen for component loaded events
+    document.addEventListener('componentLoaded', function(event) {
+      if (event.detail.componentId === 'navbar') {
+        setTimeout(initDropdowns, 100);
+      }
+    });
+  </script>
 </body>
 </html>
