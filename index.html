@@ -85,6 +85,106 @@
       border-radius: 10px;
       margin: 10px;
     }
+    
+    /* Global dropdown styles */
+    .dropdown {
+      position: relative;
+    }
+    
+    .nav-dropdown {
+      cursor: pointer;
+      opacity: 0.85;
+      user-select: none;
+      padding: 6px 0;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .nav-dropdown:hover {
+      opacity: 1;
+      color: var(--accent-gold);
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.95);
+      padding: 12px 0;
+      border-radius: 10px;
+      min-width: 200px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      z-index: 1001;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-menu.show {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+      animation: dropdownSlide 0.3s ease forwards;
+    }
+    
+    @keyframes dropdownSlide {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+    
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 20px;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      opacity: 0.9;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+    
+    .dropdown-menu a:hover {
+      background: rgba(212, 175, 55, 0.1);
+      border-left: 3px solid var(--accent-gold);
+      padding-left: 23px;
+      color: var(--accent-gold);
+    }
+    
+    .nav-dropdown i.fa-chevron-down {
+      transition: transform 0.3s ease;
+      font-size: 0.8em;
+    }
+    
+    .dropdown.active .nav-dropdown i.fa-chevron-down {
+      transform: rotate(180deg);
+    }
+    
+    @media (max-width: 768px) {
+      .dropdown-menu {
+        position: static;
+        width: 100%;
+        margin-top: 5px;
+        transform: none;
+        left: 0;
+      }
+      
+      .dropdown-menu.show {
+        transform: none;
+        animation: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -212,7 +312,11 @@
   
   <!-- Page-specific JavaScript -->
   <script>
-    // Global utility functions
+    // ============================================
+    // GLOBAL UTILITY FUNCTIONS
+    // ============================================
+    
+    // Copy text to clipboard
     function copyText(text) {
       navigator.clipboard.writeText(text).then(() => {
         const notification = document.createElement('div');
@@ -253,83 +357,90 @@
       });
     }
     
-    // Initialize the page
-    document.addEventListener('DOMContentLoaded', async () => {
-      console.log('DOM loaded, starting component loading...');
+    // Initialize dropdowns globally
+    function initializeDropdowns() {
+      console.log('Initializing dropdowns...');
       
-      // Manually load components if loader fails
-      const loadComponentsManually = async () => {
-        try {
-          // Try to load components directly
-          const components = [
-            { id: 'navbar', file: 'components/navbar.html', container: 'navbar-container' },
-            { id: 'header', file: 'components/header.html', container: 'header-container' },
-            { id: 'footer', file: 'components/footer.html', container: 'footer-container' }
-          ];
-          
-          for (const component of components) {
-            try {
-              console.log(`Loading ${component.id} from ${component.file}`);
-              const response = await fetch(component.file);
-              if (!response.ok) {
-                throw new Error(`Status: ${response.status}`);
-              }
-              const html = await response.text();
-              const container = document.getElementById(component.container);
-              if (container) {
-                container.innerHTML = html;
-                console.log(`${component.id} loaded successfully`);
-              }
-            } catch (error) {
-              console.error(`Failed to load ${component.id}:`, error);
-              const container = document.getElementById(component.container);
-              if (container) {
-                container.innerHTML = `
-                  <div class="component-error">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <h3>Failed to load ${component.id}</h3>
-                    <p>File not found: ${component.file}</p>
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">
-                      Check that the file exists in the components folder
-                    </p>
-                  </div>
-                `;
-              }
-            }
+      const dropdowns = document.querySelectorAll('.dropdown');
+      
+      // Function to close all dropdowns
+      function closeAllDropdowns() {
+        dropdowns.forEach(dropdown => {
+          dropdown.classList.remove('active');
+          const menu = dropdown.querySelector('.dropdown-menu');
+          if (menu) {
+            menu.classList.remove('show');
           }
-        } catch (error) {
-          console.error('Manual component loading failed:', error);
-        }
-      };
-      
-      // First try using the component loader
-      if (window.ComponentLoader) {
-        try {
-          await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
-          await window.ComponentLoader.loadComponent('header', 'header-container');
-          await window.ComponentLoader.loadComponent('footer', 'footer-container');
-          
-          // Set active navigation for this page
-          window.ComponentLoader.setActiveNav('index');
-        } catch (error) {
-          console.error('ComponentLoader failed, trying manual loading:', error);
-          await loadComponentsManually();
-        }
-      } else {
-        console.error('ComponentLoader not found, using manual loading');
-        await loadComponentsManually();
+        });
       }
       
-      // Load featured town
-      loadFeaturedTown();
+      // Initialize each dropdown
+      dropdowns.forEach(dropdown => {
+        const toggle = dropdown.querySelector('.nav-dropdown');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        
+        if (toggle && menu) {
+          // Remove any existing event listeners
+          const newToggle = toggle.cloneNode(true);
+          toggle.parentNode.replaceChild(newToggle, toggle);
+          
+          // Add click event to toggle
+          newToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            
+            const isActive = dropdown.classList.contains('active');
+            
+            // Close all other dropdowns
+            closeAllDropdowns();
+            
+            // Toggle this dropdown
+            if (!isActive) {
+              dropdown.classList.add('active');
+              menu.classList.add('show');
+            }
+          });
+          
+          // Prevent clicks inside dropdown from closing it
+          menu.addEventListener('click', function(e) {
+            e.stopPropagation();
+          });
+          
+          // Close dropdown when clicking a link inside it
+          menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+              setTimeout(closeAllDropdowns, 100);
+            });
+          });
+        }
+      });
       
-      // Simulate player count
-      updatePlayerCount();
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+          closeAllDropdowns();
+        }
+      });
       
-      // Initialize scroll animations
-      initScrollAnimations();
-    });
+      // Close dropdowns on escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeAllDropdowns();
+        }
+      });
+      
+      console.log('Dropdowns initialized successfully');
+    }
     
+    // Make functions globally available
+    window.copyText = copyText;
+    window.initializeDropdowns = initializeDropdowns;
+    
+    // ============================================
+    // PAGE-SPECIFIC FUNCTIONS
+    // ============================================
+    
+    // Load featured town from town-data.js
     function loadFeaturedTown() {
       const townContent = document.getElementById('town-content');
       
@@ -367,6 +478,7 @@
       }
     }
     
+    // Simulate player count updates
     function updatePlayerCount() {
       const playerCountElement = document.getElementById('player-count');
       if (playerCountElement) {
@@ -379,6 +491,7 @@
       }
     }
     
+    // Initialize scroll animations for fade-in elements
     function initScrollAnimations() {
       const fadeElements = document.querySelectorAll('.fade-in');
       
@@ -394,8 +507,10 @@
         });
       };
       
+      // Initial check
       fadeOnScroll();
       
+      // Check on scroll with throttle
       let scrollTimeout;
       window.addEventListener('scroll', () => {
         if (!scrollTimeout) {
@@ -407,8 +522,183 @@
       });
     }
     
-    // Make copyText function globally available
-    window.copyText = copyText;
+    // Setup copy functionality for header elements
+    function setupCopyFunctionality() {
+      // Attach copy functionality to server IP and Discord elements
+      const attachCopyListeners = () => {
+        const serverIpContainer = document.querySelector('.server-ip-container');
+        const discordContainer = document.querySelector('.discord-container');
+        
+        if (serverIpContainer && !serverIpContainer.hasAttribute('data-copy-bound')) {
+          serverIpContainer.setAttribute('data-copy-bound', 'true');
+          serverIpContainer.addEventListener('click', () => {
+            copyText('play.geofrontier.net');
+          });
+        }
+        
+        if (discordContainer && !discordContainer.hasAttribute('data-copy-bound')) {
+          discordContainer.setAttribute('data-copy-bound', 'true');
+          discordContainer.addEventListener('click', () => {
+            copyText('discord.gg/NWxBBTvzXb');
+          });
+        }
+      };
+      
+      // Try immediately and also listen for component loaded event
+      attachCopyListeners();
+      
+      document.addEventListener('componentLoaded', (event) => {
+        if (event.detail.componentId === 'header') {
+          setTimeout(attachCopyListeners, 100);
+        }
+      });
+      
+      // Also try after a delay in case event already fired
+      setTimeout(attachCopyListeners, 1000);
+    }
+    
+    // Manual component loading fallback
+    async function loadComponentsManually() {
+      console.log('Loading components manually...');
+      
+      const components = [
+        { id: 'navbar', file: 'components/navbar.html', container: 'navbar-container' },
+        { id: 'header', file: 'components/header.html', container: 'header-container' },
+        { id: 'footer', file: 'components/footer.html', container: 'footer-container' }
+      ];
+      
+      for (const component of components) {
+        try {
+          console.log(`Loading ${component.id} from ${component.file}`);
+          const response = await fetch(component.file);
+          if (!response.ok) {
+            throw new Error(`Status: ${response.status}`);
+          }
+          const html = await response.text();
+          const container = document.getElementById(component.container);
+          if (container) {
+            container.innerHTML = html;
+            console.log(`${component.id} loaded successfully`);
+            
+            // Execute any scripts in the component
+            const scripts = container.querySelectorAll('script');
+            scripts.forEach(oldScript => {
+              const newScript = document.createElement('script');
+              Array.from(oldScript.attributes).forEach(attr => {
+                newScript.setAttribute(attr.name, attr.value);
+              });
+              newScript.textContent = oldScript.textContent;
+              oldScript.parentNode.replaceChild(newScript, oldScript);
+            });
+          }
+        } catch (error) {
+          console.error(`Failed to load ${component.id}:`, error);
+          const container = document.getElementById(component.container);
+          if (container) {
+            container.innerHTML = `
+              <div class="component-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Failed to load ${component.id}</h3>
+                <p>File not found: ${component.file}</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">
+                  Check that the file exists in the components folder
+                </p>
+              </div>
+            `;
+          }
+        }
+      }
+    }
+    
+    // Set active navigation
+    function setActiveNav(pageName) {
+      setTimeout(() => {
+        const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
+        navLinks.forEach(link => {
+          if (link.getAttribute('data-nav') === pageName) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }, 500);
+    }
+    
+    // ============================================
+    // PAGE INITIALIZATION
+    // ============================================
+    
+    document.addEventListener('DOMContentLoaded', async () => {
+      console.log('DOM loaded, starting component loading...');
+      
+      try {
+        // Load components using ComponentLoader if available
+        if (window.ComponentLoader) {
+          console.log('Using ComponentLoader...');
+          
+          // Load navbar first
+          await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
+          console.log('Navbar loaded');
+          
+          // Initialize dropdowns after navbar loads
+          setTimeout(() => {
+            if (window.initializeDropdowns) {
+              window.initializeDropdowns();
+            }
+          }, 100);
+          
+          // Load other components
+          await window.ComponentLoader.loadComponent('header', 'header-container');
+          console.log('Header loaded');
+          
+          await window.ComponentLoader.loadComponent('footer', 'footer-container');
+          console.log('Footer loaded');
+          
+          // Set active navigation
+          setActiveNav('index');
+          
+        } else {
+          console.log('ComponentLoader not found, loading manually');
+          await loadComponentsManually();
+          
+          // Initialize dropdowns after components load
+          setTimeout(() => {
+            if (window.initializeDropdowns) {
+              window.initializeDropdowns();
+            }
+          }, 200);
+        }
+        
+        // Load featured town
+        loadFeaturedTown();
+        
+        // Initialize player count
+        updatePlayerCount();
+        
+        // Setup scroll animations
+        initScrollAnimations();
+        
+        // Setup copy functionality
+        setupCopyFunctionality();
+        
+        console.log('Page initialization complete!');
+        
+      } catch (error) {
+        console.error('Error during page initialization:', error);
+      }
+    });
+    
+    // Reinitialize dropdowns when components are loaded via event
+    document.addEventListener('componentLoaded', (event) => {
+      if (event.detail.componentId === 'navbar') {
+        console.log('Navbar component loaded, initializing dropdowns...');
+        setTimeout(() => {
+          if (window.initializeDropdowns) {
+            window.initializeDropdowns();
+          }
+        }, 100);
+      }
+    });
   </script>
 </body>
 </html>
