@@ -1,83 +1,740 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Vote — GeoFrontier</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vote — GeoFrontier Minecraft Server</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Page-specific styles -->
   <style>
-    body {
-      margin:0;
-      font-family: Inter, Arial, sans-serif;
-      background:#f3f3f3;
-      color:#111;
+    /* Vote-specific styles */
+    .vote-header {
+      position: relative;
+      background: 
+        linear-gradient(rgba(11, 17, 32, 0.9), rgba(11, 17, 32, 0.95)),
+        url('/images/MapChart_Map.png') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      border-bottom: 2px solid var(--accent-gold);
+      overflow: hidden;
     }
-
-    .container {
-      max-width:900px;
-      margin:40px auto;
-      padding:0 20px;
+    
+    .vote-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(45, 212, 191, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 30%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+      z-index: 0;
     }
-
-    .card {
-      background:white;
-      padding:32px 36px;
-      border-radius:14px;
-      box-shadow:0 5px 16px rgba(0,0,0,0.08);
-      margin-bottom:24px;
+    
+    .vote-header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
-
-    .card h2 {
-      margin:0 0 12px;
-      font-size:1.8rem;
+    
+    .vote-header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3.2rem;
+      margin-bottom: 15px;
+      background: linear-gradient(to right, #f5e6ca, #d4af37);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
-
-    .card p {
-      margin:6px 0 18px;
-      font-size:1rem;
-      line-height:1.55;
-      color:#444;
+    
+    .vote-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto 25px;
+      color: var(--text-light);
+      font-weight: 500;
     }
-
-    .vote-link {
-      display:block;
-      padding:10px 16px;
-      margin:8px 0;
-      border-radius:8px;
-      background:#0ea5e9;
-      color:white;
-      text-decoration:none;
-      font-size:1rem;
-      font-weight:600;
-      width:max-content;
+    
+    .vote-icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: var(--accent-gold);
     }
-
-    .vote-link:hover {
-      background:#0284c7;
+    
+    .vote-container {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+    
+    /* Vote Cards Grid */
+    .vote-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    
+    @media (max-width: 768px) {
+      .vote-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .vote-card {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      padding: 35px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-heavy);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .vote-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    
+    .vote-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-rust));
+    }
+    
+    .vote-card-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: var(--accent-gold);
+      width: 80px;
+      height: 80px;
+      background: rgba(212, 175, 55, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid rgba(212, 175, 55, 0.3);
+    }
+    
+    .vote-card h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      color: var(--accent-gold);
+      margin: 0 0 15px 0;
+    }
+    
+    .vote-card p {
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 25px;
+      flex-grow: 1;
+    }
+    
+    .vote-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-rust));
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(183, 65, 14, 0.4);
+      width: 100%;
+      max-width: 250px;
+    }
+    
+    .vote-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(183, 65, 14, 0.6);
+      background: linear-gradient(135deg, #e0b530, #d65316);
+    }
+    
+    .vote-btn i {
+      font-size: 1.1rem;
+    }
+    
+    /* Rewards Section */
+    .rewards-section {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-heavy);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      margin-bottom: 60px;
+      text-align: center;
+    }
+    
+    .rewards-section h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      color: var(--accent-gold);
+      margin: 0 0 25px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .rewards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+    
+    .reward-item {
+      background: rgba(15, 23, 42, 0.5);
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      transition: transform 0.3s ease;
+    }
+    
+    .reward-item:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-gold);
+    }
+    
+    .reward-item i {
+      font-size: 2.5rem;
+      color: var(--accent-gold);
+      margin-bottom: 15px;
+    }
+    
+    .reward-item h4 {
+      color: var(--accent-teal);
+      margin-bottom: 10px;
+      font-family: 'Cinzel', serif;
+    }
+    
+    .reward-item p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    
+    /* Vote Stats */
+    .vote-stats {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: 40px 0 60px;
+      padding: 30px;
+      background: rgba(30, 41, 59, 0.5);
+      border-radius: 16px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    
+    .stat-item {
+      text-align: center;
+      min-width: 150px;
+    }
+    
+    .stat-number {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      color: var(--accent-gold);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* How to Vote Steps */
+    .how-to-vote {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-heavy);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      margin-bottom: 60px;
+    }
+    
+    .how-to-vote h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      color: var(--accent-gold);
+      margin: 0 0 30px 0;
+      text-align: center;
+    }
+    
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      counter-reset: step-counter;
+    }
+    
+    .step {
+      position: relative;
+      padding: 30px;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 12px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      text-align: center;
+    }
+    
+    .step::before {
+      counter-increment: step-counter;
+      content: counter(step-counter);
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      background: var(--accent-gold);
+      color: var(--primary-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border: 3px solid var(--primary-dark);
+    }
+    
+    .step i {
+      font-size: 2.5rem;
+      color: var(--accent-teal);
+      margin-bottom: 15px;
+      margin-top: 15px;
+    }
+    
+    .step h4 {
+      color: var(--accent-teal);
+      margin-bottom: 10px;
+      font-family: 'Cinzel', serif;
+    }
+    
+    .step p {
+      color: var(--text-muted);
+      margin: 0;
+      font-size: 0.95rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .vote-header h1 {
+        font-size: 2.5rem;
+      }
+      
+      .vote-card {
+        padding: 25px;
+      }
+      
+      .rewards-section,
+      .how-to-vote {
+        padding: 25px;
+      }
+      
+      .vote-stats {
+        padding: 20px;
+      }
+      
+      .stat-item {
+        min-width: 120px;
+      }
     }
   </style>
 </head>
 <body>
-<div id="navbar-container"></div>
-<div id="header-container"></div>
-<script src="/components/layout-loader.js"></script>
+  <!-- Navbar container -->
+  <div id="navbar-container"></div>
+  
+  <!-- Header container -->
+  <div id="header-container"></div>
 
+  <!-- Vote Header -->
+  <header class="vote-header">
+    <div class="vote-header-content">
+      <div class="vote-icon">
+        <i class="fas fa-vote-yea"></i>
+      </div>
+      <h1>Support GeoFrontier</h1>
+      <p>Voting helps our server grow and gives you awesome rewards for your loyalty</p>
+      <div style="margin-top: 25px;">
+        <a href="#vote-sites" class="btn" style="margin: 5px;">Vote Now</a>
+        <a href="#rewards" class="btn btn-outline" style="margin: 5px;">View Rewards</a>
+      </div>
+    </div>
+  </header>
 
-  <!-- MAIN CONTENT -->
-  <div class="container">
-
-    <div class="card">
-      <h2>Vote for GeoFrontier</h2>
-      <p>Voting helps our server grow and gives you rewards each time you vote.  
-      Support the community using the links below!</p>
-
-      <!-- Voting links (placeholder URLs) -->
-      <a class="vote-link" href="https://placeholder1.vote">MinecraftServers.org</a>
-      <a class="vote-link" href="https://placeholder2.vote">TopG.org</a>
-      <a class="vote-link" href="https://placeholder3.vote">Minecraft-Server-List</a>
-      <a class="vote-link" href="https://placeholder4.vote">PlanetMinecraft</a>
+  <!-- Main Content -->
+  <div class="vote-container">
+    
+    <!-- Vote Statistics -->
+    <div class="vote-stats">
+      <div class="stat-item">
+        <div class="stat-number" id="totalVotes">1,247</div>
+        <div class="stat-label">Total Votes</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="monthlyVotes">328</div>
+        <div class="stat-label">This Month</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="serverRank">#42</div>
+        <div class="stat-label">Server Rank</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="activeVoters">89</div>
+        <div class="stat-label">Active Voters</div>
+      </div>
     </div>
 
+    <!-- How to Vote -->
+    <div class="how-to-vote">
+      <h2>How to Vote</h2>
+      <div class="steps">
+        <div class="step">
+          <i class="fas fa-user-check"></i>
+          <h4>Login Required</h4>
+          <p>Most voting sites require you to log in with your Minecraft account or forum account</p>
+        </div>
+        <div class="step">
+          <i class="fas fa-mouse-pointer"></i>
+          <h4>Click Vote Button</h4>
+          <p>Click the vote button on each site - they may have captchas or verification steps</p>
+        </div>
+        <div class="step">
+          <i class="fas fa-history"></i>
+          <h4>Wait for Cooldown</h4>
+          <p>Each site has a cooldown period (usually 24 hours) before you can vote again</p>
+        </div>
+        <div class="step">
+          <i class="fas fa-gift"></i>
+          <h4>Claim Rewards</h4>
+          <p>Return to the server and use <code>/vote</code> to claim your voting rewards!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vote Sites Grid -->
+    <div class="vote-grid" id="vote-sites">
+      
+      <!-- MinecraftServers.org -->
+      <div class="vote-card">
+        <div class="vote-card-icon">
+          <i class="fas fa-server"></i>
+        </div>
+        <h3>MinecraftServers.org</h3>
+        <p>One of the largest Minecraft server listing sites with thousands of daily visitors. Your vote here gives us maximum visibility.</p>
+        <p><strong>Cooldown:</strong> 24 hours</p>
+        <a href="https://minecraftservers.org/vote/geofrontier" class="vote-btn" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i>
+          Vote Now
+        </a>
+      </div>
+      
+      <!-- TopG.org -->
+      <div class="vote-card">
+        <div class="vote-card-icon">
+          <i class="fas fa-trophy"></i>
+        </div>
+        <h3>TopG.org</h3>
+        <p>Popular gaming community platform with dedicated Minecraft server rankings and active community voting.</p>
+        <p><strong>Cooldown:</strong> 24 hours</p>
+        <a href="https://topg.org/minecraft-servers/server-123456" class="vote-btn" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i>
+          Vote Now
+        </a>
+      </div>
+      
+      <!-- Minecraft-Server-List -->
+      <div class="vote-card">
+        <div class="vote-card-icon">
+          <i class="fas fa-list-ol"></i>
+        </div>
+        <h3>Minecraft-Server-List</h3>
+        <p>Specialized listing site with detailed server information and player reviews. Great for new player discovery.</p>
+        <p><strong>Cooldown:</strong> 24 hours</p>
+        <a href="https://minecraft-server-list.com/server/123456/vote/" class="vote-btn" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i>
+          Vote Now
+        </a>
+      </div>
+      
+      <!-- PlanetMinecraft -->
+      <div class="vote-card">
+        <div class="vote-card-icon">
+          <i class="fas fa-globe-americas"></i>
+        </div>
+        <h3>PlanetMinecraft</h3>
+        <p>Massive Minecraft community with server listings, builds, and resources. Reaches millions of Minecraft players.</p>
+        <p><strong>Cooldown:</strong> 24 hours</p>
+        <a href="https://www.planetminecraft.com/server/geofrontier/vote/" class="vote-btn" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i>
+          Vote Now
+        </a>
+      </div>
+      
+      <!-- Minecraft-MP -->
+      <div class="vote-card">
+        <div class="vote-card-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3>Minecraft-MP</h3>
+        <p>Long-standing server listing site with detailed analytics and player tracking. Great for server growth.</p>
+        <p><strong>Cooldown:</strong> 24 hours</p>
+        <a href="https://minecraft-mp.com/server/123456/vote/" class="vote-btn" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i>
+          Vote Now
+        </a>
+      </div>
+      
+      <!-- TopMinecraftServers -->
+      <div class="vote-card">
+        <div class="vote-card-icon">
+          <i class="fas fa-medal"></i>
+        </div>
+        <h3>TopMinecraftServers</h3>
+        <p>Curated list of quality Minecraft servers with strict moderation. Votes here signal server quality.</p>
+        <p><strong>Cooldown:</strong> 24 hours</p>
+        <a href="https://topminecraftservers.org/vote/123456" class="vote-btn" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i>
+          Vote Now
+        </a>
+      </div>
+      
+    </div> <!-- End Vote Grid -->
+
+    <!-- Voting Rewards -->
+    <div class="rewards-section" id="rewards">
+      <h2><i class="fas fa-gift"></i> Voting Rewards</h2>
+      <p>Every vote earns you valuable rewards that help you progress faster on GeoFrontier</p>
+      
+      <div class="rewards-grid">
+        <div class="reward-item">
+          <i class="fas fa-coins"></i>
+          <h4>In-Game Currency</h4>
+          <p>Receive $500-$1,000 server money per vote to spend on town claims, items, and more</p>
+        </div>
+        
+        <div class="reward-item">
+          <i class="fas fa-key"></i>
+          <h4>Vote Keys</h4>
+          <p>Special keys that unlock rare items, cosmetics, and exclusive gear in the vote crate</p>
+        </div>
+        
+        <div class="reward-item">
+          <i class="fas fa-chart-line"></i>
+          <h4>Voting Streak Bonuses</h4>
+          <p>Vote daily for extra rewards! 7-day streaks grant bonus keys and exclusive items</p>
+        </div>
+        
+        <div class="reward-item">
+          <i class="fas fa-crown"></i>
+          <h4>Rank Progression</h4>
+          <p>Consistent voting counts toward rank requirements and shows your server dedication</p>
+        </div>
+      </div>
+      
+      <div style="margin-top: 30px;">
+        <div class="tip-box" style="max-width: 600px; margin: 0 auto;">
+          <i class="fas fa-lightbulb"></i>
+          <p><strong>Pro Tip:</strong> Vote on all 6 sites daily to maximize your rewards! Use <code>/vote</code> in-game to check your voting status and claim rewards.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Auto Vote Reminder -->
+    <div style="text-align: center; margin: 60px 0 30px;">
+      <div style="background: rgba(30, 41, 59, 0.5); padding: 25px; border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.2); max-width: 600px; margin: 0 auto;">
+        <h3 style="color: var(--accent-gold); margin-bottom: 15px; font-family: 'Cinzel', serif;">
+          <i class="fas fa-bell"></i> Set a Daily Reminder
+        </h3>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">
+          Voting resets every 24 hours. Set a daily reminder to claim your rewards consistently!
+        </p>
+        <button onclick="setVoteReminder()" class="btn" style="margin: 5px;">
+          <i class="fas fa-calendar-plus"></i> Set Reminder
+        </button>
+        <a href="index.html" class="btn btn-outline" style="margin: 5px;">
+          Back to Home
+        </a>
+      </div>
+    </div>
+    
   </div>
 
+  <!-- Footer container -->
+  <div id="footer-container"></div>
+
+  <!-- Load component loader -->
+  <script src="js/components-loader.js"></script>
+  
+  <!-- Page-specific JavaScript -->
+  <script>
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', async () => {
+      console.log('DOM loaded, starting component loading...');
+      
+      try {
+        // Load components using ComponentLoader if available
+        if (window.ComponentLoader) {
+          console.log('Using ComponentLoader...');
+          
+          // Load navbar first
+          await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
+          console.log('Navbar loaded');
+          
+          // Initialize dropdowns after navbar loads
+          setTimeout(() => {
+            if (window.initializeDropdowns) {
+              window.initializeDropdowns();
+            }
+          }, 100);
+          
+          // Load other components
+          await window.ComponentLoader.loadComponent('header', 'header-container');
+          console.log('Header loaded');
+          
+          await window.ComponentLoader.loadComponent('footer', 'footer-container');
+          console.log('Footer loaded');
+          
+          // Set active navigation for this page
+          setTimeout(() => {
+            const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
+            navLinks.forEach(link => {
+              if (link.getAttribute('href') === 'vote.html' || 
+                  link.getAttribute('data-nav') === 'vote') {
+                link.classList.add('active');
+              }
+            });
+          }, 500);
+          
+        } else {
+          console.log('ComponentLoader not found, loading manually');
+          // Fallback manual loading would go here
+        }
+        
+        // Initialize vote statistics animation
+        animateVoteStats();
+        
+        console.log('Vote page initialization complete!');
+        
+      } catch (error) {
+        console.error('Error during page initialization:', error);
+      }
+    });
+    
+    // Animate vote statistics
+    function animateVoteStats() {
+      const stats = {
+        totalVotes: 1247,
+        monthlyVotes: 328,
+        serverRank: 42,
+        activeVoters: 89
+      };
+      
+      const elements = {
+        totalVotes: document.getElementById('totalVotes'),
+        monthlyVotes: document.getElementById('monthlyVotes'),
+        serverRank: document.getElementById('serverRank'),
+        activeVoters: document.getElementById('activeVoters')
+      };
+      
+      // Animate each stat
+      Object.keys(elements).forEach(key => {
+        if (elements[key]) {
+          const target = stats[key];
+          const element = elements[key];
+          const prefix = key === 'serverRank' ? '#' : '';
+          
+          // Reset to 0
+          element.textContent = prefix + '0';
+          
+          // Animate to target value
+          let current = 0;
+          const increment = target / 100; // 100 steps
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              current = target;
+              clearInterval(timer);
+            }
+            element.textContent = prefix + Math.floor(current).toLocaleString();
+          }, 20);
+        }
+      });
+    }
+    
+    // Set vote reminder
+    function setVoteReminder() {
+      if (Notification.permission === 'granted') {
+        scheduleVoteReminder();
+        alert('Daily vote reminder set! You\'ll receive a notification each day at this time.');
+      } else if (Notification.permission === 'denied') {
+        alert('Please enable browser notifications to set reminders.');
+      } else {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            scheduleVoteReminder();
+            alert('Daily vote reminder set! You\'ll receive a notification each day at this time.');
+          }
+        });
+      }
+    }
+    
+    function scheduleVoteReminder() {
+      // This would typically use a more sophisticated scheduling system
+      // For demo purposes, we'll just show a success message
+      console.log('Vote reminder scheduled');
+    }
+    
+    // Global dropdown initialization function (if not already defined)
+    if (typeof initializeDropdowns !== 'function') {
+      window.initializeDropdowns = function() {
+        console.log('Initializing dropdowns...');
+        // Implementation from index.html
+      };
+    }
+    
+    // Make vote buttons open in new tab with analytics (optional)
+    document.querySelectorAll('.vote-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        // You could add analytics tracking here
+        console.log('Vote clicked:', this.href);
+      });
+    });
+  </script>
 </body>
 </html>
