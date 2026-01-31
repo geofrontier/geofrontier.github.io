@@ -425,21 +425,56 @@
         </ul>
       </div>
     </div>
-
-    <!-- RIGHT COLUMN: FEATURED TOWN & INFO -->
-    <div>
+      <!-- RIGHT COLUMN: FEATURED TOWN & INFO -->
       <div class="card feature-card fade-in delayed-3" id="featured-town">
-        <!-- Town data will be populated by JavaScript -->
         <h2><i class="fas fa-crown"></i> Town of the Month</h2>
-        <div id="town-content">
-          <!-- Loading state -->
-          <div class="loading-town" style="text-align: center; padding: 20px;">
-            <i class="fas fa-compass fa-spin" style="font-size: 2rem; color: var(--accent-gold); margin: 20px 0;"></i>
+        <div id="featured-town-content">
+          <!-- Loading state ONLY - no hardcoded town -->
+          <div class="loading-town" style="text-align: center; padding: 40px;">
+            <i class="fas fa-compass fa-spin" style="font-size: 2rem; color: var(--accent-gold); margin-bottom: 15px;"></i>
             <p style="color: var(--text-muted);">Loading featured town...</p>
           </div>
         </div>
         <a href="towns.html" class="btn">View All Featured Towns →</a>
       </div>
+<script>
+  function loadFeaturedTown() {
+    const content = document.getElementById('featured-town-content');
+    
+    if (window.townsOfTheMonth && window.townsOfTheMonth.length > 0) {
+      const featured = window.townsOfTheMonth[0];
+      
+      content.innerHTML = `
+        <img class="town-image" src="${featured.image}" alt="${featured.name}" 
+             onerror="this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'">
+        <div class="town-meta">
+          <span><i class="fas fa-trophy"></i> ${featured.month}</span>
+        </div>
+        <h3 class="town-name">${featured.name}</h3>
+        <p class="town-desc">${featured.description}</p>
+        <div class="town-meta">
+          <span><i class="fas fa-users"></i> ${featured.population}</span>
+          <span><i class="fas fa-crown"></i> ${featured.leader}</span>
+          <span><i class="fas fa-landmark"></i> ${featured.ideology}</span>
+        </div>
+        <div style="margin-top: 15px;">
+          <button class="btn-small" onclick="copyText('${featured.name}')">
+            <i class="fas fa-copy"></i> Copy Name
+          </button>
+        </div>
+      `;
+    } else {
+      // If data fails to load completely
+      content.innerHTML = `
+        <div class="component-error" style="text-align: center; padding: 30px;">
+          <i class="fas fa-exclamation-triangle"></i>
+          <h3>Failed to load town data</h3>
+          <p>Check your connection and refresh the page</p>
+        </div>
+      `;
+    }
+  }
+</script>
       
       <br>
       
@@ -864,3 +899,4 @@
   </script>
 </body>
 </html>
+
