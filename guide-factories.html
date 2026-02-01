@@ -409,6 +409,47 @@
       margin: 0;
     }
     
+    .factory-card .cost {
+      color: var(--accent-rust);
+      font-weight: bold;
+      margin-top: 8px;
+    }
+    
+    .factory-card .time {
+      color: var(--accent-teal);
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    
+    .factory-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    
+    .factory-table th {
+      background: rgba(15, 23, 42, 0.7);
+      color: var(--accent-gold);
+      padding: 12px;
+      text-align: left;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      font-family: 'Cinzel', serif;
+    }
+    
+    .factory-table td {
+      padding: 12px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      color: var(--text-light);
+    }
+    
+    .factory-table tr:nth-child(even) {
+      background: rgba(15, 23, 42, 0.3);
+    }
+    
+    .factory-table tr:hover {
+      background: rgba(212, 175, 55, 0.05);
+    }
+    
     @media (max-width: 768px) {
       .guide-header {
         padding: 60px 20px;
@@ -433,6 +474,11 @@
       .toc-list {
         grid-template-columns: 1fr;
       }
+      
+      .factory-table {
+        display: block;
+        overflow-x: auto;
+      }
     }
   </style>
 </head>
@@ -450,7 +496,7 @@
         <i class="fas fa-industry"></i>
       </div>
       <h1>Factories Guide</h1>
-      <p>Craft weapons, ammunition, and artillery for your nation's military-industrial complex</p>
+      <p>Craft weapons, ammunition, artillery, and siege equipment for your nation's military-industrial complex</p>
       <div style="margin-top: 25px;">
         <a href="#toc" class="btn btn-outline" style="margin: 5px;">Jump to Sections</a>
         <a href="guide-movecraft.html" class="btn" style="margin: 5px;">Movecraft Guide →</a>
@@ -474,13 +520,13 @@
         <div class="toc-item">
           <a href="#section2">
             <i class="fas fa-clipboard-check"></i>
-            <span>2. Factory Approval Rules</span>
+            <span>2. Factory Types & Costs</span>
           </a>
         </div>
         <div class="toc-item">
           <a href="#section3">
             <i class="fas fa-cogs"></i>
-            <span>3. Using Factories</span>
+            <span>3. Factory Commands</span>
           </a>
         </div>
         <div class="toc-item">
@@ -501,133 +547,193 @@
     <!-- Factory Types Overview -->
     <div class="guide-section">
       <h2><i class="fas fa-industry"></i> Factory System</h2>
-      <p>Factories are specialized production facilities that allow mass crafting of weapons, ammunition, and resources for your nation's military and economy.</p>
+      <p>Factories are specialized production facilities that allow mass crafting of weapons, ammunition, artillery, and siege equipment for your nation's military and economy.</p>
       
       <div class="factory-types">
         <div class="factory-card">
           <i class="fas fa-gun"></i>
           <h4>Armory</h4>
-          <p>Produces flintlock weapons and melee weapons</p>
+          <p>Produces firearms and melee weapons</p>
+          <div class="cost">Cost: $5,000</div>
+          <div class="time">Production: 60s</div>
         </div>
         
         <div class="factory-card">
           <i class="fas fa-cannons"></i>
           <h4>Foundry</h4>
-          <p>Produces artillery pieces (cannons, mortars, culverins)</p>
+          <p>Produces artillery pieces</p>
+          <div class="cost">Cost: $10,000</div>
+          <div class="time">Production: 120s</div>
         </div>
         
         <div class="factory-card">
           <i class="fas fa-bullseye"></i>
           <h4>Munitions</h4>
-          <p>Produces ammunition (cannonballs, gunpowder barrels)</p>
+          <p>Produces ammunition</p>
+          <div class="cost">Cost: $3,000</div>
+          <div class="time">Production: 30s</div>
         </div>
         
         <div class="factory-card">
-          <i class="fas fa-mountain"></i>
-          <h4>Passive Factories</h4>
-          <p>Quarry, Mining Camp, Logging Camp, Farm - generate resources passively</p>
+          <i class="fas fa-catapult"></i>
+          <h4>Siege Works</h4>
+          <p>Produces siege equipment</p>
+          <div class="cost">Cost: $15,000</div>
+          <div class="time">Production: 180s</div>
+        </div>
+        
+        <div class="factory-card">
+          <i class="fas fa-wagon"></i>
+          <h4>Wagon Works</h4>
+          <p>Produces wagons & transports</p>
+          <div class="cost">Cost: $8,000</div>
+          <div class="time">Production: 150s</div>
         </div>
       </div>
       
       <div class="tip-box">
         <i class="fas fa-lightbulb"></i>
-        <p><strong>Production Strategy:</strong> Factories work as chests that process materials. Place required resources in the factory chest, use the production command, and items will be crafted automatically until resources run out.</p>
+        <p><strong>Important:</strong> All factory commands must be executed while looking at the factory chest. Stand close to the chest and face it when running factory commands.</p>
       </div>
     </div>
 
     <!-- Section 1 -->
     <div class="guide-section" id="section1">
       <h2><span class="section-number">1</span> <i class="fas fa-plus-circle"></i> Creating Factories</h2>
-      <p>Factories are created from chests that become specialized production stations for your town.</p>
+      <p>Factories are created from chests that become specialized production stations for your town. Each factory type has different costs and production times.</p>
       
       <div class="command-box">
-        <span class="command">/Factory Create (Factory Type)</span>
-        <span class="command-desc">Creates a factory from the chest you're looking at</span>
+        <span class="command">/factory create &lt;type&gt;</span>
+        <span class="command-desc">Creates a factory from the chest you're looking at. Must be looking at the chest!</span>
       </div>
       
       <div class="example-box">
         <p><strong>Example:</strong> To create an Armory factory for making muskets and swords:<br>
-          <code>/Factory Create Armory</code><br>
-          <em>Must be executed while looking directly at the chest that will become the factory.</em></p>
+          <code>/factory create armory</code><br>
+          <em>Costs $5,000 from your town bank. Production time: 60 seconds per item.</em></p>
       </div>
       
       <div class="command-box">
-        <span class="command">/Produce (Recipe Name)</span>
-        <span class="command-desc">Starts production using resources in the factory chest</span>
-      </div>
-      
-      <div class="example-box">
-        <p><strong>Production Example:</strong><br>
-          1. Look at your Armory factory chest<br>
-          2. Type: <code>/Produce musket</code><br>
-          3. Factory checks for 5 Iron Ingot, 2 Stick, 1 Flint in the chest<br>
-          4. If materials are present, produces muskets until resources run out</p>
+        <span class="command">/factory remove</span>
+        <span class="command-desc">Removes/deletes the factory you're looking at</span>
       </div>
       
       <div class="warning-box">
         <i class="fas fa-exclamation-triangle"></i>
-        <p><strong>Important:</strong> All factories must be approved by admins before they become functional. See Section 2 for approval requirements.</p>
+        <p><strong>Important:</strong> All factories must be approved by admins before they become functional. Factories cannot be chests laying in the open - they must be inside proper factory buildings (blacksmith, armory, etc.). See Section 5 for building requirements.</p>
+      </div>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Factory Placement:</strong> Stand directly in front of the chest you want to turn into a factory. Look directly at it and make sure you're within 5 blocks. The chest will become the factory interface for that production type.</p>
       </div>
     </div>
 
     <!-- Section 2 -->
     <div class="guide-section" id="section2">
-      <h2><span class="section-number">2</span> <i class="fas fa-clipboard-check"></i> Factory Approval Rules</h2>
-      <p>All factories must meet building requirements and be approved by server staff to prevent abuse and maintain server quality.</p>
+      <h2><span class="section-number">2</span> <i class="fas fa-clipboard-check"></i> Factory Types & Costs</h2>
+      <p>Each factory type specializes in different products and has unique creation costs and production times.</p>
       
-      <div class="registration-steps">
-        <div class="step-card">
-          <i class="fas fa-hammer"></i>
-          <h4>Rule 1: Proper Buildings</h4>
-          <p>Factories cannot be chests laying in the open. They must be inside proper factory buildings (blacksmith, armory, etc.)</p>
-        </div>
-        
-        <div class="step-card">
-          <i class="fas fa-landmark"></i>
-          <h4>Rule 2: Passive Factories</h4>
-          <p>Quarry, Mining Camp, Logging Camp, and Farm factories work differently - they don't require resources and passively generate materials</p>
-        </div>
-        
-        <div class="step-card">
-          <i class="fas fa-building"></i>
-          <h4>Rule 3: Example Builds</h4>
-          <p>Check the server forums for examples of proper factory buildings. Failure to build properly = factory destroyed + town warning</p>
-        </div>
-        
-        <div class="step-card">
-          <i class="fas fa-clipboard-list"></i>
-          <h4>Rule 4: Labeling</h4>
-          <p>Factories should be labeled (optional but recommended for town rankings)</p>
-        </div>
+      <table class="factory-table">
+        <thead>
+          <tr>
+            <th>Factory Type</th>
+            <th>Creation Cost</th>
+            <th>Production Time</th>
+            <th>Specialization</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>armory</strong></td>
+            <td>$5,000</td>
+            <td>60 seconds</td>
+            <td>Firearms & melee weapons (muskets, swords, etc.)</td>
+          </tr>
+          <tr>
+            <td><strong>foundry</strong></td>
+            <td>$10,000</td>
+            <td>120 seconds</td>
+            <td>Artillery pieces (cannons, mortars, culverins)</td>
+          </tr>
+          <tr>
+            <td><strong>munitions</strong></td>
+            <td>$3,000</td>
+            <td>30 seconds</td>
+            <td>Ammunition (cannonballs, gunpowder barrels)</td>
+          </tr>
+          <tr>
+            <td><strong>siege_works</strong></td>
+            <td>$15,000</td>
+            <td>180 seconds</td>
+            <td>Siege equipment (battering rams, siege towers, etc.)</td>
+          </tr>
+          <tr>
+            <td><strong>wagon_works</strong></td>
+            <td>$8,000</td>
+            <td>150 seconds</td>
+            <td>Wagons & transport vehicles</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Cost Management:</strong> Factory creation costs are deducted from your town bank. Ensure your town has sufficient funds before attempting to create factories. Production times are per item - plan your military production accordingly.</p>
       </div>
       
       <div class="warning-box">
         <i class="fas fa-exclamation-triangle"></i>
-        <p><strong>Bug Abuse Warning:</strong> Trying to purposely find bugs or trying to dupe and bug out the muskets/guns will result in 2 nation warnings and half of the nation's treasury being wiped.</p>
+        <p><strong>Type Limitations:</strong> Certain items can only be produced in specific factory types. For example, maces can only be made in armories, while cannons can only be made in foundries. Use <code>/factory recipes &lt;item&gt;</code> to check where an item can be produced.</p>
       </div>
     </div>
 
     <!-- Section 3 -->
     <div class="guide-section" id="section3">
-      <h2><span class="section-number">3</span> <i class="fas fa-cogs"></i> Using Factories</h2>
-      <p>Once your factory is built and approved, you can begin production of weapons and resources.</p>
+      <h2><span class="section-number">3</span> <i class="fas fa-cogs"></i> Factory Commands</h2>
+      <p>Once your factory is built and approved, use these commands to manage production.</p>
+      
+      <div class="command-box">
+        <span class="command">/factory produce &lt;item&gt;</span>
+        <span class="command-desc">Starts production of a specific item. Must be looking at the factory chest!</span>
+      </div>
+      
+      <div class="example-box">
+        <p><strong>Production Example:</strong><br>
+          1. Look at your Armory factory chest<br>
+          2. Type: <code>/factory produce musket</code><br>
+          3. Factory checks for 5 Iron Ingot, 2 Stick, 1 Flint in the chest<br>
+          4. If materials are present, begins 60-second production of muskets</p>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/factory recipes &lt;item&gt;</span>
+        <span class="command-desc">Shows the recipe for a specific item and which factory type can produce it</span>
+      </div>
+      
+      <div class="example-box">
+        <p><strong>Recipe Check Example:</strong><br>
+          <code>/factory recipes cannon</code><br>
+          Shows: "Cannon recipe: 8 Iron Block, 4 Iron Ingot, 4 Oak Log - Can be produced in: foundry"</p>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/factory stop</span>
+        <span class="command-desc">Stops production in the factory you're looking at</span>
+      </div>
       
       <p><strong>Production Process:</strong></p>
       <ol>
         <li>Place required raw materials in the factory chest</li>
-        <li>Use <code>/Produce (recipe name)</code> while looking at the chest</li>
-        <li>Factory consumes materials and produces items automatically</li>
-        <li>Production continues until resources run out</li>
-        <li>Passive factories (quarry, mining camp, etc.) generate resources automatically without input</li>
+        <li>Use <code>/factory produce &lt;item&gt;</code> while looking at the chest</li>
+        <li>Factory consumes materials and begins production timer (60s, 120s, etc.)</li>
+        <li>When timer completes, produced items appear in the chest</li>
+        <li>Use <code>/factory stop</code> to halt production if needed</li>
       </ol>
       
       <div class="tip-box">
         <i class="fas fa-lightbulb"></i>
-        <p><strong>Efficiency Tip:</strong> Keep your factory chests stocked with common materials. For passive factories, ensure they're placed in appropriate locations (quarries near stone, logging camps in forests, etc.).</p>
-      </div>
-      
-      <div class="example-box">
-        <p><strong>Passive Factory Example:</strong> A Mining Camp factory placed underground will passively generate ores. A Logging Camp in a forest will generate wood. These require no resources, just proper placement.</p>
+        <p><strong>Production Strategy:</strong> Keep your factory chests stocked with common materials. For efficient production, create supply chains from mining operations to your factories. Use <code>/factory recipes</code> to plan resource gathering.</p>
       </div>
     </div>
 
@@ -714,7 +820,12 @@
       
       <div class="tip-box">
         <i class="fas fa-lightbulb"></i>
-        <p><strong>Recipe Names:</strong> Use the exact recipe names shown above (lowercase with underscores) when producing. For example: <code>/Produce musket</code> or <code>/Produce gunpowder_barrel</code>.</p>
+        <p><strong>Recipe Names:</strong> Use the exact recipe names shown above (lowercase with underscores) when producing. For example: <code>/factory produce musket</code> or <code>/factory produce gunpowder_barrel</code>. Use <code>/factory recipes cannonball</code> to check any recipe.</p>
+      </div>
+      
+      <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Factory Type Restrictions:</strong> Items can only be produced in their designated factory types. For example, you cannot produce cannons in an armory or muskets in a foundry. Check which factory type produces each item before attempting production.</p>
       </div>
     </div>
 
@@ -723,40 +834,60 @@
       <h2><span class="section-number">5</span> <i class="fas fa-exclamation-triangle"></i> Rules & Limits</h2>
       <p>Follow these rules to ensure fair factory usage and avoid penalties.</p>
       
-      <div class="warning-box">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p><strong>Factory Limits:</strong> Only 14 factory chests per town including quarries, mining camps, farms, and logging camps.</p>
+      <div class="registration-steps">
+        <div class="step-card">
+          <i class="fas fa-hammer"></i>
+          <h4>Building Requirements</h4>
+          <p>Factories cannot be chests laying in the open. Must be inside proper factory buildings (blacksmith, armory, etc.)</p>
+        </div>
+        
+        <div class="step-card">
+          <i class="fas fa-clipboard-list"></i>
+          <h4>Factory Limits</h4>
+          <p>Only 14 factory chests per town including all types. First offense: warning + deletion. Second: treasury wipe + blacklist.</p>
+        </div>
+        
+        <div class="step-card">
+          <i class="fas fa-bug"></i>
+          <h4>Bug Abuse</h4>
+          <p>Trying to dupe or exploit factory bugs = 2 nation warnings + half of nation's treasury wiped.</p>
+        </div>
+        
+        <div class="step-card">
+          <i class="fas fa-ship"></i>
+          <h4>Placement Rules</h4>
+          <p>You may NOT place a factory on a ship. Factories must be in permanent structures.</p>
+        </div>
       </div>
-      
-      <p><strong>Penalty System:</strong></p>
-      <ul>
-        <li><strong>First Offense (Over 14 factories):</strong> Warning and deletion of extra factories</li>
-        <li><strong>Second Offense:</strong> Half of treasury wiped + national blacklist</li>
-        <li><strong>Bug Abuse:</strong> 2 nation warnings + half of nation's treasury wiped</li>
-        <li><strong>Poor Factory Buildings:</strong> Factory destroyed + town warning</li>
-      </ul>
       
       <div class="tip-box">
         <i class="fas fa-lightbulb"></i>
-        <p><strong>Factory Placement:</strong> 
+        <p><strong>Good Factory Layout:</strong> 
           <ul>
-            <li>You may NOT place a factory on a ship</li>
-            <li>Factories must be in proper buildings (not open chests)</li>
-            <li>Label factories for better organization (recommended for rankings)</li>
-            <li>Passive factories should be placed in appropriate biomes/locations</li>
+            <li><strong>Armory:</strong> Inside a blacksmith building with anvils, furnaces, weapon racks</li>
+            <li><strong>Foundry:</strong> Industrial building with blast furnaces, lava cauldrons, molds</li>
+            <li><strong>Munitions:</strong> Powder magazine with barrels, sandbags, safety signs</li>
+            <li><strong>Siege Works:</strong> Workshop with cranes, winches, large construction areas</li>
+            <li><strong>Wagon Works:</strong> Carpenter shop with wood piles, wheels, tools</li>
+            <li><strong>Label factories</strong> with signs for better organization (recommended for town rankings)</li>
+          </ul>
+        </p>
+      </div>
+      
+      <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Penalty System:</strong> 
+          <ul>
+            <li><strong>Over 14 factories:</strong> First offense = warning + deletion of extra factories. Second offense = half of treasury wiped + national blacklist</li>
+            <li><strong>Bug Abuse:</strong> 2 nation warnings + half of nation's treasury wiped</li>
+            <li><strong>Poor Factory Buildings:</strong> Factory destroyed + town warning</li>
+            <li><strong>Factory on Ship:</strong> Immediate deletion + warning</li>
           </ul>
         </p>
       </div>
       
       <div class="example-box">
-        <p><strong>Good Factory Layout:</strong> 
-          <ul>
-            <li>Armory: Inside a blacksmith building with anvils, furnaces</li>
-            <li>Foundry: Industrial building with blast furnaces, lava cauldrons</li>
-            <li>Quarry: Near stone/mountains with mining equipment decorations</li>
-            <li>Logging Camp: In forest with wood piles, sawmills</li>
-          </ul>
-        </p>
+        <p><strong>Approval Process:</strong> After building your factory structure, you must apply for approval in the Discord #factory-apply channel. Post coordinates + screenshots. Only properly built factories will be approved and made functional by staff.</p>
       </div>
     </div>
     
