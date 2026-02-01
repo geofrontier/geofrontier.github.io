@@ -2,40 +2,804 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Staff Application — GeoFrontier</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply for Staff — GeoFrontier Minecraft Server</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Page-specific styles -->
+  <style>
+    /* Guide-specific styles - Same as guide-nation.html */
+    .guide-header {
+      position: relative;
+      background: 
+        linear-gradient(rgba(11, 17, 32, 0.9), rgba(11, 17, 32, 0.95)),
+        url('/images/staff-bg.jpg') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      border-bottom: 2px solid var(--accent-gold);
+    }
+    
+    .guide-header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .guide-header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      margin-bottom: 15px;
+      background: linear-gradient(to right, #f5e6ca, #d4af37);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .guide-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--accent-teal);
+      font-weight: 500;
+    }
+    
+    .guide-icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: var(--accent-gold);
+    }
+    
+    .guide-container {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+    
+    .guide-section {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+      padding: 35px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-heavy);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .guide-section:hover {
+      transform: translateY(-3px);
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+    
+    .guide-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--accent-gold), var(--accent-rust));
+    }
+    
+    .guide-section h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .guide-section h2 i {
+      font-size: 1.4rem;
+      opacity: 0.8;
+    }
+    
+    .guide-section p {
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+    }
+    
+    .guide-section ul, .guide-section ol {
+      padding-left: 25px;
+      margin-bottom: 20px;
+    }
+    
+    .guide-section li {
+      margin-bottom: 10px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    
+    .guide-section li strong {
+      color: var(--accent-teal);
+    }
+    
+    .command-box {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      position: relative;
+    }
+    
+    .command-box:before {
+      content: '$';
+      position: absolute;
+      left: 10px;
+      top: 20px;
+      color: var(--accent-gold);
+      font-weight: bold;
+    }
+    
+    .command {
+      color: var(--accent-teal);
+      font-size: 1.1rem;
+      padding-left: 15px;
+      display: block;
+      margin-bottom: 8px;
+    }
+    
+    .command-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      padding-left: 15px;
+      margin-bottom: 5px;
+    }
+    
+    .example-box {
+      background: rgba(45, 212, 191, 0.05);
+      border-left: 3px solid var(--accent-teal);
+      padding: 15px 20px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .example-box p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    .example-box code {
+      background: rgba(45, 212, 191, 0.1);
+      color: var(--accent-teal);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'Consolas', monospace;
+    }
+    
+    .warning-box {
+      background: rgba(183, 65, 14, 0.1);
+      border-left: 3px solid var(--accent-rust);
+      padding: 15px 20px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .warning-box i {
+      color: var(--accent-rust);
+      font-size: 1.2rem;
+      margin-top: 2px;
+    }
+    
+    .warning-box p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    .tip-box {
+      background: rgba(212, 175, 55, 0.1);
+      border-left: 3px solid var(--accent-gold);
+      padding: 15px 20px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .tip-box i {
+      color: var(--accent-gold);
+      font-size: 1.2rem;
+      margin-top: 2px;
+    }
+    
+    .tip-box p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    .section-number {
+      display: inline-block;
+      background: var(--accent-gold);
+      color: var(--primary-dark);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 36px;
+      font-weight: 700;
+      margin-right: 12px;
+      font-family: 'Cinzel', serif;
+    }
+    
+    .table-of-contents {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-heavy);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      margin-bottom: 40px;
+    }
+    
+    .table-of-contents h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--accent-gold);
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .toc-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    
+    .toc-item {
+      padding: 12px 15px;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .toc-item:hover {
+      border-color: var(--accent-gold);
+      background: rgba(212, 175, 55, 0.05);
+      transform: translateX(5px);
+    }
+    
+    .toc-item a {
+      color: var(--text-light);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .toc-item i {
+      color: var(--accent-gold);
+      font-size: 0.9rem;
+    }
+    
+    .apply-form-container {
+      margin: 40px 0;
+      text-align: center;
+    }
+    
+    .apply-form-container iframe {
+      border-radius: 12px;
+      border: 2px solid rgba(212, 175, 55, 0.3);
+      box-shadow: var(--shadow-heavy);
+      max-width: 100%;
+    }
+    
+    .staff-roles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 25px 0;
+    }
+    
+    .role-card {
+      background: rgba(15, 23, 42, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .role-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-gold);
+    }
+    
+    .role-card i {
+      font-size: 2rem;
+      color: var(--accent-gold);
+      margin-bottom: 15px;
+    }
+    
+    .role-card h4 {
+      color: var(--accent-teal);
+      margin-bottom: 10px;
+      font-family: 'Cinzel', serif;
+    }
+    
+    .role-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    
+    .application-tips {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 25px 0;
+    }
+    
+    .tip-card {
+      background: rgba(15, 23, 42, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .tip-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-gold);
+    }
+    
+    .tip-card i {
+      font-size: 2rem;
+      color: var(--accent-gold);
+      margin-bottom: 15px;
+    }
+    
+    .tip-card h4 {
+      color: var(--accent-teal);
+      margin-bottom: 10px;
+      font-family: 'Cinzel', serif;
+    }
+    
+    .tip-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    
+    .faq-item {
+      background: rgba(15, 23, 42, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+    }
+    
+    .faq-item h4 {
+      color: var(--accent-teal);
+      margin-bottom: 10px;
+      font-family: 'Cinzel', serif;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .faq-item p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    @media (max-width: 768px) {
+      .guide-header {
+        padding: 60px 20px;
+      }
+      
+      .guide-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .guide-section {
+        padding: 25px;
+      }
+      
+      .toc-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .staff-roles {
+        grid-template-columns: 1fr;
+      }
+      
+      .application-tips {
+        grid-template-columns: 1fr;
+      }
+      
+      .apply-form-container iframe {
+        width: 100%;
+        height: 1700px;
+      }
+    }
+  </style>
 </head>
+<body>
+  <!-- Navbar container -->
+  <div id="navbar-container"></div>
+  
+  <!-- Header container -->
+  <div id="header-container"></div>
 
-<body style="margin:0; background:#f3f3f3; font-family:Inter, Arial, sans-serif; color:#111;">
-<div id="navbar-container"></div>
-<div id="header-container"></div>
-<script src="/components/layout-loader.js"></script>
+  <!-- Guide Header -->
+  <header class="guide-header">
+    <div class="guide-header-content">
+      <div class="guide-icon">
+        <i class="fas fa-users-gear"></i>
+      </div>
+      <h1>Apply for Staff</h1>
+      <p>Join the GeoFrontier staff team and help shape the future of our community</p>
+      <div style="margin-top: 25px;">
+        <a href="#section1" class="btn btn-outline" style="margin: 5px;">Staff Roles</a>
+        <a href="#application-form" class="btn" style="margin: 5px;">Go to Application Form →</a>
+      </div>
+    </div>
+  </header>
 
+  <!-- Main Content -->
+  <div class="guide-container">
+    
+    <!-- Table of Contents -->
+    <div class="table-of-contents" id="toc">
+      <h3><i class="fas fa-list-ol"></i> Table of Contents</h3>
+      <div class="toc-list">
+        <div class="toc-item">
+          <a href="#section1">
+            <i class="fas fa-user-tie"></i>
+            <span>1. Staff Roles & Positions</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section2">
+            <i class="fas fa-star"></i>
+            <span>2. What We Look For</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section3">
+            <i class="fas fa-list-check"></i>
+            <span>3. Application Process</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#application-form">
+            <i class="fas fa-file-pen"></i>
+            <span>4. Application Form</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section5">
+            <i class="fas fa-question-circle"></i>
+            <span>5. Frequently Asked Questions</span>
+          </a>
+        </div>
+      </div>
+    </div>
 
-<!-- PAGE CONTENT -->
-<div style="max-width:900px; margin:40px auto; padding:0 20px;">
+    <!-- Section 1 -->
+    <div class="guide-section" id="section1">
+      <h2><span class="section-number">1</span> <i class="fas fa-user-tie"></i> Staff Roles & Positions</h2>
+      <p>Our staff team is structured to provide effective community management while offering growth opportunities for dedicated members.</p>
+      
+      <div class="staff-roles">
+        <div class="role-card">
+          <i class="fas fa-shield-alt"></i>
+          <h4>Moderator (Mod)</h4>
+          <p>Entry-level staff position. Handles rule enforcement, player assistance, and basic server monitoring.</p>
+        </div>
+        
+        <div class="role-card">
+          <i class="fas fa-chess-queen"></i>
+          <h4>Lead Moderator</h4>
+          <p>Experienced mod who mentors new staff, handles complex situations, and assists with team coordination.</p>
+        </div>
+        
+        <div class="role-card">
+          <i class="fas fa-crown"></i>
+          <h4>Administrator (Admin)</h4>
+          <p>Senior staff with technical permissions, plugin configuration access, and higher-level decision making.</p>
+        </div>
+        
+        <div class="role-card">
+          <i class="fas fa-code"></i>
+          <h4>Developer</h4>
+          <p>Technical role focused on plugin development, server optimization, and custom feature creation.</p>
+        </div>
+      </div>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Career Progression:</strong> Most staff members start as Moderators and can progress to higher positions based on performance, dedication, and demonstrated skills. Be honest about where you're looking to end up within our community in your application.</p>
+      </div>
+      
+      <p><strong>General Staff Responsibilities:</strong></p>
+      <ul>
+        <li><strong>Rule Enforcement:</strong> Fairly and consistently apply server rules</li>
+        <li><strong>Player Assistance:</strong> Help players with questions, issues, and disputes</li>
+        <li><strong>Community Building:</strong> Foster a positive, welcoming environment for all players</li>
+        <li><strong>Conflict Resolution:</strong> Mediate disputes between players or nations</li>
+        <li><strong>Server Monitoring:</strong> Keep an eye on chat, player behavior, and server performance</li>
+        <li><strong>Event Support:</strong> Help organize and run server events</li>
+      </ul>
+    </div>
 
-  <h1 style="font-size:2rem; margin-bottom:16px; color:#0f172a;">Staff Application</h1>
+    <!-- Section 2 -->
+    <div class="guide-section" id="section2">
+      <h2><span class="section-number">2</span> <i class="fas fa-star"></i> What We Look For</h2>
+      <p>Successful staff applicants share certain qualities and characteristics that make them effective community leaders.</p>
+      
+      <div class="application-tips">
+        <div class="tip-card">
+          <i class="fas fa-clock"></i>
+          <h4>Availability</h4>
+          <p>Consistent, reliable hours that match our community's peak times</p>
+        </div>
+        
+        <div class="tip-card">
+          <i class="fas fa-comments"></i>
+          <h4>Communication</h4>
+          <p>Clear, respectful communication with players and staff</p>
+        </div>
+        
+        <div class="tip-card">
+          <i class="fas fa-scale-balanced"></i>
+          <h4>Fairness</h4>
+          <p>Ability to apply rules consistently without bias</p>
+        </div>
+        
+        <div class="tip-card">
+          <i class="fas fa-heart"></i>
+          <h4>Passion</h4>
+          <p>Genuine interest in helping our community thrive</p>
+        </div>
+      </div>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Application Tips:</strong> 
+          <ul>
+            <li><strong>Be specific:</strong> Instead of "I like helping people," explain how you've helped players in the past</li>
+            <li><strong>Highlight relevant experience:</strong> Both Minecraft and non-Minecraft moderation experience is valuable</li>
+            <li><strong>Show your personality:</strong> We want to know who you are, not just what you can do</li>
+            <li><strong>Be honest about availability:</strong> It's better to under-promise and over-deliver</li>
+            <li><strong>Explain your motivations:</strong> Why do you want to be staff on GeoFrontier specifically?</li>
+          </ul>
+        </p>
+      </div>
+      
+      <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Common Application Mistakes:</strong> 
+          <ul>
+            <li><strong>One-word answers:</strong> Provide detailed responses that show thought and effort</li>
+            <li><strong>Exaggerating experience:</strong> Be honest about what you have and haven't done</li>
+            <li><strong>Focusing only on power:</strong> We're looking for helpers, not rulers</li>
+            <li><strong>Poor formatting:</strong> Use paragraphs and proper grammar in your responses</li>
+            <li><strong>Not following instructions:</strong> Answer all questions completely</li>
+          </ul>
+        </p>
+      </div>
+    </div>
 
-  <p style="opacity:0.85; margin-bottom:24px; font-size:1rem;">
-    Complete the staff application below. A member of the administration team will review it shortly.
-  </p>
+    <!-- Section 3 -->
+    <div class="guide-section" id="section3">
+      <h2><span class="section-number">3</span> <i class="fas fa-list-check"></i> Application Process</h2>
+      <p>Understand what happens after you submit your application and what to expect from our review process.</p>
+      
+      <div class="application-tips">
+        <div class="tip-card">
+          <i class="fas fa-paper-plane"></i>
+          <h4>Step 1: Application</h4>
+          <p>Submit your completed application through the form below</p>
+        </div>
+        
+        <div class="tip-card">
+          <i class="fas fa-inbox"></i>
+          <h4>Step 2: Review</h4>
+          <p>Our lead mods and admins will review your application</p>
+        </div>
+        
+        <div class="tip-card">
+          <i class="fas fa-phone"></i>
+          <h4>Step 3: Voice Call</h4>
+          <p>If accepted, we'll schedule a quick voice call to get to know you</p>
+        </div>
+        
+        <div class="tip-card">
+          <i class="fas fa-rocket"></i>
+          <h4>Step 4: Onboarding</h4>
+          <p>Successful applicants will be shown around the team and trained</p>
+        </div>
+      </div>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Voice Call Preparation:</strong> If your application is accepted, we'll schedule a quick voice call (VC) to get to know you better. This is a casual conversation, not an interrogation. Be prepared to talk about your experience, your interest in the server, and your availability. This helps us ensure you're a good fit for our team culture.</p>
+      </div>
+      
+      <p><strong>What Happens After Submission:</strong></p>
+      <ol>
+        <li><strong>Application Review:</strong> Our lead mods and admins will review your application</li>
+        <li><strong>Decision:</strong> You will receive a decision via Discord (the platform you provide)</li>
+        <li><strong>Voice Call:</strong> If accepted, we'll schedule a quick voice call at a mutually convenient time</li>
+        <li><strong>Onboarding:</strong> You'll be introduced to the team, given permissions, and trained on procedures</li>
+        <li><strong>Trial Period:</strong> Most new staff begin with a trial period to ensure good fit</li>
+      </ol>
+      
+      <div class="example-box">
+        <p><strong>Strong Application Responses:</strong><br>
+          <strong>Question:</strong> "What interests you about applying?"<br>
+          <strong>Weak Answer:</strong> "I want to be staff."<br>
+          <strong>Strong Answer:</strong> "I've been playing on GeoFrontier for 3 months and love the community. I particularly enjoy helping new players understand the factory system and would like to contribute more formally to maintaining the positive environment here."</p>
+      </div>
+    </div>
 
-  <!-- GOOGLE FORM EMBED -->
-  <iframe 
-    src="https://docs.google.com/forms/d/e/1FAIpQLSc_D4se8Ul9Pnmjw9MZHSHmAQn3n9zO9Ri3IQslYGr2tCYmng/viewform?embedded=true" 
-    width="100%" 
-    height="1684" 
-    frameborder="0" 
-    marginheight="0" 
-    marginwidth="0"
-    style="
-      background:white;
-      border-radius:12px;
-      border:1px solid #ccc;
-    "
-  >Loading…</iframe>
+    <!-- Section 4: Application Form -->
+    <div class="guide-section" id="application-form">
+      <h2><span class="section-number">4</span> <i class="fas fa-file-pen"></i> Application Form</h2>
+      <p>Use the form below to submit your staff application. Please fill out all fields completely and thoughtfully.</p>
+      
+      <div class="apply-form-container">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc_D4se8Ul9Pnmjw9MZHSHmAQn3n9zO9Ri3IQslYGr2tCYmng/viewform?embedded=true" width="640" height="1686" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+      </div>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Form Preparation Tips:</strong> 
+          <ul>
+            <li><strong>Prepare answers offline:</strong> Write your responses in a separate document first, then paste them into the form</li>
+            <li><strong>Check your usernames:</strong> Ensure your Discord and Minecraft usernames are exact and current</li>
+            <li><strong>Be specific about availability:</strong> Include timezone and specific hours you're typically available</li>
+            <li><strong>Think about career goals:</strong> Consider where you'd like to end up (Mod, Lead Mod, Admin, etc.)</li>
+            <li><strong>Show personality:</strong> The "tell us about yourself" question is your chance to stand out</li>
+            <li><strong>Proofread:</strong> Check for spelling and grammar errors before submitting</li>
+          </ul>
+        </p>
+      </div>
+    </div>
 
-</div>
+    <!-- Section 5 -->
+    <div class="guide-section" id="section5">
+      <h2><span class="section-number">5</span> <i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+      <p>Common questions about the staff application process and their answers.</p>
+      
+      <div class="faq-item">
+        <h4><i class="fas fa-question"></i> How long does the application process take?</h4>
+        <p>After applying, one of our lead mods or admins will reach out to you with a decision. The timeline varies based on application volume and staff availability, but we try to review applications within a week.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h4><i class="fas fa-question"></i> Do I need previous moderation experience?</h4>
+        <p>While previous experience (within or outside Minecraft) is helpful and should be mentioned in your application, it's not strictly required. We value attitude, availability, and community knowledge just as highly.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h4><i class="fas fa-question"></i> What if I don't know which position to apply for?</h4>
+        <p>Most applicants start by applying for Moderator positions. If you have specific technical skills (development, building, etc.), mention them in your application and we can discuss specialized roles during the voice call.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h4><i class="fas fa-question"></i> Is there a minimum age requirement?</h4>
+        <p>While we don't have a strict age requirement, we expect all staff to demonstrate maturity, good judgment, and professional communication regardless of age.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h4><i class="fas fa-question"></i> How much time do I need to commit?</h4>
+        <p>This varies by position. Moderators typically commit 5-10 hours per week, while higher positions may require more. Be honest about your availability in your application.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h4><i class="fas fa-question"></i> What happens during the voice call?</h4>
+        <p>The voice call is a casual conversation to get to know you better, discuss your application, answer your questions, and see if you're a good fit for our team culture. It typically lasts 15-30 minutes.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h4><i class="fas fa-question"></i> Can I reapply if I'm not accepted?</h4>
+        <p>Yes, but we recommend waiting at least 30 days before reapplying. Use the time to become more active in the community and address any feedback you may have received.</p>
+      </div>
+    </div>
+    
+    <!-- Navigation Footer -->
+    <div style="display: flex; justify-content: space-between; margin: 50px 0 30px; padding: 20px; background: rgba(30, 41, 59, 0.5); border-radius: 12px;">
+      <a href="appeal-punishment.html" class="btn">
+        <i class="fas fa-arrow-left"></i> Back to Appeal Guide
+      </a>
+      <a href="index.html" class="btn">
+        Return to Home <i class="fas fa-home"></i>
+      </a>
+    </div>
+  </div>
 
+  <!-- Footer container -->
+  <div id="footer-container"></div>
+
+  <!-- Load component loader -->
+  <script src="js/components-loader.js"></script>
+  
+  <!-- Page-specific JavaScript -->
+  <script>
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', async () => {
+      console.log('DOM loaded, starting component loading...');
+      
+      try {
+        // Load components using ComponentLoader if available
+        if (window.ComponentLoader) {
+          console.log('Using ComponentLoader...');
+          
+          // Load navbar first
+          await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
+          console.log('Navbar loaded');
+          
+          // Initialize dropdowns after navbar loads
+          setTimeout(() => {
+            if (window.initializeDropdowns) {
+              window.initializeDropdowns();
+            }
+          }, 100);
+          
+          // Load other components
+          await window.ComponentLoader.loadComponent('header', 'header-container');
+          console.log('Header loaded');
+          
+          await window.ComponentLoader.loadComponent('footer', 'footer-container');
+          console.log('Footer loaded');
+          
+          // Set active navigation for this page
+          setTimeout(() => {
+            const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
+            navLinks.forEach(link => {
+              if (link.getAttribute('href') === 'apply-staff.html' || 
+                  link.getAttribute('data-nav') === 'guides') {
+                link.classList.add('active');
+              }
+            });
+            
+            // Also highlight the specific guide link in dropdown
+            const guideLinks = document.querySelectorAll('.dropdown-menu a[href="apply-staff.html"]');
+            guideLinks.forEach(link => {
+              link.classList.add('active');
+            });
+          }, 500);
+          
+        } else {
+          console.log('ComponentLoader not found, loading manually');
+          // Fallback manual loading would go here
+        }
+        
+        console.log('Staff application guide initialization complete!');
+        
+      } catch (error) {
+        console.error('Error during page initialization:', error);
+      }
+    });
+  </script>
 </body>
 </html>
