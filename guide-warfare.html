@@ -16,7 +16,7 @@
   
   <!-- Page-specific styles -->
   <style>
-    /* Guide-specific styles */
+    /* Guide-specific styles - Same as guide-nation.html */
     .guide-header {
       position: relative;
       background: 
@@ -244,6 +244,59 @@
       font-family: 'Cinzel', serif;
     }
     
+    .table-of-contents {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-heavy);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      margin-bottom: 40px;
+    }
+    
+    .table-of-contents h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--accent-gold);
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .toc-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    
+    .toc-item {
+      padding: 12px 15px;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .toc-item:hover {
+      border-color: var(--accent-gold);
+      background: rgba(212, 175, 55, 0.05);
+      transform: translateX(5px);
+    }
+    
+    .toc-item a {
+      color: var(--text-light);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .toc-item i {
+      color: var(--accent-gold);
+      font-size: 0.9rem;
+    }
+    
     .nexus-info {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -316,6 +369,51 @@
       gap: 10px;
     }
     
+    .raid-types {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 25px 0;
+    }
+    
+    .raid-card {
+      background: rgba(15, 23, 42, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .raid-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-gold);
+    }
+    
+    .raid-card i {
+      font-size: 2rem;
+      color: var(--accent-gold);
+      margin-bottom: 15px;
+    }
+    
+    .raid-card h4 {
+      color: var(--accent-teal);
+      margin-bottom: 10px;
+      font-family: 'Cinzel', serif;
+    }
+    
+    .raid-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    
+    .raid-card .duration {
+      color: var(--accent-rust);
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    
     @media (max-width: 768px) {
       .guide-header {
         padding: 60px 20px;
@@ -330,6 +428,14 @@
       }
       
       .nexus-info {
+        grid-template-columns: 1fr;
+      }
+      
+      .raid-types {
+        grid-template-columns: 1fr;
+      }
+      
+      .toc-list {
         grid-template-columns: 1fr;
       }
     }
@@ -351,7 +457,7 @@
       <h1>War Guide</h1>
       <p>Master Nexus War mechanics to conquer enemy nations and defend your sovereignty</p>
       <div style="margin-top: 25px;">
-        <a href="#section1" class="btn btn-outline" style="margin: 5px;">Nexus Basics</a>
+        <a href="#toc" class="btn btn-outline" style="margin: 5px;">Jump to Sections</a>
         <a href="guide-factories.html" class="btn" style="margin: 5px;">Factories Guide →</a>
       </div>
     </div>
@@ -360,6 +466,43 @@
   <!-- Main Content -->
   <div class="guide-container">
     
+    <!-- Table of Contents -->
+    <div class="table-of-contents" id="toc">
+      <h3><i class="fas fa-list-ol"></i> Table of Contents</h3>
+      <div class="toc-list">
+        <div class="toc-item">
+          <a href="#section1">
+            <i class="fas fa-flag"></i>
+            <span>1. The Nexus System</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section2">
+            <i class="fas fa-fist-raised"></i>
+            <span>2. Starting Wars</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section3">
+            <i class="fas fa-shield-alt"></i>
+            <span>3. Nexus Defense</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section4">
+            <i class="fas fa-gem"></i>
+            <span>4. Raid Types</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section5">
+            <i class="fas fa-handshake"></i>
+            <span>5. War Management</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
     <!-- Section 1 -->
     <div class="guide-section" id="section1">
       <h2><span class="section-number">1</span> <i class="fas fa-flag"></i> The Nexus System</h2>
@@ -379,9 +522,9 @@
         </div>
         
         <div class="nexus-card">
-          <i class="fas fa-shield-alt"></i>
-          <h4>War Condition</h4>
-          <p>The Nexus cannot be moved or hidden during wartime - it must be defended!</p>
+          <i class="fas fa-arrows-alt"></i>
+          <h4>Movable Nexus</h4>
+          <p>Use <code>/nexus move</code> to relocate your Nexus (cannot move during war)</p>
         </div>
         
         <div class="nexus-card">
@@ -397,6 +540,11 @@
       </div>
       
       <div class="command-box">
+        <span class="command">/nexus move</span>
+        <span class="command-desc">Moves your town's Nexus to your current location</span>
+      </div>
+      
+      <div class="command-box">
         <span class="command">/nexus remove</span>
         <span class="command-desc">Removes your town's Nexus (only during peace time)</span>
       </div>
@@ -408,36 +556,46 @@
       
       <div class="tip-box">
         <i class="fas fa-lightbulb"></i>
-        <p><strong>Strategic Placement:</strong> Place your Nexus in a defensible but accessible location. Consider castle keeps, fortified bunkers, or central town squares with layered defenses.</p>
+        <p><strong>Strategic Placement:</strong> Place your Nexus in a defensible but accessible location. Consider castle keeps, fortified bunkers, or central town squares with layered defenses. Use <code>/nexus move</code> to relocate if your current location is vulnerable.</p>
       </div>
       
       <div class="warning-box">
         <i class="fas fa-exclamation-triangle"></i>
-        <p><strong>Staff Enforcement:</strong> Hiding your Nexus underground, in bedrock, or in otherwise inaccessible locations is prohibited. Staff will move improperly placed Nexuses to surface locations.</p>
+        <p><strong>Staff Enforcement:</strong> Hiding your Nexus underground, in bedrock, or in otherwise inaccessible locations is prohibited. Staff will move improperly placed Nexuses to surface locations. Nexus cannot be moved during active wars.</p>
       </div>
     </div>
 
     <!-- Section 2 -->
     <div class="guide-section" id="section2">
-      <h2><span class="section-number">2</span> <i class="fas fa-fist-raised"></i> Starting a War</h2>
+      <h2><span class="section-number">2</span> <i class="fas fa-fist-raised"></i> Starting Wars</h2>
       <p>Initiating warfare requires proper diplomatic status and strategic preparation.</p>
       
       <div class="command-box">
-        <span class="command">/n enemy add (nation)</span>
-        <span class="command-desc">Declares another nation as an enemy (prerequisite for war)</span>
+        <span class="command">/war declare nation (nation)</span>
+        <span class="command-desc">Declares war on another nation</span>
       </div>
       
       <div class="command-box">
-        <span class="command">/nexus declarewar (nation)</span>
-        <span class="command-desc">Declares war on a nation (opens GUI confirmation)</span>
+        <span class="command">/war declare town (town)</span>
+        <span class="command-desc">Declares war on a specific town</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/war status</span>
+        <span class="command-desc">Checks current war status and active conflicts</span>
+      </div>
+      
+      <div class="command-box">
+        <span class="command">/war list</span>
+        <span class="command-desc">Lists all active wars on the server</span>
       </div>
       
       <p><strong>War Prerequisites:</strong></p>
       <ol>
-        <li>Your nation must have the target nation set as an enemy using <code>/n enemy add (nation)</code></li>
-        <li>Both nations must be at peace (not already at war with each other)</li>
+        <li>Your nation must have the target nation/town as an enemy (set through diplomacy)</li>
+        <li>Both sides must be at peace (not already at war with each other)</li>
         <li>Your town must have a Nexus placed and accessible</li>
-        <li>The target nation must have at least one town with a Nexus</li>
+        <li>The target must have at least one town with a Nexus</li>
         <li>You must be the nation leader or have war permissions</li>
       </ol>
       
@@ -447,12 +605,11 @@
       </div>
       
       <div class="example-box">
-        <p><strong>Example War Declaration:</strong><br>
-          1. First, set the nation as enemy: <code>/n enemy add Carthage</code><br>
-          2. Open Nexus GUI: <code>/nexus</code><br>
-          3. Select "Declare War" from the GUI<br>
-          4. Choose "Carthage" from the list of enemy nations<br>
-          5. Confirm the declaration</p>
+        <p><strong>Example War Declarations:</strong><br>
+          To declare war on a nation: <code>/war declare nation Carthage</code><br>
+          To declare war on a specific town: <code>/war declare town NewRome</code><br>
+          Check active wars: <code>/war list</code><br>
+          Check your war status: <code>/war status</code></p>
       </div>
     </div>
 
@@ -460,16 +617,6 @@
     <div class="guide-section" id="section3">
       <h2><span class="section-number">3</span> <i class="fas fa-shield-alt"></i> Nexus Defense</h2>
       <p>Protecting your Nexus requires layered defenses, garrison troops, and strategic planning.</p>
-      
-      <div class="command-box">
-        <span class="command">/nexus status</span>
-        <span class="command-desc">Checks your Nexus's current HP and defense status</span>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/nexus reinforcements</span>
-        <span class="command-desc">Shows reinforcement status of Nexus defenses</span>
-      </div>
       
       <p><strong>Defense Strategies:</strong></p>
       <ul>
@@ -488,51 +635,65 @@
             <li>Create murder holes and arrow slits for defensive firing positions</li>
             <li>Build underground escape tunnels for defenders (but Nexus must remain accessible!)</li>
             <li>Use water to slow attackers and prevent TNT damage</li>
+            <li>Place mounted weapons (cannons, arrow towers) around your Nexus</li>
           </ul>
         </p>
       </div>
       
       <div class="warning-box">
         <i class="fas fa-exclamation-triangle"></i>
-        <p><strong>Defense Limits:</strong> While you can fortify heavily, the Nexus chamber must remain reasonably accessible. Completely sealing the Nexus in bedrock or making it physically impossible to reach is against the rules.</p>
+        <p><strong>Defense Limits:</strong> While you can fortify heavily, the Nexus chamber must remain reasonably accessible. Completely sealing the Nexus in bedrock or making it physically impossible to reach is against the rules. Staff will enforce proper placement.</p>
       </div>
     </div>
 
     <!-- Section 4 -->
     <div class="guide-section" id="section4">
-      <h2><span class="section-number">4</span> <i class="fas fa-crosshairs"></i> Attacking Enemy Nexuses</h2>
-      <p>Successful siege warfare requires coordination, intelligence, and overwhelming force.</p>
+      <h2><span class="section-number">4</span> <i class="fas fa-gem"></i> Raid Types</h2>
+      <p>Raids are limited military actions available through the Nexus GUI. They allow targeted attacks without full-scale war.</p>
       
-      <div class="war-phases">
-        <div class="phase preparation">
-          <h4><i class="fas fa-binoculars"></i> Phase 1: Reconnaissance</h4>
-          <p>Scout enemy territory before declaring war. Identify Nexus location, defensive weaknesses, and approach routes. Consider using spies or aerial reconnaissance.</p>
+      <div class="raid-types">
+        <div class="raid-card">
+          <i class="fas fa-coins"></i>
+          <h4>Plunder Raid</h4>
+          <p>Attack towns and plunder their resources (not annex or occupy)</p>
+          <div class="duration">Duration: 1 hour</div>
         </div>
         
-        <div class="phase combat">
-          <h4><i class="fas fa-cannons"></i> Phase 2: Siege</h4>
-          <p>Breach outer defenses using TNT, cannons, or tunneling. Coordinate multiple attack vectors to divide defender attention. Use artillery barrages to soften defenses.</p>
+        <div class="raid-card">
+          <i class="fas fa-flag"></i>
+          <h4>Conquest Raid</h4>
+          <p>Occupy territory from towns (not full town annexation)</p>
+          <div class="duration">Duration: 2 hours</div>
         </div>
         
-        <div class="phase combat">
-          <h4><i class="fas fa-helmet-battle"></i> Phase 3: Assault</h4>
-          <p>Storm the inner defenses with melee troops while archers provide covering fire. Use shields, potions, and coordinated pushes. Target the Nexus directly once accessible.</p>
-        </div>
-        
-        <div class="phase conclusion">
-          <h4><i class="fas fa-flag-checkered"></i> Phase 4: Nexus Destruction</h4>
-          <p>Focus all firepower on the Nexus. It has 1,000 HP and can be damaged by any weapon. Protect your own assault troops while dealing the final blows.</p>
+        <div class="raid-card">
+          <i class="fas fa-wrench"></i>
+          <h4>Sabotage Raid</h4>
+          <p>Sabotage infrastructure like mounted weapons, factories, etc.</p>
+          <div class="duration">Duration: 30 minutes</div>
         </div>
       </div>
       
       <div class="tip-box">
         <i class="fas fa-lightbulb"></i>
-        <p><strong>Assault Tactics:</strong> 
+        <p><strong>Raid Strategy:</strong> 
           <ul>
-            <li>Use cannons from Movecraft ships for naval bombardment of coastal towns</li>
-            <li>Create distraction attacks on other fronts to draw defenders away</li>
-            <li>Time your assault for when enemy defenders are offline (but respect timezone fairness)</li>
-            <li>Bring obsidian breakers (efficiency V diamond picks) for breaching strong defenses</li>
+            <li><strong>Plunder Raids:</strong> Quick resource grabs. Target wealthy but poorly defended towns</li>
+            <li><strong>Conquest Raids:</strong> Strategic territory acquisition. Target border towns or resource-rich areas</li>
+            <li><strong>Sabotage Raids:</strong> Weaken enemies before full war. Target factories, defenses, infrastructure</li>
+            <li>All raids are initiated through the Nexus GUI (open with <code>/nexus</code>)</li>
+          </ul>
+        </p>
+      </div>
+      
+      <div class="example-box">
+        <p><strong>Raid Limitations:</strong> 
+          <ul>
+            <li>Raids have time limits (1h, 2h, 30m)</li>
+            <li>Cannot destroy Nexus during raids</li>
+            <li>Raids don't trigger full war status</li>
+            <li>Defenders can fight back during raid duration</li>
+            <li>Raids can be used against both nations and individual towns</li>
           </ul>
         </p>
       </div>
@@ -540,43 +701,41 @@
 
     <!-- Section 5 -->
     <div class="guide-section" id="section5">
-      <h2><span class="section-number">5</span> <i class="fas fa-handshake"></i> War Conclusion & Aftermath</h2>
-      <p>Wars end when one side's Nexus is destroyed or peace terms are negotiated.</p>
+      <h2><span class="section-number">5</span> <i class="fas fa-handshake"></i> War Management</h2>
+      <p>Manage ongoing conflicts, negotiate peace, and handle war diplomacy through commands and the Nexus GUI.</p>
       
       <div class="command-box">
-        <span class="command">/nexus peace (nation)</span>
-        <span class="command-desc>Proposes peace terms to end a war</span>
+        <span class="command">/war peace</span>
+        <span class="command-desc">Requests peace with all warring parties</span>
       </div>
       
-      <div class="command-box">
-        <span class="command">/nexus surrender</span>
-        <span class="command-desc>Surrenders unconditionally to all warring nations</span>
+      <p><strong>Nexus GUI Features:</strong></p>
+      <div class="war-phases">
+        <div class="phase preparation">
+          <h4><i class="fas fa-treaty"></i> Peace Treaty</h4>
+          <p>Available in Nexus GUI relations section. Offer formal peace terms to end wars. Can include reparations, territorial concessions, or alliance terms.</p>
+        </div>
+        
+        <div class="phase combat">
+          <h4><i class="fas fa-scroll"></i> Ultimatum</h4>
+          <p>Available in Nexus GUI relations section. Send demands for surrender including money, land, resources, or other concessions before escalating to full war.</p>
+        </div>
+        
+        <div class="phase conclusion">
+          <h4><i class="fas fa-flag-checkered"></i> War Conclusion</h4>
+          <p>Wars end when Nexus is destroyed, peace is negotiated, or surrender occurs. Use <code>/war peace</code> to initiate peace talks.</p>
+        </div>
       </div>
-      
-      <p><strong>War Outcomes:</strong></p>
-      <ul>
-        <li><strong>Nexus Destroyed:</strong> The town whose Nexus is destroyed automatically loses the war</li>
-        <li><strong>Peace Treaty:</strong> Negotiated settlement with terms (reparations, territory, etc.)</li>
-        <li><strong>Unconditional Surrender:</strong> Complete capitulation with no terms</li>
-        <li><strong>Stalemate:</strong> Both sides agree to cease hostilities without clear winner</li>
-      </ul>
-      
-      <p><strong>Post-War Effects:</strong></p>
-      <ul>
-        <li><strong>Victorious Nation:</strong> Gains war trophies, reparations, and prestige</li>
-        <li><strong>Defeated Nation:</strong> Suffers reputation loss, may lose towns or territory</li>
-        <li><strong>Truce Period:</strong> 48-hour forced peace after war ends</li>
-        <li><strong>Nexus Cooldown:</strong> Destroyed Nexus cannot be rebuilt for 24 hours</li>
-      </ul>
       
       <div class="tip-box">
         <i class="fas fa-lightbulb"></i>
-        <p><strong>Post-War Strategy:</strong> 
+        <p><strong>Diplomatic Strategy:</strong> 
           <ul>
-            <li>Rebuild damaged defenses immediately after war</li>
-            <li>Consider relocating your Nexus if its location was compromised</li>
-            <li>Strengthen alliances to prevent future attacks</li>
-            <li>Analyze what went wrong (or right) to improve for next time</li>
+            <li>Use Ultimatums to demand concessions without full war</li>
+            <li>Negotiate Peace Treaties with favorable terms when winning</li>
+            <li>Check <code>/war status</code> regularly during conflicts</li>
+            <li>Use <code>/war list</code> to monitor server-wide conflicts</li>
+            <li>Coordinate with allies using shared intelligence</li>
           </ul>
         </p>
       </div>
@@ -588,10 +747,21 @@
             <li>No griefing beyond what's necessary for Nexus assault</li>
             <li>Respect offline players - don't attack when zero defenders are online</li>
             <li>No exploiting Nexus placement rules</li>
-            <li>Honor peace treaties and truce periods</li>
+            <li>Honor peace treaties and raid time limits</li>
             <li>Report any rule violations to staff immediately</li>
           </ul>
         </p>
+      </div>
+      
+      <div class="example-box">
+        <p><strong>Complete War Example:</strong><br>
+          1. Scout enemy: Identify Nexus location and defenses<br>
+          2. Send Ultimatum: Demand resources through Nexus GUI<br>
+          3. If refused: <code>/war declare nation EnemyNation</code><br>
+          4. Launch Sabotage Raid: Weaken factories first (30m)<br>
+          5. Full assault: Attack Nexus with combined forces<br>
+          6. If winning: Offer Peace Treaty with favorable terms<br>
+          7. If losing: Request <code>/war peace</code> to minimize losses</p>
       </div>
     </div>
     
