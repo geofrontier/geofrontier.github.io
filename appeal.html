@@ -2,34 +2,724 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Appeal a Punishment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appeal a Punishment — GeoFrontier Minecraft Server</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Page-specific styles -->
+  <style>
+    /* Guide-specific styles - Same as guide-nation.html */
+    .guide-header {
+      position: relative;
+      background: 
+        linear-gradient(rgba(11, 17, 32, 0.9), rgba(11, 17, 32, 0.95)),
+        url('/images/appeal-bg.jpg') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      border-bottom: 2px solid var(--accent-gold);
+    }
+    
+    .guide-header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .guide-header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      margin-bottom: 15px;
+      background: linear-gradient(to right, #f5e6ca, #d4af37);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .guide-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--accent-teal);
+      font-weight: 500;
+    }
+    
+    .guide-icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: var(--accent-gold);
+    }
+    
+    .guide-container {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+    
+    .guide-section {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+      padding: 35px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-heavy);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .guide-section:hover {
+      transform: translateY(-3px);
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+    
+    .guide-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--accent-gold), var(--accent-rust));
+    }
+    
+    .guide-section h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .guide-section h2 i {
+      font-size: 1.4rem;
+      opacity: 0.8;
+    }
+    
+    .guide-section p {
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+    }
+    
+    .guide-section ul, .guide-section ol {
+      padding-left: 25px;
+      margin-bottom: 20px;
+    }
+    
+    .guide-section li {
+      margin-bottom: 10px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    
+    .guide-section li strong {
+      color: var(--accent-teal);
+    }
+    
+    .command-box {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      position: relative;
+    }
+    
+    .command-box:before {
+      content: '$';
+      position: absolute;
+      left: 10px;
+      top: 20px;
+      color: var(--accent-gold);
+      font-weight: bold;
+    }
+    
+    .command {
+      color: var(--accent-teal);
+      font-size: 1.1rem;
+      padding-left: 15px;
+      display: block;
+      margin-bottom: 8px;
+    }
+    
+    .command-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      padding-left: 15px;
+      margin-bottom: 5px;
+    }
+    
+    .example-box {
+      background: rgba(45, 212, 191, 0.05);
+      border-left: 3px solid var(--accent-teal);
+      padding: 15px 20px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .example-box p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    .example-box code {
+      background: rgba(45, 212, 191, 0.1);
+      color: var(--accent-teal);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'Consolas', monospace;
+    }
+    
+    .warning-box {
+      background: rgba(183, 65, 14, 0.1);
+      border-left: 3px solid var(--accent-rust);
+      padding: 15px 20px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .warning-box i {
+      color: var(--accent-rust);
+      font-size: 1.2rem;
+      margin-top: 2px;
+    }
+    
+    .warning-box p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    .tip-box {
+      background: rgba(212, 175, 55, 0.1);
+      border-left: 3px solid var(--accent-gold);
+      padding: 15px 20px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .tip-box i {
+      color: var(--accent-gold);
+      font-size: 1.2rem;
+      margin-top: 2px;
+    }
+    
+    .tip-box p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    .section-number {
+      display: inline-block;
+      background: var(--accent-gold);
+      color: var(--primary-dark);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 36px;
+      font-weight: 700;
+      margin-right: 12px;
+      font-family: 'Cinzel', serif;
+    }
+    
+    .table-of-contents {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-heavy);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      margin-bottom: 40px;
+    }
+    
+    .table-of-contents h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--accent-gold);
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .toc-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    
+    .toc-item {
+      padding: 12px 15px;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .toc-item:hover {
+      border-color: var(--accent-gold);
+      background: rgba(212, 175, 55, 0.05);
+      transform: translateX(5px);
+    }
+    
+    .toc-item a {
+      color: var(--text-light);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .toc-item i {
+      color: var(--accent-gold);
+      font-size: 0.9rem;
+    }
+    
+    .appeal-form-container {
+      margin: 40px 0;
+      text-align: center;
+    }
+    
+    .appeal-form-container iframe {
+      border-radius: 12px;
+      border: 2px solid rgba(212, 175, 55, 0.3);
+      box-shadow: var(--shadow-heavy);
+      max-width: 100%;
+    }
+    
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 25px 0;
+    }
+    
+    .step-card {
+      background: rgba(15, 23, 42, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .step-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-gold);
+    }
+    
+    .step-card i {
+      font-size: 2rem;
+      color: var(--accent-gold);
+      margin-bottom: 15px;
+    }
+    
+    .step-card h4 {
+      color: var(--accent-teal);
+      margin-bottom: 10px;
+      font-family: 'Cinzel', serif;
+    }
+    
+    .step-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    
+    .faq-item {
+      background: rgba(15, 23, 42, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+    }
+    
+    .faq-item h4 {
+      color: var(--accent-teal);
+      margin-bottom: 10px;
+      font-family: 'Cinzel', serif;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .faq-item p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    @media (max-width: 768px) {
+      .guide-header {
+        padding: 60px 20px;
+      }
+      
+      .guide-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .guide-section {
+        padding: 25px;
+      }
+      
+      .toc-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+      
+      .appeal-form-container iframe {
+        width: 100%;
+        height: 2200px;
+      }
+    }
+  </style>
 </head>
+<body>
+  <!-- Navbar container -->
+  <div id="navbar-container"></div>
+  
+  <!-- Header container -->
+  <div id="header-container"></div>
 
-<body style="margin:0; background:#0f172a; font-family:Inter, Arial, sans-serif; color:white;">
+  <!-- Guide Header -->
+  <header class="guide-header">
+    <div class="guide-header-content">
+      <div class="guide-icon">
+        <i class="fas fa-gavel"></i>
+      </div>
+      <h1>Appeal a Punishment</h1>
+      <p>Submit an appeal for a second chance or to contest a punishment on GeoFrontier</p>
+      <div style="margin-top: 25px;">
+        <a href="#section1" class="btn btn-outline" style="margin: 5px;">Before You Appeal</a>
+        <a href="#appeal-form" class="btn" style="margin: 5px;">Go to Appeal Form →</a>
+      </div>
+    </div>
+  </header>
 
-<div id="navbar-container"></div>
-<div id="header-container"></div>
-<script src="/components/layout-loader.js"></script>
+  <!-- Main Content -->
+  <div class="guide-container">
+    
+    <!-- Table of Contents -->
+    <div class="table-of-contents" id="toc">
+      <h3><i class="fas fa-list-ol"></i> Table of Contents</h3>
+      <div class="toc-list">
+        <div class="toc-item">
+          <a href="#section1">
+            <i class="fas fa-exclamation-circle"></i>
+            <span>1. Before You Appeal</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section2">
+            <i class="fas fa-lightbulb"></i>
+            <span>2. Appeal Guidelines</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section3">
+            <i class="fas fa-list-check"></i>
+            <span>3. Appeal Process</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#appeal-form">
+            <i class="fas fa-file-pen"></i>
+            <span>4. Appeal Form</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section5">
+            <i class="fas fa-question-circle"></i>
+            <span>5. Frequently Asked Questions</span>
+          </a>
+        </div>
+      </div>
+    </div>
 
+    <!-- Section 1 -->
+    <div class="guide-section" id="section1">
+      <h2><span class="section-number">1</span> <i class="fas fa-exclamation-circle"></i> Before You Appeal</h2>
+      <p>Before submitting an appeal, please understand our punishment philosophy and the requirements for a successful appeal.</p>
+      
+      <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Important Notes:</strong> We do not ban or mute players without proof. This appeal form is for players who feel they have changed and deserve a second chance, or who believe their punishment was unfair in the first place.</p>
+      </div>
+      
+      <p><strong>Reasons to Appeal:</strong></p>
+      <ul>
+        <li><strong>You've genuinely changed:</strong> You understand what you did wrong and have grown from the experience</li>
+        <li><strong>Unfair punishment:</strong> You believe there was a misunderstanding or error in your punishment</li>
+        <li><strong>New evidence:</strong> You have evidence that wasn't considered during the original decision</li>
+        <li><strong>Appropriate waiting period:</strong> You've waited the required time before appealing (7 days for permanent mutes/bans)</li>
+      </ul>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Honesty is Key:</strong> To save everyone's time, if you lie in your appeal, we will automatically reject it and may extend your punishment. If you are respectful and understanding in your appeal, we are more likely to shorten the punishment as a thank you for your maturity.</p>
+      </div>
+    </div>
 
-<div style="max-width:900px; margin:40px auto; padding:0 20px;">
-  <h1 style="font-size:2rem; margin-bottom:16px;">Appeal a Punishment</h1>
+    <!-- Section 2 -->
+    <div class="guide-section" id="section2">
+      <h2><span class="section-number">2</span> <i class="fas fa-lightbulb"></i> Appeal Guidelines</h2>
+      <p>Follow these guidelines to create an effective appeal that will be seriously considered by our staff team.</p>
+      
+      <div class="process-steps">
+        <div class="step-card">
+          <i class="fas fa-user-check"></i>
+          <h4>Be Respectful</h4>
+          <p>Address staff politely. Angry or demanding appeals are less likely to succeed.</p>
+        </div>
+        
+        <div class="step-card">
+          <i class="fas fa-check-double"></i>
+          <h4>Be Honest</h4>
+          <p>Admit mistakes if you made them. We have punishment logs and can verify claims.</p>
+        </div>
+        
+        <div class="step-card">
+          <i class="fas fa-file-lines"></i>
+          <h4>Provide Context</h4>
+          <p>Explain what happened from your perspective and why the punishment should be lifted/shortened.</p>
+        </div>
+        
+        <div class="step-card">
+          <i class="fas fa-clock"></i>
+          <h4>Wait Your Turn</h4>
+          <p>Please wait 7 days between appeals. Spamming appeals will result in extended punishment.</p>
+        </div>
+      </div>
+      
+      <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Critical Rules:</strong> 
+          <ul>
+            <li><strong>No harassment:</strong> Do not harass staff regarding the status of your appeal. This will extend your punishment.</li>
+            <li><strong>No false claims:</strong> We keep detailed punishment logs and can verify all claims made in appeals.</li>
+            <li><strong>Respect decisions:</strong> If your appeal is rejected, wait 7 days before appealing again.</li>
+            <li><strong>One appeal at a time:</strong> Submit only one appeal and wait for a response.</li>
+          </ul>
+        </p>
+      </div>
+      
+      <div class="example-box">
+        <p><strong>Effective Appeal Structure:</strong><br>
+          1. Acknowledge what you did wrong (if applicable)<br>
+          2. Explain any context or misunderstanding<br>
+          3. Describe how you've changed or what you've learned<br>
+          4. Provide any evidence supporting your case<br>
+          5. Politely request reconsideration</p>
+      </div>
+    </div>
 
-  <p style="opacity:0.85; margin-bottom:24px;">
-    If you believe you were punished incorrectly or unfairly, you may submit an appeal using the link below.
-  </p>
+    <!-- Section 3 -->
+    <div class="guide-section" id="section3">
+      <h2><span class="section-number">3</span> <i class="fas fa-list-check"></i> Appeal Process</h2>
+      <p>Understand what happens after you submit your appeal and what to expect from our staff team.</p>
+      
+      <div class="process-steps">
+        <div class="step-card">
+          <i class="fas fa-paper-plane"></i>
+          <h4>Step 1: Submission</h4>
+          <p>Complete the appeal form with all required information and submit it.</p>
+        </div>
+        
+        <div class="step-card">
+          <i class="fas fa-inbox"></i>
+          <h4>Step 2: Processing</h4>
+          <p>It may take up to an hour for your appeal to be forwarded to our staff team.</p>
+        </div>
+        
+        <div class="step-card">
+          <i class="fas fa-users"></i>
+          <h4>Step 3: Review</h4>
+          <p>Volunteer staff will review your appeal on their free time. This requires patience.</p>
+        </div>
+        
+        <div class="step-card">
+          <i class="fas fa-gavel"></i>
+          <h4>Step 4: Decision</h4>
+          <p>You will receive a decision. Note that we may shorten rather than fully lift a punishment.</p>
+        </div>
+      </div>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Timeline Expectations:</strong> Our staff are volunteers who review appeals on their free time. Please be patient and do not reach out directly regarding the status of your application. If your punishment has not been lifted within 3 days, assume it has been rejected.</p>
+      </div>
+      
+      <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>No Status Updates:</strong> We do not email applicants about the status of their appeal. Repeated inquiries about appeal status may result in your appeal being rejected or your punishment being extended.</p>
+      </div>
+      
+      <p><strong>Possible Outcomes:</strong></p>
+      <ul>
+        <li><strong>Appeal Accepted:</strong> Your punishment is lifted entirely</li>
+        <li><strong>Appeal Partially Accepted:</strong> Your punishment is shortened but not fully lifted</li>
+        <li><strong>Appeal Rejected:</strong> Your punishment remains unchanged</li>
+        <li><strong>Appeal Rejected with Extension:</strong> Your punishment is extended due to dishonesty or rule violations in the appeal process</li>
+      </ul>
+    </div>
 
-  <a href="https://forms.gle/u42D9ehK1Mw2ABGj7" target="_blank" style="
-    display:inline-block;
-    padding:14px 24px;
-    border-radius:8px;
-    background:#38bdf8;
-    color:#0f172a;
-    font-weight:600;
-    text-decoration:none;
-    font-size:1rem;
-  ">Submit Appeal</a>
+    <!-- Section 4: Appeal Form -->
+    <div class="guide-section" id="appeal-form">
+      <h2><span class="section-number">4</span> <i class="fas fa-file-pen"></i> Appeal Form</h2>
+      <p>Use the form below to submit your appeal. Please fill out all required fields completely and honestly.</p>
+      
+      <div class="appeal-form-container">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdRXnO_5YZEtic8tsv8DwUBKZBGsiUIce9xpaxhlPLnKwFjUQ/viewform?embedded=true" width="640" height="2082" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+      </div>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Form Tips:</strong> 
+          <ul>
+            <li>Have your evidence ready before starting the form (Google Drive or YouTube links preferred)</li>
+            <li>Be specific about when you were punished (approximately how long ago)</li>
+            <li>Provide your exact username on the affected platform</li>
+            <li>Write your explanation in a separate document first, then paste it into the form</li>
+            <li>Double-check all information before submitting</li>
+          </ul>
+        </p>
+      </div>
+    </div>
 
-</div>
+    <!-- Section 5 -->
+    <div class="guide-section" id="section5">
+      <h2><span class="section-number">5</span> <i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+      <p>Common questions about the appeal process and their answers.</p>
+      
+      <div class="faq-item">
+        <h4><i class="fas fa-question"></i> How long does it take to get a response to my appeal?</h4>
+        <p>It may take up to an hour for your appeal to be forwarded to staff, and then additional time for them to review it on their free time. If your punishment has not been lifted within 3 days, assume it has been rejected.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h4><i class="fas fa-question"></i> Can I appeal a permanent ban or mute?</h4>
+        <p>Yes, but you must wait 7 days from a permanent mute/ban before appealing. This gives you time to reflect and allows emotions to settle.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h4><i class="fas fa-question"></i> What happens if I lie in my appeal?</h4>
+        <p>If you lie in your appeal, we will automatically reject it and may extend your punishment. We keep detailed punishment logs and can verify claims.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h4><i class="fas fa-question"></i> Can I appeal more than once?</h4>
+        <p>Yes, but you must wait 7 days between appeals. If you appeal before the 7-day waiting period, it will be automatically rejected.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h4><i class="fas fa-question"></i> What kind of evidence should I provide?</h4>
+        <p>Screenshots, video recordings, or chat logs that support your case. Google Drive or YouTube links are preferred for sharing evidence.</p>
+      </div>
+      
+      <div class="faq-item">
+        <h4><i class="fas fa-question"></i> Will my punishment definitely be lifted if I appeal?</h4>
+        <p>Not necessarily. We may choose to shorten rather than fully lift a punishment. The outcome depends on the severity of the offense, your attitude in the appeal, and the evidence provided.</p>
+      </div>
+    </div>
+    
+    <!-- Navigation Footer -->
+    <div style="display: flex; justify-content: space-between; margin: 50px 0 30px; padding: 20px; background: rgba(30, 41, 59, 0.5); border-radius: 12px;">
+      <a href="guide-war.html" class="btn">
+        <i class="fas fa-arrow-left"></i> Back to War Guide
+      </a>
+      <a href="apply-staff.html" class="btn">
+        Next: Apply for Staff <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer container -->
+  <div id="footer-container"></div>
+
+  <!-- Load component loader -->
+  <script src="js/components-loader.js"></script>
+  
+  <!-- Page-specific JavaScript -->
+  <script>
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', async () => {
+      console.log('DOM loaded, starting component loading...');
+      
+      try {
+        // Load components using ComponentLoader if available
+        if (window.ComponentLoader) {
+          console.log('Using ComponentLoader...');
+          
+          // Load navbar first
+          await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
+          console.log('Navbar loaded');
+          
+          // Initialize dropdowns after navbar loads
+          setTimeout(() => {
+            if (window.initializeDropdowns) {
+              window.initializeDropdowns();
+            }
+          }, 100);
+          
+          // Load other components
+          await window.ComponentLoader.loadComponent('header', 'header-container');
+          console.log('Header loaded');
+          
+          await window.ComponentLoader.loadComponent('footer', 'footer-container');
+          console.log('Footer loaded');
+          
+          // Set active navigation for this page
+          setTimeout(() => {
+            const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
+            navLinks.forEach(link => {
+              if (link.getAttribute('href') === 'appeal-punishment.html' || 
+                  link.getAttribute('data-nav') === 'guides') {
+                link.classList.add('active');
+              }
+            });
+            
+            // Also highlight the specific guide link in dropdown
+            const guideLinks = document.querySelectorAll('.dropdown-menu a[href="appeal-punishment.html"]');
+            guideLinks.forEach(link => {
+              link.classList.add('active');
+            });
+          }, 500);
+          
+        } else {
+          console.log('ComponentLoader not found, loading manually');
+          // Fallback manual loading would go here
+        }
+        
+        console.log('Appeal guide initialization complete!');
+        
+      } catch (error) {
+        console.error('Error during page initialization:', error);
+      }
+    });
+  </script>
 </body>
 </html>
