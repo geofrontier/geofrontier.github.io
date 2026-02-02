@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oceans Guide — GeoFrontier Minecraft Server</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Page-specific styles -->
+  <style>
+    .guide-header {
+      position: relative;
+      background: 
+        linear-gradient(rgba(11, 17, 32, 0.95), rgba(8, 12, 26, 0.98)),
+        url('/images/seas-bg.jpg') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      border-bottom: 2px solid var(--accent-teal);
+    }
+    
+    .guide-header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      background: linear-gradient(to right, #a8e6cf, #2d9cdb);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    }
+    
+    .guide-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #a8e6cf;
+      font-weight: 500;
+      font-style: italic;
+    }
+    
+    .guide-icon {
+      font-size: 3.5rem;
+      margin-bottom: 25px;
+      color: var(--accent-teal);
+      text-shadow: 0 0 15px rgba(45, 156, 219, 0.5);
+    }
+    
+    .warning-banner {
+      background: linear-gradient(90deg, #b71540, #6f1e51);
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      border-bottom: 3px solid #ff9f43;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    
+    .guide-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    
+    .danger-zone {
+      background: linear-gradient(145deg, rgba(13, 25, 48, 0.9), rgba(8, 17, 35, 0.95));
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 20, 40, 0.5);
+      border: 2px solid rgba(45, 156, 219, 0.3);
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .danger-zone::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(to bottom, #2d9cdb, #1a5f8a);
+    }
+    
+    .danger-zone h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #4fc3f7;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .danger-zone h3 i {
+      color: #4fc3f7;
+    }
+    
+    .zone-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 25px 0;
+    }
+    
+    .zone-card {
+      background: rgba(15, 30, 50, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(45, 156, 219, 0.2);
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+    
+    .zone-card:hover {
+      transform: translateY(-5px);
+      border-color: #4fc3f7;
+    }
+    
+    .zone-card.shore { border-left: 4px solid #4CAF50; }
+    .zone-card.coastal { border-left: 4px solid #FF9800; }
+    .zone-card.deep { border-left: 4px solid #F44336; }
+    .zone-card.abyss { border-left: 4px solid #9C27B0; }
+    
+    .zone-card h4 {
+      color: #fff;
+      margin-bottom: 10px;
+      font-family: 'Cinzel', serif;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .zone-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: #b3e0ff;
+    }
+    
+    .zone-card li {
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+    
+    .danger-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 25px 0;
+    }
+    
+    .danger-card {
+      background: rgba(20, 35, 60, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 87, 34, 0.3);
+      text-align: center;
+    }
+    
+    .danger-card h4 {
+      color: #FF5722;
+      margin-bottom: 10px;
+      font-family: 'Cinzel', serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .danger-card p {
+      color: #ffccbc;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    
+    .materials-list {
+      background: rgba(25, 40, 65, 0.8);
+      padding: 25px;
+      border-radius: 10px;
+      margin: 25px 0;
+      border: 1px solid rgba(255, 193, 7, 0.3);
+    }
+    
+    .materials-list h4 {
+      color: #FFC107;
+      margin-bottom: 15px;
+      font-family: 'Cinzel', serif;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .materials {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    
+    .material-item {
+      background: rgba(35, 50, 75, 0.6);
+      padding: 10px 15px;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 0.9rem;
+      text-align: center;
+      border: 1px solid rgba(255, 193, 7, 0.2);
+    }
+    
+    .critical-warning {
+      background: linear-gradient(90deg, rgba(183, 28, 28, 0.2), rgba(136, 14, 79, 0.2));
+      border-left: 4px solid #F44336;
+      padding: 20px;
+      margin: 25px 0;
+      border-radius: 0 8px 8px 0;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { border-left-color: #F44336; }
+      50% { border-left-color: #FF9800; }
+    }
+    
+    .critical-warning h4 {
+      color: #FF5252;
+      margin-bottom: 10px;
+      font-family: 'Cinzel', serif;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .critical-warning p {
+      color: #ffcdd2;
+      margin: 0;
+    }
+    
+    .survival-tip {
+      background: rgba(30, 136, 229, 0.1);
+      border-left: 4px solid #2196F3;
+      padding: 20px;
+      margin: 25px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .survival-tip h4 {
+      color: #29B6F6;
+      margin-bottom: 10px;
+      font-family: 'Cinzel', serif;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .survival-tip p {
+      color: #b3e5fc;
+      margin: 0;
+    }
+    
+    .navigation-footer {
+      display: flex;
+      justify-content: space-between;
+      margin: 50px 0 30px;
+      padding: 20px;
+      background: rgba(20, 35, 60, 0.6);
+      border-radius: 12px;
+      border: 1px solid rgba(45, 156, 219, 0.2);
+    }
+    
+    @media (max-width: 768px) {
+      .guide-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .guide-header p {
+        font-size: 1.1rem;
+      }
+      
+      .zone-info {
+        grid-template-columns: 1fr;
+      }
+      
+      .danger-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .materials {
+        grid-template-columns: 1fr;
+      }
+      
+      .navigation-footer {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar container -->
+  <div id="navbar-container"></div>
+  
+  <!-- Header container -->
+  <div id="header-container"></div>
+
+  <!-- Warning Banner -->
+  <div class="warning-banner">
+    <i class="fas fa-skull-crossbones"></i> THE SEA IS MERCILESS. WITHOUT A PROPER SHIP, YOU WILL DIE. GUARANTEED.
+  </div>
+
+  <!-- Guide Header -->
+  <header class="guide-header">
+    <div class="guide-header-content">
+      <div class="guide-icon">
+        <i class="fas fa-water"></i>
+      </div>
+      <h1>Dangerous Seas</h1>
+      <p>"The sea does not forgive. The sea does not forget. Build with iron and stone, or join the drowned."</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="guide-container">
+    
+    <!-- Danger Zones -->
+    <div class="danger-zone">
+      <h3><i class="fas fa-map-marked-alt"></i> Danger Zones - Distance From Shore</h3>
+      
+      <div class="zone-info">
+        <div class="zone-card shore">
+          <h4><i class="fas fa-umbrella-beach"></i> Shore Waters (0-10 blocks)</h4>
+          <ul>
+            <li>Mild danger only</li>
+            <li>Can swim briefly (max 100 blocks total)</li>
+            <li>Some creature spawns</li>
+          </ul>
+        </div>
+        
+        <div class="zone-card coastal">
+          <h4><i class="fas fa-water"></i> Coastal Waters (10-30 blocks)</h4>
+          <ul>
+            <li>Creatures begin hunting</li>
+            <li>Waves and riptides active</li>
+            <li>Swimming becomes suicidal</li>
+          </ul>
+        </div>
+        
+        <div class="zone-card deep">
+          <h4><i class="fas fa-wind"></i> Deep Ocean (30-75 blocks)</h4>
+          <ul>
+            <li>Sharks & hostile creatures</li>
+            <li>Storms and whirlpools</li>
+            <li>Hypothermia (starts at 60s)</li>
+          </ul>
+        </div>
+        
+        <div class="zone-card abyss">
+          <h4><i class="fas fa-skull"></i> The Abyss (75+ blocks)</h4>
+          <ul>
+            <li>Instant death if swimming</li>
+            <li>Kraken territory</li>
+            <li>Maximum danger multiplier</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Critical Dangers -->
+    <div class="danger-zone">
+      <h3><i class="fas fa-exclamation-triangle"></i> Critical Dangers</h3>
+      
+      <div class="danger-grid">
+        <div class="danger-card">
+          <h4><i class="fas fa-swimmer"></i> Swimming</h4>
+          <p>Maximum 100 blocks before exhaustion. Damage when exhausted. Instant death in deep ocean. Use ships only!</p>
+        </div>
+        
+        <div class="danger-card">
+          <h4><i class="fas fa-snowflake"></i> Hypothermia</h4>
+          <p>Begins after 60 seconds in water. Causes damage and slowness. Can freeze you solid at high severity.</p>
+        </div>
+        
+        <div class="danger-card">
+          <h4><i class="fas fa-bolt"></i> Storms</h4>
+          <p>25% chance to spawn. Last 5 minutes. Destroy wooden ships. Lightning causes fires. Rogue waves knock players overboard.</p>
+        </div>
+        
+        <div class="danger-card">
+          <h4><i class="fas fa-shark"></i> Sea Creatures</h4>
+          <p>Sharks, Sea Terrors, Sirens, Leviathan, and Kraken. Attracted by blood in water. 2.5x more at night.</p>
+        </div>
+      </div>
+      
+      <div class="critical-warning">
+        <h4><i class="fas fa-radiation"></i> Blood in Water</h4>
+        <p>Taking damage attracts predators! Sharks have 10x attraction to blood. Other creatures 3x. Blood scent lasts 60 seconds.</p>
+      </div>
+    </div>
+
+    <!-- Ship Building -->
+    <div class="danger-zone">
+      <h3><i class="fas fa-ship"></i> Ship Survival - Your ONLY Hope</h3>
+      
+      <div class="critical-warning">
+        <h4><i class="fas fa-ban"></i> WOODEN SHIPS WILL BE DESTROYED</h4>
+        <p>All wood types, glass, wool, torches, chests, and decorative blocks are VULNERABLE and will break in storms. Boats capsize and break instantly in open ocean.</p>
+      </div>
+      
+      <div class="survival-tip">
+        <h4><i class="fas fa-shield-alt"></i> Build With Storm-Resistant Materials</h4>
+        <p>Use these blocks for hull and critical structures. They withstand storms and creature attacks.</p>
+      </div>
+      
+      <div class="materials-list">
+        <h4><i class="fas fa-cube"></i> Recommended Building Materials</h4>
+        <div class="materials">
+          <div class="material-item">Iron Blocks</div>
+          <div class="material-item">Gold Blocks</div>
+          <div class="material-item">Diamond Blocks</div>
+          <div class="material-item">Obsidian</div>
+          <div class="material-item">Stone Bricks</div>
+          <div class="material-item">Deepslate Bricks</div>
+          <div class="material-item">Copper Blocks</div>
+          <div class="material-item">Iron Bars/Doors</div>
+        </div>
+      </div>
+      
+      <div class="survival-tip">
+        <h4><i class="fas fa-exclamation-circle"></i> Hull Breaches & Flooding</h4>
+        <p>Ships can spring leaks during storms. Water spreads quickly (speed: 3). Damage every 30 ticks when flooding. Keep repair materials on board.</p>
+      </div>
+    </div>
+
+    <!-- Additional Hazards -->
+    <div class="danger-zone">
+      <h3><i class="fas fa-wave-square"></i> Ocean Hazards</h3>
+      
+      <div class="danger-grid">
+        <div class="danger-card">
+          <h4><i class="fas fa-tornado"></i> Whirlpools</h4>
+          <p>5% spawn chance. 20 block radius. Inescapable pull (strength: 1.2). 2.0 damage per second.</p>
+        </div>
+        
+        <div class="danger-card">
+          <h4><i class="fas fa-compress-arrows-alt"></i> Water Pressure</h4>
+          <p>Below 15 blocks depth. 0.1 damage per additional block. Deep water crushes the unprepared.</p>
+        </div>
+        
+        <div class="danger-card">
+          <h4><i class="fas fa-cloud"></i> Fog</h4>
+          <p>20% chance. Lasts 80 seconds. Causes blindness. Navigate by compass or wait it out.</p>
+        </div>
+        
+        <div class="danger-card">
+          <h4><i class="fas fa-moon"></i> Night Multipliers</h4>
+          <p>All dangers 2.0x worse at night. Creatures 2.5x more common. Reduced visibility.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Death & Punishment -->
+    <div class="danger-zone">
+      <h3><i class="fas fa-skull"></i> Death at Sea - Consequences</h3>
+      
+      <div class="critical-warning">
+        <h4><i class="fas fa-exclamation-triangle"></i> Permanent Loss</h4>
+        <p>Items sink and are lost forever when drowning. 100% experience loss. Respawn with 5 minutes of weakness.</p>
+      </div>
+      
+      <div class="survival-tip">
+        <h4><i class="fas fa-life-ring"></i> Survival Strategy</h4>
+        <p>1. Never swim in open ocean. 2. Build ships with metal/stone. 3. Avoid storms when possible. 4. Don't travel at night. 5. Keep repair materials on board. 6. Have emergency supplies.</p>
+      </div>
+    </div>
+    
+    <!-- Navigation Footer -->
+    <div class="navigation-footer">
+      <a href="guide-movecraft.html" class="btn" style="background: linear-gradient(90deg, #1a237e, #283593); border-color: #5c6bc0;">
+        <i class="fas fa-arrow-left"></i> Back to Movecraft
+      </a>
+      <a href="appeal-punishment.html" class="btn">
+        Next: Appeal Punishment <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer container -->
+  <div id="footer-container"></div>
+
+  <!-- Load component loader -->
+  <script src="js/components-loader.js"></script>
+  
+  <!-- Page-specific JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        if (window.ComponentLoader) {
+          await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
+          setTimeout(() => { if (window.initializeDropdowns) window.initializeDropdowns(); }, 100);
+          await window.ComponentLoader.loadComponent('header', 'header-container');
+          await window.ComponentLoader.loadComponent('footer', 'footer-container');
+          
+          setTimeout(() => {
+            const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
+            navLinks.forEach(link => {
+              if (link.getAttribute('href') === 'guide-dangerous-seas.html' || 
+                  link.getAttribute('data-nav') === 'guides') {
+                link.classList.add('active');
+              }
+            });
+          }, 500);
+        }
+      } catch (error) {
+        console.error('Error during page initialization:', error);
+      }
+    });
+  </script>
+</body>
+</html>
