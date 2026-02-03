@@ -349,7 +349,7 @@
     }
     
     /* ============================================
-       CUSTOM BADGE STYLES
+       CUSTOM BADGE & IMAGE STYLES
        ============================================ */
     
     /* Custom badge style */
@@ -373,11 +373,118 @@
       font-size: 0.9rem;
     }
     
+    /* Custom feature note */
+    .custom-feature-note {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(13, 25, 48, 0.9), rgba(8, 17, 35, 0.95));
+      border: 2px solid rgba(45, 156, 219, 0.3);
+      padding: 25px;
+      border-radius: 12px;
+      margin: 40px 0 30px;
+      box-shadow: 0 10px 30px rgba(0, 20, 40, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .custom-feature-note::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(to bottom, #2d9cdb, #1a5f8a);
+    }
+    
+    .custom-feature-note h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #4fc3f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    
+    .custom-feature-note p {
+      color: #b3e0ff;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    /* Landscape images section */
+    .landscape-images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 25px;
+      margin: 40px 0;
+    }
+    
+    .landscape-card {
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    
+    .landscape-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+    
+    .landscape-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .landscape-caption {
+      background: rgba(15, 23, 42, 0.85);
+      padding: 15px;
+      text-align: center;
+      color: var(--accent-gold);
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-top: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    
     /* Subtle pulsing animation */
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.2); }
       50% { box-shadow: 0 0 0 5px rgba(212, 175, 55, 0); }
       100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+    }
+    
+    @media (max-width: 768px) {
+      .landscape-images {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .landscape-card img {
+        height: 200px;
+      }
+      
+      .custom-feature-note {
+        padding: 20px 15px;
+        margin: 30px 0;
+      }
+      
+      .custom-feature-note h3 {
+        font-size: 1.3rem;
+      }
+      
+      .custom-feature-note p {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
@@ -446,7 +553,29 @@
 
       <br>
 
-      <div class="card fade-in delayed-2">
+      <!-- Custom Feature Note -->
+      <div class="custom-feature-note fade-in delayed-2">
+        <h3><i class="fas fa-code"></i> Built From The Ground Up</h3>
+        <p>Every major system on GeoFrontier—from Movecraft ship mechanics and factory automation to dangerous oceans and custom warfare—has been custom-coded from scratch. No pre-made plugins, no limitations. Just pure, bespoke gameplay designed for true empire-building.</p>
+      </div>
+
+      <br>
+
+      <!-- Landscape Images Section -->
+      <div class="landscape-images fade-in delayed-3">
+        <div class="landscape-card">
+          <img src="images/ocean-photo.jpg" alt="Dangerous Oceans of GeoFrontier">
+          <div class="landscape-caption">Conquer the Treacherous Seas</div>
+        </div>
+        <div class="landscape-card">
+          <img src="images/jungle-photo.jpg" alt="Jungle Exploration on GeoFrontier">
+          <div class="landscape-caption">Explore Untamed Wilderness</div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="card fade-in delayed-4">
         <div class="feature-icon">
           <i class="fas fa-landmark"></i>
         </div>
@@ -460,68 +589,30 @@
         </ul>
       </div>
     </div>
-      <!-- RIGHT COLUMN: FEATURED TOWN & INFO -->
-      <div class="card feature-card fade-in delayed-3" id="featured-town">
-        <h2><i class="fas fa-crown"></i> Town of the Month</h2>
-        <div id="featured-town-content">
-          <!-- Loading state ONLY - no hardcoded town -->
-          <div class="loading-town" style="text-align: center; padding: 40px;">
-            <i class="fas fa-compass fa-spin" style="font-size: 2rem; color: var(--accent-gold); margin-bottom: 15px;"></i>
-            <p style="color: var(--text-muted);">Loading featured town...</p>
-          </div>
-        </div>
-        <a href="towns.html" class="btn">View All Featured Towns →</a>
-      </div>
-<script>
-  function loadFeaturedTown() {
-    const content = document.getElementById('featured-town-content');
     
-    if (window.townsOfTheMonth && window.townsOfTheMonth.length > 0) {
-      const featured = window.townsOfTheMonth[0];
-      
-      content.innerHTML = `
-        <img class="town-image" src="${featured.image}" alt="${featured.name}" 
-             onerror="this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'">
-        <div class="town-meta">
-          <span><i class="fas fa-trophy"></i> ${featured.month}</span>
+    <!-- RIGHT COLUMN: FEATURED TOWN & INFO -->
+    <div class="card feature-card fade-in delayed-3" id="featured-town">
+      <h2><i class="fas fa-crown"></i> Town of the Month</h2>
+      <div id="featured-town-content">
+        <!-- Loading state ONLY - no hardcoded town -->
+        <div class="loading-town" style="text-align: center; padding: 40px;">
+          <i class="fas fa-compass fa-spin" style="font-size: 2rem; color: var(--accent-gold); margin-bottom: 15px;"></i>
+          <p style="color: var(--text-muted);">Loading featured town...</p>
         </div>
-        <h3 class="town-name">${featured.name}</h3>
-        <p class="town-desc">${featured.description}</p>
-        <div class="town-meta">
-          <span><i class="fas fa-users"></i> ${featured.population}</span>
-          <span><i class="fas fa-crown"></i> ${featured.leader}</span>
-          <span><i class="fas fa-landmark"></i> ${featured.ideology}</span>
-        </div>
-        <div style="margin-top: 15px;">
-          <button class="btn-small" onclick="copyText('${featured.name}')">
-            <i class="fas fa-copy"></i> Copy Name
-          </button>
-        </div>
-      `;
-    } else {
-      // If data fails to load completely
-      content.innerHTML = `
-        <div class="component-error" style="text-align: center; padding: 30px;">
-          <i class="fas fa-exclamation-triangle"></i>
-          <h3>Failed to load town data</h3>
-          <p>Check your connection and refresh the page</p>
-        </div>
-      `;
-    }
-  }
-</script>
-      
-      <br>
-      
-      <div class="card fade-in server-status">
-        <h2><i class="fas fa-clock"></i> Server Status</h2>
-        <p><strong>Online Players:</strong> <span id="player-count">Loading...</span></p>
-        <p><strong>Server Version:</strong> 1.20.1</p>
-        <p><strong>Next Event:</strong> Grand Expedition (Saturday, 8PM EST)</p>
-        <p><strong>Season:</strong> Age of Discovery</p>
-        <br>
-        <a href="map.html" class="btn" style="width:100%; text-align:center; display: block;">View Live Map</a>
       </div>
+      <a href="towns.html" class="btn">View All Featured Towns →</a>
+    </div>
+
+    <br>
+    
+    <div class="card fade-in server-status">
+      <h2><i class="fas fa-clock"></i> Server Status</h2>
+      <p><strong>Online Players:</strong> <span id="player-count">Loading...</span></p>
+      <p><strong>Server Version:</strong> 1.20.1</p>
+      <p><strong>Next Event:</strong> Grand Expedition (Saturday, 8PM EST)</p>
+      <p><strong>Season:</strong> Age of Discovery</p>
+      <br>
+      <a href="map.html" class="btn" style="width:100%; text-align:center; display: block;">View Live Map</a>
     </div>
   </div>
 
@@ -756,7 +847,7 @@
     
     // Setup copy functionality for header elements
     function setupCopyFunctionality() {
-      // Attach copy functionality to server IP and Discord elements
+      // Attach copy listeners to server IP and Discord elements
       const attachCopyListeners = () => {
         const serverIpContainer = document.querySelector('.server-ip-container');
         const discordContainer = document.querySelector('.discord-container');
@@ -907,7 +998,7 @@
         // Initialize player count
         updatePlayerCount();
         
-        // Setup scroll animations
+        // Initialize scroll animations
         initScrollAnimations();
         
         // Setup copy functionality
