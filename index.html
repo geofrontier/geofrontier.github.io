@@ -16,33 +16,6 @@
   
   <!-- Inline styles for page-specific elements -->
   <style>
-    /* Custom badge style */
-    .custom-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(212, 175, 55, 0.1);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      color: var(--accent-gold);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      margin: 10px 0 20px;
-      font-weight: 600;
-      backdrop-filter: blur(5px);
-      animation: pulse 3s infinite;
-    }
-    
-    .custom-badge i {
-      font-size: 0.9rem;
-    }
-    
-    /* Subtle pulsing animation */
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.2); }
-      50% { box-shadow: 0 0 0 5px rgba(212, 175, 55, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
-    }
     /* Additional styles specific to index page */
     .feature-card ul {
       padding-left: 20px;
@@ -374,6 +347,38 @@
         font-size: 0.85rem;
       }
     }
+    
+    /* ============================================
+       CUSTOM BADGE STYLES
+       ============================================ */
+    
+    /* Custom badge style */
+    .custom-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: var(--accent-gold);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin: 10px 0 20px;
+      font-weight: 600;
+      backdrop-filter: blur(5px);
+      animation: pulse 3s infinite;
+    }
+    
+    .custom-badge i {
+      font-size: 0.9rem;
+    }
+    
+    /* Subtle pulsing animation */
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.2); }
+      50% { box-shadow: 0 0 0 5px rgba(212, 175, 55, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+    }
   </style>
 </head>
 <body>
@@ -395,17 +400,10 @@
       <h1 class="fade-in">Forge Your Empire in a New World</h1>
       <p class="fade-in delayed-1">A geopolitical Minecraft server where exploration, diplomacy, and warfare collide. Establish nations, forge alliances, and conquer territories in an ever-evolving world inspired by the Age of Exploration.</p>
       <div class="hero-subtitle fade-in delayed-2">Version 1.20+ • Custom RPG Systems • Player-Driven Economy • Active Warfare</div>
-      <div class="hero-subtitle fade-in delayed-2">Version 1.20+ • Custom RPG Systems • Player-Driven Economy • Active Warfare</div>
-
       <div class="custom-badge fade-in delayed-3">
         <i class="fas fa-tools"></i> Most features custom-coded from scratch
       </div>
       <div class="fade-in delayed-4">
-        <a href="#join" class="btn">Join The Frontier</a>
-        <a href="rules.html" class="btn btn-outline">View Server Rules</a>
-      </div>
-      
-      <div class="fade-in delayed-3">
         <a href="#join" class="btn">Join The Frontier</a>
         <a href="rules.html" class="btn btn-outline">View Server Rules</a>
       </div>
@@ -936,5 +934,3 @@
   </script>
 </body>
 </html>
-
-
