@@ -309,6 +309,27 @@
       border-top: 1px solid rgba(255, 87, 34, 0.3);
     }
     
+    /* Inline warning image style */
+    .warning-inline-image {
+      display: block;
+      margin: 15px auto;
+      border: 2px solid rgba(183, 28, 28, 0.6);
+      border-radius: 6px;
+      max-width: 100%;
+      height: auto;
+      box-shadow: 0 3px 10px rgba(183, 28, 28, 0.3);
+    }
+    
+    .warning-inline-caption {
+      text-align: center;
+      color: #FF5252;
+      font-size: 0.9rem;
+      font-style: italic;
+      margin-top: 5px;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    
     @media (max-width: 768px) {
       .guide-header h1 {
         font-size: 2.2rem;
@@ -436,12 +457,8 @@
         </div>
       </div>
       
-      <!-- Added damage images here -->
+      <!-- Vortex image -->
       <div class="damage-images">
-        <div class="damage-image">
-          <img src="images/waterdamage.png" alt="Boat taking heavy water damage at 80% and 93%">
-          <div class="image-caption">⚠️ Your boat is taking heavy damage! (80% & 93%)</div>
-        </div>
         <div class="damage-image">
           <img src="images/bleeding.png" alt="Player bleeding out in a vortex">
           <div class="image-caption">Player bleeding out in a vortex - Blood attracts predators!</div>
@@ -461,6 +478,10 @@
       <div class="critical-warning">
         <h4><i class="fas fa-ban"></i> WOODEN SHIPS WILL BE DESTROYED</h4>
         <p>All wood types, glass, wool, torches, chests, and decorative blocks are VULNERABLE and will break in storms. Boats capsize and break instantly in open ocean.</p>
+        
+        <!-- Inline boat damage warning image -->
+        <img src="images/waterdamage.png" alt="Boat taking heavy water damage" class="warning-inline-image">
+        <div class="warning-inline-caption">⚠️ Your boat is taking heavy damage! (80% & 93%) - Wooden boats don't last long in storms!</div>
       </div>
       
       <div class="survival-tip">
