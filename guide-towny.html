@@ -425,6 +425,18 @@
             <span>8. Useful Commands</span>
           </a>
         </div>
+        <div class="toc-item">
+          <a href="#section9">
+            <i class="fas fa-skull-crossbones"></i>
+            <span>9. Death & PvP Economics</span>
+          </a>
+        </div>
+        <div class="toc-item">
+          <a href="#section10">
+            <i class="fas fa-gavel"></i>
+            <span>10. Jail & Justice System</span>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -435,7 +447,7 @@
       
       <div class="command-box">
         <span class="command">/town new &lt;TownName&gt;</span>
-        <span class="command-desc">Creates a new town with your current location as the town center</span>
+        <span class="command-desc">Creates a new town with your current location as the town center (Cost: $500)</span>
       </div>
       
       <div class="tip-box">
@@ -445,7 +457,7 @@
       
       <div class="warning-box">
         <i class="fas fa-exclamation-triangle"></i>
-        <p><strong>Requirement:</strong> You need sufficient funds (typically $500 in the server economy) and must be in an unclaimed area. Check available funds with <code>/balance</code>.</p>
+        <p><strong>Requirement:</strong> You need $500 and must be in an unclaimed area. New towns must be at least 4 chunks from any existing town's homeblock. Check available funds with <code>/balance</code>.</p>
       </div>
     </div>
 
@@ -473,7 +485,30 @@
         <p><strong>Example:</strong> To claim 5 chunks at once with $50 each, first deposit $250: <code>/town deposit 250</code> then <code>/town claim auto 5</code></p>
       </div>
       
-      <p>Claiming costs money from your <strong>town bank</strong>, not your personal balance. Each chunk has a daily upkeep cost based on server settings.</p>
+      <h3>Claiming Costs & Mechanics</h3>
+      <ul>
+        <li><strong>Base Claim Cost:</strong> $15.00 per townblock</li>
+        <li><strong>Increasing Costs:</strong> Each additional claim costs 5% more than the last (cumulative)</li>
+        <li><strong>Bonus Blocks:</strong> Can purchase extra claim blocks for personal use at $100.00 each (increases by 20% each purchase)</li>
+        <li><strong>Claim Limits:</strong> Towns can claim 8 townblocks per resident</li>
+      </ul>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Growth Strategy:</strong> As claiming costs increase with each plot, the most effective way to expand is by recruiting more residents. Each new member allows 8 more claims at the base price!</p>
+      </div>
+      
+      <h3>Claim Distance Rules</h3>
+      <ul>
+        <li><strong>Homeblock Buffer:</strong> No other town can claim within 4 chunks of your town's homeblock</li>
+        <li><strong>Town Spacing:</strong> New towns must be at least 4 chunks from any existing town's homeblock</li>
+        <li><strong>No Plot Buffer:</strong> Towns can claim directly adjacent to each other's plots (0 chunk minimum)</li>
+      </ul>
+      
+      <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Important:</strong> Outposts have no distance restrictions from other towns and no maximum distance from your main town. Place them strategically!</p>
+      </div>
     </div>
 
     <!-- Section 3 -->
@@ -525,9 +560,17 @@
         <span class="command-desc">Withdraws money from town bank to yourself</span>
       </div>
       
+      <h3>Upkeep Calculation</h3>
+      <ul>
+        <li><strong>Base Upkeep:</strong> $40.00 daily</li>
+        <li><strong>Plot-Based:</strong> Upkeep is calculated as (number of claimed plots × $40.00)</li>
+        <li><strong>Overclaim Penalty:</strong> $100.00 per day for each plot over your limit</li>
+        <li><strong>Overclaim Calculation:</strong> Penalty is (plots over limit × $100.00)</li>
+      </ul>
+      
       <div class="warning-box">
         <i class="fas fa-exclamation-triangle"></i>
-        <p><strong>Important:</strong> If your town bank cannot pay the daily upkeep (based on claimed chunks), your town will enter "bankrupt" status. After 7 days bankrupt, chunks will be unclaimed automatically!</p>
+        <p><strong>Important:</strong> If your town bank cannot pay the daily upkeep, your town will enter "bankrupt" status. After 7 days bankrupt, chunks will be unclaimed automatically!</p>
       </div>
       
       <div class="tip-box">
@@ -596,13 +639,15 @@
         <span class="command-desc">Sets permissions for this specific plot</span>
       </div>
       
-      <p><strong>Plot Types:</strong></p>
+      <h3>Plot Types & Specializations</h3>
       <ul>
-        <li><strong>shop</strong> - Commercial area (often tax-exempt)</li>
-        <li><strong>farm</strong> - Agricultural zone</li>
-        <li><strong>embassy</strong> - For foreign diplomats</li>
-        <li><strong>arena</strong> - PvP enabled area</li>
-        <li><strong>wilds</strong> - Unrestricted building</li>
+        <li><strong>default</strong> - Standard town plot</li>
+        <li><strong>shop</strong> <span style="color: #3498db;">[C]</span> - Commercial area (blue on map)</li>
+        <li><strong>arena</strong> [A] - PvP enabled combat zone</li>
+        <li><strong>embassy</strong> [E] - Diplomatic zone ($1,000 to create)</li>
+        <li><strong>inn</strong> [I] - Hospitality area</li>
+        <li><strong>jail</strong> [J] - Prison facility</li>
+        <li><strong>farm</strong> [F] - Agricultural zone</li>
       </ul>
       
       <div class="tip-box">
@@ -618,7 +663,7 @@
       
       <div class="command-box">
         <span class="command">/nation new &lt;NationName&gt;</span>
-        <span class="command-desc">Creates a new nation with your town as capital</span>
+        <span class="command-desc">Creates a new nation with your town as capital ($25,000 cost)</span>
       </div>
       
       <div class="command-box">
@@ -630,6 +675,14 @@
         <span class="command">/nation ally &lt;NationName&gt;</span>
         <span class="command-desc">Proposes an alliance with another nation</span>
       </div>
+      
+      <h3>Nation Features</h3>
+      <ul>
+        <li><strong>Neutrality:</strong> Nations can declare neutrality for $1,000 (excludes you from wars)</li>
+        <li><strong>Town Merging:</strong> Towns can merge for free base cost + 50% of claim cost per plot</li>
+        <li><strong>Shared Protection:</strong> Allied towns within same nation ignore claim distance restrictions</li>
+        <li><strong>Collective Defense:</strong> Attackers jailed in any town's jail are imprisoned for the nation</li>
+      </ul>
       
       <p><strong>Nation Benefits:</strong></p>
       <ul>
@@ -695,6 +748,72 @@
       <div class="tip-box">
         <i class="fas fa-lightbulb"></i>
         <p><strong>Pro Tip:</strong> Use <code>/town ?</code> to see all available town commands. Many commands have tab-completion - press TAB to see options!</p>
+      </div>
+    </div>
+    
+    <!-- Section 9: Death & PvP Economics -->
+    <div class="guide-section" id="section9">
+      <h2><span class="section-number">9</span> <i class="fas fa-skull-crossbones"></i> Death & PvP Economics</h2>
+      <p>Understand the financial consequences of death and player combat on GeoFrontier.</p>
+      
+      <h3>Death Costs</h3>
+      <ul>
+        <li><strong>PvP Deaths Only:</strong> Death costs only apply when killed by another player</li>
+        <li><strong>Percentage Loss:</strong> Lose 5% of your personal balance when killed in PvP</li>
+        <li><strong>Maximum Loss:</strong> Capped at $1,000.00 per death (even if 5% would be higher)</li>
+        <li><strong>Payment:</strong> The amount lost is paid to your killer</li>
+      </ul>
+      
+      <div class="example-box">
+        <p><strong>Example Death Costs:</strong><br>
+          • $10,000 balance → Lose $500 (paid to killer)<br>
+          • $50,000 balance → Lose $1,000 (capped, paid to killer)<br>
+          • $5,000 balance → Lose $250 (paid to killer)<br>
+          • Environmental deaths (fall, mobs) → No cost
+        </p>
+      </div>
+      
+      <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Combat Strategy:</strong> Consider your bank balance before engaging in PvP. High-wealth players risk significant losses even with the $1,000 cap!</p>
+      </div>
+    </div>
+
+    <!-- Section 10: Jail & Justice System -->
+    <div class="guide-section" id="section10">
+      <h2><span class="section-number">10</span> <i class="fas fa-gavel"></i> Jail & Justice System</h2>
+      <p>Towns can establish jails to imprison enemies and outlaws who attack their territory.</p>
+      
+      <h3>Automatic Imprisonment</h3>
+      <ul>
+        <li><strong>Outlaws:</strong> Players with outlaw status killed in your town are automatically jailed for 1 hour</li>
+        <li><strong>Jail Requirements:</strong> Town must have a plot set as "jail" type</li>
+      </ul>
+      
+      <h3>Jail Management</h3>
+      <ul>
+        <li><strong>Jail Costs:</strong> $1,000 initial fee + $250 per hour per prisoner (paid from town bank)</li>
+        <li><strong>Maximum Sentence:</strong> Mayors can jail for up to 12 hours</li>
+        <li><strong>Escape Prevention:</strong> Jailed players cannot use <code>/town leave</code></li>
+        <li><strong>Teleport Items:</strong> Jailed players CAN use Ender Pearls and Chorus Fruit!</li>
+      </ul>
+      
+      <div class="warning-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Security Warning:</strong> Build your jail cells secure! Prisoners can use teleport items, so consider obsidian boxes, lava barriers, or other creative containment methods.</p>
+      </div>
+      
+      <h3>Bail System</h3>
+      <ul>
+        <li><strong>Standard Bail:</strong> $1,000 for regular prisoners</li>
+        <li><strong>Mayor Bail:</strong> $10,000 for captured town mayors</li>
+        <li><strong>King Bail:</strong> $25,000 for captured nation kings</li>
+        <li><strong>Max Bail:</strong> Mayors can set bail up to $1,000 for regular crimes</li>
+      </ul>
+      
+      <div class="tip-box">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Economic Warfare:</strong> Capturing enemy leaders can be highly profitable through bail payments, but requires secure holding facilities!</p>
       </div>
     </div>
     
