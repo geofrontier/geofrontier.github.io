@@ -505,7 +505,128 @@
 
     <!-- Update Timeline -->
     <div class="update-timeline" id="timeline">
+<!-- Add these new update cards at the beginning of the update-timeline div, right after the opening <div class="update-timeline" id="timeline"> tag -->
+
+      <!-- UPDATE: Towny Changes -->
+      <div class="update-card" data-tags="economy system">
+        <div class="update-marker"></div>
+        <div class="update-content">
+          <div class="update-header">
+            <h3 class="update-title"><i class="fas fa-city"></i> Towny Economy Overhaul</h3>
+            <div class="update-meta">
+              <span class="meta-item"><i class="fas fa-calendar"></i> 2026/02/06</span>
+              <span class="developer-tag"><i class="fas fa-user"></i> ShilhohTony</span>
+              <span class="version-badge">Towny Update</span>
+            </div>
+          </div>
+          <div class="update-body">
+            <ul>
+              <li><strong>Creation Costs:</strong> Town creation set to $250, Nation creation $5000</li>
+              <li><strong>Claim System:</strong> Base claim cost $5/chunk, increases by 5% per chunk, caps at $175/chunk</li>
+              <li><strong>Claim Limits:</strong> 10 x # of residents chunks available</li>
+              <li><strong>Bonus Blocks:</strong> Purchaseable starting at $100, increasing by 20% per block</li>
+              <li><strong>Upkeep:</strong> $25 per chunk maintenance cost</li>
+              <li><strong>Death Tax:</strong> When killed by another player, 5% of balance transferred (capped at $1000)</li>
+              <li><strong>Jailing System:</strong> Outlawed players die in enemy territory → sent to prison</li>
+              <li><strong>Jailing Costs:</strong> Jail fee = $500 + $100 per hour jailed</li>
+            </ul>
+          </div>
+          <div class="update-tags">
+            <span class="update-tag tag-economy">Economy</span>
+            <span class="update-tag tag-system">Towny</span>
+            <span class="update-tag">Balance</span>
+          </div>
+        </div>
+      </div>
       
+      <!-- UPDATE: Colonies -->
+      <div class="update-card" data-tags="war economy">
+        <div class="update-marker"></div>
+        <div class="update-content">
+          <div class="update-header">
+            <h3 class="update-title"><i class="fas fa-flag"></i> Colony System Implementation</h3>
+            <div class="update-meta">
+              <span class="meta-item"><i class="fas fa-calendar"></i> 2026/02/21</span>
+              <span class="developer-tag"><i class="fas fa-user"></i> Britonics</span>
+              <span class="version-badge">Colony Update</span>
+            </div>
+          </div>
+          <div class="update-body">
+            <ul>
+              <li><strong>Colony Cost:</strong> Set to $5000.0 for establishment</li>
+              <li><strong>Colony Production:</strong> 100 base gold + 2 gold per resident</li>
+              <li><strong>KOTH War System:</strong> 30 minutes continuous control required to capture colony</li>
+              <li><strong>Strategic Value:</strong> Colonies now provide economic benefits and territorial control</li>
+              <li><strong>War Mechanics:</strong> New King of the Hill system for colony warfare</li>
+            </ul>
+          </div>
+          <div class="update-tags">
+            <span class="update-tag tag-war">War</span>
+            <span class="update-tag tag-economy">Economy</span>
+            <span class="update-tag">Colonies</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- UPDATE: Dangerous Oceans -->
+      <div class="update-card" data-tags="system">
+        <div class="update-marker"></div>
+        <div class="update-content">
+          <div class="update-header">
+            <h3 class="update-title"><i class="fas fa-water"></i> Dangerous Oceans Update</h3>
+            <div class="update-meta">
+              <span class="meta-item"><i class="fas fa-calendar"></i> 2026/02/01</span>
+              <span class="developer-tag"><i class="fas fa-user"></i> Britonics</span>
+              <span class="version-badge">Ocean Update</span>
+            </div>
+          </div>
+          <div class="update-body">
+            <ul>
+              <li><strong>Ocean Hazards:</strong> Added storms, whirlpools, and ocean monsters</li>
+              <li><strong>Swimming Exhaustion:</strong> Players experience fatigue when swimming long distances</li>
+              <li><strong>Movecraft Required:</strong> Ships now essential for ocean exploration and survival</li>
+              <li><strong>Environmental Challenges:</strong> Oceans pose real danger without proper preparation</li>
+              <li><strong>Exploration Risk/Reward:</strong> High-risk ocean travel for valuable resources and locations</li>
+            </ul>
+          </div>
+          <div class="update-tags">
+            <span class="update-tag tag-system">Environment</span>
+            <span class="update-tag">Exploration</span>
+            <span class="update-tag">Ships</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- UPDATE: Factories -->
+      <div class="update-card" data-tags="system war">
+        <div class="update-marker"></div>
+        <div class="update-content">
+          <div class="update-header">
+            <h3 class="update-title"><i class="fas fa-industry"></i> Factory System Implementation</h3>
+            <div class="update-meta">
+              <span class="meta-item"><i class="fas fa-calendar"></i> 2026/01/27</span>
+              <span class="developer-tag"><i class="fas fa-user"></i> Britonics</span>
+              <span class="version-badge">Factory Update</span>
+            </div>
+          </div>
+          <div class="update-body">
+            <ul>
+              <li><strong>Factory Types:</strong> Armory, Foundry, Munitions, Siege Works, and Wagon factories</li>
+              <li><strong>Easy Creation:</strong> Factories can be created easily using commands</li>
+              <li><strong>Production System:</strong> Players input items → factory produces desired weapons/items</li>
+              <li><strong>Custom Recipes:</strong> Unique weapon recipes for each factory type</li>
+              <li><strong>Creation Costs:</strong> Balanced costs for establishing factories</li>
+              <li><strong>Production Times:</strong> Realistic manufacturing durations based on item complexity</li>
+              <li><strong>Military Economy:</strong> Enables organized production of war materials</li>
+            </ul>
+          </div>
+          <div class="update-tags">
+            <span class="update-tag tag-system">Production</span>
+            <span class="update-tag tag-war">Military</span>
+            <span class="update-tag">Economy</span>
+          </div>
+        </div>
+      </div>      
       <!-- UPDATE 1.0 -->
       <div class="update-card" data-tags="economy system community">
         <div class="update-marker"></div>
@@ -964,3 +1085,4 @@
   </script>
 </body>
 </html>
+
