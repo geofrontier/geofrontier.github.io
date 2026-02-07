@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GeoFrontier — Towns of the Month</title>
+  <title>Towns of the Month — GeoFrontier Minecraft Server</title>
   
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,440 +14,707 @@
   <!-- Main CSS -->
   <link rel="stylesheet" href="css/styles.css">
   
-  <!-- Inline styles for towns page -->
+  <!-- Page-specific styles -->
   <style>
-    /* Hero section for towns page */
-    .towns-hero {
-      background: linear-gradient(rgba(2, 6, 23, 0.9), rgba(15, 23, 42, 0.85)), 
-                  url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
-      background-size: cover;
-      background-position: center;
+    .towns-header {
+      position: relative;
+      background: 
+        linear-gradient(rgba(11, 17, 32, 0.95), rgba(8, 12, 26, 0.98)),
+        url('/images/towns-bg.jpg') center/cover no-repeat;
       color: white;
       text-align: center;
-      padding: 100px 20px;
-      margin-bottom: 40px;
+      padding: 80px 20px;
       border-bottom: 2px solid var(--accent-gold);
+      overflow: hidden;
     }
     
-    .towns-hero h1 {
+    .towns-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 60%, rgba(45, 212, 191, 0.1) 0%, transparent 50%);
+      z-index: 0;
+    }
+    
+    .towns-header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .towns-header h1 {
       font-family: 'Cinzel', serif;
+      font-size: 3.2rem;
+      margin-bottom: 15px;
+      background: linear-gradient(to right, #f5e6ca, #d4af37);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .towns-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--accent-teal);
+      font-weight: 500;
+    }
+    
+    .towns-icon {
       font-size: 3.5rem;
       margin-bottom: 20px;
       color: var(--accent-gold);
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
     
-    .towns-hero p {
-      font-size: 1.2rem;
-      max-width: 800px;
-      margin: 0 auto 30px;
-      color: var(--text-light);
-      opacity: 0.9;
+    .towns-container {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 20px;
     }
     
-    /* Town grid layout */
-    .towns-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 30px;
-      margin: 40px 0;
-    }
-    
-    .town-card {
-      background: var(--card-bg);
-      border-radius: 15px;
+    /* Current Town of the Month */
+    .current-town {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      border-radius: 20px;
       overflow: hidden;
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      box-shadow: var(--shadow-heavy);
+      border: 2px solid var(--accent-gold);
+      margin-bottom: 60px;
+      position: relative;
     }
     
-    .town-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
-      border-color: var(--accent-gold);
+    .current-town-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(to right, var(--accent-gold), #ffd700);
+      color: var(--primary-dark);
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
     }
     
-    .town-image-container {
-      height: 200px;
-      width: 100%;
+    .current-town-image {
+      height: 400px;
       overflow: hidden;
       position: relative;
     }
     
-    .town-image {
+    .current-town-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.5s ease;
     }
     
-    .town-card:hover .town-image {
+    .current-town:hover .current-town-image img {
       transform: scale(1.05);
     }
     
-    .town-badge {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: linear-gradient(135deg, var(--accent-gold), #b7410e);
-      color: var(--primary-dark);
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    .current-town-content {
+      padding: 40px;
     }
     
-    .town-content {
+    .current-town-month {
+      color: var(--accent-gold);
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .current-town-name {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      color: white;
+      margin-bottom: 20px;
+    }
+    
+    .current-town-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+      background: rgba(15, 23, 42, 0.5);
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .current-town-description {
+      color: var(--text-light);
+      line-height: 1.7;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    
+    .current-town-leader {
+      color: var(--accent-teal);
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .current-town-ideology {
+      display: inline-block;
+      padding: 8px 20px;
+      background: rgba(45, 212, 191, 0.1);
+      color: var(--accent-teal);
+      border-radius: 20px;
+      font-weight: 600;
+      border: 1px solid rgba(45, 212, 191, 0.3);
+    }
+    
+    /* Previous Towns Grid */
+    .previous-towns-section {
+      margin-bottom: 60px;
+    }
+    
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      color: var(--accent-gold);
+      margin-bottom: 30px;
+      text-align: center;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(to right, var(--accent-gold), var(--accent-rust));
+      border-radius: 3px;
+    }
+    
+    .previous-towns-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+    
+    .town-card {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-heavy);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .town-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent-gold);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+    
+    .town-card-image {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .town-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .town-card:hover .town-card-image img {
+      transform: scale(1.1);
+    }
+    
+    .town-card-content {
       padding: 25px;
     }
     
-    .town-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 15px;
-    }
-    
-    .town-name {
-      font-family: 'Cinzel', serif;
-      font-size: 1.5rem;
-      color: var(--text-light);
-      margin: 0;
-    }
-    
-    .town-month {
-      font-size: 0.85rem;
+    .town-card-month {
       color: var(--accent-gold);
-      opacity: 0.9;
-      white-space: nowrap;
-    }
-    
-    .town-desc {
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 20px;
-      font-size: 0.95rem;
-    }
-    
-    .town-stats {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    
-    .town-stat {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.9rem;
-      color: var(--text-light);
-      background: rgba(30, 41, 59, 0.5);
-      padding: 8px 15px;
-      border-radius: 20px;
-      border: 1px solid rgba(212, 175, 55, 0.1);
     }
     
-    .town-stat i {
-      color: var(--accent-gold);
-    }
-    
-    .town-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 15px;
-    }
-    
-    .btn-small {
-      padding: 8px 15px;
-      font-size: 0.85rem;
-      flex: 1;
-      text-align: center;
-    }
-    
-    .page-intro {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto 40px;
-      padding: 0 20px;
-    }
-    
-    .page-intro h2 {
+    .town-card-name {
       font-family: 'Cinzel', serif;
-      color: var(--accent-gold);
-      margin-bottom: 20px;
+      font-size: 1.5rem;
+      color: white;
+      margin-bottom: 15px;
     }
     
-    /* Loading states */
-    .towns-loading {
+    .town-card-description {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      height: 60px;
+      overflow: hidden;
+    }
+    
+    .town-card-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    }
+    
+    .town-stat {
       text-align: center;
-      padding: 60px 20px;
-      background: rgba(30, 41, 59, 0.3);
-      border-radius: 15px;
     }
     
-    .towns-loading i {
-      font-size: 3rem;
+    .town-stat-value {
+      font-size: 1.3rem;
+      font-weight: 700;
       color: var(--accent-gold);
-      margin-bottom: 20px;
+      margin-bottom: 5px;
     }
     
-    /* Empty state */
+    .town-stat-label {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .town-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .town-card-leader {
+      color: var(--accent-teal);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .town-card-ideology {
+      padding: 5px 12px;
+      background: rgba(45, 212, 191, 0.1);
+      color: var(--accent-teal);
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid rgba(45, 212, 191, 0.3);
+    }
+    
+    /* Empty State */
     .no-towns {
       text-align: center;
       padding: 60px 20px;
-      background: rgba(30, 41, 59, 0.3);
-      border-radius: 15px;
-      border: 2px dashed rgba(212, 175, 55, 0.3);
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      background: rgba(30, 41, 59, 0.5);
+      border-radius: 12px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
     }
     
     .no-towns i {
       font-size: 3rem;
-      color: var(--accent-gold);
       margin-bottom: 20px;
+      color: var(--accent-gold);
       opacity: 0.5;
     }
     
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+    /* Navigation */
+    .towns-navigation {
+      display: flex;
+      justify-content: center;
+      margin: 40px 0 30px;
+    }
+    
+    .towns-nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .towns-header h1 {
+        font-size: 2.5rem;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      
+      .current-town-image {
+        height: 300px;
+      }
+      
+      .current-town-name {
+        font-size: 2rem;
+      }
+      
+      .previous-towns-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .current-town-stats {
+        grid-template-columns: 1fr;
+      }
+      
+      .towns-nav-links {
+        flex-direction: column;
+        align-items: center;
       }
     }
     
-    .fade-in-up {
-      animation: fadeInUp 0.6s ease forwards;
+    @media (max-width: 480px) {
+      .current-town-image {
+        height: 250px;
+      }
+      
+      .current-town-content {
+        padding: 25px;
+      }
+      
+      .current-town-name {
+        font-size: 1.8rem;
+      }
+      
+      .town-card-content {
+        padding: 20px;
+      }
     }
   </style>
 </head>
 <body>
   <!-- Navbar container -->
-  <div id="navbar-container" class="component-loading">
-    <i class="fas fa-spinner fa-spin"></i>
-    <span>Loading navigation...</span>
-  </div>
+  <div id="navbar-container"></div>
   
   <!-- Header container -->
-  <div id="header-container" class="component-loading">
-    <i class="fas fa-spinner fa-spin"></i>
-    <span>Loading header...</span>
-  </div>
+  <div id="header-container"></div>
 
-  <!-- HERO SECTION -->
-  <section class="towns-hero">
-    <h1>Towns of the Month</h1>
-    <p>Discover the most impressive settlements on GeoFrontier. Each month we feature towns that exemplify creativity, community, and strategic brilliance in our ever-evolving world.</p>
-    <a href="#towns-grid" class="btn">Explore Featured Towns</a>
-  </section>
-
-  <!-- MAIN CONTENT -->
-  <div class="section">
-    <div class="page-intro">
-      <h2>Celebrating Excellence</h2>
-      <p>From mighty fortresses to bustling trade ports, these towns represent the pinnacle of player creativity and cooperation. Explore their stories and draw inspiration for your own settlements.</p>
-    </div>
-    
-    <!-- Towns will be loaded here -->
-    <div id="towns-container">
-      <!-- Loading state -->
-      <div class="towns-loading">
-        <i class="fas fa-compass fa-spin"></i>
-        <h3>Loading Featured Towns</h3>
-        <p>Discovering the greatest settlements...</p>
+  <!-- Towns Header -->
+  <header class="towns-header">
+    <div class="towns-header-content">
+      <div class="towns-icon">
+        <i class="fas fa-city"></i>
+      </div>
+      <h1>Towns of the Month</h1>
+      <p>Celebrating the most impressive settlements and communities across GeoFrontier</p>
+      <div style="margin-top: 25px;">
+        <a href="#current-town" class="btn" style="margin: 5px;">Current Town</a>
+        <a href="#previous-towns" class="btn btn-outline" style="margin: 5px;">Previous Towns</a>
       </div>
     </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="towns-container">
+    
+    <!-- Current Town of the Month -->
+    <div id="current-town" class="current-town">
+      <div class="current-town-badge">
+        <i class="fas fa-crown"></i> CURRENT TOWN OF THE MONTH
+      </div>
+      <div class="current-town-image">
+        <img id="current-town-img" src="" alt="Current Town of the Month">
+      </div>
+      <div class="current-town-content">
+        <div class="current-town-month">
+          <i class="fas fa-calendar-star"></i>
+          <span id="current-month">Month</span>
+        </div>
+        <h2 id="current-name" class="current-town-name">Town Name</h2>
+        
+        <div id="current-stats" class="current-town-stats">
+          <!-- Stats will be populated by JavaScript -->
+        </div>
+        
+        <p id="current-description" class="current-town-description">Description will be loaded here...</p>
+        
+        <div class="current-town-leader">
+          <i class="fas fa-user-crown"></i>
+          <span>Leaders: <strong id="current-leader">Loading...</strong></span>
+        </div>
+        
+        <div>
+          <span class="current-town-ideology" id="current-ideology">Ideology</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Previous Towns of the Month -->
+    <div id="previous-towns" class="previous-towns-section">
+      <h2 class="section-title">Previous Towns of the Month</h2>
+      
+      <div id="previous-towns-grid" class="previous-towns-grid">
+        <!-- Previous towns will be populated by JavaScript -->
+      </div>
+      
+      <!-- Empty state (hidden by default) -->
+      <div id="no-towns-message" class="no-towns" style="display: none;">
+        <i class="fas fa-city"></i>
+        <h3>No Previous Towns Found</h3>
+        <p>Check back next month for featured towns!</p>
+      </div>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="towns-navigation">
+      <div class="towns-nav-links">
+        <a href="index.html" class="btn btn-outline">
+          <i class="fas fa-home"></i> Back to Home
+        </a>
+        <a href="guides.html" class="btn">
+          <i class="fas fa-book"></i> View Server Guides
+        </a>
+        <a href="rules.html" class="btn">
+          <i class="fas fa-scroll"></i> Server Rules
+        </a>
+      </div>
+    </div>
+    
   </div>
 
   <!-- Footer container -->
-  <div id="footer-container" class="component-loading" style="min-height: 150px;">
-    <i class="fas fa-spinner fa-spin"></i>
-    <span>Loading footer...</span>
-  </div>
-
-  <!-- COMPASS (BACK TO TOP) -->
-  <div class="compass" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-    <i class="fas fa-compass"></i>
-  </div>
+  <div id="footer-container"></div>
 
   <!-- Load component loader -->
   <script src="js/components-loader.js"></script>
   
-  <!-- Load town data -->
-  <script src="components/town-data.js"></script>
+  <!-- Town Data -->
+  <script src="js/town-data.js"></script>
   
   <!-- Page-specific JavaScript -->
   <script>
-    // ============================================
-    // TOWNS PAGE FUNCTIONS
-    // ============================================
-    
-    // Load and display towns from town-data.js
-    function loadTowns() {
-      const townsContainer = document.getElementById('towns-container');
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', async () => {
+      console.log('DOM loaded, starting component loading...');
       
-      // Check if town data is available
-      if (!window.townsOfTheMonth) {
-        townsContainer.innerHTML = `
-          <div class="component-error" style="text-align: center; padding: 40px; margin: 20px;">
-            <i class="fas fa-exclamation-triangle"></i>
-            <h3>Failed to load town data</h3>
-            <p>Check that components/town-data.js exists and is properly formatted</p>
-          </div>
-        `;
-        return;
-      }
-      
-      if (window.townsOfTheMonth.length === 0) {
-        townsContainer.innerHTML = `
-          <div class="no-towns">
-            <i class="fas fa-city"></i>
-            <h3>No Towns Available Yet</h3>
-            <p>Check back later for featured towns, or join the server to create your own!</p>
-            <a href="index.html#join" class="btn" style="margin-top: 20px;">Join the Server</a>
-          </div>
-        `;
-        return;
-      }
-      
-      // Create towns grid
-      let townsHTML = '<div class="towns-grid" id="towns-grid">';
-      
-      window.townsOfTheMonth.forEach((town, index) => {
-        // Use relative path for images
-        const imagePath = town.image.startsWith('http') ? town.image : town.image;
-        
-        townsHTML += `
-          <div class="town-card fade-in-up" style="animation-delay: ${index * 0.1}s">
-            <div class="town-image-container">
-              <img class="town-image" src="${imagePath}" alt="${town.name}" 
-                   onerror="this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'">
-              <div class="town-badge">${town.month}</div>
-            </div>
-            
-            <div class="town-content">
-              <div class="town-header">
-                <h3 class="town-name">${town.name}</h3>
-                <span class="town-month">${town.month}</span>
-              </div>
-              
-              <p class="town-desc">${town.description}</p>
-              
-              <div class="town-stats">
-                <div class="town-stat">
-                  <i class="fas fa-users"></i>
-                  <span>${town.population} Citizens</span>
-                </div>
-                <div class="town-stat">
-                  <i class="fas fa-crown"></i>
-                  <span>${town.leader}</span>
-                </div>
-                <div class="town-stat">
-                  <i class="fas fa-landmark"></i>
-                  <span>${town.ideology}</span>
-                </div>
-              </div>
-              
-              <div class="town-actions">
-                <button class="btn btn-small" onclick="copyText('${town.name}')">
-                  <i class="fas fa-copy"></i> Copy Name
-                </button>
-                <button class="btn btn-small btn-outline" onclick="alert('Map feature coming soon!')">
-                  <i class="fas fa-map"></i> Find on Map
-                </button>
-              </div>
-            </div>
-          </div>
-        `;
-      });
-      
-      townsHTML += '</div>';
-      townsContainer.innerHTML = townsHTML;
-      
-      // Initialize scroll animations
-      initScrollAnimations();
-    }
-    
-    // Initialize scroll animations
-    function initScrollAnimations() {
-      const fadeElements = document.querySelectorAll('.fade-in-up');
-      
-      const fadeOnScroll = () => {
-        fadeElements.forEach(element => {
-          const elementTop = element.getBoundingClientRect().top;
-          const elementVisible = 150;
+      try {
+        // Load components using ComponentLoader if available
+        if (window.ComponentLoader) {
+          console.log('Using ComponentLoader...');
           
-          if (elementTop < window.innerHeight - elementVisible) {
-            element.style.opacity = "1";
-            element.style.transform = "translateY(0)";
-          }
-        });
-      };
-      
-      fadeOnScroll();
-      
-      let scrollTimeout;
-      window.addEventListener('scroll', () => {
-        if (!scrollTimeout) {
-          scrollTimeout = setTimeout(() => {
-            fadeOnScroll();
-            scrollTimeout = null;
+          // Load navbar first
+          await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
+          console.log('Navbar loaded');
+          
+          // Initialize dropdowns after navbar loads
+          setTimeout(() => {
+            if (window.initializeDropdowns) {
+              window.initializeDropdowns();
+            }
           }, 100);
+          
+          // Load other components
+          await window.ComponentLoader.loadComponent('header', 'header-container');
+          console.log('Header loaded');
+          
+          await window.ComponentLoader.loadComponent('footer', 'footer-container');
+          console.log('Footer loaded');
+          
+          // Set active navigation for this page
+          setTimeout(() => {
+            const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
+            navLinks.forEach(link => {
+              if (link.getAttribute('href') === 'towns.html' || 
+                  link.getAttribute('data-nav') === 'towns') {
+                link.classList.add('active');
+              }
+            });
+          }, 500);
+          
+        } else {
+          console.log('ComponentLoader not found, loading manually');
+          // Fallback manual loading would go here
         }
-      });
-    }
-    
-    // Copy text function (reuse from index.html if available)
-    window.copyText = window.copyText || function(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        const notification = document.createElement('div');
-        notification.textContent = `Copied: ${text}`;
-        notification.style.cssText = `
-          position: fixed;
-          top: 20px;
-          right: 20px;
-          background: var(--accent-gold);
-          color: var(--primary-dark);
-          padding: 12px 24px;
-          border-radius: 8px;
-          font-weight: 600;
-          z-index: 1000;
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-          animation: fadeIn 0.3s ease;
-        `;
-        document.body.appendChild(notification);
         
-        setTimeout(() => {
-          notification.style.animation = 'fadeOut 0.5s ease forwards';
-          setTimeout(() => document.body.removeChild(notification), 500);
-        }, 2000);
-      }).catch(err => {
-        console.error('Failed to copy:', err);
-      });
-    };
-    
-    // ============================================
-    // PAGE INITIALIZATION
-    // ============================================
-    
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('Towns page loading...');
-      
-      // Load towns after a short delay to ensure town-data.js is loaded
-      setTimeout(loadTowns, 100);
-      
-      // Initialize dropdowns if function exists
-      if (window.initializeDropdowns) {
-        setTimeout(window.initializeDropdowns, 200);
+        // Load and display town data
+        loadTownsData();
+        
+        console.log('Towns page initialization complete!');
+        
+      } catch (error) {
+        console.error('Error during page initialization:', error);
       }
     });
+    
+    // Function to load and display town data
+    function loadTownsData() {
+      // Check if town data exists
+      if (!window.townsOfTheMonth || !Array.isArray(window.townsOfTheMonth) || window.townsOfTheMonth.length === 0) {
+        console.error('No town data found!');
+        document.getElementById('current-town').style.display = 'none';
+        document.getElementById('no-towns-message').style.display = 'block';
+        return;
+      }
+      
+      // Sort towns by date (assuming month format is "Month Year")
+      const sortedTowns = [...window.townsOfTheMonth].sort((a, b) => {
+        // Convert month strings to dates for sorting
+        const dateA = parseMonthYear(a.month);
+        const dateB = parseMonthYear(b.month);
+        return dateB - dateA; // Most recent first
+      });
+      
+      // Display current town (most recent)
+      displayCurrentTown(sortedTowns[0]);
+      
+      // Display previous towns (all except the first one)
+      if (sortedTowns.length > 1) {
+        displayPreviousTowns(sortedTowns.slice(1));
+      } else {
+        document.getElementById('no-towns-message').style.display = 'block';
+      }
+    }
+    
+    // Helper function to parse month-year strings
+    function parseMonthYear(monthYear) {
+      const months = {
+        'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
+        'July': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11
+      };
+      
+      const [month, year] = monthYear.split(' ');
+      const monthIndex = months[month];
+      const yearNum = parseInt(year);
+      
+      return new Date(yearNum, monthIndex);
+    }
+    
+    // Display the current town
+    function displayCurrentTown(town) {
+      // Set basic info
+      document.getElementById('current-month').textContent = town.month;
+      document.getElementById('current-name').textContent = town.name;
+      document.getElementById('current-description').textContent = town.description;
+      document.getElementById('current-leader').textContent = town.leader;
+      document.getElementById('current-ideology').textContent = town.ideology;
+      
+      // Set image
+      const imgElement = document.getElementById('current-town-img');
+      imgElement.src = town.image;
+      imgElement.alt = `Image of ${town.name}`;
+      
+      // Set fallback image if needed
+      imgElement.onerror = function() {
+        this.src = 'images/default-town.jpg';
+      };
+      
+      // Create stats HTML
+      const statsHTML = `
+        <div class="stat-item">
+          <div class="stat-value">${town.population}</div>
+          <div class="stat-label">Population</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">${town.ideology}</div>
+          <div class="stat-label">Ideology</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">${town.leader}</div>
+          <div class="stat-label">Leaders</div>
+        </div>
+      `;
+      
+      document.getElementById('current-stats').innerHTML = statsHTML;
+    }
+    
+    // Display previous towns
+    function displayPreviousTowns(towns) {
+      const gridContainer = document.getElementById('previous-towns-grid');
+      
+      // Clear any existing content
+      gridContainer.innerHTML = '';
+      
+      // Create town cards
+      towns.forEach(town => {
+        const townCard = document.createElement('div');
+        townCard.className = 'town-card';
+        
+        townCard.innerHTML = `
+          <div class="town-card-image">
+            <img src="${town.image}" alt="${town.name}" onerror="this.src='images/default-town.jpg'">
+          </div>
+          <div class="town-card-content">
+            <div class="town-card-month">
+              <i class="fas fa-calendar-alt"></i>
+              ${town.month}
+            </div>
+            <h3 class="town-card-name">${town.name}</h3>
+            <p class="town-card-description">${town.description}</p>
+            
+            <div class="town-card-stats">
+              <div class="town-stat">
+                <div class="town-stat-value">${town.population}</div>
+                <div class="town-stat-label">Population</div>
+              </div>
+              <div class="town-stat">
+                <div class="town-stat-value">${town.leader.split(',')[0]}</div>
+                <div class="town-stat-label">Lead</div>
+              </div>
+            </div>
+            
+            <div class="town-card-footer">
+              <div class="town-card-leader">
+                <i class="fas fa-user"></i>
+                ${town.leader}
+              </div>
+              <div class="town-card-ideology">
+                ${town.ideology}
+              </div>
+            </div>
+          </div>
+        `;
+        
+        gridContainer.appendChild(townCard);
+      });
+    }
+    
+    // Global dropdown initialization function
+    if (typeof initializeDropdowns !== 'function') {
+      window.initializeDropdowns = function() {
+        console.log('Initializing dropdowns...');
+        // Implementation from index.html
+      };
+    }
   </script>
 </body>
 </html>
