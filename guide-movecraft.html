@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NavyCraft Guide — GeoFrontier Minecraft Server</title>
+  <title>Movecraft Guide — GeoFrontier Minecraft Server</title>
   
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +20,7 @@
       position: relative;
       background: 
         linear-gradient(rgba(11, 17, 32, 0.95), rgba(8, 12, 26, 0.98)),
-        url('/images/navycraft-bg.jpg') center/cover no-repeat;
+        url('/images/movecraft-bg.jpg') center/cover no-repeat;
       color: white;
       text-align: center;
       padding: 60px 20px;
@@ -59,29 +59,6 @@
       padding: 0 20px;
     }
     
-    .wip-notice {
-      background: linear-gradient(145deg, rgba(255, 152, 0, 0.2), rgba(255, 193, 7, 0.1));
-      border-left: 4px solid #FF9800;
-      padding: 20px;
-      margin-bottom: 30px;
-      border-radius: 0 8px 8px 0;
-      animation: pulse 3s infinite;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { border-left-color: #FF9800; }
-      50% { border-left-color: #FFC107; }
-    }
-    
-    .wip-notice h3 {
-      color: #FF9800;
-      margin-bottom: 10px;
-      font-family: 'Cinzel', serif;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
     .ship-types-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -115,9 +92,8 @@
       background: linear-gradient(to bottom, #2d9cdb, #1a5f8a);
     }
     
-    .ship-card.small { border-left-color: #4CAF50; }
-    .ship-card.medium { border-left-color: #2196F3; }
-    .ship-card.large { border-left-color: #F44336; }
+    .ship-card.civilian { border-left-color: #4CAF50; }
+    .ship-card.naval { border-left-color: #F44336; }
     .ship-card.flagship { border-left-color: #9C27B0; }
     
     .ship-card h4 {
@@ -160,7 +136,6 @@
       font-size: 0.95rem;
       line-height: 1.6;
       margin-top: 15px;
-      font-style: italic;
     }
     
     .ship-role {
@@ -172,6 +147,114 @@
       font-size: 0.8rem;
       font-weight: 600;
       margin-top: 10px;
+    }
+    
+    .cannon-status {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+    
+    .cannon-enabled {
+      background: rgba(244, 67, 54, 0.2);
+      color: #FF5252;
+    }
+    
+    .cannon-disabled {
+      background: rgba(158, 158, 158, 0.2);
+      color: #9E9E9E;
+    }
+    
+    .sign-guide {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      padding: 30px;
+      border-radius: 15px;
+      margin: 40px 0;
+      border: 2px solid rgba(212, 175, 55, 0.3);
+    }
+    
+    .sign-guide h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--accent-gold);
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .sign-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 30px 0;
+    }
+    
+    .sign-card {
+      background: rgba(20, 35, 60, 0.7);
+      border-radius: 10px;
+      padding: 20px;
+      border: 1px solid rgba(45, 156, 219, 0.3);
+    }
+    
+    .sign-card h4 {
+      color: #4fc3f7;
+      margin-bottom: 15px;
+      font-family: 'Cinzel', serif;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .sign-example {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 15px 0;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      border-radius: 8px;
+    }
+    
+    .sign-example img {
+      width: 92px;
+      height: 45px;
+      image-rendering: pixelated;
+      border: 2px solid #4fc3f7;
+      border-radius: 4px;
+    }
+    
+    .sign-format {
+      font-family: monospace;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 8px;
+      border-radius: 4px;
+      color: #a8e6cf;
+      border-left: 3px solid #4fc3f7;
+    }
+    
+    .required-signs {
+      background: rgba(255, 152, 0, 0.1);
+      border-left: 4px solid #FF9800;
+      padding: 20px;
+      margin: 30px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .required-signs h4 {
+      color: #FF9800;
+      margin-bottom: 15px;
+      font-family: 'Cinzel', serif;
+    }
+    
+    .required-signs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
     }
     
     .building-guide {
@@ -262,6 +345,32 @@
       gap: 10px;
     }
     
+    .cannon-link {
+      background: linear-gradient(145deg, rgba(244, 67, 54, 0.15), rgba(198, 40, 40, 0.1));
+      border: 2px solid #F44336;
+      border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+      margin: 30px 0;
+    }
+    
+    .cannon-link a {
+      display: inline-block;
+      padding: 15px 30px;
+      background: linear-gradient(90deg, #c62828, #d32f2f);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .cannon-link a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(198, 40, 40, 0.4);
+    }
+    
     .navigation-footer {
       display: flex;
       justify-content: space-between;
@@ -289,6 +398,11 @@
         flex-direction: column;
         gap: 15px;
       }
+      
+      .sign-example {
+        flex-direction: column;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -305,25 +419,19 @@
       <div class="guide-icon">
         <i class="fas fa-ship"></i>
       </div>
-      <h1>NavyCraft</h1>
+      <h1>Movecraft</h1>
       <p>Age of Exploration Naval System — Build, Sail, and Conquer</p>
     </div>
   </header>
 
   <!-- Main Content -->
   <div class="guide-container">
-    
-    <!-- WIP Notice -->
-    <div class="wip-notice">
-      <h3><i class="fas fa-tools"></i> Work in Progress</h3>
-      <p style="color: #ffecb3;">NavyCraft is currently being developed and balanced. Ship stats and mechanics may change. This guide will be updated as the system evolves.</p>
-    </div>
 
     <!-- Introduction -->
     <div class="building-guide">
       <h3><i class="fas fa-anchor"></i> Naval System Overview</h3>
       <p style="color: #b3e0ff; line-height: 1.7;">
-        NavyCraft replaces the standard Movecraft system with specialized Age of Exploration ship classes. Each ship type has specific building requirements, capabilities, and combat roles. 
+        Movecraft replaces the standard minecart system with specialized Age of Exploration ship classes. Each ship type has specific building requirements, capabilities, and combat roles. 
         The seas are extremely dangerous — only properly built ships will survive storms, creatures, and enemy fire.
       </p>
     </div>
@@ -332,14 +440,18 @@
     <div class="building-guide">
       <h3><i class="fas fa-flag"></i> Ship Classes</h3>
       <p style="color: #b3e0ff; margin-bottom: 25px;">
-        Choose your vessel based on your needs: exploration, trade, or warfare. Each class has size limits, speed, and weapon capacity.
+        Choose your vessel based on your needs. <strong class="cannon-enabled">Red ships</strong> are naval vessels with cannons enabled. 
+        <strong class="cannon-disabled">Green ships</strong> are civilian/trader vessels with cannons disabled.
       </p>
       
       <div class="ship-types-grid">
         
-        <!-- Small Vessels -->
-        <div class="ship-card small">
-          <h4><i class="fas fa-sailboat"></i> Pinnace</h4>
+        <!-- Civilian Vessels (Cannons Disabled) -->
+        <div class="ship-card civilian">
+          <h4>
+            <i class="fas fa-sailboat"></i> Pinnace 
+            <span class="cannon-status cannon-disabled">Cannons Disabled</span>
+          </h4>
           <div class="ship-stats">
             <div class="stat-row">
               <span class="stat-label">Size:</span>
@@ -350,22 +462,21 @@
               <span class="stat-value">14 (Very Fast)</span>
             </div>
             <div class="stat-row">
-              <span class="stat-label">Fuel Efficiency:</span>
-              <span class="stat-value">High</span>
-            </div>
-            <div class="stat-row">
               <span class="stat-label">Cruise Skip:</span>
               <span class="stat-value">4 blocks</span>
             </div>
           </div>
           <div class="ship-description">
-            Tiny scout vessel for coastal exploration and quick messenger runs. Fastest ship in the fleet.
+            Tiny civilian vessel for coastal trading and quick messenger runs. Fastest ship in the fleet. Cannot equip cannons.
           </div>
-          <div class="ship-role">Scout / Messenger</div>
+          <div class="ship-role">Civilian / Trader / Messenger</div>
         </div>
         
-        <div class="ship-card small">
-          <h4><i class="fas fa-bolt"></i> Cutter</h4>
+        <div class="ship-card civilian">
+          <h4>
+            <i class="fas fa-bolt"></i> Cutter 
+            <span class="cannon-status cannon-disabled">Cannons Disabled</span>
+          </h4>
           <div class="ship-stats">
             <div class="stat-row">
               <span class="stat-label">Size:</span>
@@ -376,49 +487,22 @@
               <span class="stat-value">11 (Fast)</span>
             </div>
             <div class="stat-row">
-              <span class="stat-label">Fuel Efficiency:</span>
-              <span class="stat-value">High</span>
-            </div>
-            <div class="stat-row">
               <span class="stat-label">Cruise Skip:</span>
               <span class="stat-value">6 blocks</span>
             </div>
           </div>
           <div class="ship-description">
-            Small, fast vessel for coastal patrol and light duties. Excellent speed for its size.
+            Small civilian vessel for coastal trade and light duties. Excellent speed for its size. Cannot equip cannons.
           </div>
-          <div class="ship-role">Patrol / Light Duty</div>
+          <div class="ship-role">Civilian / Trader</div>
         </div>
         
-        <div class="ship-card small">
-          <h4><i class="fas fa-compass"></i> Caravel</h4>
-          <div class="ship-stats">
-            <div class="stat-row">
-              <span class="stat-label">Size:</span>
-              <span class="stat-value">600-2500 blocks</span>
-            </div>
-            <div class="stat-row">
-              <span class="stat-label">Speed:</span>
-              <span class="stat-value">8</span>
-            </div>
-            <div class="stat-row">
-              <span class="stat-label">Fuel Efficiency:</span>
-              <span class="stat-value">Very High</span>
-            </div>
-            <div class="stat-row">
-              <span class="stat-label">Cruise Skip:</span>
-              <span class="stat-value">8 blocks</span>
-            </div>
-          </div>
-          <div class="ship-description">
-            Versatile exploration ship for discovery voyages and coastal trading. Extremely fuel efficient.
-          </div>
-          <div class="ship-role">Exploration / Trading</div>
-        </div>
-        
-        <!-- Medium Vessels -->
-        <div class="ship-card medium">
-          <h4><i class="fas fa-ship"></i> Schooner</h4>
+        <!-- Naval Vessels (Cannons Enabled) -->
+        <div class="ship-card naval">
+          <h4>
+            <i class="fas fa-ship"></i> Schooner
+            <span class="cannon-status cannon-enabled">Cannons Enabled</span>
+          </h4>
           <div class="ship-stats">
             <div class="stat-row">
               <span class="stat-label">Size:</span>
@@ -429,22 +513,21 @@
               <span class="stat-value">8</span>
             </div>
             <div class="stat-row">
-              <span class="stat-label">Fuel Efficiency:</span>
-              <span class="stat-value">High</span>
-            </div>
-            <div class="stat-row">
               <span class="stat-label">Cruise Skip:</span>
               <span class="stat-value">4 blocks</span>
             </div>
           </div>
           <div class="ship-description">
-            Balanced vessel with good speed and cargo capacity for versatile operations.
+            Small naval vessel with good speed. First ship class that can equip and fire cannons.
           </div>
-          <div class="ship-role">Versatile / Cargo</div>
+          <div class="ship-role">Naval / Light Warship</div>
         </div>
         
-        <div class="ship-card medium">
-          <h4><i class="fas fa-chess-rook"></i> Brigantine</h4>
+        <div class="ship-card naval">
+          <h4>
+            <i class="fas fa-chess-rook"></i> Brigantine
+            <span class="cannon-status cannon-enabled">Cannons Enabled</span>
+          </h4>
           <div class="ship-stats">
             <div class="stat-row">
               <span class="stat-label">Size:</span>
@@ -455,22 +538,21 @@
               <span class="stat-value">7</span>
             </div>
             <div class="stat-row">
-              <span class="stat-label">Fuel Efficiency:</span>
-              <span class="stat-value">Good</span>
-            </div>
-            <div class="stat-row">
               <span class="stat-label">Cruise Skip:</span>
               <span class="stat-value">6 blocks</span>
             </div>
           </div>
           <div class="ship-description">
-            Two-masted vessel perfect for naval skirmishes and privateering operations.
+            Two-masted naval vessel perfect for naval skirmishes and privateering operations. Cannon-equipped.
           </div>
-          <div class="ship-role">Naval Skirmish / Privateer</div>
+          <div class="ship-role">Naval / Privateer</div>
         </div>
         
-        <div class="ship-card medium">
-          <h4><i class="fas fa-skull-crossbones"></i> Corsair</h4>
+        <div class="ship-card naval">
+          <h4>
+            <i class="fas fa-skull-crossbones"></i> Corsair
+            <span class="cannon-status cannon-enabled">Cannons Enabled</span>
+          </h4>
           <div class="ship-stats">
             <div class="stat-row">
               <span class="stat-label">Size:</span>
@@ -481,23 +563,21 @@
               <span class="stat-value">6</span>
             </div>
             <div class="stat-row">
-              <span class="stat-label">Fuel Efficiency:</span>
-              <span class="stat-value">Very High</span>
-            </div>
-            <div class="stat-row">
               <span class="stat-label">Cruise Skip:</span>
               <span class="stat-value">8 blocks</span>
             </div>
           </div>
           <div class="ship-description">
-            Raider vessel optimized for speed, boarding actions, and hit-and-run tactics.
+            Raider vessel optimized for boarding actions and hit-and-run tactics. Equipped with cannons.
           </div>
-          <div class="ship-role">Raider / Pirate</div>
+          <div class="ship-role">Naval / Raider</div>
         </div>
         
-        <!-- Large Vessels -->
-        <div class="ship-card large">
-          <h4><i class="fas fa-boxes"></i> Galleon</h4>
+        <div class="ship-card naval">
+          <h4>
+            <i class="fas fa-boxes"></i> Galleon
+            <span class="cannon-status cannon-enabled">Cannons Enabled</span>
+          </h4>
           <div class="ship-stats">
             <div class="stat-row">
               <span class="stat-label">Size:</span>
@@ -508,22 +588,21 @@
               <span class="stat-value">6 (Slow)</span>
             </div>
             <div class="stat-row">
-              <span class="stat-label">Fuel Efficiency:</span>
-              <span class="stat-value">Low</span>
-            </div>
-            <div class="stat-row">
               <span class="stat-label">Cruise Skip:</span>
               <span class="stat-value">12 blocks</span>
             </div>
           </div>
           <div class="ship-description">
-            Heavy armed merchantman or treasure ship for trans-oceanic voyages and bulk cargo.
+            Heavy armed merchantman or treasure ship. Naval vessel with cannon capability.
           </div>
-          <div class="ship-role">Trade / Troop Transport</div>
+          <div class="ship-role">Naval / Armed Transport</div>
         </div>
         
-        <div class="ship-card large">
-          <h4><i class="fas fa-shield-alt"></i> Frigate</h4>
+        <div class="ship-card naval">
+          <h4>
+            <i class="fas fa-shield-alt"></i> Frigate
+            <span class="cannon-status cannon-enabled">Cannons Enabled</span>
+          </h4>
           <div class="ship-stats">
             <div class="stat-row">
               <span class="stat-label">Size:</span>
@@ -534,23 +613,22 @@
               <span class="stat-value">4 (Slow)</span>
             </div>
             <div class="stat-row">
-              <span class="stat-label">Fuel Efficiency:</span>
-              <span class="stat-value">Very High</span>
-            </div>
-            <div class="stat-row">
               <span class="stat-label">Cruise Skip:</span>
               <span class="stat-value">10 blocks</span>
             </div>
           </div>
           <div class="ship-description">
-            Fast warship for convoy escort, patrol duties, and naval engagements. Excellent fuel economy for its size.
+            Fast warship for convoy escort, patrol duties, and naval engagements. Heavy cannon armament.
           </div>
-          <div class="ship-role">Escort / Patrol / Warship</div>
+          <div class="ship-role">Naval / Warship</div>
         </div>
         
-        <!-- Flagship Vessels -->
+        <!-- Flagship Vessel -->
         <div class="ship-card flagship">
-          <h4><i class="fas fa-crosshairs"></i> Man-o-War</h4>
+          <h4>
+            <i class="fas fa-crosshairs"></i> Man-o-War
+            <span class="cannon-status cannon-enabled">Cannons Enabled</span>
+          </h4>
           <div class="ship-stats">
             <div class="stat-row">
               <span class="stat-label">Size:</span>
@@ -561,10 +639,6 @@
               <span class="stat-value">3 (Very Slow)</span>
             </div>
             <div class="stat-row">
-              <span class="stat-label">Fuel Efficiency:</span>
-              <span class="stat-value">Extremely High</span>
-            </div>
-            <div class="stat-row">
               <span class="stat-label">Cruise Skip:</span>
               <span class="stat-value">12 blocks</span>
             </div>
@@ -572,20 +646,92 @@
           <div class="ship-description">
             Ultimate ship of the line - the pinnacle of naval power with maximum durability and firepower.
           </div>
-          <div class="ship-role">Battleship / Flagship</div>
+          <div class="ship-role">Naval / Flagship</div>
         </div>
         
       </div>
       
-      <!-- Ship System Notes -->
-      <div class="progression-guide" style="margin-top: 30px;">
-        <h4><i class="fas fa-info-circle"></i> Ship System Notes</h4>
-        <div style="color: #b3e0ff; line-height: 1.7;">
-          <p><strong>Fuel Efficiency:</strong> Ships vary in fuel consumption. Smaller ships like Caravel and Corsair are very fuel-efficient, while larger ships consume more resources.</p>
-          <p><strong>Cruise Skip:</strong> Determines how many blocks the ship "skips" during cruising mode. Higher values mean smoother sailing over long distances.</p>
-          <p><strong>Durability:</strong> All ships can take damage and sink. Man-o-War has the highest durability (90% sink threshold).</p>
-          <p><strong>Tech Restrictions:</strong> All ships forbid redstone, pistons, and other modern technology to maintain era authenticity.</p>
+      <!-- Cannon Guide Link -->
+      <div class="cannon-link">
+        <a href="guide-cannons.html">
+          <i class="fas fa-cannon"></i> View Complete Cannon Guide <i class="fas fa-arrow-right"></i>
+        </a>
+        <p style="color: #b3e0ff; margin-top: 15px;">Learn how to equip, aim, and fire your naval vessel's cannons</p>
+      </div>
+    </div>
+
+    <!-- Required Signs Section -->
+    <div class="sign-guide">
+      <h3><i class="fas fa-sign"></i> Required Ship Signs</h3>
+      
+      <div class="required-signs">
+        <h4><i class="fas fa-exclamation-triangle"></i> Every ship MUST have these signs:</h4>
+        
+        <div class="required-signs-grid">
+          <div class="sign-example">
+            <img src="images/name_sign.png" alt="Name sign example">
+            <div>
+              <strong>Name Sign</strong>
+              <div class="sign-format">Name:<br>Sea Dragon</div>
+              <small>Sets the craft's name, displayed on nametag and /contacts</small>
+            </div>
+          </div>
+          
+          <div class="sign-example">
+            <img src="images/cruise_sign.png" alt="Cruise sign example">
+            <div>
+              <strong>Cruise Sign</strong>
+              <div class="sign-format">Cruise: OFF</div>
+              <small>Right-click to toggle cruise mode</small>
+            </div>
+          </div>
+          
+          <div class="sign-example">
+            <img src="images/pilot_sign.png" alt="Pilot sign example">
+            <div>
+              <strong>Pilot Sign</strong>
+              <div class="sign-format">Pilot:<br>PlayerName</div>
+              <small>Add registered pilots (one per line)</small>
+            </div>
+          </div>
+          
+          <div class="sign-example">
+            <img src="images/release_sign.png" alt="Release sign example">
+            <div>
+              <strong>Release Sign</strong>
+              <div class="sign-format">Release</div>
+              <small>Right-click to release the craft</small>
+            </div>
+          </div>
+          
+          <div class="sign-example">
+            <img src="images/manoverboard_sign.png" alt="Manoverboard sign example">
+            <div>
+              <strong>Manoverboard Sign</strong>
+              <div class="sign-format">Manoverboard</div>
+              <small>Sets teleport point for /manoverboard command</small>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Optional Signs Section -->
+    <div class="sign-guide">
+      <h3><i class="fas fa-sign"></i> Optional Ship Signs</h3>
+      
+      <div class="sign-grid">
+        
+        <div class="sign-card">
+          <h4><i class="fas fa-compass"></i> Helm Sign</h4>
+          <div class="sign-format" style="margin: 10px 0;">[helm]</div>
+          <p style="color: #b3e0ff;">Allows steering control:</p>
+          <ul style="color: #b3e0ff; list-style: none; padding-left: 0;">
+            <li><i class="fas fa-mouse-pointer"></i> Right-click: Rotate ship 90° clockwise (right)</li>
+            <li><i class="fas fa-mouse-pointer"></i> Left-click: Rotate ship 90° counter-clockwise (left)</li>
+          </ul>
+        </div>
+        
       </div>
     </div>
 
@@ -653,61 +799,9 @@
       <div class="danger-warning">
         <h4><i class="fas fa-exclamation-circle"></i> Forbidden Blocks (Tech Restrictions)</h4>
         <p style="color: #ffcdd2;">
-          <strong>The following blocks are prohibited on all NavyCraft ships:</strong> Pistons, Sticky Pistons, Slime Blocks, Honey Blocks, Observers, 
+          <strong>The following blocks are prohibited on all Movecraft ships:</strong> Pistons, Sticky Pistons, Slime Blocks, Honey Blocks, Observers, 
           Dispensers, Droppers, Redstone components, Beacons, and Ender Chests. These restrictions maintain Age of Exploration authenticity and prevent exploits.
         </p>
-      </div>
-    </div>
-
-    <!-- Fuel System -->
-    <div class="building-guide">
-      <h3><i class="fas fa-fire"></i> Fuel System</h3>
-      <div style="color: #b3e0ff; line-height: 1.7;">
-        <p>All ships require fuel to sail. Fuel efficiency varies by ship class:</p>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
-          <div style="background: rgba(20, 35, 60, 0.6); padding: 15px; border-radius: 8px;">
-            <h5 style="color: #4fc3f7; margin-bottom: 10px;">Fuel Types & Values</h5>
-            <div class="stat-row">
-              <span class="stat-label">Coal:</span>
-              <span class="stat-value">15-50 units</span>
-            </div>
-            <div class="stat-row">
-              <span class="stat-label">Charcoal:</span>
-              <span class="stat-value">15-50 units</span>
-            </div>
-            <div class="stat-row">
-              <span class="stat-label">Coal Block:</span>
-              <span class="stat-value">150-500 units</span>
-            </div>
-            <div class="stat-row">
-              <span class="stat-label">Lava Bucket:</span>
-              <span class="stat-value">75-1000 units</span>
-            </div>
-          </div>
-          
-          <div style="background: rgba(20, 35, 60, 0.6); padding: 15px; border-radius: 8px;">
-            <h5 style="color: #4fc3f7; margin-bottom: 10px;">Efficiency Examples</h5>
-            <div class="stat-row">
-              <span class="stat-label">Most Efficient:</span>
-              <span class="stat-value">Caravel, Corsair</span>
-            </div>
-            <div class="stat-row">
-              <span class="stat-label">High Efficiency:</span>
-              <span class="stat-value">Frigate, Man-o-War</span>
-            </div>
-            <div class="stat-row">
-              <span class="stat-label">Moderate:</span>
-              <span class="stat-value">Schooner, Brigantine</span>
-            </div>
-            <div class="stat-row">
-              <span class="stat-label">Lowest:</span>
-              <span class="stat-value">Galleon</span>
-            </div>
-          </div>
-        </div>
-        
-        <p><strong>Note:</strong> Fuel consumption is balanced so larger warships aren't prohibitively expensive to operate, while still requiring resource investment.</p>
       </div>
     </div>
 
@@ -715,18 +809,19 @@
     <div class="progression-guide">
       <h4><i class="fas fa-chart-line"></i> Ship Progression Path</h4>
       <div style="color: #b3e0ff; line-height: 1.7;">
-        <p><strong>Start (Coastal):</strong> Pinnace (20-150) or Cutter (151-400) for learning and quick travel</p>
-        <p><strong>Early Exploration:</strong> Caravel (600-2500) for discovery voyages and light trade</p>
-        <p><strong>Specialization:</strong> Schooner (500-1400) for versatility or Brigantine (1200-2800) for combat</p>
-        <p><strong>Mid-Game Power:</strong> Corsair (2500-4400) for raiding or Frigate (4200-6500) for naval power</p>
-        <p><strong>Late-Game Trade:</strong> Galleon (2501-4000) for bulk cargo and treasure transport</p>
+        <p><strong>Start (Civilian):</strong> Pinnace (20-150) or Cutter (151-400) for learning and quick travel. <span class="cannon-disabled">Cannons disabled</span></p>
+        <p><strong>First Warship:</strong> Schooner (500-1400) - Your first vessel with cannon capability</p>
+        <p><strong>Naval Combat:</strong> Brigantine (1200-2800) for serious naval engagements</p>
+        <p><strong>Raiding:</strong> Corsair (2500-4400) for hit-and-run tactics</p>
+        <p><strong>Naval Power:</strong> Frigate (4200-6500) for convoy escort and fleet actions</p>
+        <p><strong>Armed Trade:</strong> Galleon (2501-4000) for bulk cargo with cannon protection</p>
         <p><strong>End-Game Flagship:</strong> Man-o-War (7500-10000) as ultimate naval dominance</p>
       </div>
     </div>
 
     <!-- Commands -->
     <div class="building-guide">
-      <h3><i class="fas fa-terminal"></i> NavyCraft Commands</h3>
+      <h3><i class="fas fa-terminal"></i> Movecraft Commands</h3>
       <div style="background: rgba(20, 35, 60, 0.6); padding: 20px; border-radius: 8px; margin-top: 20px;">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
           <div>
@@ -735,9 +830,11 @@
             <p style="color: #b3e0ff; margin: 5px 0;"><code>/craft release</code> - Stop sailing</p>
             <p style="color: #b3e0ff; margin: 5px 0;"><code>/craft info</code> - Ship status</p>
             <p style="color: #b3e0ff; margin: 5px 0;"><code>/craft cruise</code> - Toggle cruise mode</p>
+            <p style="color: #b3e0ff; margin: 5px 0;"><code>/manoverboard</code> - Teleport to manoverboard sign</p>
+            <p style="color: #b3e0ff; margin: 5px 0;"><code>/contacts</code> - View nearby ships</p>
           </div>
           <div>
-            <h5 style="color: #4fc3f7; margin-bottom: 10px;">Combat & Management</h5>
+            <h5 style="color: #4fc3f7; margin-bottom: 10px;">Combat Commands (Naval Ships Only)</h5>
             <p style="color: #b3e0ff; margin: 5px 0;"><code>/craft fire</code> - Fire cannons</p>
             <p style="color: #b3e0ff; margin: 5px 0;"><code>/craft reload</code> - Reload weapons</p>
             <p style="color: #b3e0ff; margin: 5px 0;"><code>/craft repair</code> - Repair damage</p>
@@ -752,8 +849,11 @@
       <a href="guide-dangerous-seas.html" class="btn" style="background: linear-gradient(90deg, #0D47A1, #1565C0); border-color: #42A5F5;">
         <i class="fas fa-arrow-left"></i> Dangerous Seas Guide
       </a>
+      <a href="guide-cannons.html" class="btn" style="background: linear-gradient(90deg, #c62828, #d32f2f);">
+        <i class="fas fa-cannon"></i> Cannon Guide
+      </a>
       <a href="rules.html" class="btn">
-        Next: Server Rules <i class="fas fa-arrow-right"></i>
+        Server Rules <i class="fas fa-arrow-right"></i>
       </a>
     </div>
   </div>
@@ -777,7 +877,7 @@
           setTimeout(() => {
             const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
             navLinks.forEach(link => {
-              if (link.getAttribute('href') === 'guide-navycraft.html' || 
+              if (link.getAttribute('href') === 'guide-movecraft.html' || 
                   link.getAttribute('data-nav') === 'guides') {
                 link.classList.add('active');
               }
