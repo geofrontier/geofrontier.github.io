@@ -59,6 +59,54 @@
       padding: 0 20px;
     }
     
+    /* Table of Contents */
+    .table-of-contents {
+      background-color: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 20px 25px;
+      margin-bottom: 40px;
+      border-radius: 8px;
+    }
+    
+    .table-of-contents h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--accent-gold);
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding-bottom: 8px;
+    }
+    
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px 30px;
+    }
+    
+    .toc-list li {
+      flex: 0 0 auto;
+      width: calc(50% - 15px);
+    }
+    
+    .toc-list a {
+      color: #b3e0ff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    
+    .toc-list a i {
+      color: #4fc3f7;
+      font-size: 0.8rem;
+    }
+    
+    .toc-list a:hover {
+      color: var(--accent-gold);
+      text-decoration: none;
+    }
+    
     /* Wikipedia-style tutorial sections */
     .tutorial-section {
       margin-bottom: 40px;
@@ -503,6 +551,122 @@
       margin: 8px 0;
     }
     
+    /* Troubleshooting section */
+    .troubleshooting-grid {
+      background: rgba(20, 35, 60, 0.8);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    
+    .troubleshooting-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(45, 156, 219, 0.2);
+    }
+    
+    .troubleshooting-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .troubleshooting-number {
+      background: rgba(45, 156, 219, 0.2);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4fc3f7;
+      font-weight: bold;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    
+    .troubleshooting-content h4 {
+      color: #4fc3f7;
+      margin-bottom: 5px;
+    }
+    
+    .troubleshooting-content p {
+      color: #b3e0ff;
+      margin: 0;
+    }
+    
+    /* Ship diagram */
+    .ship-diagram-container {
+      background: rgba(8, 17, 35, 0.9);
+      border: 2px solid #4fc3f7;
+      border-radius: 16px;
+      padding: 25px;
+      margin: 30px 0 20px 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    
+    .ship-diagram-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: #4fc3f7;
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+    }
+    
+    .ascii-ship {
+      font-family: monospace;
+      white-space: pre;
+      color: #a8e6cf;
+      font-size: 0.9rem;
+      line-height: 1.2;
+      text-align: center;
+      margin-bottom: 25px;
+      background: rgba(0, 20, 40, 0.6);
+      padding: 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    
+    .diagram-labels {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    
+    .diagram-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: rgba(20, 35, 60, 0.8);
+      border-radius: 6px;
+    }
+    
+    .label-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+    }
+    
+    .label-color.hull { background: #4fc3f7; }
+    .label-color.sails { background: #FFC107; }
+    .label-color.masts { background: #9C27B0; }
+    .label-color.sign { background: #FF5252; }
+    
+    .label-text {
+      color: #b3e0ff;
+      font-size: 0.9rem;
+    }
+    
+    .label-text strong {
+      color: #fff;
+    }
+    
     .navigation-footer {
       display: flex;
       justify-content: space-between;
@@ -533,6 +697,10 @@
         font-size: 2.2rem;
       }
       
+      .toc-list li {
+        width: 100%;
+      }
+      
       .ship-types-grid {
         grid-template-columns: 1fr;
       }
@@ -552,6 +720,11 @@
       }
       
       .recommendation-item {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .troubleshooting-item {
         flex-direction: column;
         text-align: center;
       }
@@ -579,15 +752,32 @@
   <!-- Main Content -->
   <div class="guide-container">
 
+    <!-- Table of Contents -->
+    <div class="table-of-contents">
+      <h3><i class="fas fa-list"></i> Contents</h3>
+      <ul class="toc-list">
+        <li><a href="#introduction"><i class="fas fa-chevron-right"></i> What is Movecraft?</a></li>
+        <li><a href="#how-ships-work"><i class="fas fa-chevron-right"></i> How Ships Work</a></li>
+        <li><a href="#troubleshooting"><i class="fas fa-chevron-right"></i> Why My Ship Won't Move</a></li>
+        <li><a href="#building-guide"><i class="fas fa-chevron-right"></i> Step-by-Step Building</a></li>
+        <li><a href="#material-requirements"><i class="fas fa-chevron-right"></i> Material Requirements</a></li>
+        <li><a href="#ship-classes"><i class="fas fa-chevron-right"></i> Ship Classes</a></li>
+        <li><a href="#signs"><i class="fas fa-chevron-right"></i> Ship Signs</a></li>
+        <li><a href="#materials"><i class="fas fa-chevron-right"></i> Allowed Materials</a></li>
+        <li><a href="#commands"><i class="fas fa-chevron-right"></i> Essential Commands</a></li>
+        <li><a href="#progression"><i class="fas fa-chevron-right"></i> Recommended Progression</a></li>
+      </ul>
+    </div>
+
     <!-- Introduction -->
-    <div class="tutorial-section">
+    <div class="tutorial-section" id="introduction">
       <h2><i class="fas fa-anchor"></i> What is Movecraft?</h2>
       <p>Movecraft transforms static builds into moving ships. Instead of using minecarts or boats, you construct a vessel out of legitimate blocks, place a few specialized signs, and then sail it across the ocean. The ship moves as a single unit, with all players aboard moving with it.</p>
       <p>The system is designed for the Age of Exploration. Ships are slow, require careful handling, and are vulnerable to storms, sea creatures, and enemy cannon fire. A poorly built ship will sink. A well built ship becomes your home on the waves.</p>
     </div>
 
     <!-- How Ships Work (Core Mechanics) -->
-    <div class="tutorial-section">
+    <div class="tutorial-section" id="how-ships-work">
       <h2><i class="fas fa-cogs"></i> How Ships Work</h2>
       
       <h3>Ship Identification</h3>
@@ -615,8 +805,95 @@
       <p>Any player can pilot any ship by default. To restrict access, use a pilot sign listing authorized pilots. The ship's owner is the player who placed the craft type sign. This player can add or remove pilots via the sign.</p>
     </div>
 
+    <!-- Why My Ship Won't Move - Troubleshooting -->
+    <div class="tutorial-section" id="troubleshooting">
+      <h2><i class="fas fa-question-circle"></i> Why My Ship Won't Move</h2>
+      
+      <p>You built a beautiful ship, placed your signs, right clicked with a stick, and nothing happened. Don't panic. This is the most common experience for new shipwrights. Work through these checks in order.</p>
+      
+      <div class="troubleshooting-grid">
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">1</div>
+          <div class="troubleshooting-content">
+            <h4>Are you standing on the ship?</h4>
+            <p>You must be physically on the ship's blocks. Standing next to it or on nearby terrain won't work. The game needs to know which craft you're trying to move.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">2</div>
+          <div class="troubleshooting-content">
+            <h4>Are you holding a stick?</h4>
+            <p>The movement item is a stick. Not a sword, not a fishing rod, not your bare hand. A regular stick, in your main hand, right clicked in the direction you want to sail.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">3</div>
+          <div class="troubleshooting-content">
+            <h4>Does it have a Craft Type sign?</h4>
+            <p>Check for the required sign. First line must be exactly the ship class name, for example "Brigantine" or "Pinnace". No extra text, no punctuation. Just the class name.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">4</div>
+          <div class="troubleshooting-content">
+            <h4>Is it within block limits?</h4>
+            <p>Count your blocks. Every ship class has a minimum and maximum size. Too small or too large, and the ship won't be recognized. Check the Ship Classes table for your vessel's required range.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">5</div>
+          <div class="troubleshooting-content">
+            <h4>Are material percentages correct?</h4>
+            <p>Your ship needs at least 30 percent planks and 4 to 20 percent wool. If you built with too much stone or too little wool, the ship will sit dead in the water.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">6</div>
+          <div class="troubleshooting-content">
+            <h4>Is cruise already enabled?</h4>
+            <p>If you have a cruise sign and it's set to ON, the ship may already be trying to move. Toggle it OFF, then try the stick again.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">7</div>
+          <div class="troubleshooting-content">
+            <h4>Is it intersecting terrain?</h4>
+            <p>Ships cannot phase through land, other ships, or major structures. If any part of your ship would clip into something, movement fails. Try moving to open water.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">8</div>
+          <div class="troubleshooting-content">
+            <h4>Is someone else piloting?</h4>
+            <p>Only one player can control a ship at a time. If another player is currently piloting, you will need to wait or ask them to release control.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">9</div>
+          <div class="troubleshooting-content">
+            <h4>Does it have forbidden blocks?</h4>
+            <p>Check your build for pistons, redstone components, or other prohibited materials. One forbidden block can disable the entire ship.</p>
+          </div>
+        </div>
+        
+      </div>
+      
+      <div style="background: rgba(255, 193, 7, 0.1); border-left: 4px solid #FFC107; padding: 15px; border-radius: 0 8px 8px 0; margin-top: 20px;">
+        <p style="color: #ffecb3; margin: 0;"><i class="fas fa-lightbulb"></i> <strong>Still stuck?</strong> Ask in Discord with a screenshot of your ship and a player online can usually spot the issue in seconds. Nine times out of ten, it is a missing craft type sign or a block count problem.</p>
+      </div>
+    </div>
+
     <!-- Step-by-Step Building Guide -->
-    <div class="tutorial-section">
+    <div class="tutorial-section" id="building-guide">
       <h2><i class="fas fa-hammer"></i> How to Build a Ship: Step by Step</h2>
       
       <div class="build-steps">
@@ -689,7 +966,7 @@
     </div>
 
     <!-- Material Requirements -->
-    <div class="material-requirement">
+    <div class="material-requirement" id="material-requirements">
       <h3><i class="fas fa-cubes"></i> Material Composition Requirements</h3>
       <p style="color: #b3e0ff; margin-bottom: 20px;">Every ship must meet these material percentages to function.</p>
       
@@ -710,9 +987,58 @@
       <p style="color: #b3e0ff; margin-top: 15px;"><i class="fas fa-info-circle"></i> The remaining percentage can be any combination of allowed materials, including stone, glass, and wood variants.</p>
     </div>
 
-    <!-- Ship Classes (Stat Cards) -->
-    <div class="tutorial-section">
+    <!-- Ship Classes (Stat Cards) with Integrated Diagram -->
+    <div class="tutorial-section" id="ship-classes">
       <h2><i class="fas fa-flag"></i> Ship Classes</h2>
+      
+      <!-- Ship Diagram - Visual Reference -->
+      <div class="ship-diagram-container">
+        <div class="ship-diagram-title">
+          <i class="fas fa-draw-polygon"></i> Anatomy of a Brigantine
+        </div>
+        
+        <div class="ascii-ship">
+          <pre style="color: #4fc3f7; font-family: monospace; margin: 0 auto; display: inline-block; text-align: left;">
+                        ╱▔▔▔▔▔▔▔▔╲                         
+                  ╱▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔╲                   
+             ╱▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔╲              
+          ╱▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔╲           
+          ████████████████████████████████████████████          
+          ███▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███  ╱▔▔▔╲ 
+          ███▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███ █   █ 
+          ███▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███ ╲▁▁▁╱ 
+          ████████████████████████████████████████████          
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          
+          </pre>
+        </div>
+        
+        <div class="diagram-labels">
+          <div class="diagram-label">
+            <div class="label-color hull"></div>
+            <div class="label-text"><strong>Hull</strong> — Planks, stone, iron</div>
+          </div>
+          <div class="diagram-label">
+            <div class="label-color sails"></div>
+            <div class="label-text"><strong>Sails</strong> — Wool (4% to 20%)</div>
+          </div>
+          <div class="diagram-label">
+            <div class="label-color masts"></div>
+            <div class="label-text"><strong>Masts</strong> — Logs, fences</div>
+          </div>
+          <div class="diagram-label">
+            <div class="label-color sign"></div>
+            <div class="label-text"><strong>Sign</strong> — Craft type (required)</div>
+          </div>
+        </div>
+        
+        <p style="color: #90CAF9; font-size: 0.9rem; margin-top: 15px; text-align: center;">
+          <i class="fas fa-info-circle"></i> The craft type sign can be placed anywhere on the ship. All blocks shown count toward total volume.
+        </p>
+      </div>
+      
       <p style="margin-bottom: 20px;">Ships are divided into civilian vessels with no cannons and naval vessels with cannons enabled. Choose based on your intended use. Traders should use civilian ships to avoid being mistaken for warships.</p>
       
       <div class="ship-types-grid">
@@ -858,7 +1184,7 @@
     </div>
 
     <!-- Signs Section with Images -->
-    <div class="sign-guide">
+    <div class="sign-guide" id="signs">
       <h3><i class="fas fa-sign"></i> Ship Signs Reference</h3>
       
       <div class="required-notice">
@@ -933,7 +1259,7 @@
     </div>
 
     <!-- Allowed Materials -->
-    <div class="tutorial-section">
+    <div class="tutorial-section" id="materials">
       <h2><i class="fas fa-cubes"></i> Allowed Building Materials</h2>
       
       <div class="materials-section">
@@ -993,7 +1319,7 @@
     </div>
 
     <!-- Commands -->
-    <div class="tutorial-section">
+    <div class="tutorial-section" id="commands">
       <h2><i class="fas fa-terminal"></i> Essential Commands</h2>
       
       <div class="commands-grid">
@@ -1020,7 +1346,7 @@
     </div>
 
     <!-- Progression Path -->
-    <div class="tutorial-section">
+    <div class="tutorial-section" id="progression">
       <h2><i class="fas fa-chart-line"></i> Recommended Progression</h2>
       <p>New to ships? Start small and work your way up.</p>
       <ol style="color: #b3e0ff;">
