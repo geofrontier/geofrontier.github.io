@@ -104,6 +104,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
     }
     
     .ship-stats {
@@ -155,7 +156,6 @@
       border-radius: 20px;
       font-size: 0.8rem;
       font-weight: 600;
-      margin-left: 10px;
     }
     
     .cannon-enabled {
@@ -166,6 +166,49 @@
     .cannon-disabled {
       background: rgba(158, 158, 158, 0.2);
       color: #9E9E9E;
+    }
+    
+    .material-requirement {
+      background: linear-gradient(145deg, rgba(255, 193, 7, 0.1), rgba(255, 152, 0, 0.05));
+      border: 2px solid #FFC107;
+      border-radius: 12px;
+      padding: 25px;
+      margin: 30px 0;
+    }
+    
+    .material-requirement h3 {
+      color: #FFC107;
+      font-family: 'Cinzel', serif;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .percentage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+    
+    .percentage-card {
+      background: rgba(20, 35, 60, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #FFC107;
+    }
+    
+    .percentage-card h4 {
+      color: #FFD54F;
+      margin-bottom: 10px;
+    }
+    
+    .percentage-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #FFC107;
+      margin: 10px 0;
     }
     
     .sign-guide {
@@ -186,40 +229,23 @@
       gap: 12px;
     }
     
-    .sign-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      margin: 30px 0;
+    .sign-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
     
-    .sign-card {
+    .sign-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
       background: rgba(20, 35, 60, 0.7);
+      padding: 15px;
       border-radius: 10px;
-      padding: 20px;
       border: 1px solid rgba(45, 156, 219, 0.3);
     }
     
-    .sign-card h4 {
-      color: #4fc3f7;
-      margin-bottom: 15px;
-      font-family: 'Cinzel', serif;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .sign-example {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin: 15px 0;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 10px;
-      border-radius: 8px;
-    }
-    
-    .sign-example img {
+    .sign-item img {
       width: 92px;
       height: 45px;
       image-rendering: pixelated;
@@ -227,34 +253,42 @@
       border-radius: 4px;
     }
     
-    .sign-format {
-      font-family: monospace;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 8px;
-      border-radius: 4px;
-      color: #a8e6cf;
-      border-left: 3px solid #4fc3f7;
+    .sign-info {
+      flex: 1;
     }
     
-    .required-signs {
-      background: rgba(255, 152, 0, 0.1);
-      border-left: 4px solid #FF9800;
-      padding: 20px;
-      margin: 30px 0;
-      border-radius: 0 8px 8px 0;
-    }
-    
-    .required-signs h4 {
-      color: #FF9800;
-      margin-bottom: 15px;
+    .sign-info h4 {
+      color: #4fc3f7;
+      margin-bottom: 5px;
       font-family: 'Cinzel', serif;
     }
     
-    .required-signs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
+    .sign-format {
+      font-family: monospace;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 4px 8px;
+      border-radius: 4px;
+      color: #a8e6cf;
+      display: inline-block;
+      margin: 5px 0;
+    }
+    
+    .sign-required {
+      background: #FF9800;
+      color: #000;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+    
+    .required-notice {
+      background: rgba(255, 152, 0, 0.15);
+      border-left: 4px solid #FF9800;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 0 8px 8px 0;
     }
     
     .building-guide {
@@ -371,6 +405,14 @@
       box-shadow: 0 5px 15px rgba(198, 40, 40, 0.4);
     }
     
+    .durability-note {
+      background: rgba(33, 150, 243, 0.1);
+      border: 1px solid #2196F3;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    
     .navigation-footer {
       display: flex;
       justify-content: space-between;
@@ -399,7 +441,7 @@
         gap: 15px;
       }
       
-      .sign-example {
+      .sign-item {
         flex-direction: column;
         text-align: center;
       }
@@ -436,6 +478,36 @@
       </p>
     </div>
 
+    <!-- Material Requirements -->
+    <div class="material-requirement">
+      <h3><i class="fas fa-cubes"></i> Critical Building Requirements</h3>
+      <p style="color: #b3e0ff; margin-bottom: 20px;">All ships must meet these material composition requirements:</p>
+      
+      <div class="percentage-grid">
+        <div class="percentage-card">
+          <h4><i class="fas fa-wood"></i> Planks</h4>
+          <div class="percentage-value">30% - 100%</div>
+          <p style="color: #b3e0ff;">Minimum 30% of your ship MUST be made of planks</p>
+        </div>
+        
+        <div class="percentage-card">
+          <h4><i class="fas fa-tshirt"></i> Wool (Sails)</h4>
+          <div class="percentage-value">4% - 20%</div>
+          <p style="color: #b3e0ff;">Wool must comprise 4-20% of your total ship volume</p>
+        </div>
+      </div>
+      
+      <div class="durability-note">
+        <h4 style="color: #29B6F6;"><i class="fas fa-heart"></i> Ship Durability</h4>
+        <p style="color: #b3e0ff;">Each ship has two durability thresholds:</p>
+        <ul style="color: #b3e0ff; list-style: none; padding-left: 0;">
+          <li><i class="fas fa-skull"></i> <strong>Sink Percent (80-90%):</strong> Ship begins taking damage</li>
+          <li><i class="fas fa-water"></i> <strong>Overall Sink Percent (60-80%):</strong> Ship sinks when this percentage is damaged</li>
+        </ul>
+        <p style="color: #90CAF9; font-size: 0.9rem; margin-top: 10px;">Example: Man-o-War sinks at 80% overall damage, making it the most durable vessel</p>
+      </div>
+    </div>
+
     <!-- Ship Classes -->
     <div class="building-guide">
       <h3><i class="fas fa-flag"></i> Ship Classes</h3>
@@ -463,7 +535,11 @@
             </div>
             <div class="stat-row">
               <span class="stat-label">Cruise Skip:</span>
-              <span class="stat-value">4 blocks</span>
+              <span class="stat-value">10 blocks</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Sink %:</span>
+              <span class="stat-value">90%</span>
             </div>
           </div>
           <div class="ship-description">
@@ -490,6 +566,10 @@
               <span class="stat-label">Cruise Skip:</span>
               <span class="stat-value">6 blocks</span>
             </div>
+            <div class="stat-row">
+              <span class="stat-label">Sink %:</span>
+              <span class="stat-value">80%</span>
+            </div>
           </div>
           <div class="ship-description">
             Small civilian vessel for coastal trade and light duties. Excellent speed for its size. Cannot equip cannons.
@@ -498,6 +578,35 @@
         </div>
         
         <!-- Naval Vessels (Cannons Enabled) -->
+        <div class="ship-card naval">
+          <h4>
+            <i class="fas fa-ship"></i> Caravel
+            <span class="cannon-status cannon-enabled">Cannons Enabled</span>
+          </h4>
+          <div class="ship-stats">
+            <div class="stat-row">
+              <span class="stat-label">Size:</span>
+              <span class="stat-value">600-2500 blocks</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Speed:</span>
+              <span class="stat-value">8</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Cruise Skip:</span>
+              <span class="stat-value">8 blocks</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Sink %:</span>
+              <span class="stat-value">80%</span>
+            </div>
+          </div>
+          <div class="ship-description">
+            Versatile exploration ship for discovery voyages. Naval vessel with cannon capability.
+          </div>
+          <div class="ship-role">Naval / Exploration</div>
+        </div>
+        
         <div class="ship-card naval">
           <h4>
             <i class="fas fa-ship"></i> Schooner
@@ -514,11 +623,15 @@
             </div>
             <div class="stat-row">
               <span class="stat-label">Cruise Skip:</span>
-              <span class="stat-value">4 blocks</span>
+              <span class="stat-value">8 blocks</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Sink %:</span>
+              <span class="stat-value">80%</span>
             </div>
           </div>
           <div class="ship-description">
-            Small naval vessel with good speed. First ship class that can equip and fire cannons.
+            Small naval vessel with good speed. First dedicated warship class with cannons.
           </div>
           <div class="ship-role">Naval / Light Warship</div>
         </div>
@@ -539,7 +652,11 @@
             </div>
             <div class="stat-row">
               <span class="stat-label">Cruise Skip:</span>
-              <span class="stat-value">6 blocks</span>
+              <span class="stat-value">8 blocks</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Sink %:</span>
+              <span class="stat-value">80%</span>
             </div>
           </div>
           <div class="ship-description">
@@ -564,7 +681,11 @@
             </div>
             <div class="stat-row">
               <span class="stat-label">Cruise Skip:</span>
-              <span class="stat-value">8 blocks</span>
+              <span class="stat-value">10 blocks</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Sink %:</span>
+              <span class="stat-value">85%</span>
             </div>
           </div>
           <div class="ship-description">
@@ -591,6 +712,10 @@
               <span class="stat-label">Cruise Skip:</span>
               <span class="stat-value">12 blocks</span>
             </div>
+            <div class="stat-row">
+              <span class="stat-label">Sink %:</span>
+              <span class="stat-value">85%</span>
+            </div>
           </div>
           <div class="ship-description">
             Heavy armed merchantman or treasure ship. Naval vessel with cannon capability.
@@ -616,6 +741,10 @@
               <span class="stat-label">Cruise Skip:</span>
               <span class="stat-value">10 blocks</span>
             </div>
+            <div class="stat-row">
+              <span class="stat-label">Sink %:</span>
+              <span class="stat-value">85%</span>
+            </div>
           </div>
           <div class="ship-description">
             Fast warship for convoy escort, patrol duties, and naval engagements. Heavy cannon armament.
@@ -632,7 +761,7 @@
           <div class="ship-stats">
             <div class="stat-row">
               <span class="stat-label">Size:</span>
-              <span class="stat-value">7500-10000 blocks</span>
+              <span class="stat-value">7500-100000 blocks</span>
             </div>
             <div class="stat-row">
               <span class="stat-label">Speed:</span>
@@ -642,9 +771,13 @@
               <span class="stat-label">Cruise Skip:</span>
               <span class="stat-value">12 blocks</span>
             </div>
+            <div class="stat-row">
+              <span class="stat-label">Sink %:</span>
+              <span class="stat-value">90%</span>
+            </div>
           </div>
           <div class="ship-description">
-            Ultimate ship of the line - the pinnacle of naval power with maximum durability and firepower.
+            Ultimate ship of the line - the pinnacle of naval power with maximum durability (80% overall sink) and firepower.
           </div>
           <div class="ship-role">Naval / Flagship</div>
         </div>
@@ -660,76 +793,70 @@
       </div>
     </div>
 
-    <!-- Required Signs Section -->
+    <!-- Signs Section -->
     <div class="sign-guide">
-      <h3><i class="fas fa-sign"></i> Required Ship Signs</h3>
+      <h3><i class="fas fa-sign"></i> Ship Signs</h3>
       
-      <div class="required-signs">
-        <h4><i class="fas fa-exclamation-triangle"></i> Every ship MUST have these signs:</h4>
+      <div class="required-notice">
+        <p style="color: #ffecb3;"><i class="fas fa-exclamation-triangle"></i> <strong>Required Sign:</strong> Every ship MUST have a Craft Type/Name sign. All other signs are optional.</p>
+      </div>
+      
+      <div class="sign-list">
         
-        <div class="required-signs-grid">
-          <div class="sign-example">
-            <img src="images/name_sign.png" alt="Name sign example">
-            <div>
-              <strong>Name Sign</strong>
-              <div class="sign-format">Name:<br>Sea Dragon</div>
-              <small>Sets the craft's name, displayed on nametag and /contacts</small>
-            </div>
-          </div>
-          
-          <div class="sign-example">
-            <img src="images/cruise_sign.png" alt="Cruise sign example">
-            <div>
-              <strong>Cruise Sign</strong>
-              <div class="sign-format">Cruise: OFF</div>
-              <small>Right-click to toggle cruise mode</small>
-            </div>
-          </div>
-          
-          <div class="sign-example">
-            <img src="images/pilot_sign.png" alt="Pilot sign example">
-            <div>
-              <strong>Pilot Sign</strong>
-              <div class="sign-format">Pilot:<br>PlayerName</div>
-              <small>Add registered pilots (one per line)</small>
-            </div>
-          </div>
-          
-          <div class="sign-example">
-            <img src="images/release_sign.png" alt="Release sign example">
-            <div>
-              <strong>Release Sign</strong>
-              <div class="sign-format">Release</div>
-              <small>Right-click to release the craft</small>
-            </div>
-          </div>
-          
-          <div class="sign-example">
-            <img src="images/manoverboard_sign.png" alt="Manoverboard sign example">
-            <div>
-              <strong>Manoverboard Sign</strong>
-              <div class="sign-format">Manoverboard</div>
-              <small>Sets teleport point for /manoverboard command</small>
-            </div>
+        <!-- Required Sign -->
+        <div class="sign-item">
+          <img src="images/name_sign.png" alt="Name sign example">
+          <div class="sign-info">
+            <h4>Craft Type / Name <span class="sign-required">REQUIRED</span></h4>
+            <div class="sign-format">Brigantine<br>Sea Dragon</div>
+            <p style="color: #b3e0ff;">First line must be the craft type (e.g., Brigantine, Galleon, etc.). Second line is your ship's name. Sets the craft's name displayed on nametag and /contacts.</p>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Optional Signs Section -->
-    <div class="sign-guide">
-      <h3><i class="fas fa-sign"></i> Optional Ship Signs</h3>
-      
-      <div class="sign-grid">
         
-        <div class="sign-card">
-          <h4><i class="fas fa-compass"></i> Helm Sign</h4>
-          <div class="sign-format" style="margin: 10px 0;">[helm]</div>
-          <p style="color: #b3e0ff;">Allows steering control:</p>
-          <ul style="color: #b3e0ff; list-style: none; padding-left: 0;">
-            <li><i class="fas fa-mouse-pointer"></i> Right-click: Rotate ship 90° clockwise (right)</li>
-            <li><i class="fas fa-mouse-pointer"></i> Left-click: Rotate ship 90° counter-clockwise (left)</li>
-          </ul>
+        <!-- Optional Signs -->
+        <div class="sign-item">
+          <img src="images/helm_sign.png" alt="Helm sign example">
+          <div class="sign-info">
+            <h4>Helm Sign</h4>
+            <div class="sign-format">[helm]</div>
+            <p style="color: #b3e0ff;">Allows steering control. Right-click to rotate ship 90° clockwise, left-click to rotate 90° counter-clockwise.</p>
+          </div>
+        </div>
+        
+        <div class="sign-item">
+          <img src="images/cruise_sign.png" alt="Cruise sign example">
+          <div class="sign-info">
+            <h4>Cruise Sign</h4>
+            <div class="sign-format">Cruise: OFF</div>
+            <p style="color: #b3e0ff;">Right-click to toggle cruise mode on/off. Cruise mode allows continuous sailing in a straight line.</p>
+          </div>
+        </div>
+        
+        <div class="sign-item">
+          <img src="images/pilot_sign.png" alt="Pilot sign example">
+          <div class="sign-info">
+            <h4>Pilot Sign</h4>
+            <div class="sign-format">Pilot:<br>PlayerName</div>
+            <p style="color: #b3e0ff;">Add registered pilots (one per line). Anyone not on this list cannot pilot the ship. Leave blank for public access.</p>
+          </div>
+        </div>
+        
+        <div class="sign-item">
+          <img src="images/manoverboard_sign.png" alt="Manoverboard sign example">
+          <div class="sign-info">
+            <h4>Manoverboard Sign</h4>
+            <div class="sign-format">Manoverboard</div>
+            <p style="color: #b3e0ff;">Sets the location that the /manoverboard command will teleport you to. Useful for getting back aboard if you fall off.</p>
+          </div>
+        </div>
+        
+        <div class="sign-item">
+          <img src="images/release_sign.png" alt="Release sign example">
+          <div class="sign-info">
+            <h4>Release Sign</h4>
+            <div class="sign-format">Release</div>
+            <p style="color: #b3e0ff;">Right-click to release the craft (stop sailing). Alternative to /craft release command.</p>
+          </div>
         </div>
         
       </div>
@@ -737,19 +864,20 @@
 
     <!-- Building Materials -->
     <div class="building-guide">
-      <h3><i class="fas fa-hammer"></i> Building Requirements</h3>
+      <h3><i class="fas fa-hammer"></i> Building Materials</h3>
       
       <div class="materials-section">
         <div class="material-category">
           <h5>Primary Materials</h5>
           <div class="material-list">
-            <span class="material-tag">All Planks</span>
+            <span class="material-tag">All Planks (30-100%)</span>
             <span class="material-tag">All Logs</span>
-            <span class="material-tag">All Wool</span>
-            <span class="material-tag">Iron Blocks</span>
+            <span class="material-tag">All Wool (4-20%)</span>
+            <span class="material-tag">Iron Blocks*</span>
             <span class="material-tag">All Glass</span>
             <span class="material-tag">Stone</span>
             <span class="material-tag">Cobblestone</span>
+            <span class="material-tag">Stone Bricks</span>
           </div>
         </div>
         
@@ -762,7 +890,6 @@
             <span class="material-tag">All Wooden Trapdoors</span>
             <span class="material-tag">All Fences</span>
             <span class="material-tag">All Fence Gates</span>
-            <span class="material-tag">Stone Bricks</span>
             <span class="material-tag">All Walls</span>
           </div>
         </div>
@@ -771,14 +898,27 @@
           <h5>Deck & Interior</h5>
           <div class="material-list">
             <span class="material-tag">All Carpets</span>
-            <span class="material-tag">All Chests</span>
-            <span class="material-tag">Barrels</span>
+            <span class="material-tag">All Chests (0-3%)</span>
+            <span class="material-tag">Barrels (0-3%)</span>
             <span class="material-tag">All Signs</span>
             <span class="material-tag">Ladders</span>
             <span class="material-tag">Chains</span>
             <span class="material-tag">Furnaces</span>
+            <span class="material-tag">Smokers</span>
             <span class="material-tag">Crafting Tables</span>
+            <span class="material-tag">Cartography Tables</span>
           </div>
+        </div>
+        
+        <div class="material-category">
+          <h5>Naval Ship Only</h5>
+          <div class="material-list">
+            <span class="material-tag">Hoppers (0-0.6%)</span>
+            <span class="material-tag">Iron Blocks (0-10%)</span>
+            <span class="material-tag">Stone Buttons (0-1%)</span>
+            <span class="material-tag">Weighted Plates (0-0.2%)</span>
+          </div>
+          <p style="color: #90CAF9; font-size: 0.8rem; margin-top: 8px;">* Percentage limits shown in parentheses. Naval ships have higher iron limits for cannons.</p>
         </div>
         
         <div class="material-category">
@@ -787,12 +927,7 @@
             <span class="material-tag">Lanterns</span>
             <span class="material-tag">Torches</span>
             <span class="material-tag">Campfires</span>
-            <span class="material-tag">Smokers</span>
-            <span class="material-tag">Cartography Tables</span>
-            <span class="material-tag">Stone Buttons*</span>
-            <span class="material-tag">Pressure Plates*</span>
           </div>
-          <p style="color: #90CAF9; font-size: 0.8rem; margin-top: 8px;">* Only on naval combat ships</p>
         </div>
       </div>
       
@@ -800,7 +935,7 @@
         <h4><i class="fas fa-exclamation-circle"></i> Forbidden Blocks (Tech Restrictions)</h4>
         <p style="color: #ffcdd2;">
           <strong>The following blocks are prohibited on all Movecraft ships:</strong> Pistons, Sticky Pistons, Slime Blocks, Honey Blocks, Observers, 
-          Dispensers, Droppers, Redstone components, Beacons, and Ender Chests. These restrictions maintain Age of Exploration authenticity and prevent exploits.
+          Dispensers, Droppers, Redstone components (wire, blocks, repeaters, comparators), Daylight Detectors, Beacons, and Ender Chests. These restrictions maintain Age of Exploration authenticity and prevent exploits.
         </p>
       </div>
     </div>
@@ -810,12 +945,12 @@
       <h4><i class="fas fa-chart-line"></i> Ship Progression Path</h4>
       <div style="color: #b3e0ff; line-height: 1.7;">
         <p><strong>Start (Civilian):</strong> Pinnace (20-150) or Cutter (151-400) for learning and quick travel. <span class="cannon-disabled">Cannons disabled</span></p>
-        <p><strong>First Warship:</strong> Schooner (500-1400) - Your first vessel with cannon capability</p>
+        <p><strong>First Warship:</strong> Schooner (500-1400) or Caravel (600-2500) - Your first vessels with cannon capability</p>
         <p><strong>Naval Combat:</strong> Brigantine (1200-2800) for serious naval engagements</p>
-        <p><strong>Raiding:</strong> Corsair (2500-4400) for hit-and-run tactics</p>
-        <p><strong>Naval Power:</strong> Frigate (4200-6500) for convoy escort and fleet actions</p>
-        <p><strong>Armed Trade:</strong> Galleon (2501-4000) for bulk cargo with cannon protection</p>
-        <p><strong>End-Game Flagship:</strong> Man-o-War (7500-10000) as ultimate naval dominance</p>
+        <p><strong>Raiding:</strong> Corsair (2500-4400) for hit-and-run tactics (85% durability)</p>
+        <p><strong>Naval Power:</strong> Frigate (4200-6500) for convoy escort and fleet actions (85% durability)</p>
+        <p><strong>Armed Trade:</strong> Galleon (2501-4000) for bulk cargo with cannon protection (85% durability)</p>
+        <p><strong>End-Game Flagship:</strong> Man-o-War (7500-100000) as ultimate naval dominance (90% durability, 80% overall sink)</p>
       </div>
     </div>
 
