@@ -601,6 +601,28 @@
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
     
+    /* Image styling */
+    .example-image {
+      margin: 25px 0;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid rgba(45, 156, 219, 0.4);
+    }
+    
+    .example-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .image-caption {
+      background: rgba(0, 0, 0, 0.6);
+      color: #a8e6cf;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    
     @media (max-width: 768px) {
       .guide-header h1 {
         font-size: 2.2rem;
@@ -695,7 +717,7 @@
       
       <h3>Ship Movement</h3>
       <p>Ships move by teleporting forward in a series of jumps, not by smooth sailing. The distance traveled per jump, called cruise skip, varies by ship class. When you command your ship to move, the game checks if the entire ship would fit in the new position. If any part would intersect solid land, another ship, or major structures, the movement fails and your ship stays put.</p>
-      <p>If you do hit something, your ship may take damage and you will need to back up. To reverse direction, turn your ship around using the helm sign and sail back the way you came. Repeated collisions can severely damage your vessel.</p>
+      <p>If you do hit something, your ship may take damage and you will need to back up. To reverse direction, <strong>hold a stick and right click behind the ship</strong>; the vessel will move backward. (You do not need to turn the ship around to back up.) Repeated collisions can severely damage your vessel.</p>
       
       <h3>Storms and Environmental Damage</h3>
       <div class="storm-warning">
@@ -708,7 +730,7 @@
       <p>Any player can pilot any ship by default. To restrict access, use a pilot sign listing authorized pilots. The ship's owner is the player who placed the craft type sign. This player can add or remove pilots via the sign.</p>
     </div>
 
-    <!-- How to Pilot a Ship (New detailed section) -->
+    <!-- How to Pilot a Ship (Updated with stick details) -->
     <div class="tutorial-section" id="piloting">
       <h2><i class="fas fa-ship"></i> How to Pilot a Ship</h2>
       
@@ -719,8 +741,8 @@
       <ul>
         <li><strong>Moving Forward:</strong> Hold a stick in your hand and right click in the direction you want to sail. The ship will move forward in the direction you are facing. This works for forward movement, but many pilots prefer using the helm and cruise signs for long journeys.</li>
         <li><strong>Turning:</strong> Find your helm sign, labeled [helm]. Right click it to rotate the ship 90 degrees clockwise. Left click to rotate 90 degrees counter clockwise. Turn first, then sail forward.</li>
-        <li><strong>Sailing Diagonally or Backwards:</strong> The stick method works for any direction. Face the angle you want to travel, hold the stick, and right click. The ship will move in that exact direction. This is useful for maneuvering in tight spaces or backing away from obstacles.</li>
-        <li><strong>Cruise Mode:</strong> If you have a cruise sign, right click it to toggle cruise on and off. When cruise is ON, the ship will continue moving forward automatically without needing to click repeatedly. Be careful. Cruise mode does not avoid obstacles.</li>
+        <li><strong>Moving in Any Direction (Diagonal, Backward):</strong> The stick is your primary maneuvering tool. Face the exact direction you want the ship to go—even diagonally or behind you—hold the stick, and right click. The ship will move that way. This is the only way to back up or sail at angles; you do not need to turn the ship around to reverse.</li>
+        <li><strong>Cruise Mode:</strong> If you have a cruise sign, right click it to toggle cruise on and off. When cruise is ON, the ship will continue moving forward automatically without needing to click repeatedly. Be careful: cruise mode does not avoid obstacles, and you will still need the stick to change direction or back up while cruising.</li>
         <li><strong>Stopping:</strong> Right click a release sign if you have one, or type /release in chat. The ship will stop moving immediately.</li>
       </ul>
       
@@ -728,7 +750,7 @@
       <ul>
         <li>Always check your surroundings before moving. A ship stuck inside land takes damage and may sink.</li>
         <li>Use cruise mode only in open water. If you hit something while cruising, you will take damage before you can react.</li>
-        <li>The stick method is best for precise movements like docking or backing up. The helm plus cruise is better for long distance travel.</li>
+        <li>The stick is essential for all non-forward movement: diagonal sailing, backing up, and tight docking.</li>
         <li>If you fall off your ship, type /manoverboard to teleport back to your manoverboard sign. Always place one.</li>
       </ul>
     </div>
@@ -742,7 +764,7 @@
         <div class="step-item">Decide what you need, a fast trader like a Pinnace, a warship like a Brigantine, or a flagship like a Man o War. Each class has specific size requirements, as shown in the Ship Classes table below.</div>
         
         <h4>Step 2: Gather Materials</h4>
-        <div class="step-item">You will need planks, 30 to 100 percent of total volume, and wool for sails, 4 to 20 percent. Naval vessels can use up to 10 percent iron blocks for cannons. Your ship must be at least 30 percent planks, or it will not be recognized.</div>
+        <div class="step-item">You will need planks, 30 to 100 percent of total volume, and wool for sails, 4 to 20 percent. Naval vessels can use up to 10 percent iron blocks <strong>for cannons only</strong>. Your ship must be at least 30 percent planks, or it will not be recognized.</div>
         
         <h4>Step 3: Build the Hull</h4>
         <div class="step-item">Construct your ship within the size range for your chosen class. The hull must be solidly connected. All blocks count toward the ship's total volume. You can leave interior spaces hollow. Only the blocks themselves matter, not the air inside.</div>
@@ -776,7 +798,7 @@
           <div class="recommendation-icon"><i class="fas fa-shield-alt"></i></div>
           <div>
             <strong>Reinforce Critical Sections</strong>
-            <p>Storms and cannon fire do not destroy blocks uniformly. Reinforce your hull with multiple layers around vital areas, especially near the waterline. If the outer layer gets blown away, you have backups. Obsidian is excellent for core structural elements.</p>
+            <p>Storms and cannon fire do not destroy blocks uniformly. Reinforce your hull with multiple layers around vital areas, especially near the waterline. If the outer layer gets blown away, you have backups.</p>
           </div>
         </div>
         
@@ -901,7 +923,7 @@
       </div>
     </div>
 
-    <!-- Material Requirements -->
+    <!-- Material Requirements (Obsidian removed) -->
     <div class="material-requirement" id="material-requirements">
       <h3><i class="fas fa-cubes"></i> Material Composition Requirements</h3>
       <p style="color: #b3e0ff; margin-bottom: 20px;">Every ship must meet these material percentages to function.</p>
@@ -920,7 +942,7 @@
         </div>
       </div>
       
-      <p style="color: #b3e0ff; margin-top: 15px;"><i class="fas fa-info-circle"></i> The remaining percentage can be any combination of allowed materials, including stone, glass, and wood variants.</p>
+      <p style="color: #b3e0ff; margin-top: 15px;"><i class="fas fa-info-circle"></i> The remaining percentage can be any combination of allowed materials, including stone, glass, and wood variants. <strong>Iron blocks are used only for cannons on naval vessels and do not count toward reinforcement.</strong></p>
     </div>
 
     <!-- Ship Classes (Stat Cards) -->
@@ -928,6 +950,12 @@
       <h2><i class="fas fa-flag"></i> Ship Classes</h2>
       
       <p style="margin-bottom: 20px;">Ships are divided into civilian vessels with no cannons and naval vessels with cannons enabled. Choose based on your intended use. Traders should use civilian ships to avoid being mistaken for warships.</p>
+      
+      <!-- Example image of a Man o' War placed appropriately -->
+      <div class="example-image">
+        <img src="images/manowar.png" alt="Example of a Man o' War class ship" style="width:100%; height:auto;">
+        <div class="image-caption"><i class="fas fa-ship"></i> Example of a Man o' War flagship—the largest vessel in the Movecraft fleet.</div>
+      </div>
       
       <div class="ship-types-grid">
         
@@ -1061,12 +1089,18 @@
       </div>
     </div>
 
-    <!-- Signs Section with Images -->
+    <!-- Signs Section with two images: existing signs and new composite sign image -->
     <div class="sign-guide" id="signs">
       <h3><i class="fas fa-sign"></i> Ship Signs Reference</h3>
       
       <div class="required-notice">
         <p style="color: #ffecb3;"><i class="fas fa-exclamation-triangle"></i> <strong>Required:</strong> Every ship MUST have a Craft Type sign. All other signs are optional.</p>
+      </div>
+      
+      <!-- New composite sign placement image -->
+      <div class="example-image" style="margin-bottom:30px;">
+        <img src="images/sign-placement.png" alt="Example of all ship signs placed together" style="width:100%; height:auto;">
+        <div class="image-caption"><i class="fas fa-signs-post"></i> Common sign arrangement on a ship—craft type, helm, cruise, and pilot signs.</div>
       </div>
       
       <div class="sign-list">
@@ -1103,7 +1137,7 @@
           <div class="sign-info">
             <h4>Cruise Sign</h4>
             <div class="sign-format">Cruise: OFF</div>
-            <p style="color: #b3e0ff;">Toggle continuous sailing. The ship will keep moving in a straight line until turned off.</p>
+            <p style="color: #b3e0ff;">Toggle continuous sailing. The ship will keep moving in a straight line until turned off. While cruising, use the stick to change direction or back up.</p>
           </div>
         </div>
         
@@ -1136,7 +1170,7 @@
       </div>
     </div>
 
-    <!-- Allowed Materials -->
+    <!-- Allowed Materials (Obsidian removed from note) -->
     <div class="tutorial-section" id="materials">
       <h2><i class="fas fa-cubes"></i> Allowed Building Materials</h2>
       
@@ -1151,7 +1185,7 @@
             <span class="material-tag">Stone Bricks</span>
             <span class="material-tag">Iron Blocks*</span>
           </div>
-          <p style="color: #90CAF9; font-size: 0.8rem; margin-top: 8px;">*Iron blocks limited to 10 percent on naval ships, 0 percent on civilian.</p>
+          <p style="color: #90CAF9; font-size: 0.8rem; margin-top: 8px;">*Iron blocks limited to 10 percent on naval ships, 0 percent on civilian. Used for cannons only, not reinforcement.</p>
         </div>
         
         <div class="material-category">
@@ -1220,7 +1254,7 @@
         </div>
       </div>
       
-      <p style="color: #b3e0ff; margin-top: 15px;"><i class="fas fa-info-circle"></i> To move your ship, hold a stick and right click in the direction you want to sail. To fire cannons on naval vessels, see the Cannon Guide.</p>
+      <p style="color: #b3e0ff; margin-top: 15px;"><i class="fas fa-info-circle"></i> To move your ship, hold a stick and right click in the direction you want to sail. The stick works for forward, diagonal, and backward movement. To fire cannons on naval vessels, see the Cannon Guide.</p>
     </div>
 
     <!-- Progression Path -->
