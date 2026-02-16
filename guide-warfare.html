@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    /* Base Styles & Variables (keeping your excellent scheme) */
+    /* Base Styles & Variables */
     :root {
       --primary-dark: #0B1120;
       --primary-deep: #1E293B;
@@ -117,12 +117,12 @@
 
     /* Main Container */
     .guide-container {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 40px auto;
       padding: 0 20px;
     }
 
-    /* Table of Contents - Cleaner, Wikipedia-like */
+    /* Table of Contents */
     .table-of-contents {
       background-color: rgba(30, 41, 59, 0.5);
       border: 1px solid var(--border-glow);
@@ -136,7 +136,6 @@
       color: var(--accent-gold);
       margin-bottom: 15px;
       font-size: 1.4rem;
-      font-weight: 600;
       border-bottom: 1px solid var(--border-glow);
       padding-bottom: 8px;
     }
@@ -173,8 +172,8 @@
 
     /* Guide Sections */
     .guide-section {
-      margin-bottom: 45px;
-      padding-bottom: 25px;
+      margin-bottom: 50px;
+      padding-bottom: 30px;
       border-bottom: 1px solid var(--border-glow);
     }
 
@@ -201,16 +200,22 @@
 
     .guide-section h3 {
       font-family: 'Cinzel', serif;
-      font-size: 1.4rem;
-      margin: 25px 0 15px 0;
+      font-size: 1.5rem;
+      margin: 30px 0 15px 0;
       color: var(--accent-teal);
-      font-weight: 600;
     }
 
     .guide-section h3 i {
-      margin-right: 8px;
-      font-size: 1.2rem;
+      margin-right: 10px;
       color: var(--accent-gold);
+      font-size: 1.3rem;
+    }
+
+    .guide-section h4 {
+      font-size: 1.2rem;
+      margin: 20px 0 10px 0;
+      color: var(--text-light);
+      font-weight: 600;
     }
 
     .guide-section p {
@@ -241,88 +246,84 @@
       font-size: 0.9em;
     }
 
-    /* Special Boxes - Less noisy, more subtle */
-    .info-panel {
-      background-color: rgba(15, 23, 42, 0.6);
-      border: 1px solid var(--border-glow);
-      border-radius: 12px;
-      padding: 20px;
+    /* Image Styles */
+    .figure {
       margin: 25px 0;
-    }
-
-    .info-panel h4 {
-      color: var(--accent-gold);
-      margin-bottom: 15px;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .grid-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin: 20px 0;
-    }
-
-    .card {
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid rgba(212, 175, 55, 0.15);
-      border-radius: 10px;
-      padding: 20px;
       text-align: center;
-      transition: border-color 0.2s;
     }
 
-    .card:hover {
-      border-color: var(--accent-gold);
+    .figure img {
+      max-width: 100%;
+      border-radius: 8px;
+      border: 2px solid var(--border-glow);
+      background: rgba(15, 23, 42, 0.5);
+      padding: 8px;
     }
 
-    .card i {
-      font-size: 2rem;
-      color: var(--accent-gold);
-      margin-bottom: 12px;
-    }
-
-    .card h4 {
-      color: var(--accent-teal);
-      margin-bottom: 10px;
-      font-family: 'Cinzel', serif;
-    }
-
-    .card p {
+    .figure figcaption {
+      margin-top: 8px;
       color: var(--text-muted);
-      font-size: 0.95rem;
-      margin: 0;
-    }
-
-    .card .meta {
-      color: var(--accent-rust);
-      font-weight: bold;
-      margin-top: 10px;
+      font-style: italic;
       font-size: 0.9rem;
     }
 
-    .callout {
-      padding: 15px 20px;
-      margin: 20px 0;
-      border-left: 4px solid;
-      background: rgba(255, 255, 255, 0.02);
+    .figure.inline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      text-align: left;
     }
 
-    .callout.tip {
-      border-left-color: var(--accent-gold);
+    .figure.inline img {
+      max-width: 200px;
     }
 
-    .callout.warning {
-      border-left-color: var(--accent-rust);
+    .figure.inline figcaption {
+      flex: 1;
+      margin-top: 0;
     }
 
-    .callout i {
-      margin-right: 10px;
+    /* Summary Cards - For quick reference */
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 25px 0;
+      background: rgba(15, 23, 42, 0.3);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border-glow);
     }
 
+    .summary-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+    .summary-card h4 {
+      color: var(--accent-gold);
+      margin-bottom: 10px;
+      font-family: 'Cinzel', serif;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding-bottom: 5px;
+    }
+
+    .summary-card ul {
+      margin: 5px 0 0 15px;
+    }
+
+    .summary-card li {
+      margin-bottom: 4px;
+      color: var(--text-muted);
+    }
+
+    /* Command Lists */
     .command-list {
       background: rgba(15, 23, 42, 0.5);
       border: 1px solid var(--border-glow);
@@ -349,6 +350,51 @@
       font-family: 'Inter', sans-serif;
     }
 
+    /* Callout Boxes */
+    .callout {
+      padding: 15px 20px;
+      margin: 20px 0;
+      border-left: 4px solid;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .callout.tip {
+      border-left-color: var(--accent-gold);
+    }
+
+    .callout.warning {
+      border-left-color: var(--accent-rust);
+    }
+
+    .callout.info {
+      border-left-color: var(--accent-teal);
+    }
+
+    .callout i {
+      margin-right: 10px;
+    }
+
+    /* Stat Blocks */
+    .stat-block {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 15px 0;
+    }
+
+    .stat {
+      background: rgba(45, 212, 191, 0.1);
+      border: 1px solid var(--accent-teal);
+      border-radius: 6px;
+      padding: 8px 15px;
+      font-weight: 600;
+    }
+
+    .stat span {
+      color: var(--accent-teal);
+      margin-right: 5px;
+    }
+
     hr {
       border: none;
       border-top: 1px solid var(--border-glow);
@@ -364,8 +410,13 @@
         width: 100%;
       }
 
-      .grid-cards {
+      .summary-cards {
         grid-template-columns: 1fr;
+      }
+
+      .figure.inline {
+        flex-direction: column;
+        text-align: center;
       }
     }
   </style>
@@ -381,7 +432,7 @@
         <i class="fas fa-crosshairs"></i>
       </div>
       <h1>Nexus War Guide</h1>
-      <p>A comprehensive overview of warfare, raiding, and diplomacy on GeoFrontier.</p>
+      <p>A comprehensive overview of warfare, army mechanics, and diplomacy on GeoFrontier.</p>
     </div>
   </header>
 
@@ -393,40 +444,72 @@
       <h3>Contents</h3>
       <ul class="toc-list">
         <li><a href="#the-nexus"><i class="fas fa-chevron-right"></i> 1. The Nexus System</a></li>
-        <li><a href="#warfare"><i class="fas fa-chevron-right"></i> 2. Full-Scale Warfare</a></li>
-        <li><a href="#raids"><i class="fas fa-chevron-right"></i> 3. Raids</a></li>
-        <li><a href="#defense"><i class="fas fa-chevron-right"></i> 4. Defense & Fortification</a></li>
-        <li><a href="#diplomacy"><i class="fas fa-chevron-right"></i> 5. Diplomacy: Ultimatums & Peace</a></li>
+        <li><a href="#army-system"><i class="fas fa-chevron-right"></i> 2. Army System</a></li>
+        <li><a href="#warfare"><i class="fas fa-chevron-right"></i> 3. Full-Scale Warfare & Sieges</a></li>
+        <li><a href="#raids"><i class="fas fa-chevron-right"></i> 4. Raids (WIP)</a></li>
+        <li><a href="#defense"><i class="fas fa-chevron-right"></i> 5. Defense & Fortification</a></li>
+        <li><a href="#diplomacy"><i class="fas fa-chevron-right"></i> 6. Diplomacy: Ultimatums & Peace</a></li>
       </ul>
     </div>
 
     <!-- Section 1: The Nexus -->
     <section class="guide-section" id="the-nexus">
       <h2><i class="fas fa-flag"></i> 1. The Nexus System</h2>
-      <p>The <strong>Nexus</strong> is the physical and political heart of every town. It is a placeable block that serves as the town's war objective. Its destruction in a full-scale war means the dissolution of the town. Interacting with a Nexus or using the <code>/nexus</code> command opens the war management GUI.</p>
+      
+      <div class="figure inline">
+        <img src="images/nexus.png" alt="Nexus - End Crystal" style="max-width: 168px;">
+        <figcaption>The Nexus appears as a regular-sized end crystal, serving as the physical heart of every town.</figcaption>
+      </div>
+      
+      <p>The <strong>Nexus</strong> is the physical and political heart of every town. It appears as a regular-sized end crystal and serves as the town's war objective. Interacting with a Nexus or using the <code>/nexus</code> command opens the war management GUI, through which wars are declared, armies are managed, and raids are initiated.</p>
 
-      <div class="grid-cards">
-        <div class="card">
-          <i class="fas fa-heart"></i>
-          <h4>Hit Points</h4>
-          <p>Each Nexus has 1,000 HP. When it reaches 0 during an active war, the town is defeated.</p>
+      <div class="figure">
+        <img src="images/nexusgui.png" alt="Nexus GUI" style="max-width: 350px;">
+        <figcaption>The Nexus GUI - central hub for all war-related activities.</figcaption>
+      </div>
+
+      <h3>Nexus Mechanics</h3>
+      <p>Each Nexus has <strong>1,000 hit points</strong>. During a siege (full-scale war), attackers can damage the Nexus. When its HP reaches zero, the town is considered defeated and is dissolved. During peacetime, the Nexus is invulnerable.</p>
+
+      <div class="stat-block">
+        <div class="stat"><span>HP:</span> 1,000</div>
+        <div class="stat"><span>Invulnerable:</span> During peacetime</div>
+        <div class="stat"><span>Movable:</span> Only during peacetime</div>
+      </div>
+
+      <h4>Accessibility Requirements</h4>
+      <p>The Nexus must be placed in a location that attackers can reasonably reach. Staff enforce the following guidelines:</p>
+      <ul>
+        <li><strong>Maximum depth:</strong> Cannot be buried more than 15 blocks underground</li>
+        <li><strong>Maximum height:</strong> Cannot be suspended more than 50 blocks above the highest point of any building or the natural ground</li>
+        <li><strong>Example:</strong> If you build a castle spanning from Y=50 to Y=85, the Nexus cannot be placed above Y=135 or below Y=35 <em>unless</em> you provide a clearly defined tunnel, bridge, or path that attackers can follow (walls and defenses are still permitted along this path).</li>
+      </ul>
+
+      <!-- Summary Card for Quick Reference -->
+      <div class="summary-cards">
+        <div class="summary-card">
+          <h4><i class="fas fa-heart"></i> Nexus Stats</h4>
+          <ul>
+            <li><strong>HP:</strong> 1,000</li>
+            <li><strong>Appearance:</strong> End Crystal</li>
+            <li><strong>Movable:</strong> /nexus move</li>
+            <li><strong>Invulnerable:</strong> During peace</li>
+          </ul>
         </div>
-        <div class="card">
-          <i class="fas fa-gift"></i>
-          <h4>Creation</h4>
-          <p>Towns are automatically given a Nexus upon creation. It can be moved or removed during peacetime.</p>
-        </div>
-        <div class="card">
-          <i class="fas fa-eye"></i>
-          <h4>Accessibility</h4>
-          <p>Nexuses must be reasonably accessible. Hiding them underground or in bedrock is prohibited.</p>
+        <div class="summary-card">
+          <h4><i class="fas fa-ruler"></i> Placement Rules</h4>
+          <ul>
+            <li><strong>Max depth:</strong> 15 blocks</li>
+            <li><strong>Max height:</strong> 50 blocks above highest structure</li>
+            <li>Must have defined path if outside bounds</li>
+          </ul>
         </div>
       </div>
 
-      <h3><i class="fas fa-terminal"></i> Nexus Commands</h3>
+      <h3>Nexus Commands</h3>
       <dl class="command-list">
         <dt><code>/nexus</code></dt>
-        <dd>Opens the Nexus GUI for managing wars, viewing status, and initiating raids.</dd>
+        <dd>Opens the Nexus GUI for managing wars, armies, raids, and viewing status.</dd>
         <dt><code>/nexus move</code></dt>
         <dd>Moves your town's Nexus to your current location. Cannot be used during an active war.</dd>
         <dt><code>/nexus remove</code></dt>
@@ -437,21 +520,94 @@
 
       <div class="callout warning">
         <i class="fas fa-exclamation-triangle"></i>
-        <strong>Staff Enforcement:</strong> The Nexus must be placed in a location that attackers can physically reach. Burying it in bedrock, lava, or behind unbreakable barriers is not allowed. Staff will relocate improperly placed Nexuses to a suitable surface location.
+        <strong>Staff Enforcement:</strong> Staff will relocate improperly placed Nexuses that violate accessibility rules. Nexus cannot be moved during active wars, so ensure proper placement beforehand.
       </div>
     </section>
 
-    <!-- Section 2: Full-Scale Warfare -->
+    <!-- Section 2: Army System -->
+    <section class="guide-section" id="army-system">
+      <h2><i class="fas fa-users"></i> 2. Army System</h2>
+      
+      <p>To wage war, a nation must first organize its fighting force into a structured army. The army system is managed through the Nexus GUI and allows for organized military campaigns and earned special abilities.</p>
+
+      <h3>Army Structure</h3>
+      <p>The military is organized hierarchically:</p>
+      <ul>
+        <li><strong>3 Army Groups total</strong> per server</li>
+        <li><strong>3 Regiments per Army Group</strong></li>
+        <li>Each regiment can have its own leadership and earns <strong>Regiment Points (RP)</strong> through combat</li>
+      </ul>
+
+      <div class="figure">
+        <img src="images/regiment.png" alt="Regiment Interface" style="max-width: 338px;">
+        <figcaption>Regiment management interface showing membership and points.</figcaption>
+      </div>
+
+      <h3>Creating an Army</h3>
+      <p>The nation leader initiates army creation by being the first to join a regiment:</p>
+      <dl class="command-list">
+        <dt><code>/army join (regiment)</code></dt>
+        <dd>The first use of this command by a nation leader creates the army group and regiment.</dd>
+      </dl>
+      
+      <p>After creation, the nation leader must appoint a <strong>General</strong> for the army group (this can be themselves or another trusted player). The General can then appoint <strong>Regiment Leaders</strong> for each of the three regiments. While not required, this allows for realistic military hierarchies and delegation of command.</p>
+
+      <h3>Regiment Points (RP) & Formations</h3>
+      <p>When a member of a regiment kills an enemy player during wartime or raids, their regiment earns <strong>Regiment Points (RP)</strong>. These points are pooled at the regiment level and can be spent by regiment leaders to purchase <strong>formations</strong> that grant temporary buffs and strategic advantages.</p>
+
+      <div class="figure">
+        <img src="images/defensiveformation.png" alt="Defensive Formation" style="max-width: 444px;">
+        <figcaption>Example formation purchase interface - Defensive Formation providing stat bonuses.</figcaption>
+      </div>
+
+      <div class="summary-cards">
+        <div class="summary-card">
+          <h4><i class="fas fa-sitemap"></i> Army Hierarchy</h4>
+          <ul>
+            <li><strong>3 Army Groups</strong> total</li>
+            <li><strong>3 Regiments</strong> per group</li>
+            <li>General leads army group</li>
+            <li>Regiment leaders optional</li>
+          </ul>
+        </div>
+        <div class="summary-card">
+          <h4><i class="fas fa-trophy"></i> Regiment Points</h4>
+          <ul>
+            <li>Earned from player kills</li>
+            <li>Pooled by regiment</li>
+            <li>Spent on formations</li>
+            <li>Managed via Nexus GUI</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Leadership Strategy:</strong> Appointing regiment leaders allows for more responsive command during battle, as they can purchase formations for their troops without needing to contact the General. Consider a chain of command that mirrors your nation's activity schedules.</p>
+      </div>
+    </section>
+
+    <!-- Section 3: Full-Scale Warfare & Sieges -->
     <section class="guide-section" id="warfare">
-      <h2><i class="fas fa-fist-raised"></i> 2. Full-Scale Warfare</h2>
-      <p>A formal declaration of war allows for the complete destruction of an enemy's Nexus. It is a high-stakes conflict with no time limit, ending only when one side's Nexus is destroyed or a peace treaty is signed.</p>
+      <h2><i class="fas fa-fist-raised"></i> 3. Full-Scale Warfare & Sieges</h2>
+      
+      <p>A formal declaration of war initiates a <strong>siege</strong>—a state of total conflict where block destruction is enabled and the enemy Nexus can be attacked. Unlike raids, sieges have no time limit and end only when one side's Nexus is destroyed or a peace treaty is signed.</p>
+
+      <h3>Siege Mechanics</h3>
+      <ul>
+        <li><strong>PvP Enabled:</strong> Combat is forced between warring parties</li>
+        <li><strong>Block Destruction Enabled:</strong> Attackers can break through defenses</li>
+        <li><strong>Nexus Vulnerable:</strong> The enemy Nexus can be damaged (1,000 HP)</li>
+        <li><strong>No Time Limit:</strong> Sieges continue until resolution</li>
+      </ul>
 
       <h3>Prerequisites for Declaring War</h3>
       <ul>
-        <li><strong>Diplomatic Status:</strong> Your nation must have the target nation or town set as an enemy.</li>
-        <li><strong>Peace:</strong> Neither party can already be at war with each other.</li>
-        <li><strong>Active Nexus:</strong> Both sides must have at least one town with a valid, placed Nexus.</li>
-        <li><strong>Permission:</strong> You must be a nation leader or have the necessary war permissions.</li>
+        <li><strong>Diplomatic Status:</strong> Your nation must have the target set as an enemy</li>
+        <li><strong>Organized Army:</strong> Your nation must have at least one army group formed</li>
+        <li><strong>Peace:</strong> Neither party can already be at war with each other</li>
+        <li><strong>Active Nexus:</strong> Both sides must have valid, placed Nexuses</li>
+        <li><strong>Permission:</strong> You must be a nation leader or have war permissions</li>
       </ul>
 
       <h3>War Commands</h3>
@@ -466,76 +622,115 @@
         <dd>Lists all active wars currently happening on the server.</dd>
       </dl>
 
-      <div class="callout tip">
-        <i class="fas fa-scroll"></i>
-        <strong>Casus Belli:</strong> While not mechanically required, roleplaying a reason for war—such as a border dispute, historical grievance, or resource conflict—greatly enhances the server's narrative and can help you secure allies.
+      <div class="summary-cards">
+        <div class="summary-card">
+          <h4><i class="fas fa-skull"></i> Siege Features</h4>
+          <ul>
+            <li>PvP enabled</li>
+            <li>Block destruction enabled</li>
+            <li>Nexus damageable (1,000 HP)</li>
+            <li>No time limit</li>
+          </ul>
+        </div>
+        <div class="summary-card">
+          <h4><i class="fas fa-check-circle"></i> Requirements</h4>
+          <ul>
+            <li>Enemy diplomatic status</li>
+            <li>Organized army</li>
+            <li>Both sides at peace</li>
+            <li>Valid Nexuses</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <!-- Section 3: Raids -->
+    <!-- Section 4: Raids (WIP) -->
     <section class="guide-section" id="raids">
-      <h2><i class="fas fa-gem"></i> 3. Raids</h2>
-      <p>Raids are limited, time-bound hostile actions initiated through the Nexus GUI. They allow for targeted aggression without triggering a full-scale war, meaning the defender's Nexus is not at risk of permanent destruction.</p>
+      <h2><i class="fas fa-gem"></i> 4. Raids (Work in Progress)</h2>
+      
+      <p>Raids are limited, time-bound hostile actions initiated through the Nexus GUI. Unlike sieges, raids do not allow block destruction or Nexus damage. They serve as limited engagements for specific objectives.</p>
 
-      <div class="grid-cards">
-        <div class="card">
-          <i class="fas fa-coins"></i>
-          <h4>Plunder Raid</h4>
-          <p>A quick strike focused on stealing resources from the target town's chests.</p>
-          <div class="meta">Duration: 1 Hour</div>
+      <h3>Current Raid Types</h3>
+      <p><em>Note: Conquest and Sabotage raids are currently Work in Progress and not yet available.</em></p>
+
+      <div class="summary-cards">
+        <div class="summary-card">
+          <h4><i class="fas fa-coins"></i> Plunder Raid (Active)</h4>
+          <ul>
+            <li>PvP enabled</li>
+            <li>No block destruction</li>
+            <li>Nexus invulnerable</li>
+            <li>Focus: Resource theft</li>
+            <li><strong>Duration:</strong> 1 Hour</li>
+          </ul>
         </div>
-        <div class="card">
-          <i class="fas fa-flag"></i>
-          <h4>Conquest Raid</h4>
-          <p>An attempt to claim a specific piece of territory (a chunk) for your own nation.</p>
-          <div class="meta">Duration: 2 Hours</div>
+        <div class="summary-card">
+          <h4><i class="fas fa-flag"></i> Conquest Raid (WIP)</h4>
+          <ul>
+            <li>Coming soon</li>
+            <li>Territory claims</li>
+            <li>No Nexus damage</li>
+          </ul>
         </div>
-        <div class="card">
-          <i class="fas fa-wrench"></i>
-          <h4>Sabotage Raid</h4>
-          <p>A covert operation to damage or destroy enemy infrastructure like factories and mounted weapons.</p>
-          <div class="meta">Duration: 30 Minutes</div>
+        <div class="summary-card">
+          <h4><i class="fas fa-wrench"></i> Sabotage Raid (WIP)</h4>
+          <ul>
+            <li>Coming soon</li>
+            <li>Target infrastructure</li>
+            <li>Factories & weapons</li>
+          </ul>
         </div>
       </div>
 
-      <h3>Raid Limitations</h3>
+      <h3>Raid Mechanics (Active)</h3>
       <ul>
-        <li><strong>Nexus Immunity:</strong> The defender's Nexus cannot be damaged during a raid.</li>
-        <li><strong>Time Limit:</strong> All raids have strict durations (30m to 2h).</li>
-        <li><strong>Defender Rights:</strong> Defenders are free to fight back and protect their town for the raid's duration.</li>
+        <li><strong>PvP Enabled:</strong> Combat is forced for the raid duration</li>
+        <li><strong>No Block Destruction:</strong> Terrain and buildings are protected</li>
+        <li><strong>Nexus Immunity:</strong> The defender's Nexus cannot be damaged</li>
+        <li><strong>Time Limit:</strong> Plunder raids last 1 hour</li>
       </ul>
 
-      <p>Raids are initiated from the Nexus GUI (<code>/nexus</code>) and are an excellent way to weaken an enemy, gather intelligence, or probe their defenses before committing to a full-scale war.</p>
+      <div class="callout info">
+        <i class="fas fa-info-circle"></i>
+        <strong>Development Status:</strong> Conquest and Sabotage raids are under development. Only Plunder raids are currently available for limited resource-gathering operations.
+      </div>
     </section>
 
-    <!-- Section 4: Defense & Fortification -->
+    <!-- Section 5: Defense & Fortification -->
     <section class="guide-section" id="defense">
-      <h2><i class="fas fa-shield-alt"></i> 4. Defense & Fortification</h2>
-      <p>A well-defended Nexus is the key to surviving a war. Defense requires a combination of strategic architecture, traps, and active player garrisoning.</p>
+      <h2><i class="fas fa-shield-alt"></i> 5. Defense & Fortification</h2>
+      
+      <p>A well-defended Nexus is the key to surviving a siege. Defense requires a combination of strategic architecture, traps, and active player garrisoning—all while maintaining reasonable accessibility.</p>
 
       <h3>Principles of Nexus Defense</h3>
+      
+      <h4>Layered Defense</h4>
+      <p>Do not rely on a single wall. Create multiple defensive rings around your Nexus with chokepoints and kill zones. Each layer should slow attackers and give defenders opportunities to engage.</p>
+
+      <h4>Active Garrison</h4>
+      <p>A Nexus is only as strong as the players defending it. Establish a rotation of defenders, coordinate with your regiment leadership, and use voice communication for effective coordination.</p>
+
+      <h4>Defensive Architecture</h4>
       <ul>
-        <li><strong>Layered Defense:</strong> Do not rely on a single wall. Create multiple defensive rings around your Nexus with chokepoints and kill zones.</li>
-        <li><strong>Garrison:</strong> A Nexus is only as strong as the players defending it. Establish a rotation of defenders, especially during known active hours.</li>
-        <li><strong>Redstone & Traps:</strong> Use arrow dispensers, lava moats (with careful controls), and falling block traps to slow and damage attackers.</li>
+        <li><strong>Obsidian Core:</strong> Reinforce the immediate Nexus chamber with obsidian for blast resistance</li>
+        <li><strong>Murder Holes:</strong> Create openings above the Nexus chamber for defenders to fire down</li>
+        <li><strong>Water Curtains:</strong> Strategic water flows can negate TNT damage and slow attackers</li>
+        <li><strong>Trap Networks:</strong> Use redstone traps, arrow dispensers, and falling block traps</li>
       </ul>
 
-      <h3>Architectural Tips</h3>
-      <ul>
-        <li><strong>Obsidian Core:</strong> While expensive, reinforcing the immediate Nexus chamber with obsidian provides significant blast resistance.</li>
-        <li><strong>Murder Holes:</strong> Create openings in the floor above your Nexus chamber to allow defenders to fire down at attackers.</li>
-        <li><strong>Water Curtains:</strong> Strategic use of water can extinguish fires, push back attackers, and negate TNT damage.</li>
-      </ul>
+      <h3>Formations for Defense</h3>
+      <p>Regiments can spend RP on defensive formations that provide combat bonuses to all members in the area. These are activated through the Nexus GUI and can turn the tide of a siege.</p>
 
       <div class="callout warning">
         <i class="fas fa-exclamation-triangle"></i>
-        <strong>Fair Play Reminder:</strong> While you are encouraged to build elaborate defenses, you cannot make the Nexus completely inaccessible. The path to the Nexus must be physically navigable by an attacker.
+        <strong>Accessibility Reminder:</strong> While you are encouraged to build elaborate defenses, the Nexus must remain reachable. You cannot completely seal it off. Defensive structures must still allow a path—however dangerous—to the Nexus itself.
       </div>
     </section>
 
-    <!-- Section 5: Diplomacy -->
+    <!-- Section 6: Diplomacy -->
     <section class="guide-section" id="diplomacy">
-      <h2><i class="fas fa-handshake"></i> 5. Diplomacy: Ultimatums & Peace</h2>
+      <h2><i class="fas fa-handshake"></i> 6. Diplomacy: Ultimatums & Peace</h2>
+      
       <p>War is not the only option. GeoFrontier features a robust diplomatic system for resolving conflicts or making demands without a single arrow fired.</p>
 
       <h3>Ultimatums</h3>
@@ -554,32 +749,28 @@
       </dl>
 
       <h3>Negotiable Terms</h3>
-      <div class="grid-cards">
-        <div class="card">
-          <i class="fas fa-exchange-alt"></i>
-          <h4>Territory Transfer</h4>
+      <div class="summary-cards">
+        <div class="summary-card">
+          <h4><i class="fas fa-exchange-alt"></i> Territory Transfer</h4>
           <p>Permanently transfer a town or chunk to the other party.</p>
         </div>
-        <div class="card">
-          <i class="fas fa-clock"></i>
-          <h4>Occupation</h4>
+        <div class="summary-card">
+          <h4><i class="fas fa-clock"></i> Occupation</h4>
           <p>Temporarily occupy a territory for up to 30 days. Control, but not ownership, is transferred.</p>
         </div>
-        <div class="card">
-          <i class="fas fa-coins"></i>
-          <h4>Reparations</h4>
+        <div class="summary-card">
+          <h4><i class="fas fa-coins"></i> Reparations</h4>
           <p>A one-time payment of in-game currency from one party to another.</p>
         </div>
-        <div class="card">
-          <i class="fas fa-gavel"></i>
-          <h4>Player Jailing</h4>
-          <p>Specific players from the losing side can be jailed for a period of up to 7 days.</p>
+        <div class="summary-card">
+          <h4><i class="fas fa-gavel"></i> Player Jailing</h4>
+          <p>Specific players from the losing side can be jailed for up to 7 days.</p>
         </div>
       </div>
 
       <div class="callout tip">
         <i class="fas fa-lightbulb"></i>
-        <p><strong>Strategic Diplomacy:</strong> Use ultimatums to gauge an enemy's resolve. A strong, prepared nation might refuse, while a weaker one may concede to your demands. In peace negotiations, asking for temporary occupation of a key resource zone can be a more achievable goal than demanding permanent cession.</p>
+        <p><strong>Strategic Diplomacy:</strong> Use ultimatums to gauge an enemy's resolve. A strong, prepared nation might refuse, while a weaker one may concede. In peace negotiations, temporary occupation of a key resource zone can be a more achievable goal than demanding permanent cession.</p>
       </div>
     </section>
 
@@ -599,7 +790,6 @@
   <!-- Load component loader -->
   <script src="js/components-loader.js"></script>
   <script>
-    // Basic initialization for the guide page
     document.addEventListener('DOMContentLoaded', () => {
       if (window.ComponentLoader) {
         window.ComponentLoader.loadComponent('navbar', 'navbar-container');
