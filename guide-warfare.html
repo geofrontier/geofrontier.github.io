@@ -117,7 +117,7 @@
 
     /* Main Container */
     .guide-container {
-      max-width: 1100px;
+      max-width: 900px;
       margin: 40px auto;
       padding: 0 20px;
     }
@@ -205,15 +205,9 @@
       color: var(--accent-teal);
     }
 
-    .guide-section h3 i {
-      margin-right: 10px;
-      color: var(--accent-gold);
-      font-size: 1.3rem;
-    }
-
     .guide-section h4 {
       font-size: 1.2rem;
-      margin: 20px 0 10px 0;
+      margin: 25px 0 10px 0;
       color: var(--text-light);
       font-weight: 600;
     }
@@ -248,7 +242,7 @@
 
     /* Image Styles */
     .figure {
-      margin: 25px 0;
+      margin: 30px 0;
       text-align: center;
     }
 
@@ -267,33 +261,30 @@
       font-size: 0.9rem;
     }
 
-    .figure.inline {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 20px;
-      text-align: left;
+    .figure.right {
+      float: right;
+      margin: 0 0 20px 30px;
+      max-width: 300px;
     }
 
-    .figure.inline img {
-      max-width: 200px;
+    .figure.left {
+      float: left;
+      margin: 0 30px 20px 0;
+      max-width: 300px;
     }
 
-    .figure.inline figcaption {
-      flex: 1;
-      margin-top: 0;
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
     }
 
     /* Summary Cards - For quick reference */
     .summary-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
-      margin: 25px 0;
-      background: rgba(15, 23, 42, 0.3);
-      padding: 20px;
-      border-radius: 12px;
-      border: 1px solid var(--border-glow);
+      margin: 30px 0;
     }
 
     .summary-card {
@@ -353,7 +344,7 @@
     /* Callout Boxes */
     .callout {
       padding: 15px 20px;
-      margin: 20px 0;
+      margin: 25px 0;
       border-left: 4px solid;
       background: rgba(255, 255, 255, 0.02);
     }
@@ -374,27 +365,6 @@
       margin-right: 10px;
     }
 
-    /* Stat Blocks */
-    .stat-block {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin: 15px 0;
-    }
-
-    .stat {
-      background: rgba(45, 212, 191, 0.1);
-      border: 1px solid var(--accent-teal);
-      border-radius: 6px;
-      padding: 8px 15px;
-      font-weight: 600;
-    }
-
-    .stat span {
-      color: var(--accent-teal);
-      margin-right: 5px;
-    }
-
     hr {
       border: none;
       border-top: 1px solid var(--border-glow);
@@ -410,13 +380,10 @@
         width: 100%;
       }
 
-      .summary-cards {
-        grid-template-columns: 1fr;
-      }
-
-      .figure.inline {
-        flex-direction: column;
-        text-align: center;
+      .figure.right, .figure.left {
+        float: none;
+        margin: 20px auto;
+        max-width: 100%;
       }
     }
   </style>
@@ -446,32 +413,33 @@
         <li><a href="#the-nexus"><i class="fas fa-chevron-right"></i> 1. The Nexus System</a></li>
         <li><a href="#army-system"><i class="fas fa-chevron-right"></i> 2. Army System</a></li>
         <li><a href="#warfare"><i class="fas fa-chevron-right"></i> 3. Full-Scale Warfare & Sieges</a></li>
-        <li><a href="#raids"><i class="fas fa-chevron-right"></i> 4. Raids (WIP)</a></li>
-        <li><a href="#defense"><i class="fas fa-chevron-right"></i> 5. Defense & Fortification</a></li>
-        <li><a href="#diplomacy"><i class="fas fa-chevron-right"></i> 6. Diplomacy: Ultimatums & Peace</a></li>
+        <li><a href="#raids"><i class="fas fa-chevron-right"></i> 4. Raids (Plunder, Conquest, Sabotage)</a></li>
+        <li><a href="#war-rules"><i class="fas fa-chevron-right"></i> 5. War Rules & Regulations</a></li>
+        <li><a href="#defense"><i class="fas fa-chevron-right"></i> 6. Defense & Fortification</a></li>
+        <li><a href="#diplomacy"><i class="fas fa-chevron-right"></i> 7. Diplomacy: Ultimatums & Peace</a></li>
       </ul>
     </div>
 
     <!-- Section 1: The Nexus -->
-    <section class="guide-section" id="the-nexus">
+    <section class="guide-section clearfix" id="the-nexus">
       <h2><i class="fas fa-flag"></i> 1. The Nexus System</h2>
 
-      <p>The <strong>Nexus</strong> is the physical and political heart of every town. It appears as a regular-sized end crystal and serves as the town's war objective. Interacting with a Nexus or using the <code>/nexus</code> command opens the war management GUI, through which wars are declared, armies are managed, and raids are initiated.</p>
-
-      <div class="figure">
-        <img src="images/nexusgui.png" alt="Nexus GUI" style="max-width: 350px;">
-        <figcaption>The Nexus GUI - central hub for all war-related activities.</figcaption>
+      <div class="figure right">
+        <img src="images/nexusgui.png" alt="Nexus GUI">
+        <figcaption>The Nexus GUI - the central hub for all war-related activities.</figcaption>
       </div>
 
-      <h3>Nexus Mechanics</h3>
-      <p>Each Nexus has <strong>1,000 hit points</strong>. During a siege (full-scale war), attackers can damage the Nexus. When its HP reaches zero, the town is considered defeated and is dissolved. During peacetime, the Nexus is invulnerable.</p>
+      <p>At the heart of every town on GeoFrontier lies the <strong>Nexus</strong>. Visually represented as a regular-sized end crystal, the Nexus is more than just a decorative fixture; it is the physical and political embodiment of your town's sovereignty. It serves as the primary objective in any conflict, and its destruction marks the end of a town. The Nexus can be interacted with directly or via the <code>/nexus</code> command, which opens a comprehensive GUI for managing all aspects of warfare, from declarations to army organization.</p>
+
+      <h3>Nexus Mechanics and Vulnerability</h3>
+      <p>Each Nexus possesses <strong>1,000 hit points (HP)</strong>. During a formal siege, attackers are able to damage the Nexus. Should its HP be reduced to zero, the town is considered defeated and is dissolved. During peacetime, however, the Nexus remains invulnerable, ensuring that a town's existence is never threatened outside of a formal conflict.</p>
 
       <h4>Accessibility Requirements</h4>
-      <p>The Nexus must be placed in a location that attackers can reasonably reach. Staff enforce the following guidelines:</p>
+      <p>To ensure that sieges are always a matter of skill and strategy rather than simply hiding the objective, the Nexus must be placed in a location that attackers can reasonably reach. Staff actively enforce the following guidelines to prevent unfair placements:</p>
       <ul>
-        <li><strong>Maximum depth:</strong> Cannot be buried more than 15 blocks underground</li>
-        <li><strong>Maximum height:</strong> Cannot be suspended more than 50 blocks above the highest point of any building or the natural ground</li>
-        <li><strong>Example:</strong> If you build a castle spanning from Y=50 to Y=85, the Nexus cannot be placed above Y=135 or below Y=35 <em>unless</em> you provide a clearly defined tunnel, bridge, or path that attackers can follow (walls and defenses are still permitted along this path).</li>
+        <li><strong>Maximum Depth:</strong> The Nexus cannot be buried more than 15 blocks underground.</li>
+        <li><strong>Maximum Height:</strong> It cannot be suspended more than 50 blocks above the highest point of any building or the natural ground level.</li>
+        <li><strong>Example:</strong> If you build a castle spanning from Y=50 to Y=85, the Nexus cannot be placed above Y=135 or below Y=35. If you wish to place it outside these bounds, you must provide a clearly defined tunnel, bridge, or path that attackers can follow to reach it. (Note: This path can still be defended with walls and traps).</li>
       </ul>
 
       <!-- Summary Card for Quick Reference -->
@@ -481,16 +449,16 @@
           <ul>
             <li><strong>HP:</strong> 1,000</li>
             <li><strong>Appearance:</strong> End Crystal</li>
-            <li><strong>Movable:</strong> /nexus move</li>
-            <li><strong>Invulnerable:</strong> During peace</li>
+            <li><strong>Movable:</strong> Yes, with <code>/nexus move</code> (only during peacetime)</li>
+            <li><strong>Vulnerability:</strong> Only during active sieges</li>
           </ul>
         </div>
         <div class="summary-card">
           <h4><i class="fas fa-ruler"></i> Placement Rules</h4>
           <ul>
-            <li><strong>Max depth:</strong> 15 blocks</li>
-            <li><strong>Max height:</strong> 50 blocks above highest structure</li>
-            <li>Must have defined path if outside bounds</li>
+            <li><strong>Max Depth:</strong> 15 blocks</li>
+            <li><strong>Max Height:</strong> 50 blocks above highest structure</li>
+            <li><strong>Access:</strong> Must have a defined path if outside standard bounds</li>
           </ul>
         </div>
       </div>
@@ -498,81 +466,80 @@
       <h3>Nexus Commands</h3>
       <dl class="command-list">
         <dt><code>/nexus</code></dt>
-        <dd>Opens the Nexus GUI for managing wars, armies, raids, and viewing status.</dd>
+        <dd>Opens the Nexus GUI for managing wars, armies, raids, and viewing your town's status.</dd>
         <dt><code>/nexus move</code></dt>
         <dd>Moves your town's Nexus to your current location. Cannot be used during an active war.</dd>
         <dt><code>/nexus remove</code></dt>
-        <dd>Permanently removes the town's Nexus. Only available during peacetime.</dd>
+        <dd>Permanently removes the town's Nexus. This action is only available during peacetime.</dd>
         <dt><code>/nexus create</code></dt>
-        <dd>Creates a new Nexus for your town if one does not exist.</dd>
+        <dd>Creates a new Nexus for your town if one does not already exist.</dd>
       </dl>
 
       <div class="callout warning">
         <i class="fas fa-exclamation-triangle"></i>
-        <strong>Staff Enforcement:</strong> Staff will relocate improperly placed Nexuses that violate accessibility rules. Nexus cannot be moved during active wars, so ensure proper placement beforehand.
+        <strong>Staff Enforcement:</strong> Staff will relocate improperly placed Nexuses that violate accessibility rules. As a Nexus cannot be moved during an active war, ensuring proper placement beforehand is critical to your town's defense.
       </div>
     </section>
 
     <!-- Section 2: Army System -->
     <section class="guide-section" id="army-system">
       <h2><i class="fas fa-users"></i> 2. Army System</h2>
-      
-      <p>To wage war, a nation must first organize its fighting force into a structured army. The army system is managed through the Nexus GUI and allows for organized military campaigns and earned special abilities.</p>
 
-      <h3>Army Structure</h3>
-      <p>The military is organized hierarchically:</p>
+      <div class="figure right">
+        <img src="images/regiment.png" alt="Regiment Interface">
+        <figcaption>The regiment management interface, showing membership and earned points.</figcaption>
+      </div>
+      
+      <p>A nation cannot project power without a structured fighting force. The army system, managed through the Nexus GUI, provides this structure. It allows for organized military campaigns, a clear chain of command, and the earning of unique tactical advantages. To wage war, a nation must first organize its members into a formal army.</p>
+
+      <h3>Army Structure and Hierarchy</h3>
+      <p>The military is organized hierarchically to facilitate clear leadership and delegation. Each nation can maintain a total of three distinct army groups, each of which is further divided into three regiments.</p>
       <ul>
-        <li><strong>3 Army Groups total</strong> per nation</li>
-        <li><strong>3 Regiments per Army Group</strong></li>
-        <li>Each regiment can have its own leadership and earns <strong>Regiment Points (RP)</strong> through combat</li>
+        <li><strong>3 Army Groups</strong> per nation.</li>
+        <li><strong>3 Regiments</strong> per Army Group.</li>
+        <li>Each regiment can have its own leadership and independently earns <strong>Regiment Points (RP)</strong> through combat.</li>
       </ul>
 
-      <div class="figure">
-        <img src="images/regiment.png" alt="Regiment Interface" style="max-width: 338px;">
-        <figcaption>Regiment management interface showing membership and points.</figcaption>
-      </div>
-
-      <h3>Creating an Army</h3>
-      <p>The nation leader initiates army creation by being the first to join a regiment:</p>
+      <h3>Creating an Army and Appointing Leaders</h3>
+      <p>The process of forming an army begins with the nation leader. By being the first to join a regiment using the command below, the leader creates the foundational army group and its first regiment. Following creation, the leader must appoint a <strong>General</strong> for the new army group (this can be themselves or a trusted commander). The General, in turn, can then appoint <strong>Regiment Leaders</strong> for each of the three regiments under their command. While optional, establishing this full chain of command allows for more dynamic and responsive leadership during the chaos of battle.</p>
+      
       <dl class="command-list">
         <dt><code>/army join (regiment)</code></dt>
         <dd>The first use of this command by a nation leader creates the army group and regiment.</dd>
       </dl>
-      
-      <p>After creation, the nation leader must appoint a <strong>General</strong> for the army group (this can be themselves or another trusted player). The General can then appoint <strong>Regiment Leaders</strong> for each of the three regiments. While not required, this allows for realistic military hierarchies and delegation of command.</p>
 
-      <h3>Regiment Points (RP) & Formations</h3>
-      <p>When a member of a regiment kills an enemy player during wartime or raids, their regiment earns <strong>Regiment Points (RP)</strong>. These points are pooled at the regiment level and can be spent by regiment leaders to purchase <strong>formations</strong> that grant temporary buffs and strategic advantages.</p>
+      <h3>Regiment Points (RP) and Formations</h3>
+      <p>When a member of a regiment kills an enemy player during wartime or a raid, their regiment earns <strong>Regiment Points (RP)</strong>. These points are pooled at the regiment level and serve as a resource for strategic advantages. Regiment leaders can spend RP through the Nexus GUI to purchase <strong>formations</strong>. Formations grant temporary buffs and strategic bonuses to all members of the regiment, providing a crucial edge in combat.</p>
 
       <div class="figure">
-        <img src="images/defensiveformation.png" alt="Defensive Formation" style="max-width: 444px;">
-        <figcaption>Example formation purchase interface - Defensive Formation providing stat bonuses.</figcaption>
+        <img src="images/defensiveformation.png" alt="Defensive Formation">
+        <figcaption>An example formation purchase interface. Here, the Defensive Formation provides significant stat bonuses to all regiment members.</figcaption>
       </div>
 
       <div class="summary-cards">
         <div class="summary-card">
           <h4><i class="fas fa-sitemap"></i> Army Hierarchy</h4>
           <ul>
-            <li><strong>3 Army Groups</strong> total</li>
+            <li><strong>3 Army Groups</strong> per nation</li>
             <li><strong>3 Regiments</strong> per group</li>
-            <li>General leads army group</li>
-            <li>Regiment leaders optional</li>
+            <li>General leads an army group</li>
+            <li>Regiment leaders lead individual regiments</li>
           </ul>
         </div>
         <div class="summary-card">
-          <h4><i class="fas fa-trophy"></i> Regiment Points</h4>
+          <h4><i class="fas fa-trophy"></i> Regiment Points (RP)</h4>
           <ul>
-            <li>Earned from player kills</li>
-            <li>Pooled by regiment</li>
-            <li>Spent on formations</li>
-            <li>Managed via Nexus GUI</li>
+            <li>Earned from player kills during conflicts</li>
+            <li>Pooled and managed at the regiment level</li>
+            <li>Spent on formations for tactical buffs</li>
+            <li>Managed via the Nexus GUI</li>
           </ul>
         </div>
       </div>
 
       <div class="callout tip">
         <i class="fas fa-lightbulb"></i>
-        <p><strong>Leadership Strategy:</strong> Appointing regiment leaders allows for more responsive command during battle, as they can purchase formations for their troops without needing to contact the General. Consider a chain of command that mirrors your nation's activity schedules.</p>
+        <p><strong>Leadership Strategy:</strong> Appointing regiment leaders allows for more responsive command during battle. They can purchase formations for their troops in real-time without needing to contact the General, creating a more agile and effective fighting force.</p>
       </div>
     </section>
 
@@ -580,23 +547,24 @@
     <section class="guide-section" id="warfare">
       <h2><i class="fas fa-fist-raised"></i> 3. Full-Scale Warfare & Sieges</h2>
       
-      <p>A formal declaration of war initiates a <strong>siege</strong>—a state of total conflict where block destruction is enabled and the enemy Nexus can be attacked. Unlike raids, sieges have no time limit and end only when one side's Nexus is destroyed or a peace treaty is signed.</p>
+      <p>A formal declaration of war escalates a conflict to a <strong>siege</strong>—a state of total war. This is the ultimate test of a nation's strength, where block destruction is enabled and the enemy's Nexus becomes vulnerable. Unlike smaller raids, sieges have no set time limit and continue until one side's Nexus is destroyed or a peace treaty is formally signed.</p>
 
       <h3>Siege Mechanics</h3>
       <ul>
-        <li><strong>PvP Enabled:</strong> Combat is forced between warring parties</li>
-        <li><strong>Block Destruction Enabled:</strong> Attackers can break through defenses</li>
-        <li><strong>Nexus Vulnerable:</strong> The enemy Nexus can be damaged (1,000 HP)</li>
-        <li><strong>No Time Limit:</strong> Sieges continue until resolution</li>
+        <li><strong>PvP Always Enabled:</strong> Combat is forced between members of the warring parties.</li>
+        <li><strong>Block Destruction Enabled:</strong> Attackers can break through walls, tunnels, and defenses.</li>
+        <li><strong>Nexus Vulnerable:</strong> The enemy Nexus can be damaged, with its 1,000 HP becoming the primary target.</li>
+        <li><strong>No Time Limit:</strong> Sieges are a marathon, not a sprint, and will last until a decisive conclusion is reached.</li>
       </ul>
 
       <h3>Prerequisites for Declaring War</h3>
+      <p>War cannot be declared lightly. A nation must meet several prerequisites to ensure that any conflict is between prepared and established powers.</p>
       <ul>
-        <li><strong>Diplomatic Status:</strong> Your nation must have the target set as an enemy</li>
-        <li><strong>Organized Army:</strong> Your nation must have at least one army group formed</li>
-        <li><strong>Peace:</strong> Neither party can already be at war with each other</li>
-        <li><strong>Active Nexus:</strong> Both sides must have valid, placed Nexuses</li>
-        <li><strong>Permission:</strong> You must be a nation leader or have war permissions</li>
+        <li><strong>Diplomatic Status:</strong> Your nation must have the target set as an enemy.</li>
+        <li><strong>Organized Army:</strong> Your nation must have at least one army group formed.</li>
+        <li><strong>State of Peace:</strong> Neither party can already be at war with each other.</li>
+        <li><strong>Active Nexus:</strong> Both sides must have valid, placed Nexuses.</li>
+        <li><strong>Proper Authority:</strong> You must be a nation leader or have been granted war permissions.</li>
       </ul>
 
       <h3>War Commands</h3>
@@ -604,7 +572,7 @@
         <dt><code>/war declare nation &lt;nation&gt;</code></dt>
         <dd>Declares war on an entire nation and all its member towns.</dd>
         <dt><code>/war declare town &lt;town&gt;</code></dt>
-        <dd>Declares war on a specific town.</dd>
+        <dd>Declares war on a specific town within a nation.</dd>
         <dt><code>/war status</code></dt>
         <dd>Checks the current status of any wars your nation or town is involved in.</dd>
         <dt><code>/war list</code></dt>
@@ -615,118 +583,154 @@
         <div class="summary-card">
           <h4><i class="fas fa-skull"></i> Siege Features</h4>
           <ul>
-            <li>PvP enabled</li>
+            <li>Forced PvP enabled</li>
             <li>Block destruction enabled</li>
             <li>Nexus damageable (1,000 HP)</li>
             <li>No time limit</li>
           </ul>
         </div>
         <div class="summary-card">
-          <h4><i class="fas fa-check-circle"></i> Requirements</h4>
+          <h4><i class="fas fa-check-circle"></i> War Requirements</h4>
           <ul>
             <li>Enemy diplomatic status</li>
-            <li>Organized army</li>
-            <li>Both sides at peace</li>
-            <li>Valid Nexuses</li>
+            <li>At least one organized army group</li>
+            <li>Both sides at peace with each other</li>
+            <li>Valid and accessible Nexuses</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- Section 4: Raids (WIP) -->
+    <!-- Section 4: Raids -->
     <section class="guide-section" id="raids">
-      <h2><i class="fas fa-gem"></i> 4. Raids (Work in Progress)</h2>
+      <h2><i class="fas fa-gem"></i> 4. Raids (Plunder, Conquest, Sabotage)</h2>
       
-      <p>Raids are limited, time-bound hostile actions initiated through the Nexus GUI. Unlike sieges, raids do not allow block destruction or Nexus damage. They serve as limited engagements for specific objectives.</p>
+      <p>Raids are limited, time-bound hostile actions that offer a middle ground between simple PvP and full-scale siege warfare. Initiated through the Nexus GUI, raids are focused on specific objectives and, unlike sieges, do not allow for block destruction or Nexus damage. They are intended for quick, decisive engagements.</p>
 
-      <h3>Current Raid Types</h3>
-      <p><em>Note: Conquest and Sabotage raids are currently Work in Progress and not yet available.</em></p>
+      <h3>Raid Mechanics (General)</h3>
+      <ul>
+        <li><strong>PvP Enabled:</strong> Combat is forced for the entire raid duration.</li>
+        <li><strong>No Block Destruction:</strong> Terrain and buildings are completely protected.</li>
+        <li><strong>Nexus Immunity:</strong> The defender's Nexus cannot be damaged.</li>
+        <li><strong>Time Limit:</strong> All raids have a fixed duration, after which they automatically end.</li>
+      </ul>
+
+      <h3>Types of Raids</h3>
+      <p>There are three distinct types of raids planned, each with a different strategic focus. Currently, only the Plunder raid is active, with the others under development.</p>
 
       <div class="summary-cards">
         <div class="summary-card">
           <h4><i class="fas fa-coins"></i> Plunder Raid (Active)</h4>
+          <p>A fast-paced raid focused on resource theft. The attacking party's goal is to break into the town's storage and escape with as much wealth as possible.</p>
           <ul>
-            <li>PvP enabled</li>
-            <li>No block destruction</li>
-            <li>Nexus invulnerable</li>
-            <li>Focus: Resource theft</li>
             <li><strong>Duration:</strong> 1 Hour</li>
+            <li><strong>Objective:</strong> Resource Extraction</li>
           </ul>
         </div>
         <div class="summary-card">
-          <h4><i class="fas fa-flag"></i> Conquest Raid (WIP)</h4>
+          <h4><i class="fas fa-flag"></i> Conquest Raid (Coming Soon)</h4>
+          <p>A territorial raid where the goal is to capture and hold a specific point or region. Success may result in a shift of land claims.</p>
           <ul>
-            <li>Coming soon</li>
-            <li>Territory claims</li>
-            <li>No Nexus damage</li>
+            <li><strong>Objective:</strong> Territory Capture</li>
           </ul>
         </div>
         <div class="summary-card">
-          <h4><i class="fas fa-wrench"></i> Sabotage Raid (WIP)</h4>
+          <h4><i class="fas fa-wrench"></i> Sabotage Raid (Coming Soon)</h4>
+          <p>A precision strike aimed at crippling a town's industrial capacity. Key targets include factories and other infrastructure.</p>
           <ul>
-            <li>Coming soon</li>
-            <li>Target infrastructure</li>
-            <li>Factories & weapons</li>
+            <li><strong>Objective:</strong> Infrastructure Disablement</li>
           </ul>
         </div>
       </div>
-
-      <h3>Raid Mechanics (Active)</h3>
-      <ul>
-        <li><strong>PvP Enabled:</strong> Combat is forced for the raid duration</li>
-        <li><strong>No Block Destruction:</strong> Terrain and buildings are protected</li>
-        <li><strong>Nexus Immunity:</strong> The defender's Nexus cannot be damaged</li>
-        <li><strong>Time Limit:</strong> Plunder raids last 1 hour</li>
-      </ul>
 
       <div class="callout info">
         <i class="fas fa-info-circle"></i>
-        <strong>Development Status:</strong> Conquest and Sabotage raids are under development. Only Plunder raids are currently available for limited resource-gathering operations.
+        <strong>Development Status:</strong> Conquest and Sabotage raids are currently under development. Only Plunder raids are available for play at this time.
       </div>
     </section>
 
-    <!-- Section 5: Defense & Fortification -->
-    <section class="guide-section" id="defense">
-      <h2><i class="fas fa-shield-alt"></i> 5. Defense & Fortification</h2>
+    <!-- New Section 5: War Rules & Regulations -->
+    <section class="guide-section" id="war-rules">
+      <h2><i class="fas fa-gavel"></i> 5. War Rules & Regulations</h2>
       
-      <p>A well-defended Nexus is the key to surviving a siege. Defense requires a combination of strategic architecture, traps, and active player garrisoning—all while maintaining reasonable accessibility.</p>
+      <p>To ensure fair and engaging conflicts, all wars and sieges on GeoFrontier are governed by a set of rules derived from the server's official guidelines. Violation of these rules can lead to severe penalties, including the automatic loss of a war. All players are expected to familiarize themselves with these regulations.</p>
+
+      <h3>Conduct During Sieges and Wars</h3>
+      
+      <h4>5.1 No Towering or Pillaring Over Walls</h4>
+      <p>During sieges or wars, attackers must engage with the defender's fortifications directly. Building towers or pillars to simply bypass walls is prohibited. Attackers must go through walls, not over them.</p>
+      <p><strong>Penalty:</strong> Minor to Moderate.</p>
+
+      <h4>5.2 No Lava or Obsidian-Filled Walls</h4>
+      <p>Walls and defensive structures cannot be filled with lava or made entirely of obsidian in a way that makes them impossibly tedious to breach. If a wall section is found to be filled with lava, the entire section will be set to air by staff.</p>
+      <p><strong>Penalty:</strong> Minor to Moderate, and everything inside of the wall will be set to air.</p>
+
+      <h4>5.3 Alliance Declarations</h4>
+      <p>All alliances must be formally declared and set before a siege or war begins. "Mid-war" betrayals or the sudden inclusion of new allies are strictly prohibited. Alliances can only be changed or declared during scheduled peacetime periods.</p>
+      <p><strong>Penalty:</strong> All groups involved will receive a penalty of 3x upkeep costs for up to a week.</p>
+
+      <h4>5.4 Valid War Reasons</h4>
+      <p>A formal war or siege must be declared for a valid, justifiable reason. This rule does not apply to basic open-world PvP or impromptu raids, but for a full-scale siege, a casus belli is required.</p>
+      <p><strong>Penalty:</strong> Automatic war loss.</p>
+
+      <h4>5.5 No Instant-Kill Traps</h4>
+      <p>Traps that are designed to instantly kill a player without any chance of escape or counterplay are prohibited during wars and sieges. Defenses should create challenges and opportunities for defenders, not serve as unavoidable death sentences.</p>
+      <p><strong>Penalty:</strong> Minor to Moderate, and the trap must be removed.</p>
+
+      <div class="callout warning">
+        <i class="fas fa-exclamation-triangle"></i>
+        <strong>Rule Enforcement:</strong> These rules are actively enforced by staff. If you are unsure whether a tactic or defensive measure is allowed, it is always best to ask a staff member for clarification before implementing it.
+      </div>
+    </section>
+
+    <!-- Section 6: Defense & Fortification -->
+    <section class="guide-section" id="defense">
+      <h2><i class="fas fa-shield-alt"></i> 6. Defense & Fortification</h2>
+      
+      <p>A well-defended Nexus is the key to surviving a siege. While raw player skill is essential, a strategically designed fortress can multiply the effectiveness of its defenders. Good defense combines layered architecture, clever traps, and an active player garrison, all while adhering to the server's accessibility rules.</p>
 
       <h3>Principles of Nexus Defense</h3>
       
       <h4>Layered Defense</h4>
-      <p>Do not rely on a single wall. Create multiple defensive rings around your Nexus with chokepoints and kill zones. Each layer should slow attackers and give defenders opportunities to engage.</p>
+      <p>A single wall is a delay, not a defense. Create multiple defensive rings around your Nexus, separated by courtyards or kill zones. Each layer should serve as a chokepoint, slowing the attackers' advance and forcing them to use up resources and time while giving your defenders multiple positions from which to engage.</p>
 
       <h4>Active Garrison</h4>
-      <p>A Nexus is only as strong as the players defending it. Establish a rotation of defenders, coordinate with your regiment leadership, and use voice communication for effective coordination.</p>
+      <p>A Nexus is only as strong as the players defending it. No amount of obsidian can replace a coordinated team. Establish a rotation of defenders, communicate with your regiment leadership, and use voice chat for real-time coordination. A coordinated defense can hold off a larger, disorganized attacking force.</p>
 
       <h4>Defensive Architecture</h4>
+      <p>Use the game's mechanics to your advantage. Smart design can create formidable obstacles.</p>
       <ul>
-        <li><strong>Obsidian Core:</strong> Reinforce the immediate Nexus chamber with obsidian for blast resistance</li>
-        <li><strong>Murder Holes:</strong> Create openings above the Nexus chamber for defenders to fire down</li>
-        <li><strong>Water Curtains:</strong> Strategic water flows can negate TNT damage and slow attackers</li>
-        <li><strong>Trap Networks:</strong> Use redstone traps, arrow dispensers, and falling block traps</li>
+        <li><strong>Obsidian Core:</strong> Reinforce the immediate chamber around your Nexus with obsidian to provide maximum blast resistance.</li>
+        <li><strong>Murder Holes:</strong> Create openings in the ceiling above your Nexus chamber, allowing defenders to fire down upon attackers from a protected position.</li>
+        <li><strong>Water Curtains:</strong> Strategic water flows can negate or mitigate TNT damage and can also be used to slow attackers' movement.</li>
+        <li><strong>Trap Networks:</strong> Use redstone to create arrow dispensers, falling block traps, and other non-instant-kill hazards to harass and slow the enemy.</li>
       </ul>
 
       <h3>Formations for Defense</h3>
-      <p>Regiments can spend RP on defensive formations that provide combat bonuses to all members in the area. These are activated through the Nexus GUI and can turn the tide of a siege.</p>
+      <p>Don't forget the offensive power of a good defense. Regiments can spend their hard-earned RP on defensive formations that provide powerful combat bonuses to all members within the area of effect. These formations are activated through the Nexus GUI and can turn the tide of a siege at a critical moment.</p>
 
       <div class="callout warning">
         <i class="fas fa-exclamation-triangle"></i>
-        <strong>Accessibility Reminder:</strong> While you are encouraged to build elaborate defenses, the Nexus must remain reachable. You cannot completely seal it off. Defensive structures must still allow a path—however dangerous—to the Nexus itself.
+        <strong>Accessibility Reminder:</strong> You are encouraged to build elaborate defenses, but the Nexus must remain reachable. You cannot completely seal it off. Defensive structures must still allow a path—however dangerous—to the Nexus itself.
       </div>
     </section>
 
-    <!-- Section 6: Diplomacy -->
+    <!-- Section 7: Diplomacy -->
     <section class="guide-section" id="diplomacy">
-      <h2><i class="fas fa-handshake"></i> 6. Diplomacy: Ultimatums & Peace</h2>
+      <h2><i class="fas fa-handshake"></i> 7. Diplomacy: Ultimatums & Peace</h2>
       
-      <p>War is not the only option. GeoFrontier features a robust diplomatic system for resolving conflicts or making demands without a single arrow fired.</p>
+      <div class="figure right">
+        <img src="images/peaceGUI.png" alt="Peace Proposal GUI">
+        <figcaption>The peace proposal GUI, where terms for ending a war are negotiated.</figcaption>
+      </div>
+
+      <p>War is costly and risky. GeoFrontier features a robust diplomatic system that allows nations to resolve conflicts, make demands, and secure victories without a single block being broken. From pre-war ultimatums to negotiated surrenders, diplomacy offers a path for the shrewd leader.</p>
 
       <h3>Ultimatums</h3>
-      <p>An ultimatum is a formal demand issued to another nation or town before a war declaration. It allows you to state your terms and give your opponent a chance to comply. Issuing an ultimatum opens a negotiation GUI where you can propose various conditions.</p>
+      <p>Before drawing a sword, a nation may issue an <strong>ultimatum</strong> to its opponent. This is a formal demand issued through the Nexus GUI, allowing you to state your terms and give your opponent a chance to comply peacefully. Issuing an ultimatum opens a negotiation screen where you can propose a variety of conditions. A refused ultimatum can then serve as a valid casus belli for a formal war declaration.</p>
 
       <h3>Peace Treaties</h3>
-      <p>Peace treaties are used to end an ongoing war. They utilize the same GUI as ultimatums, allowing both sides to negotiate terms for surrender or ceasefire.</p>
+      <p>When the tide of war turns, or both sides tire of conflict, a <strong>peace treaty</strong> can be negotiated to formally end hostilities. The peace proposal utilizes the same GUI as ultimatums, allowing both sides to propose and agree upon terms for surrender or a mutually beneficial ceasefire.</p>
 
       <dl class="command-list">
         <dt><code>/ultimatum issue &lt;opponent&gt;</code></dt>
@@ -738,28 +742,29 @@
       </dl>
 
       <h3>Negotiable Terms</h3>
+      <p>The diplomatic system allows for complex treaties with multiple clauses. Here are the primary terms that can be negotiated:</p>
       <div class="summary-cards">
         <div class="summary-card">
           <h4><i class="fas fa-exchange-alt"></i> Territory Transfer</h4>
-          <p>Permanently transfer a town or chunk to the other party.</p>
+          <p>Permanently transfer ownership of a specific town or chunk to the other party.</p>
         </div>
         <div class="summary-card">
           <h4><i class="fas fa-clock"></i> Occupation</h4>
-          <p>Temporarily occupy a territory for up to 30 days. Control, but not ownership, is transferred.</p>
+          <p>Establish a temporary occupation of a territory for up to 30 days. Control, but not permanent ownership, is transferred.</p>
         </div>
         <div class="summary-card">
           <h4><i class="fas fa-coins"></i> Reparations</h4>
-          <p>A one-time payment of in-game currency from one party to another.</p>
+          <p>A one-time payment of in-game currency from one party to another as compensation for damages or as a sign of submission.</p>
         </div>
         <div class="summary-card">
           <h4><i class="fas fa-gavel"></i> Player Jailing</h4>
-          <p>Specific players from the losing side can be jailed for up to 7 days.</p>
+          <p>Specific players from the losing side can be designated for jailing for up to 7 days, removing them from the conflict.</p>
         </div>
       </div>
 
       <div class="callout tip">
         <i class="fas fa-lightbulb"></i>
-        <p><strong>Strategic Diplomacy:</strong> Use ultimatums to gauge an enemy's resolve. A strong, prepared nation might refuse, while a weaker one may concede. In peace negotiations, temporary occupation of a key resource zone can be a more achievable goal than demanding permanent cession.</p>
+        <p><strong>Strategic Diplomacy:</strong> Use ultimatums not just as a threat, but as a tool to gauge an enemy's resolve. A strong, prepared nation might refuse, while a weaker one may concede. In peace negotiations, aiming for a temporary occupation of a key resource zone can be a more achievable goal than demanding permanent cession, and can set the stage for future conflicts.</p>
       </div>
     </section>
 
