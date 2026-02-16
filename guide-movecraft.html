@@ -242,7 +242,7 @@
       color: #9E9E9E;
     }
     
-    /* Durability explanation - clarified */
+    /* Durability explanation */
     .durability-explainer {
       background: rgba(33, 150, 243, 0.1);
       border: 1px solid #2196F3;
@@ -582,8 +582,8 @@
     <!-- Introduction -->
     <div class="tutorial-section">
       <h2><i class="fas fa-anchor"></i> What is Movecraft?</h2>
-      <p>Movecraft transforms static builds into moving ships. Instead of using minecarts or boats, you construct a vessel out of legitimate blocks, place a few specialized signs, and then command it to sail across the ocean. The ship moves as a single unit, with all players aboard moving with it.</p>
-      <p>The system is designed for the Age of Exploration—ships are slow, require careful handling, and are vulnerable to storms, sea creatures, and enemy cannon fire. A poorly built ship will sink. A well-built ship becomes your home on the waves.</p>
+      <p>Movecraft transforms static builds into moving ships. Instead of using minecarts or boats, you construct a vessel out of legitimate blocks, place a few specialized signs, and then sail it across the ocean. The ship moves as a single unit, with all players aboard moving with it.</p>
+      <p>The system is designed for the Age of Exploration. Ships are slow, require careful handling, and are vulnerable to storms, sea creatures, and enemy cannon fire. A poorly built ship will sink. A well built ship becomes your home on the waves.</p>
     </div>
 
     <!-- How Ships Work (Core Mechanics) -->
@@ -591,58 +591,58 @@
       <h2><i class="fas fa-cogs"></i> How Ships Work</h2>
       
       <h3>Ship Identification</h3>
-      <p>Every ship is defined by its <strong>craft type sign</strong>. This single sign—placed anywhere on the vessel—tells Movecraft what class of ship you've built. The first line must be the ship type (e.g., "Brigantine" or "Pinnace"). Without this sign, your build is just a build, not a ship.</p>
+      <p>Every ship is defined by its craft type sign. This single sign, placed anywhere on the vessel, tells Movecraft what class of ship you have built. The first line must be the ship type, for example "Brigantine" or "Pinnace". Without this sign, your build is just a build, not a ship.</p>
       
       <h3>Movement</h3>
-      <p>Ships move in the direction the pilot is facing. When you issue the <code>/craft sail</code> command, the ship teleports forward a set number of blocks (its "cruise skip" distance) in that direction. This isn't smooth sailing—it's a series of jumps. The ship must have a clear path; if any part would intersect solid land or another ship, movement fails.</p>
+      <p>To move a ship, the pilot must hold a stick and right click in the direction they want to sail. The ship will then teleport forward a set number of blocks, its cruise skip distance, in that direction. This is not smooth sailing but a series of jumps. The ship must have a clear path. If any part would intersect solid land or another ship, movement fails.</p>
       
       <h3>Controls</h3>
-      <p>You control the ship through a combination of signs and commands. The helm sign allows 90-degree rotations. The cruise sign lets you toggle continuous movement. Most pilots use a mix—rotating with the helm, then sailing forward with commands.</p>
+      <p>You control the ship through a combination of signs and items. The helm sign allows 90 degree rotations. The cruise sign lets you toggle continuous movement. Most pilots use a mix. They rotate with the helm, then sail forward with the stick.</p>
       
       <!-- Durability - Clarified Explanation -->
       <div class="durability-explainer">
-        <h4><i class="fas fa-heart"></i> Ship Durability (How Sinking Works)</h4>
-        <p>Contrary to what the numbers might suggest, ships do not have a flat "damage resistance." Instead, they have two critical thresholds:</p>
+        <h4><i class="fas fa-heart"></i> Ship Durability and How Sinking Works</h4>
+        <p>Contrary to what the numbers might suggest, ships do not have a flat damage resistance. They have two critical thresholds.</p>
         <ul>
-          <li><span class="damage-threshold">Damage Threshold (80-90%)</span> — When a ship takes enough damage to reach this percentage of its total blocks, it <strong>begins to take continuous damage</strong>. For most ships, this is 80% (meaning 20% of the ship must be destroyed before it starts deteriorating). The Man-o-War has 90% (only 10% destruction required to trigger sinking).</li>
-          <li><span class="sink-threshold">Sink Threshold (60-80%)</span> — This is the percentage of the ship that must be <strong>totally destroyed</strong> for the ship to sink. For a Man-o-War, 80% of its blocks must be destroyed before it finally goes under. For a Pinnace, only 60% destruction is required.</li>
+          <li><span class="damage-threshold">Damage Threshold (80 to 90 percent)</span> — When a ship takes enough damage to reach this percentage of its total blocks, it begins to take continuous damage. For most ships, this is 80 percent, meaning 20 percent of the ship must be destroyed before it starts deteriorating. The Man o War has 90 percent, so only 10 percent destruction is required to trigger sinking.</li>
+          <li><span class="sink-threshold">Sink Threshold (60 to 80 percent)</span> — This is the percentage of the ship that must be totally destroyed for the ship to sink. For a Man o War, 80 percent of its blocks must be destroyed before it finally goes under. For a Pinnace, only 60 percent destruction is required.</li>
         </ul>
-        <p><strong>In plain terms:</strong> The Man-o-War starts taking damage earlier (90% threshold) but requires far more total destruction to actually sink (80% sink threshold). Smaller ships stay intact longer but sink faster once they start taking damage.</p>
-        <p>Damage comes from storms, ramming, and cannon fire. When blocks are destroyed, the ship's integrity decreases. Repair using <code>/craft repair</code> and the appropriate materials.</p>
+        <p><strong>In plain terms:</strong> The Man o War starts taking damage earlier, at 90 percent, but requires far more total destruction to actually sink, at 80 percent. Smaller ships stay intact longer but sink faster once they start taking damage.</p>
+        <p>Damage comes from storms, ramming, and cannon fire. When blocks are destroyed, the ship's integrity decreases. There is no repair command. You must physically replace destroyed blocks while on board.</p>
       </div>
       
       <h3>Piloting and Ownership</h3>
-      <p>Any player can pilot any ship by default. To restrict access, use a <strong>pilot sign</strong> listing authorized pilots. The ship's "owner" is the player who placed the craft type sign—this player can add or remove pilots via the sign.</p>
+      <p>Any player can pilot any ship by default. To restrict access, use a pilot sign listing authorized pilots. The ship's owner is the player who placed the craft type sign. This player can add or remove pilots via the sign.</p>
     </div>
 
-    <!-- Step-by-Step Building Guide (NEW) -->
+    <!-- Step-by-Step Building Guide -->
     <div class="tutorial-section">
       <h2><i class="fas fa-hammer"></i> How to Build a Ship: Step by Step</h2>
       
       <div class="build-steps">
         <h4>Step 1: Choose Your Ship Class</h4>
-        <div class="step-item">Decide what you need—a fast trader (Pinnace), a warship (Brigantine), or a flagship (Man-o-War). Each class has specific size requirements (see the Ship Classes table below).</div>
+        <div class="step-item">Decide what you need, a fast trader like a Pinnace, a warship like a Brigantine, or a flagship like a Man o War. Each class has specific size requirements, as shown in the Ship Classes table below.</div>
         
         <h4>Step 2: Gather Materials</h4>
-        <div class="step-item">You'll need planks (30-100% of total volume), wool for sails (4-20%), and various structural blocks. Naval vessels can use up to 10% iron blocks for cannons. <strong>Critical:</strong> Your ship must be at least 30% planks, or it won't be recognized.</div>
+        <div class="step-item">You will need planks, 30 to 100 percent of total volume, and wool for sails, 4 to 20 percent. Naval vessels can use up to 10 percent iron blocks for cannons. Your ship must be at least 30 percent planks, or it will not be recognized.</div>
         
         <h4>Step 3: Build the Hull</h4>
-        <div class="step-item">Construct your ship within the size range for your chosen class. The hull must be <strong>solidly connected</strong>—all blocks count toward the ship's total volume. Leave interior spaces hollow; only the blocks themselves matter, not the air inside.</div>
+        <div class="step-item">Construct your ship within the size range for your chosen class. The hull must be solidly connected. All blocks count toward the ship's total volume. You can leave interior spaces hollow. Only the blocks themselves matter, not the air inside.</div>
         
-        <h4>Step 4: Add Sails (Wool)</h4>
-        <div class="step-item">Wool blocks represent sails. They must comprise 4-20% of your total block count. You can place them traditionally as masts and sails, but they count as part of the ship structure.</div>
+        <h4>Step 4: Add Sails Using Wool</h4>
+        <div class="step-item">Wool blocks represent sails. They must make up 4 to 20 percent of your total block count. You can place them traditionally as masts and sails, but they count as part of the ship structure.</div>
         
         <h4>Step 5: Place the Required Sign</h4>
-        <div class="step-item">Place a sign with the ship class on the first line (e.g., "Brigantine"). This sign can be anywhere—on the hull, mast, or deck. Without this, your build won't move.</div>
+        <div class="step-item">Place a sign with the ship class on the first line, for example "Brigantine". This sign can be anywhere on the hull, mast, or deck. Without this, your build will not move.</div>
         
         <h4>Step 6: Add Optional Signs</h4>
-        <div class="step-item">Add helm signs for steering, cruise signs for continuous movement, pilot signs for access control, and manoverboard signs for easy return. These make the ship usable but aren't strictly required.</div>
+        <div class="step-item">Add helm signs for steering, cruise signs for continuous movement, pilot signs for access control, and manoverboard signs for easy return. These make the ship usable but are not strictly required.</div>
         
         <h4>Step 7: Test Your Ship</h4>
-        <div class="step-item">Stand on the ship, face the direction you want to go, and type <code>/craft sail</code>. If everything is correct, your ship will move forward. If not, check your material percentages and sign placement.</div>
+        <div class="step-item">Stand on the ship, face the direction you want to go, hold a stick, and right click. If everything is correct, your ship will move forward. If not, check your material percentages and sign placement.</div>
       </div>
       
-      <!-- Player Recommendations (NEW) -->
+      <!-- Player Recommendations -->
       <div class="recommendation-box">
         <h4><i class="fas fa-lightbulb"></i> Experienced Sailor Recommendations</h4>
         
@@ -650,7 +650,7 @@
           <div class="recommendation-icon"><i class="fas fa-lock"></i></div>
           <div>
             <strong>Secure Your Ship When Docked</strong>
-            <p>Always dock your ship inside a claimed chunk. Place a piston against the hull and extend it into the ship. This physically prevents theft—even if someone places their own pilot sign, the ship won't move while blocked by the piston. Retract the piston when you're ready to sail.</p>
+            <p>Always dock your ship inside a claimed chunk. Place a piston against the hull and extend it into the ship. This physically prevents theft. Even if someone places their own pilot sign, the ship will not move while blocked by the piston. Retract the piston when you are ready to sail.</p>
           </div>
         </div>
         
@@ -658,7 +658,7 @@
           <div class="recommendation-icon"><i class="fas fa-shield-alt"></i></div>
           <div>
             <strong>Reinforce Critical Sections</strong>
-            <p>Storms and cannon fire don't destroy blocks uniformly. Reinforce your hull with multiple layers around vital areas—especially near the waterline. If the outer layer gets blown away, you have backups. Obsidian is excellent for core structural elements.</p>
+            <p>Storms and cannon fire do not destroy blocks uniformly. Reinforce your hull with multiple layers around vital areas, especially near the waterline. If the outer layer gets blown away, you have backups. Obsidian is excellent for core structural elements.</p>
           </div>
         </div>
         
@@ -666,7 +666,7 @@
           <div class="recommendation-icon"><i class="fas fa-route"></i></div>
           <div>
             <strong>Always Set a Manoverboard Sign</strong>
-            <p>Falling off your ship in open ocean is a death sentence. Place a "Manoverboard" sign somewhere easily accessible. If you fall, type <code>/manoverboard</code> and you'll teleport back to that sign. Don't learn this lesson the hard way.</p>
+            <p>Falling off your ship in open ocean is a death sentence. Place a Manoverboard sign somewhere easily accessible. If you fall, type /manoverboard and you will teleport back to that sign. Do not learn this lesson the hard way.</p>
           </div>
         </div>
         
@@ -674,7 +674,7 @@
           <div class="recommendation-icon"><i class="fas fa-toolbox"></i></div>
           <div>
             <strong>Carry Repair Materials</strong>
-            <p>Always have spare planks and wool in your inventory. If your ship takes damage mid-voyage, you can repair it immediately with <code>/craft repair</code>. Waiting until you reach port might be too late.</p>
+            <p>Always have spare planks and wool in your inventory. If your ship takes damage mid voyage, you can repair it immediately by placing new blocks. There is no repair command. Waiting until you reach port might be too late.</p>
           </div>
         </div>
         
@@ -691,29 +691,29 @@
     <!-- Material Requirements -->
     <div class="material-requirement">
       <h3><i class="fas fa-cubes"></i> Material Composition Requirements</h3>
-      <p style="color: #b3e0ff; margin-bottom: 20px;">Every ship must meet these material percentages to function:</p>
+      <p style="color: #b3e0ff; margin-bottom: 20px;">Every ship must meet these material percentages to function.</p>
       
       <div class="percentage-grid">
         <div class="percentage-card">
           <h4><i class="fas fa-wood"></i> Planks</h4>
-          <div class="percentage-value">30% - 100%</div>
-          <p style="color: #b3e0ff;">At least 30% of your ship's total blocks must be any type of planks. This is the primary structural material.</p>
+          <div class="percentage-value">30% to 100%</div>
+          <p style="color: #b3e0ff;">At least 30 percent of your ship's total blocks must be any type of planks. This is the primary structural material.</p>
         </div>
         
         <div class="percentage-card">
-          <h4><i class="fas fa-tshirt"></i> Wool (Sails)</h4>
-          <div class="percentage-value">4% - 20%</div>
+          <h4><i class="fas fa-tshirt"></i> Wool for Sails</h4>
+          <div class="percentage-value">4% to 20%</div>
           <p style="color: #b3e0ff;">Wool blocks represent sails. You need enough to catch wind, but too much makes the ship unstable.</p>
         </div>
       </div>
       
-      <p style="color: #b3e0ff; margin-top: 15px;"><i class="fas fa-info-circle"></i> The remaining percentage can be any combination of allowed materials (stone, glass, wood variants, etc.).</p>
+      <p style="color: #b3e0ff; margin-top: 15px;"><i class="fas fa-info-circle"></i> The remaining percentage can be any combination of allowed materials, including stone, glass, and wood variants.</p>
     </div>
 
     <!-- Ship Classes (Stat Cards) -->
     <div class="tutorial-section">
       <h2><i class="fas fa-flag"></i> Ship Classes</h2>
-      <p style="margin-bottom: 20px;">Ships are divided into civilian (no cannons) and naval (cannon-enabled) vessels. Choose based on your intended use—traders should use civilian ships to avoid being mistaken for warships.</p>
+      <p style="margin-bottom: 20px;">Ships are divided into civilian vessels with no cannons and naval vessels with cannons enabled. Choose based on your intended use. Traders should use civilian ships to avoid being mistaken for warships.</p>
       
       <div class="ship-types-grid">
         
@@ -724,13 +724,13 @@
             <span class="cannon-status cannon-disabled">No Cannons</span>
           </h4>
           <div class="ship-stats">
-            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">20-150 blocks</span></div>
-            <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">14 (Very Fast)</span></div>
+            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">20 to 150 blocks</span></div>
+            <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">14, Very Fast</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">10 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">60%</span></div>
           </div>
           <div class="ship-description">Tiny coastal vessel. Fastest ship in the fleet, perfect for messengers and quick trades. Cannot equip cannons.</div>
-          <div class="ship-role">Civilian / Trader</div>
+          <div class="ship-role">Civilian, Trader</div>
         </div>
         
         <div class="ship-card civilian">
@@ -739,13 +739,13 @@
             <span class="cannon-status cannon-disabled">No Cannons</span>
           </h4>
           <div class="ship-stats">
-            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">151-400 blocks</span></div>
-            <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">11 (Fast)</span></div>
+            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">151 to 400 blocks</span></div>
+            <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">11, Fast</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">6 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">60%</span></div>
           </div>
           <div class="ship-description">Small coastal trader with excellent speed for its size. Popular among merchants. Cannot equip cannons.</div>
-          <div class="ship-role">Civilian / Trader</div>
+          <div class="ship-role">Civilian, Trader</div>
         </div>
         
         <!-- Naval Vessels -->
@@ -755,13 +755,13 @@
             <span class="cannon-status cannon-enabled">Cannons Enabled</span>
           </h4>
           <div class="ship-stats">
-            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">600-2500 blocks</span></div>
+            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">600 to 2500 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">8</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">8 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">70%</span></div>
           </div>
           <div class="ship-description">Versatile exploration vessel. The smallest ship capable of mounting cannons. Good for discovery voyages.</div>
-          <div class="ship-role">Naval / Exploration</div>
+          <div class="ship-role">Naval, Exploration</div>
         </div>
         
         <div class="ship-card naval">
@@ -770,13 +770,13 @@
             <span class="cannon-status cannon-enabled">Cannons Enabled</span>
           </h4>
           <div class="ship-stats">
-            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">500-1400 blocks</span></div>
+            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">500 to 1400 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">8</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">8 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">70%</span></div>
           </div>
           <div class="ship-description">First dedicated warship class. Fast and maneuverable, ideal for coastal patrol and light combat.</div>
-          <div class="ship-role">Naval / Light Warship</div>
+          <div class="ship-role">Naval, Light Warship</div>
         </div>
         
         <div class="ship-card naval">
@@ -785,13 +785,13 @@
             <span class="cannon-status cannon-enabled">Cannons Enabled</span>
           </h4>
           <div class="ship-stats">
-            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">1200-2800 blocks</span></div>
+            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">1200 to 2800 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">7</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">8 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">70%</span></div>
           </div>
-          <div class="ship-description">Two-masted warship perfect for naval skirmishes. The standard privateer vessel.</div>
-          <div class="ship-role">Naval / Privateer</div>
+          <div class="ship-description">Two masted warship perfect for naval skirmishes. The standard privateer vessel.</div>
+          <div class="ship-role">Naval, Privateer</div>
         </div>
         
         <div class="ship-card naval">
@@ -800,13 +800,13 @@
             <span class="cannon-status cannon-enabled">Cannons Enabled</span>
           </h4>
           <div class="ship-stats">
-            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">2500-4400 blocks</span></div>
+            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">2500 to 4400 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">6</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">10 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">75%</span></div>
           </div>
-          <div class="ship-description">Raider vessel optimized for boarding actions. Heavier than a brigantine, designed for hit-and-run.</div>
-          <div class="ship-role">Naval / Raider</div>
+          <div class="ship-description">Raider vessel optimized for boarding actions. Heavier than a brigantine, designed for hit and run tactics.</div>
+          <div class="ship-role">Naval, Raider</div>
         </div>
         
         <div class="ship-card naval">
@@ -815,13 +815,13 @@
             <span class="cannon-status cannon-enabled">Cannons Enabled</span>
           </h4>
           <div class="ship-stats">
-            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">2501-4000 blocks</span></div>
-            <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">6 (Slow)</span></div>
+            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">2501 to 4000 blocks</span></div>
+            <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">6, Slow</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">12 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">75%</span></div>
           </div>
-          <div class="ship-description">Heavily armed merchantman. Carries cargo and cannons—perfect for valuable trade routes.</div>
-          <div class="ship-role">Naval / Armed Transport</div>
+          <div class="ship-description">Heavily armed merchantman. Carries cargo and cannons, perfect for valuable trade routes.</div>
+          <div class="ship-role">Naval, Armed Transport</div>
         </div>
         
         <div class="ship-card naval">
@@ -830,34 +830,34 @@
             <span class="cannon-status cannon-enabled">Cannons Enabled</span>
           </h4>
           <div class="ship-stats">
-            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">4200-6500 blocks</span></div>
-            <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">4 (Slow)</span></div>
+            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">4200 to 6500 blocks</span></div>
+            <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">4, Slow</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">10 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">75%</span></div>
           </div>
           <div class="ship-description">Heavy warship for convoy escort and fleet engagements. Significant firepower.</div>
-          <div class="ship-role">Naval / Warship</div>
+          <div class="ship-role">Naval, Warship</div>
         </div>
         
         <div class="ship-card flagship">
           <h4>
-            <i class="fas fa-crosshairs"></i> Man-o-War
+            <i class="fas fa-crosshairs"></i> Man o War
             <span class="cannon-status cannon-enabled">Cannons Enabled</span>
           </h4>
           <div class="ship-stats">
-            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">7500-100000 blocks</span></div>
-            <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">3 (Very Slow)</span></div>
+            <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">7500 to 100000 blocks</span></div>
+            <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">3, Very Slow</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">12 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Damage Threshold:</span><span class="stat-value">90%</span></div>
             <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">80%</span></div>
           </div>
           <div class="ship-description">The ultimate ship of the line. Starts taking damage earlier but requires massive destruction to sink. Unmatched firepower.</div>
-          <div class="ship-role">Naval / Flagship</div>
+          <div class="ship-role">Naval, Flagship</div>
         </div>
       </div>
     </div>
 
-    <!-- Signs Section (Keep Original Images) -->
+    <!-- Signs Section with Images -->
     <div class="sign-guide">
       <h3><i class="fas fa-sign"></i> Ship Signs Reference</h3>
       
@@ -872,7 +872,7 @@
           <div class="sign-info">
             <h4>Craft Type Sign <span class="sign-required">REQUIRED</span></h4>
             <div class="sign-format">Brigantine</div>
-            <p style="color: #b3e0ff;">First line must be the ship class (e.g., Pinnace, Brigantine, Man-o-War). This tells Movecraft what you built.</p>
+            <p style="color: #b3e0ff;">First line must be the ship class, for example Pinnace, Brigantine, or Man o War. This tells Movecraft what you built.</p>
           </div>
         </div>
         
@@ -881,7 +881,7 @@
           <div class="sign-info">
             <h4>Name Sign</h4>
             <div class="sign-format">Name:<br>HMS Victory</div>
-            <p style="color: #b3e0ff;">Line 1: "Name:" (exactly). Line 2: Your ship's name. Displays on nametag and /contacts.</p>
+            <p style="color: #b3e0ff;">Line 1 must be "Name:" exactly. Line 2 is your ship's name. Displays on nametag and in /contacts.</p>
           </div>
         </div>
         
@@ -890,7 +890,7 @@
           <div class="sign-info">
             <h4>Helm Sign</h4>
             <div class="sign-format">[helm]</div>
-            <p style="color: #b3e0ff;">Right-click to rotate ship 90° clockwise, left-click for counter-clockwise.</p>
+            <p style="color: #b3e0ff;">Right click to rotate ship 90 degrees clockwise. Left click to rotate 90 degrees counter clockwise.</p>
           </div>
         </div>
         
@@ -899,7 +899,7 @@
           <div class="sign-info">
             <h4>Cruise Sign</h4>
             <div class="sign-format">Cruise: OFF</div>
-            <p style="color: #b3e0ff;">Toggle continuous sailing. Ship will keep moving in a straight line until turned off.</p>
+            <p style="color: #b3e0ff;">Toggle continuous sailing. The ship will keep moving in a straight line until turned off.</p>
           </div>
         </div>
         
@@ -908,7 +908,7 @@
           <div class="sign-info">
             <h4>Pilot Sign</h4>
             <div class="sign-format">Pilot:<br>CaptainJack</div>
-            <p style="color: #b3e0ff;">List authorized pilots (one per line). Leave blank for public access.</p>
+            <p style="color: #b3e0ff;">List authorized pilots, one per line. Leave blank for public access.</p>
           </div>
         </div>
         
@@ -917,7 +917,7 @@
           <div class="sign-info">
             <h4>Manoverboard Sign</h4>
             <div class="sign-format">Manoverboard</div>
-            <p style="color: #b3e0ff;">Teleport location for /manoverboard. Place somewhere safe on deck.</p>
+            <p style="color: #b3e0ff;">Teleport location for the /manoverboard command. Place somewhere safe on deck.</p>
           </div>
         </div>
         
@@ -926,7 +926,7 @@
           <div class="sign-info">
             <h4>Release Sign</h4>
             <div class="sign-format">Release</div>
-            <p style="color: #b3e0ff;">Right-click to stop sailing. Alternative to /craft release.</p>
+            <p style="color: #b3e0ff;">Right click to stop sailing. Alternative to the /release command.</p>
           </div>
         </div>
       </div>
@@ -947,13 +947,13 @@
             <span class="material-tag">Stone Bricks</span>
             <span class="material-tag">Iron Blocks*</span>
           </div>
-          <p style="color: #90CAF9; font-size: 0.8rem; margin-top: 8px;">*Iron blocks limited to 10% on naval ships, 0% on civilian</p>
+          <p style="color: #90CAF9; font-size: 0.8rem; margin-top: 8px;">*Iron blocks limited to 10 percent on naval ships, 0 percent on civilian.</p>
         </div>
         
         <div class="material-category">
-          <h5>Sails & Decor</h5>
+          <h5>Sails and Decor</h5>
           <div class="material-list">
-            <span class="material-tag">All Wool (4-20%)</span>
+            <span class="material-tag">All Wool (4 to 20%)</span>
             <span class="material-tag">All Carpets</span>
             <span class="material-tag">Banners</span>
           </div>
@@ -974,8 +974,8 @@
         <div class="material-category">
           <h5>Interior</h5>
           <div class="material-list">
-            <span class="material-tag">Chests (0-3%)</span>
-            <span class="material-tag">Barrels (0-3%)</span>
+            <span class="material-tag">Chests (0 to 3%)</span>
+            <span class="material-tag">Barrels (0 to 3%)</span>
             <span class="material-tag">Furnaces</span>
             <span class="material-tag">Crafting Tables</span>
             <span class="material-tag">All Signs</span>
@@ -987,7 +987,7 @@
       <div class="danger-warning">
         <h4><i class="fas fa-exclamation-circle"></i> Forbidden Blocks</h4>
         <p style="color: #ffcdd2;">
-          <strong>Do not use these on any ship:</strong> Pistons, Sticky Pistons, Slime Blocks, Honey Blocks, Observers, Dispensers, Droppers, Redstone components (wire, blocks, repeaters, comparators), Daylight Detectors, Beacons, Ender Chests. These are disabled for Age of Exploration authenticity and to prevent exploits.
+          <strong>Do not use these on any ship:</strong> Pistons, Sticky Pistons, Slime Blocks, Honey Blocks, Observers, Dispensers, Droppers, Redstone components including wire, blocks, repeaters, and comparators, Daylight Detectors, Beacons, and Ender Chests. These are disabled for Age of Exploration authenticity and to prevent exploits.
         </p>
       </div>
     </div>
@@ -999,58 +999,36 @@
       <div class="commands-grid">
         <div class="command-group">
           <h5>Sailing</h5>
-          <div class="command-line">/craft sail</div>
-          <p style="color: #b3e0ff; margin: 5px 0 15px;">Move ship forward</p>
-          
-          <div class="command-line">/craft release</div>
-          <p style="color: #b3e0ff; margin: 5px 0 15px;">Stop moving</p>
-          
-          <div class="command-line">/craft cruise</div>
-          <p style="color: #b3e0ff; margin: 5px 0 15px;">Toggle continuous movement</p>
+          <div class="command-line">/release</div>
+          <p style="color: #b3e0ff; margin: 5px 0 15px;">Stop moving your ship.</p>
         </div>
         
         <div class="command-group">
           <h5>Information</h5>
-          <div class="command-line">/craft info</div>
-          <p style="color: #b3e0ff; margin: 5px 0 15px;">Ship status and stats</p>
-          
           <div class="command-line">/contacts</div>
-          <p style="color: #b3e0ff; margin: 5px 0 15px;">List nearby ships</p>
-        </div>
-        
-        <div class="command-group">
-          <h5>Combat (Naval Only)</h5>
-          <div class="command-line">/craft fire</div>
-          <p style="color: #b3e0ff; margin: 5px 0 15px;">Fire cannons</p>
-          
-          <div class="command-line">/craft reload</div>
-          <p style="color: #b3e0ff; margin: 5px 0 15px;">Reload weapons</p>
-          
-          <div class="command-line">/craft repair</div>
-          <p style="color: #b3e0ff; margin: 5px 0 15px;">Repair damage (uses materials)</p>
+          <p style="color: #b3e0ff; margin: 5px 0 15px;">List nearby ships.</p>
         </div>
         
         <div class="command-group">
           <h5>Utility</h5>
           <div class="command-line">/manoverboard</div>
-          <p style="color: #b3e0ff; margin: 5px 0 15px;">Teleport to manoverboard sign</p>
-          
-          <div class="command-line">/craft pilot</div>
-          <p style="color: #b3e0ff; margin: 5px 0 15px;">Take control of ship</p>
+          <p style="color: #b3e0ff; margin: 5px 0 15px;">Teleport to your manoverboard sign.</p>
         </div>
       </div>
+      
+      <p style="color: #b3e0ff; margin-top: 15px;"><i class="fas fa-info-circle"></i> To move your ship, hold a stick and right click in the direction you want to sail. To fire cannons on naval vessels, see the Cannon Guide.</p>
     </div>
 
     <!-- Progression Path -->
     <div class="tutorial-section">
       <h2><i class="fas fa-chart-line"></i> Recommended Progression</h2>
-      <p>New to ships? Start small and work your way up:</p>
+      <p>New to ships? Start small and work your way up.</p>
       <ol style="color: #b3e0ff;">
         <li><strong>Pinnace or Cutter</strong> — Learn the basics of building and sailing. These are cheap, fast, and forgiving.</li>
         <li><strong>Schooner or Caravel</strong> — Your first warship. Learn cannon mechanics and naval combat.</li>
-        <li><strong>Brigantine or Corsair</strong> — Serious raiding and privateering. Heavier firepower, more crew.</li>
+        <li><strong>Brigantine or Corsair</strong> — Serious raiding and privateering. Heavier firepower and more crew.</li>
         <li><strong>Frigate or Galleon</strong> — Fleet operations and valuable cargo runs.</li>
-        <li><strong>Man-o-War</strong> — End-game flagship. Requires a nation's worth of resources and crew.</li>
+        <li><strong>Man o War</strong> — End game flagship. Requires a nation's worth of resources and crew.</li>
       </ol>
     </div>
 
