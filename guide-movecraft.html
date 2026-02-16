@@ -290,8 +290,8 @@
       color: #9E9E9E;
     }
     
-    /* Durability explanation */
-    .durability-explainer {
+    /* Storm warning */
+    .storm-warning {
       background: rgba(33, 150, 243, 0.1);
       border: 1px solid #2196F3;
       padding: 20px;
@@ -299,31 +299,9 @@
       margin: 20px 0;
     }
     
-    .durability-explainer h4 {
+    .storm-warning h4 {
       color: #29B6F6;
       margin-bottom: 10px;
-    }
-    
-    .durability-explainer p {
-      margin-bottom: 10px;
-    }
-    
-    .damage-threshold {
-      display: inline-block;
-      background: rgba(244, 67, 54, 0.2);
-      color: #FF5252;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-weight: 600;
-    }
-    
-    .sink-threshold {
-      display: inline-block;
-      background: rgba(33, 150, 243, 0.2);
-      color: #4fc3f7;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-weight: 600;
     }
     
     /* Player recommendations */
@@ -598,75 +576,6 @@
       margin: 0;
     }
     
-    /* Ship diagram */
-    .ship-diagram-container {
-      background: rgba(8, 17, 35, 0.9);
-      border: 2px solid #4fc3f7;
-      border-radius: 16px;
-      padding: 25px;
-      margin: 30px 0 20px 0;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-    
-    .ship-diagram-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      color: #4fc3f7;
-      font-family: 'Cinzel', serif;
-      font-size: 1.2rem;
-    }
-    
-    .ascii-ship {
-      font-family: monospace;
-      white-space: pre;
-      color: #a8e6cf;
-      font-size: 0.9rem;
-      line-height: 1.2;
-      text-align: center;
-      margin-bottom: 25px;
-      background: rgba(0, 20, 40, 0.6);
-      padding: 20px;
-      border-radius: 8px;
-      overflow-x: auto;
-    }
-    
-    .diagram-labels {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-    }
-    
-    .diagram-label {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
-      background: rgba(20, 35, 60, 0.8);
-      border-radius: 6px;
-    }
-    
-    .label-color {
-      width: 16px;
-      height: 16px;
-      border-radius: 4px;
-    }
-    
-    .label-color.hull { background: #4fc3f7; }
-    .label-color.sails { background: #FFC107; }
-    .label-color.masts { background: #9C27B0; }
-    .label-color.sign { background: #FF5252; }
-    
-    .label-text {
-      color: #b3e0ff;
-      font-size: 0.9rem;
-    }
-    
-    .label-text strong {
-      color: #fff;
-    }
-    
     .navigation-footer {
       display: flex;
       justify-content: space-between;
@@ -758,8 +667,9 @@
       <ul class="toc-list">
         <li><a href="#introduction"><i class="fas fa-chevron-right"></i> What is Movecraft?</a></li>
         <li><a href="#how-ships-work"><i class="fas fa-chevron-right"></i> How Ships Work</a></li>
-        <li><a href="#troubleshooting"><i class="fas fa-chevron-right"></i> Why My Ship Won't Move</a></li>
+        <li><a href="#piloting"><i class="fas fa-chevron-right"></i> How to Pilot a Ship</a></li>
         <li><a href="#building-guide"><i class="fas fa-chevron-right"></i> Step-by-Step Building</a></li>
+        <li><a href="#troubleshooting"><i class="fas fa-chevron-right"></i> Why My Ship Won't Move</a></li>
         <li><a href="#material-requirements"><i class="fas fa-chevron-right"></i> Material Requirements</a></li>
         <li><a href="#ship-classes"><i class="fas fa-chevron-right"></i> Ship Classes</a></li>
         <li><a href="#signs"><i class="fas fa-chevron-right"></i> Ship Signs</a></li>
@@ -783,113 +693,44 @@
       <h3>Ship Identification</h3>
       <p>Every ship is defined by its craft type sign. This single sign, placed anywhere on the vessel, tells Movecraft what class of ship you have built. The first line must be the ship type, for example "Brigantine" or "Pinnace". Without this sign, your build is just a build, not a ship.</p>
       
-      <h3>Movement</h3>
-      <p>To move a ship, the pilot must hold a stick and right click in the direction they want to sail. The ship will then teleport forward a set number of blocks, its cruise skip distance, in that direction. This is not smooth sailing but a series of jumps. The ship must have a clear path. If any part would intersect solid land or another ship, movement fails.</p>
+      <h3>Ship Movement</h3>
+      <p>Ships move by teleporting forward in a series of jumps, not by smooth sailing. The distance traveled per jump, called cruise skip, varies by ship class. When you command your ship to move, the game checks if the entire ship would fit in the new position. If any part would intersect solid land, another ship, or major structures, the movement fails and your ship stays put.</p>
+      <p>If you do hit something, your ship may take damage and you will need to back up. To reverse direction, turn your ship around using the helm sign and sail back the way you came. Repeated collisions can severely damage your vessel.</p>
       
-      <h3>Controls</h3>
-      <p>You control the ship through a combination of signs and items. The helm sign allows 90 degree rotations. The cruise sign lets you toggle continuous movement. Most pilots use a mix. They rotate with the helm, then sail forward with the stick.</p>
-      
-      <!-- Durability - Clarified Explanation -->
-      <div class="durability-explainer">
-        <h4><i class="fas fa-heart"></i> Ship Durability and How Sinking Works</h4>
-        <p>Contrary to what the numbers might suggest, ships do not have a flat damage resistance. They have two critical thresholds.</p>
-        <ul>
-          <li><span class="damage-threshold">Damage Threshold (80 to 90 percent)</span> — When a ship takes enough damage to reach this percentage of its total blocks, it begins to take continuous damage. For most ships, this is 80 percent, meaning 20 percent of the ship must be destroyed before it starts deteriorating. The Man o War has 90 percent, so only 10 percent destruction is required to trigger sinking.</li>
-          <li><span class="sink-threshold">Sink Threshold (60 to 80 percent)</span> — This is the percentage of the ship that must be totally destroyed for the ship to sink. For a Man o War, 80 percent of its blocks must be destroyed before it finally goes under. For a Pinnace, only 60 percent destruction is required.</li>
-        </ul>
-        <p><strong>In plain terms:</strong> The Man o War starts taking damage earlier, at 90 percent, but requires far more total destruction to actually sink, at 80 percent. Smaller ships stay intact longer but sink faster once they start taking damage.</p>
-        <p>Damage comes from storms, ramming, and cannon fire. When blocks are destroyed, the ship's integrity decreases. There is no repair command. You must physically replace destroyed blocks while on board.</p>
+      <h3>Storms and Environmental Damage</h3>
+      <div class="storm-warning">
+        <h4><i class="fas fa-cloud-rain"></i> Storms at Sea</h4>
+        <p>The oceans are not safe. Storms can roll in without warning, damaging ships caught in open water. During a storm, blocks on your ship may randomly break, especially sails and upper structures. If you see dark clouds gathering or hear thunder, return to port or seek shelter. There is no way to stop storm damage except to not be at sea.</p>
+        <p style="margin-top: 10px;"><i class="fas fa-tools"></i> Damage from storms must be repaired manually by replacing broken blocks. Always carry spare planks and wool.</p>
       </div>
       
-      <h3>Piloting and Ownership</h3>
+      <h3>Ownership and Access</h3>
       <p>Any player can pilot any ship by default. To restrict access, use a pilot sign listing authorized pilots. The ship's owner is the player who placed the craft type sign. This player can add or remove pilots via the sign.</p>
     </div>
 
-    <!-- Why My Ship Won't Move - Troubleshooting -->
-    <div class="tutorial-section" id="troubleshooting">
-      <h2><i class="fas fa-question-circle"></i> Why My Ship Won't Move</h2>
+    <!-- How to Pilot a Ship (New detailed section) -->
+    <div class="tutorial-section" id="piloting">
+      <h2><i class="fas fa-ship"></i> How to Pilot a Ship</h2>
       
-      <p>You built a beautiful ship, placed your signs, right clicked with a stick, and nothing happened. Don't panic. This is the most common experience for new shipwrights. Work through these checks in order.</p>
+      <h3>Becoming the Pilot</h3>
+      <p>Before you can control a ship, you must become its active pilot. Right click on the craft type sign. You will see a message confirming that you are now piloting the vessel. Only one player can pilot at a time. If someone else is already piloting, you will need to wait or ask them to step down.</p>
       
-      <div class="troubleshooting-grid">
-        
-        <div class="troubleshooting-item">
-          <div class="troubleshooting-number">1</div>
-          <div class="troubleshooting-content">
-            <h4>Are you standing on the ship?</h4>
-            <p>You must be physically on the ship's blocks. Standing next to it or on nearby terrain won't work. The game needs to know which craft you're trying to move.</p>
-          </div>
-        </div>
-        
-        <div class="troubleshooting-item">
-          <div class="troubleshooting-number">2</div>
-          <div class="troubleshooting-content">
-            <h4>Are you holding a stick?</h4>
-            <p>The movement item is a stick. Not a sword, not a fishing rod, not your bare hand. A regular stick, in your main hand, right clicked in the direction you want to sail.</p>
-          </div>
-        </div>
-        
-        <div class="troubleshooting-item">
-          <div class="troubleshooting-number">3</div>
-          <div class="troubleshooting-content">
-            <h4>Does it have a Craft Type sign?</h4>
-            <p>Check for the required sign. First line must be exactly the ship class name, for example "Brigantine" or "Pinnace". No extra text, no punctuation. Just the class name.</p>
-          </div>
-        </div>
-        
-        <div class="troubleshooting-item">
-          <div class="troubleshooting-number">4</div>
-          <div class="troubleshooting-content">
-            <h4>Is it within block limits?</h4>
-            <p>Count your blocks. Every ship class has a minimum and maximum size. Too small or too large, and the ship won't be recognized. Check the Ship Classes table for your vessel's required range.</p>
-          </div>
-        </div>
-        
-        <div class="troubleshooting-item">
-          <div class="troubleshooting-number">5</div>
-          <div class="troubleshooting-content">
-            <h4>Are material percentages correct?</h4>
-            <p>Your ship needs at least 30 percent planks and 4 to 20 percent wool. If you built with too much stone or too little wool, the ship will sit dead in the water.</p>
-          </div>
-        </div>
-        
-        <div class="troubleshooting-item">
-          <div class="troubleshooting-number">6</div>
-          <div class="troubleshooting-content">
-            <h4>Is cruise already enabled?</h4>
-            <p>If you have a cruise sign and it's set to ON, the ship may already be trying to move. Toggle it OFF, then try the stick again.</p>
-          </div>
-        </div>
-        
-        <div class="troubleshooting-item">
-          <div class="troubleshooting-number">7</div>
-          <div class="troubleshooting-content">
-            <h4>Is it intersecting terrain?</h4>
-            <p>Ships cannot phase through land, other ships, or major structures. If any part of your ship would clip into something, movement fails. Try moving to open water.</p>
-          </div>
-        </div>
-        
-        <div class="troubleshooting-item">
-          <div class="troubleshooting-number">8</div>
-          <div class="troubleshooting-content">
-            <h4>Is someone else piloting?</h4>
-            <p>Only one player can control a ship at a time. If another player is currently piloting, you will need to wait or ask them to release control.</p>
-          </div>
-        </div>
-        
-        <div class="troubleshooting-item">
-          <div class="troubleshooting-number">9</div>
-          <div class="troubleshooting-content">
-            <h4>Does it have forbidden blocks?</h4>
-            <p>Check your build for pistons, redstone components, or other prohibited materials. One forbidden block can disable the entire ship.</p>
-          </div>
-        </div>
-        
-      </div>
+      <h3>Basic Controls</h3>
+      <ul>
+        <li><strong>Moving Forward:</strong> Hold a stick in your hand and right click in the direction you want to sail. The ship will move forward in the direction you are facing. This works for forward movement, but many pilots prefer using the helm and cruise signs for long journeys.</li>
+        <li><strong>Turning:</strong> Find your helm sign, labeled [helm]. Right click it to rotate the ship 90 degrees clockwise. Left click to rotate 90 degrees counter clockwise. Turn first, then sail forward.</li>
+        <li><strong>Sailing Diagonally or Backwards:</strong> The stick method works for any direction. Face the angle you want to travel, hold the stick, and right click. The ship will move in that exact direction. This is useful for maneuvering in tight spaces or backing away from obstacles.</li>
+        <li><strong>Cruise Mode:</strong> If you have a cruise sign, right click it to toggle cruise on and off. When cruise is ON, the ship will continue moving forward automatically without needing to click repeatedly. Be careful. Cruise mode does not avoid obstacles.</li>
+        <li><strong>Stopping:</strong> Right click a release sign if you have one, or type /release in chat. The ship will stop moving immediately.</li>
+      </ul>
       
-      <div style="background: rgba(255, 193, 7, 0.1); border-left: 4px solid #FFC107; padding: 15px; border-radius: 0 8px 8px 0; margin-top: 20px;">
-        <p style="color: #ffecb3; margin: 0;"><i class="fas fa-lightbulb"></i> <strong>Still stuck?</strong> Ask in Discord with a screenshot of your ship and a player online can usually spot the issue in seconds. Nine times out of ten, it is a missing craft type sign or a block count problem.</p>
-      </div>
+      <h3>Piloting Tips</h3>
+      <ul>
+        <li>Always check your surroundings before moving. A ship stuck inside land takes damage and may sink.</li>
+        <li>Use cruise mode only in open water. If you hit something while cruising, you will take damage before you can react.</li>
+        <li>The stick method is best for precise movements like docking or backing up. The helm plus cruise is better for long distance travel.</li>
+        <li>If you fall off your ship, type /manoverboard to teleport back to your manoverboard sign. Always place one.</li>
+      </ul>
     </div>
 
     <!-- Step-by-Step Building Guide -->
@@ -916,7 +757,7 @@
         <div class="step-item">Add helm signs for steering, cruise signs for continuous movement, pilot signs for access control, and manoverboard signs for easy return. These make the ship usable but are not strictly required.</div>
         
         <h4>Step 7: Test Your Ship</h4>
-        <div class="step-item">Stand on the ship, face the direction you want to go, hold a stick, and right click. If everything is correct, your ship will move forward. If not, check your material percentages and sign placement.</div>
+        <div class="step-item">Right click the craft type sign to become pilot. Hold a stick, face the direction you want to go, and right click. If everything is correct, your ship will move forward. If not, check your material percentages and sign placement.</div>
       </div>
       
       <!-- Player Recommendations -->
@@ -965,6 +806,101 @@
       </div>
     </div>
 
+    <!-- Why My Ship Won't Move - Troubleshooting -->
+    <div class="tutorial-section" id="troubleshooting">
+      <h2><i class="fas fa-question-circle"></i> Why My Ship Won't Move</h2>
+      
+      <p>You built a beautiful ship, placed your signs, right clicked with a stick, and nothing happened. Don't panic. This is the most common experience for new shipwrights. Work through these checks in order.</p>
+      
+      <div class="troubleshooting-grid">
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">1</div>
+          <div class="troubleshooting-content">
+            <h4>Did you right click the craft type sign first?</h4>
+            <p>You must become the pilot by right clicking the craft type sign. Until you do, the ship will not respond to controls.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">2</div>
+          <div class="troubleshooting-content">
+            <h4>Are you standing on the ship?</h4>
+            <p>You must be physically on the ship's blocks. Standing next to it or on nearby terrain won't work. The game needs to know which craft you're trying to move.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">3</div>
+          <div class="troubleshooting-content">
+            <h4>Are you holding a stick?</h4>
+            <p>The movement item is a stick. Not a sword, not a fishing rod, not your bare hand. A regular stick, in your main hand, right clicked in the direction you want to sail.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">4</div>
+          <div class="troubleshooting-content">
+            <h4>Does it have a Craft Type sign?</h4>
+            <p>Check for the required sign. First line must be exactly the ship class name, for example "Brigantine" or "Pinnace". No extra text, no punctuation. Just the class name.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">5</div>
+          <div class="troubleshooting-content">
+            <h4>Is it within block limits?</h4>
+            <p>Count your blocks. Every ship class has a minimum and maximum size. Too small or too large, and the ship won't be recognized. Check the Ship Classes table for your vessel's required range.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">6</div>
+          <div class="troubleshooting-content">
+            <h4>Are material percentages correct?</h4>
+            <p>Your ship needs at least 30 percent planks and 4 to 20 percent wool. If you built with too much stone or too little wool, the ship will sit dead in the water.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">7</div>
+          <div class="troubleshooting-content">
+            <h4>Is cruise already enabled?</h4>
+            <p>If you have a cruise sign and it's set to ON, the ship may already be trying to move. Toggle it OFF, then try the stick again.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">8</div>
+          <div class="troubleshooting-content">
+            <h4>Is it intersecting terrain?</h4>
+            <p>Ships cannot phase through land, other ships, or major structures. If any part of your ship would clip into something, movement fails. Try moving to open water.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">9</div>
+          <div class="troubleshooting-content">
+            <h4>Is someone else piloting?</h4>
+            <p>Only one player can control a ship at a time. If another player is currently piloting, you will need to wait or ask them to release control.</p>
+          </div>
+        </div>
+        
+        <div class="troubleshooting-item">
+          <div class="troubleshooting-number">10</div>
+          <div class="troubleshooting-content">
+            <h4>Does it have forbidden blocks?</h4>
+            <p>Check your build for pistons, redstone components, or other prohibited materials. One forbidden block can disable the entire ship.</p>
+          </div>
+        </div>
+        
+      </div>
+      
+      <div style="background: rgba(255, 193, 7, 0.1); border-left: 4px solid #FFC107; padding: 15px; border-radius: 0 8px 8px 0; margin-top: 20px;">
+        <p style="color: #ffecb3; margin: 0;"><i class="fas fa-lightbulb"></i> <strong>Still stuck?</strong> Ask in Discord with a screenshot of your ship and a player online can usually spot the issue in seconds. Nine times out of ten, it is a missing craft type sign or a block count problem.</p>
+      </div>
+    </div>
+
     <!-- Material Requirements -->
     <div class="material-requirement" id="material-requirements">
       <h3><i class="fas fa-cubes"></i> Material Composition Requirements</h3>
@@ -987,57 +923,9 @@
       <p style="color: #b3e0ff; margin-top: 15px;"><i class="fas fa-info-circle"></i> The remaining percentage can be any combination of allowed materials, including stone, glass, and wood variants.</p>
     </div>
 
-    <!-- Ship Classes (Stat Cards) with Integrated Diagram -->
+    <!-- Ship Classes (Stat Cards) -->
     <div class="tutorial-section" id="ship-classes">
       <h2><i class="fas fa-flag"></i> Ship Classes</h2>
-      
-      <!-- Ship Diagram - Visual Reference -->
-      <div class="ship-diagram-container">
-        <div class="ship-diagram-title">
-          <i class="fas fa-draw-polygon"></i> Anatomy of a Brigantine
-        </div>
-        
-        <div class="ascii-ship">
-          <pre style="color: #4fc3f7; font-family: monospace; margin: 0 auto; display: inline-block; text-align: left;">
-                        ╱▔▔▔▔▔▔▔▔╲                         
-                  ╱▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔╲                   
-             ╱▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔╲              
-          ╱▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔╲           
-          ████████████████████████████████████████████          
-          ███▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███  ╱▔▔▔╲ 
-          ███▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███ █   █ 
-          ███▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███ ╲▁▁▁╱ 
-          ████████████████████████████████████████████          
-          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          
-          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          
-          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          
-          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          
-          </pre>
-        </div>
-        
-        <div class="diagram-labels">
-          <div class="diagram-label">
-            <div class="label-color hull"></div>
-            <div class="label-text"><strong>Hull</strong> — Planks, stone, iron</div>
-          </div>
-          <div class="diagram-label">
-            <div class="label-color sails"></div>
-            <div class="label-text"><strong>Sails</strong> — Wool (4% to 20%)</div>
-          </div>
-          <div class="diagram-label">
-            <div class="label-color masts"></div>
-            <div class="label-text"><strong>Masts</strong> — Logs, fences</div>
-          </div>
-          <div class="diagram-label">
-            <div class="label-color sign"></div>
-            <div class="label-text"><strong>Sign</strong> — Craft type (required)</div>
-          </div>
-        </div>
-        
-        <p style="color: #90CAF9; font-size: 0.9rem; margin-top: 15px; text-align: center;">
-          <i class="fas fa-info-circle"></i> The craft type sign can be placed anywhere on the ship. All blocks shown count toward total volume.
-        </p>
-      </div>
       
       <p style="margin-bottom: 20px;">Ships are divided into civilian vessels with no cannons and naval vessels with cannons enabled. Choose based on your intended use. Traders should use civilian ships to avoid being mistaken for warships.</p>
       
@@ -1053,7 +941,6 @@
             <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">20 to 150 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">14, Very Fast</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">10 blocks</span></div>
-            <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">60%</span></div>
           </div>
           <div class="ship-description">Tiny coastal vessel. Fastest ship in the fleet, perfect for messengers and quick trades. Cannot equip cannons.</div>
           <div class="ship-role">Civilian, Trader</div>
@@ -1068,7 +955,6 @@
             <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">151 to 400 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">11, Fast</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">6 blocks</span></div>
-            <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">60%</span></div>
           </div>
           <div class="ship-description">Small coastal trader with excellent speed for its size. Popular among merchants. Cannot equip cannons.</div>
           <div class="ship-role">Civilian, Trader</div>
@@ -1084,7 +970,6 @@
             <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">600 to 2500 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">8</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">8 blocks</span></div>
-            <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">70%</span></div>
           </div>
           <div class="ship-description">Versatile exploration vessel. The smallest ship capable of mounting cannons. Good for discovery voyages.</div>
           <div class="ship-role">Naval, Exploration</div>
@@ -1099,7 +984,6 @@
             <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">500 to 1400 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">8</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">8 blocks</span></div>
-            <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">70%</span></div>
           </div>
           <div class="ship-description">First dedicated warship class. Fast and maneuverable, ideal for coastal patrol and light combat.</div>
           <div class="ship-role">Naval, Light Warship</div>
@@ -1114,7 +998,6 @@
             <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">1200 to 2800 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">7</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">8 blocks</span></div>
-            <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">70%</span></div>
           </div>
           <div class="ship-description">Two masted warship perfect for naval skirmishes. The standard privateer vessel.</div>
           <div class="ship-role">Naval, Privateer</div>
@@ -1129,7 +1012,6 @@
             <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">2500 to 4400 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">6</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">10 blocks</span></div>
-            <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">75%</span></div>
           </div>
           <div class="ship-description">Raider vessel optimized for boarding actions. Heavier than a brigantine, designed for hit and run tactics.</div>
           <div class="ship-role">Naval, Raider</div>
@@ -1144,7 +1026,6 @@
             <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">2501 to 4000 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">6, Slow</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">12 blocks</span></div>
-            <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">75%</span></div>
           </div>
           <div class="ship-description">Heavily armed merchantman. Carries cargo and cannons, perfect for valuable trade routes.</div>
           <div class="ship-role">Naval, Armed Transport</div>
@@ -1159,7 +1040,6 @@
             <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">4200 to 6500 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">4, Slow</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">10 blocks</span></div>
-            <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">75%</span></div>
           </div>
           <div class="ship-description">Heavy warship for convoy escort and fleet engagements. Significant firepower.</div>
           <div class="ship-role">Naval, Warship</div>
@@ -1174,10 +1054,8 @@
             <div class="stat-row"><span class="stat-label">Size:</span><span class="stat-value">7500 to 100000 blocks</span></div>
             <div class="stat-row"><span class="stat-label">Speed:</span><span class="stat-value">3, Very Slow</span></div>
             <div class="stat-row"><span class="stat-label">Cruise Skip:</span><span class="stat-value">12 blocks</span></div>
-            <div class="stat-row"><span class="stat-label">Damage Threshold:</span><span class="stat-value">90%</span></div>
-            <div class="stat-row"><span class="stat-label">Sink Threshold:</span><span class="stat-value">80%</span></div>
           </div>
-          <div class="ship-description">The ultimate ship of the line. Starts taking damage earlier but requires massive destruction to sink. Unmatched firepower.</div>
+          <div class="ship-description">The ultimate ship of the line. Massive, heavily armed, and extremely durable. Requires a crew to operate effectively.</div>
           <div class="ship-role">Naval, Flagship</div>
         </div>
       </div>
@@ -1198,7 +1076,7 @@
           <div class="sign-info">
             <h4>Craft Type Sign <span class="sign-required">REQUIRED</span></h4>
             <div class="sign-format">Brigantine</div>
-            <p style="color: #b3e0ff;">First line must be the ship class, for example Pinnace, Brigantine, or Man o War. This tells Movecraft what you built.</p>
+            <p style="color: #b3e0ff;">First line must be the ship class, for example Pinnace, Brigantine, or Man o War. Right click to become pilot.</p>
           </div>
         </div>
         
