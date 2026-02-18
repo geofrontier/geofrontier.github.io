@@ -16,7 +16,7 @@
   
   <!-- Page-specific styles -->
   <style>
-    /* Guide-specific styles */
+    /* Guide-specific styles - preserving original theme */
     .guide-header {
       position: relative;
       background: 
@@ -67,21 +67,15 @@
       padding: 0 20px;
     }
     
+    /* Wikipedia-style information sections - cleaner, more structured */
     .guide-section {
       background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-      padding: 35px;
-      border-radius: 16px;
+      padding: 30px 35px;
+      border-radius: 8px;
       box-shadow: var(--shadow-heavy);
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      margin-bottom: 30px;
-      transition: transform 0.3s ease;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      margin-bottom: 25px;
       position: relative;
-      overflow: hidden;
-    }
-    
-    .guide-section:hover {
-      transform: translateY(-3px);
-      border-color: rgba(212, 175, 55, 0.4);
     }
     
     .guide-section::before {
@@ -89,168 +83,209 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 6px;
+      width: 4px;
       height: 100%;
       background: linear-gradient(to bottom, var(--accent-gold), var(--accent-rust));
     }
     
     .guide-section h2 {
       font-family: 'Cinzel', serif;
-      font-size: 1.8rem;
+      font-size: 2rem;
       margin-top: 0;
       margin-bottom: 20px;
       color: var(--accent-gold);
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      padding-bottom: 10px;
+      font-weight: 600;
     }
     
-    .guide-section h2 i {
+    .guide-section h3 {
+      font-family: 'Cinzel', serif;
       font-size: 1.4rem;
-      opacity: 0.8;
+      margin: 25px 0 15px 0;
+      color: var(--accent-teal);
+      font-weight: 500;
+    }
+    
+    .guide-section h4 {
+      font-size: 1.1rem;
+      margin: 20px 0 10px 0;
+      color: var(--text-light);
+      font-weight: 600;
     }
     
     .guide-section p {
       line-height: 1.7;
       color: var(--text-muted);
-      margin-bottom: 15px;
+      margin-bottom: 16px;
+      font-size: 1rem;
     }
     
+    /* Wikipedia-style lists - scannable and clean */
     .guide-section ul, .guide-section ol {
-      padding-left: 25px;
-      margin-bottom: 20px;
+      padding-left: 20px;
+      margin: 15px 0 20px 0;
     }
     
     .guide-section li {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       color: var(--text-light);
       line-height: 1.6;
     }
     
     .guide-section li strong {
       color: var(--accent-teal);
+      font-weight: 600;
     }
     
-    .command-box {
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      border-radius: 10px;
-      padding: 20px;
+    /* Compact definition lists for commands */
+    .command-definitions {
       margin: 20px 0;
-      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 6px;
+      padding: 15px;
+    }
+    
+    .command-definitions dl {
+      margin: 0;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 8px 20px;
+      align-items: baseline;
+    }
+    
+    .command-definitions dt {
+      font-family: 'Consolas', 'Monaco', monospace;
+      color: var(--accent-teal);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    
+    .command-definitions dd {
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+    
+    .command-definitions dd::before {
+      content: "—";
+      color: var(--accent-gold);
+      margin-right: 8px;
+      opacity: 0.7;
+    }
+    
+    /* Simple bordered boxes for notices */
+    .notice-box {
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      background: rgba(15, 23, 42, 0.7);
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 4px;
       position: relative;
     }
     
-    .command-box:before {
-      content: '$';
-      position: absolute;
-      left: 10px;
-      top: 20px;
-      color: var(--accent-gold);
-      font-weight: bold;
+    .notice-box.warning {
+      border-color: var(--accent-rust);
     }
     
-    .command {
+    .notice-box.warning strong {
+      color: var(--accent-rust);
+    }
+    
+    .notice-box.tip {
+      border-color: var(--accent-teal);
+    }
+    
+    .notice-box.tip strong {
       color: var(--accent-teal);
-      font-size: 1.1rem;
-      padding-left: 15px;
-      display: block;
-      margin-bottom: 8px;
     }
     
-    .command-desc {
-      color: var(--text-muted);
+    .notice-box i {
+      margin-right: 10px;
+      color: var(--accent-gold);
+    }
+    
+    /* Tables for specifications */
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
       font-size: 0.95rem;
-      padding-left: 15px;
-      margin-bottom: 5px;
+      background: rgba(15, 23, 42, 0.5);
     }
     
-    .example-box {
-      background: rgba(45, 212, 191, 0.05);
-      border-left: 3px solid var(--accent-teal);
-      padding: 15px 20px;
-      margin: 15px 0;
-      border-radius: 0 8px 8px 0;
+    .specs-table th {
+      text-align: left;
+      padding: 12px 15px;
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--accent-gold);
+      font-weight: 600;
+      border-bottom: 2px solid var(--accent-gold);
     }
     
-    .example-box p {
-      margin: 0;
+    .specs-table td {
+      padding: 10px 15px;
+      color: var(--text-light);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    }
+    
+    .specs-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .specs-table td:first-child {
+      font-weight: 600;
+      color: var(--accent-teal);
+      width: 40%;
+    }
+    
+    /* Compact card alternative for specifications */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 12px;
+      margin: 20px 0;
+    }
+    
+    .spec-item {
+      background: rgba(15, 23, 42, 0.7);
+      padding: 10px 15px;
+      border-radius: 4px;
+      border-left: 2px solid var(--accent-teal);
+      font-size: 0.95rem;
+    }
+    
+    .spec-item strong {
+      color: var(--accent-gold);
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .spec-item span {
       color: var(--text-light);
     }
     
-    .example-box code {
+    /* Inline code styling */
+    code {
       background: rgba(45, 212, 191, 0.1);
       color: var(--accent-teal);
-      padding: 2px 8px;
-      border-radius: 4px;
+      padding: 2px 6px;
+      border-radius: 3px;
       font-family: 'Consolas', monospace;
+      font-size: 0.9em;
     }
     
-    .warning-box {
-      background: rgba(183, 65, 14, 0.1);
-      border-left: 3px solid var(--accent-rust);
-      padding: 15px 20px;
-      margin: 15px 0;
-      border-radius: 0 8px 8px 0;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    
-    .warning-box i {
-      color: var(--accent-rust);
-      font-size: 1.2rem;
-      margin-top: 2px;
-    }
-    
-    .warning-box p {
-      margin: 0;
-      color: var(--text-light);
-    }
-    
-    .tip-box {
-      background: rgba(212, 175, 55, 0.1);
-      border-left: 3px solid var(--accent-gold);
-      padding: 15px 20px;
-      margin: 15px 0;
-      border-radius: 0 8px 8px 0;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    
-    .tip-box i {
-      color: var(--accent-gold);
-      font-size: 1.2rem;
-      margin-top: 2px;
-    }
-    
-    .tip-box p {
-      margin: 0;
-      color: var(--text-light);
-    }
-    
-    .section-number {
-      display: inline-block;
-      background: var(--accent-gold);
-      color: var(--primary-dark);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 36px;
-      font-weight: 700;
-      margin-right: 12px;
-      font-family: 'Cinzel', serif;
-    }
-    
+    /* Table of contents - more compact */
     .table-of-contents {
       background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
-      padding: 30px;
-      border-radius: 16px;
+      padding: 25px 30px;
+      border-radius: 8px;
       box-shadow: var(--shadow-heavy);
       border: 1px solid rgba(212, 175, 55, 0.2);
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
     
     .table-of-contents h3 {
@@ -259,44 +294,58 @@
       margin-top: 0;
       margin-bottom: 20px;
       font-size: 1.5rem;
-      display: flex;
-      align-items: center;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding-bottom: 10px;
+    }
+    
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 10px;
     }
     
-    .toc-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 15px;
-    }
-    
-    .toc-item {
-      padding: 12px 15px;
-      background: rgba(15, 23, 42, 0.5);
-      border-radius: 8px;
-      border: 1px solid rgba(212, 175, 55, 0.1);
-      transition: all 0.3s ease;
-    }
-    
-    .toc-item:hover {
-      border-color: var(--accent-gold);
-      background: rgba(212, 175, 55, 0.05);
-      transform: translateX(5px);
-    }
-    
-    .toc-item a {
+    .toc-grid a {
       color: var(--text-light);
       text-decoration: none;
+      padding: 8px 12px;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 4px;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      transition: all 0.2s ease;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      font-size: 0.95rem;
     }
     
-    .toc-item i {
+    .toc-grid a:hover {
+      border-color: var(--accent-gold);
+      background: rgba(212, 175, 55, 0.05);
+    }
+    
+    .toc-grid i {
       color: var(--accent-gold);
-      font-size: 0.9rem;
+      font-size: 0.8rem;
+      width: 16px;
     }
     
+    /* Section numbering */
+    .section-number {
+      display: inline-block;
+      background: var(--accent-gold);
+      color: var(--primary-dark);
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      text-align: center;
+      line-height: 32px;
+      font-weight: 700;
+      margin-right: 12px;
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+    }
+    
+    /* Progress indicator (preserved) */
     .guide-progress {
       position: fixed;
       top: 80px;
@@ -330,15 +379,24 @@
       }
       
       .guide-section {
-        padding: 25px;
+        padding: 20px;
       }
       
       .guide-progress {
         display: none;
       }
       
-      .toc-list {
+      .toc-grid {
         grid-template-columns: 1fr;
+      }
+      
+      .command-definitions dl {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+      
+      .command-definitions dt {
+        margin-top: 10px;
       }
     }
   </style>
@@ -355,7 +413,7 @@
     <div class="guide-progress-bar" id="progressBar"></div>
   </div>
 
-  <!-- Guide Header -->
+  <!-- Guide Header (unchanged) -->
   <header class="guide-header">
     <div class="guide-header-content">
       <div class="guide-icon">
@@ -370,132 +428,75 @@
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main Content - Wikipedia Style -->
   <div class="guide-container">
     
-    <!-- Table of Contents -->
+    <!-- Table of Contents (more compact) -->
     <div class="table-of-contents" id="toc">
-      <h3><i class="fas fa-list-ol"></i> Table of Contents</h3>
-      <div class="toc-list">
-        <div class="toc-item">
-          <a href="#section1">
-            <i class="fas fa-flag"></i>
-            <span>1. Creating a Town</span>
-          </a>
-        </div>
-        <div class="toc-item">
-          <a href="#section2">
-            <i class="fas fa-expand-arrows-alt"></i>
-            <span>2. Claiming Land</span>
-          </a>
-        </div>
-        <div class="toc-item">
-          <a href="#section3">
-            <i class="fas fa-users"></i>
-            <span>3. Managing Residents</span>
-          </a>
-        </div>
-        <div class="toc-item">
-          <a href="#section4">
-            <i class="fas fa-coins"></i>
-            <span>4. Taxes & Upkeep</span>
-          </a>
-        </div>
-        <div class="toc-item">
-          <a href="#section5">
-            <i class="fas fa-shield-alt"></i>
-            <span>5. Town Permissions</span>
-          </a>
-        </div>
-        <div class="toc-item">
-          <a href="#section6">
-            <i class="fas fa-map"></i>
-            <span>6. Plot Management</span>
-          </a>
-        </div>
-        <div class="toc-item">
-          <a href="#section7">
-            <i class="fas fa-landmark"></i>
-            <span>7. Joining a Nation</span>
-          </a>
-        </div>
-        <div class="toc-item">
-          <a href="#section8">
-            <i class="fas fa-code"></i>
-            <span>8. Useful Commands</span>
-          </a>
-        </div>
-        <div class="toc-item">
-          <a href="#section9">
-            <i class="fas fa-skull-crossbones"></i>
-            <span>9. Death & PvP Economics</span>
-          </a>
-        </div>
-        <div class="toc-item">
-          <a href="#section10">
-            <i class="fas fa-gavel"></i>
-            <span>10. Jail & Justice System</span>
-          </a>
-        </div>
+      <h3><i class="fas fa-list-ol"></i> Contents</h3>
+      <div class="toc-grid">
+        <a href="#section1"><i class="fas fa-flag"></i> 1. Creating a Town</a>
+        <a href="#section2"><i class="fas fa-expand-arrows-alt"></i> 2. Claiming Land</a>
+        <a href="#section3"><i class="fas fa-users"></i> 3. Managing Residents</a>
+        <a href="#section4"><i class="fas fa-coins"></i> 4. Taxes & Upkeep</a>
+        <a href="#section5"><i class="fas fa-shield-alt"></i> 5. Town Permissions</a>
+        <a href="#section6"><i class="fas fa-map"></i> 6. Plot Management</a>
+        <a href="#section7"><i class="fas fa-landmark"></i> 7. Joining a Nation</a>
+        <a href="#section8"><i class="fas fa-code"></i> 8. Useful Commands</a>
+        <a href="#section9"><i class="fas fa-skull-crossbones"></i> 9. Death & PvP</a>
+        <a href="#section10"><i class="fas fa-gavel"></i> 10. Jail System</a>
       </div>
     </div>
 
-    <!-- Section 1 -->
+    <!-- Section 1 - Wikipedia style: structured paragraphs with inline specs -->
     <div class="guide-section" id="section1">
-      <h2><span class="section-number">1</span> <i class="fas fa-flag"></i> Creating a Town</h2>
-      <p>Establishing your first settlement is the foundation of your journey on GeoFrontier. A town provides protection, organization, and a home for your citizens.</p>
+      <h2><span class="section-number">1</span> Creating a Town</h2>
+      <p>Establishing your first settlement is the foundation of your journey on GeoFrontier. A town provides protection, organization, and a home for your citizens. To create a town, you must be in an unclaimed area at least 4 chunks from any existing town's homeblock.</p>
       
-      <div class="command-box">
-        <span class="command">/town new &lt;TownName&gt;</span>
-        <span class="command-desc">Creates a new town with your current location as the town center (Cost: $500)</span>
-      </div>
-      
-      <div class="tip-box">
-        <i class="fas fa-lightbulb"></i>
-        <p><strong>Tip:</strong> Choose a strategic location near resources but defensible. Consider proximity to water, mountains for natural defenses, and resource availability.</p>
-      </div>
-      
-      <div class="warning-box">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p><strong>Requirement:</strong> You need $500 and must be in an unclaimed area. New towns must be at least 4 chunks from any existing town's homeblock. Check available funds with <code>/balance</code>.</p>
-      </div>
-    </div>
-
-    <!-- Section 2 -->
-    <div class="guide-section" id="section2">
-      <h2><span class="section-number">2</span> <i class="fas fa-expand-arrows-alt"></i> Claiming Land</h2>
-      <p>Expand your town's territory to secure resources and build defensive perimeters. Towny uses a chunk-based system (16×16 blocks).</p>
-      
-      <div class="command-box">
-        <span class="command">/town claim</span>
-        <span class="command-desc">Claims the chunk you're standing in for your town</span>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/town claim auto &lt;number&gt;</span>
-        <span class="command-desc">Claims multiple adjacent chunks at once</span>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/town deposit &lt;amount&gt;</span>
-        <span class="command-desc">Adds money to your town bank for claiming costs</span>
-      </div>
-      
-      <div class="example-box">
-        <p><strong>Example:</strong> To claim 5 chunks at once with $50 each, first deposit $250: <code>/town deposit 250</code> then <code>/town claim auto 5</code></p>
-      </div>
-      
-      <h3>Claiming Costs & Mechanics</h3>
+      <h3>Requirements</h3>
       <ul>
-        <li><strong>Base Claim Cost:</strong> $5.00 per townblock</li>
-        <li><strong>Increasing Costs:</strong> Each additional claim costs 5% more than the last (cumulative)</li>
-        <li><strong>Bonus Blocks:</strong> Can purchase extra claim blocks for personal use at $100.00 each (increases by 20% each purchase)</li>
-        <li><strong>Claim Limits:</strong> Towns can claim 10 townblocks per resident</li>
+        <li><strong>Cost:</strong> $500 (check balance with <code>/balance</code>)</li>
+        <li><strong>Location:</strong> Unclaimed territory, minimum 4 chunks from other towns</li>
+        <li><strong>Command:</strong> <code>/town new &lt;TownName&gt;</code> creates town at your current location</li>
       </ul>
       
-      <div class="tip-box">
-        <i class="fas fa-lightbulb"></i>
-        <p><strong>Growth Strategy:</strong> As claiming costs increase with each plot, the most effective way to expand is by recruiting more residents. Each new member allows 8 more claims at the base price!</p>
+      <div class="notice-box tip">
+        <i class="fas fa-lightbulb"></i> <strong>Strategic tip:</strong> Choose a location near resources but defensible. Consider proximity to water, mountains for natural defenses, and resource availability.
+      </div>
+      
+      <div class="notice-box warning">
+        <i class="fas fa-exclamation-triangle"></i> <strong>Requirement:</strong> You need $500 and must be in an unclaimed area. New towns must be at least 4 chunks from any existing town's homeblock.
+      </div>
+    </div>
+
+    <!-- Section 2 - With tables for specs -->
+    <div class="guide-section" id="section2">
+      <h2><span class="section-number">2</span> Claiming Land</h2>
+      <p>Expand your town's territory to secure resources and build defensive perimeters. Towny uses a chunk-based system (16×16 blocks).</p>
+      
+      <h3>Claim Commands</h3>
+      <div class="command-definitions">
+        <dl>
+          <dt>/town claim</dt>
+          <dd>Claims the chunk you're standing in for your town</dd>
+          <dt>/town claim auto &lt;number&gt;</dt>
+          <dd>Claims multiple adjacent chunks at once</dd>
+          <dt>/town deposit &lt;amount&gt;</dt>
+          <dd>Adds money to your town bank for claiming costs</dd>
+        </dl>
+      </div>
+      
+      <h3>Claiming Costs</h3>
+      <table class="specs-table">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Base Claim Cost</td><td>$5.00 per townblock</td></tr>
+        <tr><td>Cost Progression</td><td>Each claim costs 5% more than the last (cumulative)</td></tr>
+        <tr><td>Bonus Blocks</td><td>$100.00 each (increases 20% per purchase)</td></tr>
+        <tr><td>Claim Limit</td><td>10 townblocks per resident</td></tr>
+      </table>
+      
+      <div class="notice-box tip">
+        <i class="fas fa-lightbulb"></i> <strong>Growth strategy:</strong> As claiming costs increase with each plot, the most effective way to expand is by recruiting more residents. Each new member allows 8 more claims at the base price!
       </div>
       
       <h3>Claim Distance Rules</h3>
@@ -505,283 +506,239 @@
         <li><strong>No Plot Buffer:</strong> Towns can claim directly adjacent to each other's plots (0 chunk minimum)</li>
       </ul>
       
-      <div class="warning-box">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p><strong>Important:</strong> Outposts have no distance restrictions from other towns and no maximum distance from your main town. Place them strategically!</p>
+      <div class="notice-box warning">
+        <i class="fas fa-exclamation-triangle"></i> <strong>Outposts:</strong> Have no distance restrictions from other towns and no maximum distance from your main town. Place them strategically!
       </div>
     </div>
 
-    <!-- Section 3 -->
+    <!-- Section 3 - Compact lists -->
     <div class="guide-section" id="section3">
-      <h2><span class="section-number">3</span> <i class="fas fa-users"></i> Managing Residents</h2>
+      <h2><span class="section-number">3</span> Managing Residents</h2>
       <p>A thriving town needs citizens. Invite players, assign ranks, and build your community.</p>
       
-      <div class="command-box">
-        <span class="command">/town invite &lt;PlayerName&gt;</span>
-        <span class="command-desc">Invites a player to join your town</span>
+      <h3>Resident Commands</h3>
+      <div class="command-definitions">
+        <dl>
+          <dt>/town invite &lt;Player&gt;</dt>
+          <dd>Invites a player to join your town</dd>
+          <dt>/town kick &lt;Player&gt;</dt>
+          <dd>Removes a player from your town</dd>
+          <dt>/town rank add &lt;Player&gt; &lt;rank&gt;</dt>
+          <dd>Assigns a special rank to a resident</dd>
+        </dl>
       </div>
       
-      <div class="command-box">
-        <span class="command">/town kick &lt;PlayerName&gt;</span>
-        <span class="command-desc">Removes a player from your town</span>
+      <h3>Available Ranks</h3>
+      <div class="specs-grid">
+        <div class="spec-item"><strong>assistant</strong> <span>Invite/kick residents, claim/unclaim land</span></div>
+        <div class="spec-item"><strong>helper</strong> <span>Set permissions on town/plots</span></div>
+        <div class="spec-item"><strong>jailer</strong> <span>Jail players within town</span></div>
+        <div class="spec-item"><strong>taxexempt</strong> <span>Exempt from town taxes</span></div>
       </div>
-      
-      <div class="command-box">
-        <span class="command">/town rank add &lt;PlayerName&gt; &lt;rank&gt;</span>
-        <span class="command-desc">Assigns a special rank to a resident</span>
-      </div>
-      
-      <p><strong>Available Ranks:</strong></p>
-      <ul>
-        <li><strong>assistant</strong> - Can invite/kick residents, claim/unclaim land</li>
-        <li><strong>helper</strong> - Can set permissions on town/plots</li>
-        <li><strong>jailer</strong> - Can jail players within town</li>
-        <li><strong>taxexempt</strong> - Exempt from town taxes</li>
-      </ul>
     </div>
 
-    <!-- Section 4 -->
+    <!-- Section 4 - Tabular data -->
     <div class="guide-section" id="section4">
-      <h2><span class="section-number">4</span> <i class="fas fa-coins"></i> Taxes & Upkeep</h2>
+      <h2><span class="section-number">4</span> Taxes & Upkeep</h2>
       <p>Manage your town's economy to ensure long-term survival and growth.</p>
       
-      <div class="command-box">
-        <span class="command">/town set tax &lt;amount&gt;</span>
-        <span class="command-desc">Sets daily tax collected from each resident</span>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/town set plottax &lt;amount&gt;</span>
-        <span class="command-desc">Sets tax for individual plot owners</span>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/town withdraw &lt;amount&gt;</span>
-        <span class="command-desc">Withdraws money from town bank to yourself</span>
+      <h3>Tax Commands</h3>
+      <div class="command-definitions">
+        <dl>
+          <dt>/town set tax &lt;amount&gt;</dt>
+          <dd>Sets daily tax collected from each resident</dd>
+          <dt>/town set plottax &lt;amount&gt;</dt>
+          <dd>Sets tax for individual plot owners</dd>
+          <dt>/town withdraw &lt;amount&gt;</dt>
+          <dd>Withdraws money from town bank to yourself</dd>
+        </dl>
       </div>
       
       <h3>Upkeep Calculation</h3>
-      <ul>
-        <li><strong>Base Upkeep:</strong> $25.00 daily</li>
-        <li><strong>Plot-Based:</strong> Upkeep is calculated as (number of claimed plots × $40.00)</li>
-        <li><strong>Overclaim Penalty:</strong> $100.00 per day for each plot over your limit</li>
-        <li><strong>Overclaim Calculation:</strong> Penalty is (plots over limit × $100.00)</li>
-      </ul>
+      <table class="specs-table">
+        <tr><td>Base Upkeep</td><td>$25.00 daily</td></tr>
+        <tr><td>Plot-Based</td><td>Number of claimed plots × $40.00</td></tr>
+        <tr><td>Overclaim Penalty</td><td>$100.00 per day per plot over limit</td></tr>
+        <tr><td>Overclaim Formula</td><td>(plots over limit × $100.00)</td></tr>
+      </table>
       
-      <div class="warning-box">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p><strong>Important:</strong> If your town bank cannot pay the daily upkeep, your town will enter "bankrupt" status. After 7 days bankrupt, chunks will be unclaimed automatically!</p>
+      <div class="notice-box warning">
+        <i class="fas fa-exclamation-triangle"></i> <strong>Bankruptcy:</strong> If your town bank cannot pay daily upkeep, your town enters "bankrupt" status. After 7 days bankrupt, chunks will be unclaimed automatically.
       </div>
       
-      <div class="tip-box">
-        <i class="fas fa-lightbulb"></i>
-        <p><strong>Strategy:</strong> Balance taxes to cover upkeep without driving residents away. Use <code>/town</code> to check your town's daily costs and current balance.</p>
+      <div class="notice-box tip">
+        <i class="fas fa-lightbulb"></i> <strong>Strategy:</strong> Balance taxes to cover upkeep without driving residents away. Use <code>/town</code> to check your town's daily costs and current balance.
       </div>
     </div>
 
-    <!-- Section 5 -->
+    <!-- Section 5 - Definition lists for permissions -->
     <div class="guide-section" id="section5">
-      <h2><span class="section-number">5</span> <i class="fas fa-shield-alt"></i> Town Permissions</h2>
+      <h2><span class="section-number">5</span> Town Permissions</h2>
       <p>Control what players can do within your town's borders for security and organization.</p>
       
-      <div class="command-box">
-        <span class="command">/town set perm &lt;who&gt; &lt;type&gt; &lt;on/off&gt;</span>
-        <span class="command-desc">Sets town-wide permissions for different groups</span>
-      </div>
+      <p><strong>Command:</strong> <code>/town set perm &lt;who&gt; &lt;type&gt; &lt;on/off&gt;</code> — Sets town-wide permissions for different groups.</p>
       
-      <p><strong>Permission Groups:</strong></p>
+      <h3>Permission Groups</h3>
       <ul>
-        <li><strong>resident</strong> - Town members</li>
-        <li><strong>ally</strong> - Members of allied nations</li>
-        <li><strong>outsider</strong> - Everyone else</li>
-        <li><strong>nation</strong> - Members of your nation</li>
+        <li><strong>resident</strong> — Town members</li>
+        <li><strong>ally</strong> — Members of allied nations</li>
+        <li><strong>outsider</strong> — Everyone else</li>
+        <li><strong>nation</strong> — Members of your nation</li>
       </ul>
       
-      <p><strong>Permission Types:</strong></p>
+      <h3>Permission Types</h3>
       <ul>
-        <li><strong>build</strong> - Place blocks</li>
-        <li><strong>destroy</strong> - Break blocks</li>
-        <li><strong>switch</strong> - Use buttons, levers, etc.</li>
-        <li><strong>itemuse</strong> - Use items (buckets, flint & steel)</li>
-        <li><strong>pvp</strong> - Player vs player combat</li>
+        <li><strong>build</strong> — Place blocks</li>
+        <li><strong>destroy</strong> — Break blocks</li>
+        <li><strong>switch</strong> — Use buttons, levers, doors</li>
+        <li><strong>itemuse</strong> — Use items (buckets, flint & steel)</li>
+        <li><strong>pvp</strong> — Player vs player combat</li>
       </ul>
       
-      <div class="example-box">
-        <p><strong>Common Setup:</strong><br>
-          <code>/town set perm outsider build off</code> - Prevents outsiders from building<br>
-          <code>/town set perm resident pvp off</code> - Prevents PvP between residents<br>
-          <code>/town set perm ally switch on</code> - Allows allies to use switches</p>
-      </div>
+      <h4>Common configurations</h4>
+      <ul>
+        <li><code>/town set perm outsider build off</code> — Prevents outsiders from building</li>
+        <li><code>/town set perm resident pvp off</code> — Prevents PvP between residents</li>
+        <li><code>/town set perm ally switch on</code> — Allows allies to use switches</li>
+      </ul>
     </div>
 
-    <!-- Section 6 -->
+    <!-- Section 6 - Plot types as compact cards -->
     <div class="guide-section" id="section6">
-      <h2><span class="section-number">6</span> <i class="fas fa-map"></i> Plot Management</h2>
+      <h2><span class="section-number">6</span> Plot Management</h2>
       <p>Divide your town into specialized districts and manage individual land plots.</p>
       
-      <div class="command-box">
-        <span class="command">/plot fs &lt;price&gt;</span>
-        <span class="command-desc">Puts your current plot up for sale</span>
+      <h3>Plot Commands</h3>
+      <div class="command-definitions">
+        <dl>
+          <dt>/plot fs &lt;price&gt;</dt>
+          <dd>Puts current plot up for sale</dd>
+          <dt>/plot claim</dt>
+          <dd>Claims a plot that's for sale</dd>
+          <dt>/plot set type &lt;type&gt;</dt>
+          <dd>Sets the plot type (affects permissions)</dd>
+          <dt>/plot set perm &lt;who&gt; &lt;type&gt; &lt;on/off&gt;</dt>
+          <dd>Sets permissions for specific plot</dd>
+        </dl>
       </div>
       
-      <div class="command-box">
-        <span class="command">/plot claim</span>
-        <span class="command-desc">Claims a plot that's for sale (stand in it)</span>
-      </div>
+      <h3>Plot Types</h3>
+      <table class="specs-table">
+        <tr><th>Type</th><th>Map Icon</th><th>Description</th></tr>
+        <tr><td>default</td><td>—</td><td>Standard town plot</td></tr>
+        <tr><td>shop</td><td>[C]</td><td>Commercial area (blue on map)</td></tr>
+        <tr><td>arena</td><td>[A]</td><td>PvP enabled combat zone</td></tr>
+        <tr><td>embassy</td><td>[E]</td><td>Diplomatic zone ($1,000 to create)</td></tr>
+        <tr><td>inn</td><td>[I]</td><td>Hospitality area</td></tr>
+        <tr><td>jail</td><td>[J]</td><td>Prison facility</td></tr>
+        <tr><td>farm</td><td>[F]</td><td>Agricultural zone</td></tr>
+      </table>
       
-      <div class="command-box">
-        <span class="command">/plot set type &lt;type&gt;</span>
-        <span class="command-desc">Sets the plot type (affects permissions)</span>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/plot set perm &lt;who&gt; &lt;type&gt; &lt;on/off&gt;</span>
-        <span class="command-desc">Sets permissions for this specific plot</span>
-      </div>
-      
-      <h3>Plot Types & Specializations</h3>
-      <ul>
-        <li><strong>default</strong> - Standard town plot</li>
-        <li><strong>shop</strong> <span style="color: #3498db;">[C]</span> - Commercial area (blue on map)</li>
-        <li><strong>arena</strong> [A] - PvP enabled combat zone</li>
-        <li><strong>embassy</strong> [E] - Diplomatic zone ($1,000 to create)</li>
-        <li><strong>inn</strong> [I] - Hospitality area</li>
-        <li><strong>jail</strong> [J] - Prison facility</li>
-        <li><strong>farm</strong> [F] - Agricultural zone</li>
-      </ul>
-      
-      <div class="tip-box">
-        <i class="fas fa-lightbulb"></i>
-        <p><strong>Strategy:</strong> Create commercial districts with shop plots near town spawn, residential areas with build permissions for residents only, and embassy plots near borders for diplomatic relations.</p>
+      <div class="notice-box tip">
+        <i class="fas fa-lightbulb"></i> <strong>Zoning strategy:</strong> Create commercial districts with shop plots near town spawn, residential areas with build permissions for residents only, and embassy plots near borders for diplomatic relations.
       </div>
     </div>
 
-    <!-- Section 7 -->
+    <!-- Section 7 - Nations with inline specs -->
     <div class="guide-section" id="section7">
-      <h2><span class="section-number">7</span> <i class="fas fa-landmark"></i> Joining a Nation</h2>
+      <h2><span class="section-number">7</span> Joining a Nation</h2>
       <p>Forge alliances and gain protection by forming or joining a nation with other towns.</p>
       
-      <div class="command-box">
-        <span class="command">/nation new &lt;NationName&gt;</span>
-        <span class="command-desc">Creates a new nation with your town as capital ($10,000 cost)</span>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/nation join &lt;NationName&gt;</span>
-        <span class="command-desc">Requests to join an existing nation</span>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/nation ally &lt;NationName&gt;</span>
-        <span class="command-desc">Proposes an alliance with another nation</span>
+      <h3>Nation Commands</h3>
+      <div class="command-definitions">
+        <dl>
+          <dt>/nation new &lt;Name&gt;</dt>
+          <dd>Creates nation with your town as capital ($10,000)</dd>
+          <dt>/nation join &lt;Nation&gt;</dt>
+          <dd>Requests to join an existing nation</dd>
+          <dt>/nation ally &lt;Nation&gt;</dt>
+          <dd>Proposes alliance with another nation</dd>
+        </dl>
       </div>
       
       <h3>Nation Features</h3>
       <ul>
-        <li><strong>Neutrality:</strong> Nations can declare neutrality for $1,000 (excludes you from wars)</li>
-        <li><strong>Town Merging:</strong> Towns can merge for free base cost + 50% of claim cost per plot</li>
-        <li><strong>Shared Protection:</strong> Allied towns within same nation ignore claim distance restrictions</li>
-        <li><strong>Collective Defense:</strong> Attackers jailed in any town's jail are imprisoned for the nation</li>
+        <li><strong>Neutrality:</strong> Declare neutrality for $1,000 (excludes you from wars)</li>
+        <li><strong>Town Merging:</strong> Free base cost + 50% of claim cost per plot</li>
+        <li><strong>Shared Protection:</strong> Allied towns ignore claim distance restrictions</li>
+        <li><strong>Collective Defense:</strong> Attackers jailed in any town are imprisoned for the nation</li>
       </ul>
       
-      <p><strong>Nation Benefits:</strong></p>
+      <h4>Nation Benefits</h4>
       <ul>
         <li>Shared protection and military support</li>
         <li>Reduced upkeep costs for towns</li>
         <li>Ability to declare war and conduct diplomacy</li>
         <li>Access to nation-only chat channels</li>
-        <li>Collective bargaining power in server politics</li>
+        <li>Collective bargaining power</li>
       </ul>
       
-      <div style="text-align: center; margin-top: 25px;">
-        <a href="guide-nation.html" class="btn">
-          <i class="fas fa-book"></i> Read Full Nation Guide
-        </a>
+      <div style="text-align: center; margin: 25px 0 10px;">
+        <a href="guide-nation.html" class="btn"><i class="fas fa-book"></i> Full Nation Guide</a>
       </div>
     </div>
 
-    <!-- Section 8 -->
+    <!-- Section 8 - All commands in definition list -->
     <div class="guide-section" id="section8">
-      <h2><span class="section-number">8</span> <i class="fas fa-code"></i> Useful Commands</h2>
+      <h2><span class="section-number">8</span> Useful Commands</h2>
       <p>Essential commands for daily town management and navigation.</p>
       
-      <div class="command-box">
-        <span class="command">/town</span>
-        <span class="command-desc">Opens town management interface</span>
+      <div class="command-definitions">
+        <dl>
+          <dt>/town</dt>
+          <dd>Opens town management interface</dd>
+          <dt>/resident</dt>
+          <dd>Shows your resident information</dd>
+          <dt>/town spawn</dt>
+          <dd>Teleports to your town spawn point</dd>
+          <dt>/town set spawn</dt>
+          <dd>Sets town spawn to your location</dd>
+          <dt>/town here</dt>
+          <dd>Shows information about current town</dd>
+          <dt>/town list</dt>
+          <dd>Lists all towns on the server</dd>
+          <dt>/town toggle fire</dt>
+          <dd>Toggles fire spread in your town</dd>
+          <dt>/town toggle explosion</dt>
+          <dd>Toggles explosion damage</dd>
+          <dt>/town ?</dt>
+          <dd>Shows all available town commands</dd>
+        </dl>
       </div>
       
-      <div class="command-box">
-        <span class="command">/resident</span>
-        <span class="command-desc">Shows your resident information</span>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/town spawn</span>
-        <span class="command-desc">Teleports to your town spawn point</span>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/town set spawn</span>
-        <span class="command-desc">Sets town spawn to your location</span>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/town here</span>
-        <span class="command-desc">Shows information about current town</span>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/town list</span>
-        <span class="command-desc">Lists all towns on the server</span>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/town toggle fire</span>
-        <span class="command-desc">Toggles fire spread in your town</span>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/town toggle explosion</span>
-        <span class="command-desc">Toggles explosion damage in your town</span>
-      </div>
-      
-      <div class="tip-box">
-        <i class="fas fa-lightbulb"></i>
-        <p><strong>Pro Tip:</strong> Use <code>/town ?</code> to see all available town commands. Many commands have tab-completion - press TAB to see options!</p>
+      <div class="notice-box tip">
+        <i class="fas fa-lightbulb"></i> <strong>Pro Tip:</strong> Many commands have tab-completion — press TAB to see options!
       </div>
     </div>
     
     <!-- Section 9: Death & PvP Economics -->
     <div class="guide-section" id="section9">
-      <h2><span class="section-number">9</span> <i class="fas fa-skull-crossbones"></i> Death & PvP Economics</h2>
-      <p>Understand the financial consequences of death and player combat on GeoFrontier.</p>
+      <h2><span class="section-number">9</span> Death & PvP Economics</h2>
+      <p>Understand the financial consequences of death and player combat.</p>
       
-      <h3>Death Costs</h3>
+      <h3>Death Costs (PvP only)</h3>
+      <table class="specs-table">
+        <tr><td>Loss Percentage</td><td>5% of personal balance when killed by player</td></tr>
+        <tr><td>Maximum Loss</td><td>Capped at $1,000 per death</td></tr>
+        <tr><td>Payment</td><td>Lost amount paid to your killer</td></tr>
+        <tr><td>Environmental Deaths</td><td>No cost (falls, mobs, etc.)</td></tr>
+      </table>
+      
+      <h4>Examples</h4>
       <ul>
-        <li><strong>PvP Deaths Only:</strong> Death costs only apply when killed by another player</li>
-        <li><strong>Percentage Loss:</strong> Lose 5% of your personal balance when killed in PvP</li>
-        <li><strong>Maximum Loss:</strong> Capped at $1,000.00 per death (even if 5% would be higher)</li>
-        <li><strong>Payment:</strong> The amount lost is paid to your killer</li>
+        <li>$10,000 balance → Lose $500 (paid to killer)</li>
+        <li>$50,000 balance → Lose $1,000 (capped, paid to killer)</li>
+        <li>$5,000 balance → Lose $250 (paid to killer)</li>
       </ul>
       
-      <div class="example-box">
-        <p><strong>Example Death Costs:</strong><br>
-          • $10,000 balance → Lose $500 (paid to killer)<br>
-          • $50,000 balance → Lose $1,000 (capped, paid to killer)<br>
-          • $5,000 balance → Lose $250 (paid to killer)<br>
-          • Environmental deaths (fall, mobs) → No cost
-        </p>
-      </div>
-      
-      <div class="warning-box">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p><strong>Combat Strategy:</strong> Consider your bank balance before engaging in PvP. High-wealth players risk significant losses even with the $1,000 cap!</p>
+      <div class="notice-box warning">
+        <i class="fas fa-exclamation-triangle"></i> <strong>Combat strategy:</strong> Consider your bank balance before engaging in PvP. High-wealth players risk significant losses even with the $1,000 cap!
       </div>
     </div>
 
-    <!-- Section 10: Jail & Justice System -->
+    <!-- Section 10: Jail System -->
     <div class="guide-section" id="section10">
-      <h2><span class="section-number">10</span> <i class="fas fa-gavel"></i> Jail & Justice System</h2>
+      <h2><span class="section-number">10</span> Jail & Justice System</h2>
       <p>Towns can establish jails to imprison enemies and outlaws who attack their territory.</p>
       
       <h3>Automatic Imprisonment</h3>
@@ -791,33 +748,32 @@
       </ul>
       
       <h3>Jail Management</h3>
-      <ul>
-        <li><strong>Jail Costs:</strong> $1,000 initial fee + $250 per hour per prisoner (paid from town bank)</li>
-        <li><strong>Maximum Sentence:</strong> Mayors can jail for up to 12 hours</li>
-        <li><strong>Escape Prevention:</strong> Jailed players cannot use <code>/town leave</code></li>
-        <li><strong>Teleport Items:</strong> Jailed players CAN use Ender Pearls and Chorus Fruit!</li>
-      </ul>
+      <table class="specs-table">
+        <tr><td>Initial Fee</td><td>$1,000</td></tr>
+        <tr><td>Hourly Cost</td><td>$250 per prisoner (paid from town bank)</td></tr>
+        <tr><td>Maximum Sentence</td><td>12 hours (set by mayors)</td></tr>
+        <tr><td>Escape Prevention</td><td>Jailed players cannot use <code>/town leave</code></td></tr>
+        <tr><td>Teleport Items</td><td>Ender Pearls and Chorus Fruit <em>can</em> be used</td></tr>
+      </table>
       
-      <div class="warning-box">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p><strong>Security Warning:</strong> Build your jail cells secure! Prisoners can use teleport items, so consider obsidian boxes, lava barriers, or other creative containment methods.</p>
+      <div class="notice-box warning">
+        <i class="fas fa-exclamation-triangle"></i> <strong>Security:</strong> Build your jail cells secure! Prisoners can use teleport items, so consider obsidian boxes, lava barriers, or other creative containment methods.
       </div>
       
       <h3>Bail System</h3>
-      <ul>
-        <li><strong>Standard Bail:</strong> $1,000 for regular prisoners</li>
-        <li><strong>Mayor Bail:</strong> $10,000 for captured town mayors</li>
-        <li><strong>King Bail:</strong> $25,000 for captured nation kings</li>
-        <li><strong>Max Bail:</strong> Mayors can set bail up to $1,000 for regular crimes</li>
-      </ul>
+      <table class="specs-table">
+        <tr><td>Standard Bail</td><td>$1,000</td></tr>
+        <tr><td>Mayor Bail</td><td>$10,000</td></tr>
+        <tr><td>King Bail</td><td>$25,000</td></tr>
+        <tr><td>Maximum Bail Set</td><td>$1,000 for regular crimes</td></tr>
+      </table>
       
-      <div class="tip-box">
-        <i class="fas fa-lightbulb"></i>
-        <p><strong>Economic Warfare:</strong> Capturing enemy leaders can be highly profitable through bail payments, but requires secure holding facilities!</p>
+      <div class="notice-box tip">
+        <i class="fas fa-lightbulb"></i> <strong>Economic warfare:</strong> Capturing enemy leaders can be highly profitable through bail payments, but requires secure holding facilities!
       </div>
     </div>
     
-    <!-- Navigation Footer -->
+    <!-- Navigation Footer (unchanged) -->
     <div style="display: flex; justify-content: space-between; margin: 50px 0 30px; padding: 20px; background: rgba(30, 41, 59, 0.5); border-radius: 12px;">
       <a href="index.html" class="btn btn-outline">
         <i class="fas fa-home"></i> Back to Home
@@ -834,30 +790,21 @@
   <!-- Load component loader -->
   <script src="js/components-loader.js"></script>
   
-  <!-- Page-specific JavaScript -->
+  <!-- Page-specific JavaScript (unchanged) -->
   <script>
     // Initialize the page
     document.addEventListener('DOMContentLoaded', async () => {
-      // Load all components
       await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
       await window.ComponentLoader.loadComponent('header', 'header-container');
       await window.ComponentLoader.loadComponent('footer', 'footer-container');
       
-      // Set active navigation for this page
       window.ComponentLoader.setActiveNav('guides');
-      
-      // Highlight current guide in navbar (if needed)
       highlightCurrentGuide();
-      
-      // Initialize scroll progress
       initScrollProgress();
-      
-      // Smooth scroll for table of contents
       initSmoothScroll();
     });
     
     function highlightCurrentGuide() {
-      // This could be used to highlight "Guides" dropdown as active
       const guideLinks = document.querySelectorAll('a[href*="guide-towny"]');
       guideLinks.forEach(link => {
         link.classList.add('active');
@@ -872,18 +819,16 @@
         const windowHeight = window.innerHeight;
         const documentHeight = document.documentElement.scrollHeight - windowHeight;
         const scrolled = window.scrollY;
-        
         const progress = (scrolled / documentHeight) * 100;
         progressBar.style.height = `${Math.min(100, progress)}%`;
       };
       
       window.addEventListener('scroll', updateProgress);
-      updateProgress(); // Initial call
+      updateProgress();
     }
     
     function initSmoothScroll() {
-      // Smooth scroll for table of contents links
-      document.querySelectorAll('.toc-item a').forEach(anchor => {
+      document.querySelectorAll('.toc-grid a').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
           e.preventDefault();
           const targetId = this.getAttribute('href');
@@ -903,15 +848,11 @@
       });
     }
     
-    // Make copyText function available if needed
-    if (typeof copyText !== 'function') {
-      window.copyText = function(text) {
-        navigator.clipboard.writeText(text).then(() => {
-          // Simple notification
-          alert(`Copied: ${text}`);
-        });
-      };
-    }
+    window.copyText = function(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert(`Copied: ${text}`);
+      });
+    };
   </script>
 </body>
 </html>
