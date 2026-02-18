@@ -45,6 +45,13 @@
       opacity: 0.9;
     }
     
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--accent-teal);
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    
     /* Map container */
     .map-container {
       display: flex;
@@ -129,7 +136,7 @@
     }
     
     .info-card {
-      background: var(--card-bg);
+      background: var(--card-bg, #1e293b);
       border-radius: 10px;
       padding: 20px;
       border: 1px solid rgba(212, 175, 55, 0.2);
@@ -142,10 +149,6 @@
       display: flex;
       align-items: center;
       gap: 10px;
-    }
-    
-    .info-card h3 i {
-      font-size: 1.2rem;
     }
     
     .info-item {
@@ -163,12 +166,12 @@
     }
     
     .info-label {
-      color: var(--text-muted);
+      color: var(--text-muted, #94a3b8);
       font-weight: 500;
     }
     
     .info-value {
-      color: var(--text-light);
+      color: var(--text-light, #f1f5f9);
       font-weight: 600;
     }
     
@@ -193,6 +196,7 @@
       align-items: center;
       gap: 8px;
       font-size: 0.9rem;
+      color: var(--text-light, #f1f5f9);
     }
     
     .legend-color {
@@ -212,8 +216,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: var(--primary-dark);
-      color: var(--text-light);
+      background: var(--primary-dark, #0b1120);
+      color: var(--text-light, #f1f5f9);
       z-index: 5;
     }
     
@@ -245,11 +249,47 @@
     
     .map-tips li {
       margin-bottom: 8px;
-      color: var(--text-muted);
+      color: var(--text-muted, #94a3b8);
     }
     
-    .map-tips li:last-child {
-      margin-bottom: 0;
+    .btn-small {
+      display: inline-block;
+      padding: 8px 16px;
+      background: #2d3b4f;
+      color: var(--text-light, #f1f5f9);
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      text-align: center;
+    }
+    
+    .btn-small:hover {
+      background: #3a4a62;
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--accent-gold);
+    }
+    
+    .btn-outline:hover {
+      background: rgba(212, 175, 55, 0.1);
+    }
+    
+    /* Component loading states */
+    .component-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px;
+      background: rgba(30, 41, 59, 0.5);
+      color: var(--text-muted);
+      font-size: 0.9rem;
     }
     
     /* Responsive design */
@@ -276,10 +316,6 @@
       .map-wrapper {
         min-height: 500px;
       }
-      
-      .map-title {
-        text-align: center;
-      }
     }
     
     @media (max-width: 480px) {
@@ -289,10 +325,6 @@
       
       .map-wrapper {
         min-height: 400px;
-      }
-      
-      .map-hero {
-        padding: 60px 20px;
       }
       
       .map-hero h1 {
@@ -322,7 +354,7 @@
   </section>
 
   <!-- MAIN CONTENT -->
-  <div class="section">
+  <div class="section" style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
     <!-- Map container -->
     <div class="map-container">
       <div class="map-wrapper">
@@ -359,6 +391,7 @@
           title="GeoFrontier Dynmap"
           allow="fullscreen"
           onload="mapLoaded()"
+          onerror="mapError()"
         ></iframe>
       </div>
       
@@ -380,7 +413,7 @@
           <h3><i class="fas fa-server"></i> Server Status</h3>
           <div class="info-item">
             <span class="info-label">Map Status:</span>
-            <span class="info-value online" id="map-status">Online</span>
+            <span class="info-value online" id="map-status">Connecting...</span>
           </div>
           <div class="info-item">
             <span class="info-label">Players Online:</span>
@@ -399,16 +432,16 @@
         <div class="info-card">
           <h3><i class="fas fa-key"></i> Quick Links</h3>
           <div style="display: flex; flex-direction: column; gap: 10px;">
-            <a href="http://216.173.77.69:25667/#world:GeoFrontier:0:64:0:0:0:0" class="btn btn-small" target="_blank">
+            <a href="http://216.173.77.69:25667/#world:GeoFrontier:0:64:0:0:0:0" class="btn-small" target="_blank">
               <i class="fas fa-home"></i> World Spawn
             </a>
-            <a href="http://216.173.77.69:25667/#world:GeoFrontier:-500:64:500:-30:0:0" class="btn btn-small" target="_blank">
-              <i class="fas fa-sun"></i} > Eastern Continent
+            <a href="http://216.173.77.69:25667/#world:GeoFrontier:-500:64:500:-30:0:0" class="btn-small" target="_blank">
+              <i class="fas fa-sun"></i> Eastern Continent
             </a>
-            <a href="http://216.173.77.69:25667/#world:GeoFrontier:500:64:-500:30:0:0" class="btn btn-small" target="_blank">
+            <a href="http://216.173.77.69:25667/#world:GeoFrontier:500:64:-500:30:0:0" class="btn-small" target="_blank">
               <i class="fas fa-moon"></i> Western Isles
             </a>
-            <button class="btn btn-small btn-outline" onclick="copyText('play.geofrontier.net')">
+            <button class="btn-small btn-outline" onclick="copyText('play.geofrontier.net')">
               <i class="fas fa-copy"></i> Copy Server IP
             </button>
           </div>
@@ -440,7 +473,7 @@
   </div>
 
   <!-- Footer container -->
-  <div id="footer-container" class="component-loading" style="min-height: 150px;">
+  <div id="footer-container" class="component-loading">
     <i class="fas fa-spinner fa-spin"></i>
     <span>Loading footer...</span>
   </div>
@@ -450,86 +483,165 @@
     <i class="fas fa-compass"></i>
   </div>
 
-  <!-- Load component loader -->
-  <script src="js/components-loader.js"></script>
-  
-  <!-- Page-specific JavaScript -->
   <script>
+    // ============================================
+    // COMPONENT LOADER
+    // ============================================
+    
+    class ComponentLoader {
+      constructor() {
+        this.components = {
+          'navbar': 'components/navbar.html',
+          'header': 'components/header.html',
+          'footer': 'components/footer.html'
+        };
+        this.loadedComponents = 0;
+        this.totalComponents = 3;
+      }
+    
+      async loadComponent(componentId, targetElementId) {
+        try {
+          const componentPath = this.components[componentId];
+          if (!componentPath) {
+            console.error(`Component ${componentId} not found`);
+            return;
+          }
+    
+          console.log(`Loading component from: ${componentPath}`);
+          
+          // Add cache-busting query parameter
+          const response = await fetch(`${componentPath}?t=${Date.now()}`);
+          if (!response.ok) {
+            throw new Error(`Failed to load ${componentPath}: ${response.status}`);
+          }
+    
+          const html = await response.text();
+          const targetElement = document.getElementById(targetElementId);
+          
+          if (targetElement) {
+            targetElement.innerHTML = html;
+            targetElement.classList.remove('component-loading');
+            
+            // Execute scripts within the component
+            await this.executeScripts(targetElement);
+            
+            // Dispatch event for component-specific initialization
+            document.dispatchEvent(new CustomEvent('componentLoaded', {
+              detail: { componentId, targetElement }
+            }));
+            
+            console.log(`Component ${componentId} loaded successfully`);
+            
+            this.loadedComponents++;
+            if (this.loadedComponents === this.totalComponents) {
+              document.dispatchEvent(new CustomEvent('allComponentsLoaded'));
+            }
+            
+            return true;
+          }
+        } catch (error) {
+          console.error(`Error loading component ${componentId}:`, error);
+          this.showComponentError(targetElementId, componentId);
+        }
+      }
+    
+      async executeScripts(container) {
+        const scripts = container.querySelectorAll('script');
+        
+        for (const oldScript of scripts) {
+          const newScript = document.createElement('script');
+          
+          // Copy all attributes
+          Array.from(oldScript.attributes).forEach(attr => {
+            newScript.setAttribute(attr.name, attr.value);
+          });
+          
+          if (oldScript.src) {
+            // External script - load it
+            await new Promise((resolve, reject) => {
+              newScript.onload = resolve;
+              newScript.onerror = reject;
+              newScript.src = oldScript.src;
+              document.head.appendChild(newScript);
+            });
+          } else {
+            // Inline script - execute it
+            newScript.textContent = oldScript.textContent;
+            document.head.appendChild(newScript);
+          }
+        }
+      }
+    
+      showComponentError(targetElementId, componentId) {
+        const targetElement = document.getElementById(targetElementId);
+        if (targetElement) {
+          targetElement.innerHTML = `
+            <div style="text-align: center; padding: 20px; background: #1e293b; color: #94a3b8;">
+              <i class="fas fa-exclamation-triangle" style="color: #b7410e; font-size: 2rem; margin-bottom: 10px;"></i>
+              <p>Failed to load ${componentId}</p>
+              <button onclick="window.location.reload()" style="
+                background: #d4af37;
+                color: #0b1120;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 6px;
+                cursor: pointer;
+                margin-top: 10px;
+                font-weight: 600;
+              ">
+                <i class="fas fa-redo"></i> Reload Page
+              </button>
+            </div>
+          `;
+        }
+      }
+    }
+    
+    // Initialize loader
+    const loader = new ComponentLoader();
+    
+    // Load all components when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM loaded, loading components...');
+      
+      // Load components
+      Promise.all([
+        loader.loadComponent('navbar', 'navbar-container'),
+        loader.loadComponent('header', 'header-container'),
+        loader.loadComponent('footer', 'footer-container')
+      ]).catch(error => {
+        console.error('Error loading components:', error);
+      });
+    });
+    
     // ============================================
     // MAP PAGE FUNCTIONS
     // ============================================
     
-    // Copy text function (reuse from other pages)
-    window.copyText = window.copyText || function(text) {
+    // Copy text function
+    window.copyText = function(text) {
       navigator.clipboard.writeText(text).then(() => {
-        const notification = document.createElement('div');
-        notification.textContent = `Copied: ${text}`;
-        notification.style.cssText = `
-          position: fixed;
-          top: 20px;
-          right: 20px;
-          background: var(--accent-gold);
-          color: var(--primary-dark);
-          padding: 12px 24px;
-          border-radius: 8px;
-          font-weight: 600;
-          z-index: 1000;
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-          animation: fadeIn 0.3s ease;
-        `;
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-          notification.style.animation = 'fadeOut 0.5s ease forwards';
-          setTimeout(() => document.body.removeChild(notification), 500);
-        }, 2000);
+        showNotification(`Copied: ${text}`);
       }).catch(err => {
         console.error('Failed to copy:', err);
         alert(`Copy this: ${text}`);
       });
     };
     
-    // Map functions
-    function mapLoaded() {
-      console.log('Dynmap loaded successfully');
-      const loadingElement = document.getElementById('map-loading');
-      if (loadingElement) {
-        loadingElement.style.display = 'none';
-      }
-      
-      // Update status
-      document.getElementById('map-status').textContent = 'Online';
-      document.getElementById('map-status').className = 'info-value online';
-      
-      // Start player count simulation
-      updatePlayerCount();
-      updateLastUpdated();
-    }
-    
-    function reloadMap() {
-      const mapFrame = document.getElementById('dynmap-frame');
-      const loadingElement = document.getElementById('map-loading');
-      
-      if (loadingElement) {
-        loadingElement.style.display = 'flex';
-      }
-      
-      // Force reload
-      mapFrame.src = mapFrame.src;
-      
-      // Show notification
+    // Show notification
+    function showNotification(message, bgColor = '#d4af37') {
       const notification = document.createElement('div');
-      notification.textContent = 'Reloading map...';
+      notification.textContent = message;
       notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
-        background: var(--accent-teal);
-        color: var(--primary-dark);
+        background: ${bgColor};
+        color: #0b1120;
         padding: 12px 24px;
         border-radius: 8px;
         font-weight: 600;
-        z-index: 1000;
+        z-index: 10000;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         animation: fadeIn 0.3s ease;
       `;
@@ -539,6 +651,66 @@
         notification.style.animation = 'fadeOut 0.5s ease forwards';
         setTimeout(() => document.body.removeChild(notification), 500);
       }, 2000);
+    }
+    
+    // Map functions
+    function mapLoaded() {
+      console.log('Dynmap loaded successfully');
+      const loadingElement = document.getElementById('map-loading');
+      if (loadingElement) {
+        loadingElement.style.display = 'none';
+      }
+      
+      document.getElementById('map-status').textContent = 'Online';
+      document.getElementById('map-status').className = 'info-value online';
+      
+      updatePlayerCount();
+      updateLastUpdated();
+    }
+    
+    function mapError() {
+      console.log('Dynmap failed to load');
+      const loadingElement = document.getElementById('map-loading');
+      if (loadingElement) {
+        loadingElement.innerHTML = `
+          <i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i>
+          <h3>Connection Error</h3>
+          <p>Unable to connect to the map server</p>
+          <p style="font-size: 0.9rem; margin-top: 10px;">The map may be offline or the address may be incorrect</p>
+          <button onclick="reloadMap()" style="
+            background: #d4af37;
+            color: #0b1120;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: 600;
+          ">
+            <i class="fas fa-sync-alt"></i> Try Again
+          </button>
+        `;
+      }
+      
+      document.getElementById('map-status').textContent = 'Offline';
+      document.getElementById('map-status').className = 'info-value offline';
+    }
+    
+    function reloadMap() {
+      const mapFrame = document.getElementById('dynmap-frame');
+      const loadingElement = document.getElementById('map-loading');
+      
+      if (loadingElement) {
+        loadingElement.style.display = 'flex';
+        loadingElement.innerHTML = `
+          <i class="fas fa-compass fa-spin"></i>
+          <h3>Loading Dynmap...</h3>
+          <p>Connecting to the GeoFrontier world</p>
+        `;
+      }
+      
+      mapFrame.src = mapFrame.src;
+      showNotification('Reloading map...');
     }
     
     function openFullscreen() {
@@ -552,30 +724,7 @@
         mapFrame.msRequestFullscreen();
       }
       
-      // Show notification
-      const notification = document.createElement('div');
-      notification.textContent = 'Press ESC to exit fullscreen';
-      notification.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: rgba(2, 6, 23, 0.9);
-        color: var(--accent-gold);
-        padding: 10px 20px;
-        border-radius: 8px;
-        font-weight: 600;
-        z-index: 1000;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-        animation: fadeIn 0.3s ease;
-        border: 1px solid var(--accent-gold);
-      `;
-      document.body.appendChild(notification);
-      
-      setTimeout(() => {
-        notification.style.animation = 'fadeOut 0.5s ease forwards';
-        setTimeout(() => document.body.removeChild(notification), 500);
-      }, 3000);
+      showNotification('Press ESC to exit fullscreen');
     }
     
     function copyMapLink() {
@@ -586,97 +735,39 @@
     function updatePlayerCount() {
       const playerCountElement = document.getElementById('player-count');
       if (playerCountElement) {
-        // Simulate player count (replace with actual API call if available)
-        const basePlayers = Math.floor(Math.random() * 20) + 15;
-        const variation = Math.floor(Math.random() * 8) - 4;
-        const playerCount = Math.max(0, basePlayers + variation);
-        
+        const playerCount = Math.floor(Math.random() * 16) + 8;
         playerCountElement.textContent = `${playerCount} players`;
-        
-        // Update every 30 seconds
         setTimeout(updatePlayerCount, 30000);
       }
     }
     
-    // Update last updated timestamp
     function updateLastUpdated() {
       const lastUpdatedElement = document.getElementById('last-updated');
       if (lastUpdatedElement) {
         const now = new Date();
         const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        lastUpdatedElement.textContent = `${timeString}`;
-        
-        // Update every minute
+        lastUpdatedElement.textContent = timeString;
         setTimeout(updateLastUpdated, 60000);
       }
     }
     
-    // Check map connection status
-    function checkMapStatus() {
-      const mapFrame = document.getElementById('dynmap-frame');
-      const statusElement = document.getElementById('map-status');
-      
-      // This is a basic check - for more accurate checking you'd need CORS access
-      setTimeout(() => {
-        const loadingElement = document.getElementById('map-loading');
-        if (loadingElement && loadingElement.style.display !== 'none') {
-          // Map still loading after 10 seconds
-          statusElement.textContent = 'Slow Connection';
-          statusElement.className = 'info-value offline';
-          
-          loadingElement.innerHTML = `
-            <i class="fas fa-exclamation-triangle"></i>
-            <h3>Slow Connection Detected</h3>
-            <p>The map is taking longer than usual to load</p>
-            <button class="btn" onclick="reloadMap()" style="margin-top: 15px;">
-              <i class="fas fa-sync-alt"></i> Try Again
-            </button>
-          `;
-        }
-      }, 10000);
-    }
-    
-    // Initialize dropdowns if function exists
-    function initDropdowns() {
-      if (window.initializeDropdowns) {
-        window.initializeDropdowns();
+    // Check map status after 10 seconds
+    setTimeout(() => {
+      const loadingElement = document.getElementById('map-loading');
+      if (loadingElement && loadingElement.style.display !== 'none') {
+        mapError();
       }
-    }
+    }, 10000);
     
-    // ============================================
-    // PAGE INITIALIZATION
-    // ============================================
-    
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('Map page loading...');
-      
-      // Start checking map status
-      setTimeout(checkMapStatus, 5000);
-      
-      // Initialize player count and timestamp
-      updatePlayerCount();
-      updateLastUpdated();
-      
-      // Initialize dropdowns
-      setTimeout(initDropdowns, 200);
-      
-      // Set active nav
-      setTimeout(() => {
-        const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
-        navLinks.forEach(link => {
-          if (link.getAttribute('data-nav') === 'map') {
-            link.classList.add('active');
-          }
-        });
-      }, 500);
-    });
-    
-    // Listen for component loaded events
-    document.addEventListener('componentLoaded', function(event) {
-      if (event.detail.componentId === 'navbar') {
-        setTimeout(initDropdowns, 100);
+    // Add animation styles
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeOut {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(-20px); }
       }
-    });
+    `;
+    document.head.appendChild(style);
   </script>
 </body>
 </html>
