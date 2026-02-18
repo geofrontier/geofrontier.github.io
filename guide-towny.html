@@ -67,7 +67,7 @@
       padding: 0 20px;
     }
     
-    /* Wikipedia-style information sections - cleaner, more structured */
+    /* Wikipedia-style information sections */
     .guide-section {
       background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
       padding: 30px 35px;
@@ -121,7 +121,7 @@
       font-size: 1rem;
     }
     
-    /* Wikipedia-style lists - scannable and clean */
+    /* Wikipedia-style lists */
     .guide-section ul, .guide-section ol {
       padding-left: 20px;
       margin: 15px 0 20px 0;
@@ -138,7 +138,7 @@
       font-weight: 600;
     }
     
-    /* Compact definition lists for commands */
+    /* Command definition lists */
     .command-definitions {
       margin: 20px 0;
       background: rgba(15, 23, 42, 0.5);
@@ -174,7 +174,7 @@
       opacity: 0.7;
     }
     
-    /* Simple bordered boxes for notices */
+    /* Notice boxes */
     .notice-box {
       border: 1px solid rgba(212, 175, 55, 0.3);
       background: rgba(15, 23, 42, 0.7);
@@ -239,7 +239,7 @@
       width: 40%;
     }
     
-    /* Compact card alternative for specifications */
+    /* Compact spec grid */
     .specs-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -268,7 +268,7 @@
       color: var(--text-light);
     }
     
-    /* Inline code styling */
+    /* Inline code */
     code {
       background: rgba(45, 212, 191, 0.1);
       color: var(--accent-teal);
@@ -278,7 +278,7 @@
       font-size: 0.9em;
     }
     
-    /* Table of contents - more compact */
+    /* Table of contents */
     .table-of-contents {
       background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
       padding: 25px 30px;
@@ -329,7 +329,6 @@
       width: 16px;
     }
     
-    /* Section numbering */
     .section-number {
       display: inline-block;
       background: var(--accent-gold);
@@ -345,7 +344,7 @@
       font-size: 1.2rem;
     }
     
-    /* Progress indicator (preserved) */
+    /* Progress indicator */
     .guide-progress {
       position: fixed;
       top: 80px;
@@ -367,6 +366,43 @@
       background: linear-gradient(to bottom, var(--accent-gold), var(--accent-rust));
       border-radius: 5px;
       transition: height 0.3s ease;
+    }
+    
+    /* Embassy information box */
+    .embassy-info {
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid var(--accent-gold);
+      border-radius: 6px;
+      padding: 20px;
+      margin: 25px 0;
+    }
+    
+    .embassy-info h4 {
+      color: var(--accent-gold);
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-family: 'Cinzel', serif;
+    }
+    
+    .embassy-step {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+    
+    .embassy-step .step-number {
+      background: var(--accent-teal);
+      color: var(--primary-dark);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
     }
     
     @media (max-width: 768px) {
@@ -394,10 +430,6 @@
         grid-template-columns: 1fr;
         gap: 5px;
       }
-      
-      .command-definitions dt {
-        margin-top: 10px;
-      }
     }
   </style>
 </head>
@@ -413,7 +445,7 @@
     <div class="guide-progress-bar" id="progressBar"></div>
   </div>
 
-  <!-- Guide Header (unchanged) -->
+  <!-- Guide Header -->
   <header class="guide-header">
     <div class="guide-header-content">
       <div class="guide-icon">
@@ -428,10 +460,10 @@
     </div>
   </header>
 
-  <!-- Main Content - Wikipedia Style -->
+  <!-- Main Content -->
   <div class="guide-container">
     
-    <!-- Table of Contents (more compact) -->
+    <!-- Table of Contents -->
     <div class="table-of-contents" id="toc">
       <h3><i class="fas fa-list-ol"></i> Contents</h3>
       <div class="toc-grid">
@@ -445,73 +477,122 @@
         <a href="#section8"><i class="fas fa-code"></i> 8. Useful Commands</a>
         <a href="#section9"><i class="fas fa-skull-crossbones"></i> 9. Death & PvP</a>
         <a href="#section10"><i class="fas fa-gavel"></i> 10. Jail System</a>
+        <a href="#section11"><i class="fas fa-passport"></i> 11. Embassy System</a>
       </div>
     </div>
 
-    <!-- Section 1 - Wikipedia style: structured paragraphs with inline specs -->
+    <!-- Section 1 - Creating a Town (UPDATED with config values) -->
     <div class="guide-section" id="section1">
       <h2><span class="section-number">1</span> Creating a Town</h2>
-      <p>Establishing your first settlement is the foundation of your journey on GeoFrontier. A town provides protection, organization, and a home for your citizens. To create a town, you must be in an unclaimed area at least 4 chunks from any existing town's homeblock.</p>
+      <p>Establishing your first settlement requires strategic planning and capital. Town creation costs and requirements are based on server configuration.</p>
       
-      <h3>Requirements</h3>
+      <h3>Requirements & Costs</h3>
+      <table class="specs-table">
+        <tr><td>Creation Cost</td><td>$200 (config: economy.new_expand.price_new_town)</td></tr>
+        <tr><td>Minimum Distance</td><td>4 chunks from any existing town's homeblock (config: claiming.distance_rules.min_distance_from_town_homeblock)</td></tr>
+        <tr><td>Location</td><td>Must be in unclaimed territory</td></tr>
+        <tr><td>Default Tax Mode</td><td>Percentage-based (10% default tax)</td></tr>
+      </table>
+      
+      <h3>Creation Command</h3>
+      <div class="command-definitions">
+        <dl>
+          <dt>/town new &lt;TownName&gt;</dt>
+          <dd>Creates a new town at your current location ($200)</dd>
+        </dl>
+      </div>
+      
+      <h3>Initial Town Benefits</h3>
       <ul>
-        <li><strong>Cost:</strong> $500 (check balance with <code>/balance</code>)</li>
-        <li><strong>Location:</strong> Unclaimed territory, minimum 4 chunks from other towns</li>
-        <li><strong>Command:</strong> <code>/town new &lt;TownName&gt;</code> creates town at your current location</li>
+        <li><strong>Base Claim Limit:</strong> 8 townblocks (town_level: 0 residents tier)</li>
+        <li><strong>Bonus Block Purchases:</strong> Up to 20 additional blocks can be purchased (town_level: 1 resident tier)</li>
+        <li><strong>Default Public Status:</strong> True (town.default_public)</li>
       </ul>
       
       <div class="notice-box tip">
-        <i class="fas fa-lightbulb"></i> <strong>Strategic tip:</strong> Choose a location near resources but defensible. Consider proximity to water, mountains for natural defenses, and resource availability.
+        <i class="fas fa-lightbulb"></i> <strong>Strategic tip:</strong> Choose a location near resources but defensible. Check available funds with <code>/balance</code> before creating.
       </div>
       
       <div class="notice-box warning">
-        <i class="fas fa-exclamation-triangle"></i> <strong>Requirement:</strong> You need $500 and must be in an unclaimed area. New towns must be at least 4 chunks from any existing town's homeblock.
+        <i class="fas fa-exclamation-triangle"></i> <strong>Requirement:</strong> You must be in an unclaimed area at least 4 chunks from any existing town's homeblock. Towns with 0 residents cannot claim outposts.
       </div>
     </div>
 
-    <!-- Section 2 - With tables for specs -->
+    <!-- Section 2 - Claiming Land (COMPLETELY UPDATED with config caps and nation bonuses) -->
     <div class="guide-section" id="section2">
       <h2><span class="section-number">2</span> Claiming Land</h2>
-      <p>Expand your town's territory to secure resources and build defensive perimeters. Towny uses a chunk-based system (16×16 blocks).</p>
+      <p>Expand your territory strategically—claim costs increase with each plot, and nations provide significant claim bonuses.</p>
       
       <h3>Claim Commands</h3>
       <div class="command-definitions">
         <dl>
           <dt>/town claim</dt>
-          <dd>Claims the chunk you're standing in for your town</dd>
+          <dd>Claims the chunk you're standing in</dd>
           <dt>/town claim auto &lt;number&gt;</dt>
-          <dd>Claims multiple adjacent chunks at once</dd>
+          <dd>Claims multiple adjacent chunks (max radius: 5, config: claiming.max_claim_radius_value)</dd>
           <dt>/town deposit &lt;amount&gt;</dt>
-          <dd>Adds money to your town bank for claiming costs</dd>
+          <dd>Adds money to town bank for claiming</dd>
+          <dt>/town unclaim</dt>
+          <dd>Unclaims current chunk (15% refund, config: economy.new_expand.price_claim_townblock_refund)</dd>
         </dl>
       </div>
       
-      <h3>Claiming Costs</h3>
+      <h3>Claim Costs & Mechanics</h3>
       <table class="specs-table">
-        <tr><th>Item</th><th>Value</th></tr>
+        <tr><th>Parameter</th><th>Value</th></tr>
         <tr><td>Base Claim Cost</td><td>$5.00 per townblock</td></tr>
-        <tr><td>Cost Progression</td><td>Each claim costs 5% more than the last (cumulative)</td></tr>
-        <tr><td>Bonus Blocks</td><td>$100.00 each (increases 20% per purchase)</td></tr>
-        <tr><td>Claim Limit</td><td>10 townblocks per resident</td></tr>
+        <tr><td>Cost Increase per Claim</td><td>5% (1.05 multiplier, config: economy.new_expand.price_claim_townblock_increase)</td></tr>
+        <tr><td>Maximum Claim Price</td><td>$300 (hard cap, config: economy.new_expand.max_price_claim_townblock)</td></tr>
+        <tr><td>Unclaim Refund</td><td>15% of original cost ($0.75 per block)</td></tr>
+        <tr><td>Bonus Block Cost</td><td>$50 each (config: economy.new_expand.price_purchased_bonus_townblock)</td></tr>
+        <tr><td>Bonus Block Increase</td><td>20% per purchase (1.2 multiplier)</td></tr>
+        <tr><td>Max Bonus Block Price</td><td>$5,000 (config: economy.new_expand.price_purchased_bonus_townblock_max_price)</td></tr>
       </table>
       
-      <div class="notice-box tip">
-        <i class="fas fa-lightbulb"></i> <strong>Growth strategy:</strong> As claiming costs increase with each plot, the most effective way to expand is by recruiting more residents. Each new member allows 8 more claims at the base price!
-      </div>
+      <h3>Claim Limits by Town Size</h3>
+      <p>Towns receive base claim blocks based on resident count (town_block_ratio: 10 blocks per resident). Additional blocks can be purchased up to tiered limits:</p>
+      
+      <table class="specs-table">
+        <tr><th>Residents</th><th>Base Claims (ratio)</th><th>Bonus Purchase Limit</th><th>Total Possible</th></tr>
+        <tr><td>0 (new)</td><td>8</td><td>0</td><td>8</td></tr>
+        <tr><td>1</td><td>10</td><td>20</td><td>30</td></tr>
+        <tr><td>5</td><td>50</td><td>40</td><td>90</td></tr>
+        <tr><td>15</td><td>150</td><td>80</td><td>230</td></tr>
+        <tr><td>30</td><td>300</td><td>150</td><td>450</td></tr>
+        <tr><td>50</td><td>500</td><td>250</td><td>750</td></tr>
+        <tr><td>75</td><td>750</td><td>400</td><td>1,150</td></tr>
+        <tr><td>100</td><td>1,000</td><td>600</td><td>1,600</td></tr>
+      </table>
+      
+      <h3>Nation Claim Bonuses</h3>
+      <p>Joining a nation provides additional claim blocks based on nation size:</p>
+      <table class="specs-table">
+        <tr><th>Nation Residents</th><th>Bonus Town Blocks</th></tr>
+        <tr><td>1 (Band)</td><td>+20</td></tr>
+        <tr><td>10 (Clan)</td><td>+30</td></tr>
+        <tr><td>25 (Tribe)</td><td>+75</td></tr>
+        <tr><td>50 (Federation)</td><td>+150</td></tr>
+        <tr><td>100 (Kingdom)</td><td>+250</td></tr>
+        <tr><td>200 (Empire)</td><td>+400</td></tr>
+      </table>
       
       <h3>Claim Distance Rules</h3>
       <ul>
-        <li><strong>Homeblock Buffer:</strong> No other town can claim within 4 chunks of your town's homeblock</li>
-        <li><strong>Town Spacing:</strong> New towns must be at least 4 chunks from any existing town's homeblock</li>
-        <li><strong>No Plot Buffer:</strong> Towns can claim directly adjacent to each other's plots (0 chunk minimum)</li>
+        <li><strong>Homeblock Buffer:</strong> 4 chunks minimum from other towns' homeblocks</li>
+        <li><strong>Plot-to-Plot Distance:</strong> 0 chunks (can claim directly adjacent)</li>
+        <li><strong>Same Nation Exception:</strong> Distance rules ignored for towns in same nation</li>
       </ul>
       
       <div class="notice-box warning">
-        <i class="fas fa-exclamation-triangle"></i> <strong>Outposts:</strong> Have no distance restrictions from other towns and no maximum distance from your main town. Place them strategically!
+        <i class="fas fa-exclamation-triangle"></i> <strong>Outposts Disabled:</strong> Outpost creation is disabled (config: claiming.outposts.allow_outposts: false). Use embassy system for remote teleportation.
+      </div>
+      
+      <div class="notice-box tip">
+        <i class="fas fa-lightbulb"></i> <strong>Growth Strategy:</strong> Each new resident allows 10 additional base claims. Nations provide significant claim bonuses—recruit members and join/ form nations to maximize territory.
       </div>
     </div>
 
-    <!-- Section 3 - Compact lists -->
+    <!-- Section 3 - Managing Residents (UPDATED with ranks from townyperms) -->
     <div class="guide-section" id="section3">
       <h2><span class="section-number">3</span> Managing Residents</h2>
       <p>A thriving town needs citizens. Invite players, assign ranks, and build your community.</p>
@@ -522,91 +603,136 @@
           <dt>/town invite &lt;Player&gt;</dt>
           <dd>Invites a player to join your town</dd>
           <dt>/town kick &lt;Player&gt;</dt>
-          <dd>Removes a player from your town</dd>
+          <dd>Removes a player from your town (assistants cannot be kicked)</dd>
           <dt>/town rank add &lt;Player&gt; &lt;rank&gt;</dt>
           <dd>Assigns a special rank to a resident</dd>
+          <dt>/town rank remove &lt;Player&gt; &lt;rank&gt;</dt>
+          <dd>Removes a rank from a resident</dd>
         </dl>
       </div>
       
       <h3>Available Ranks</h3>
       <div class="specs-grid">
-        <div class="spec-item"><strong>assistant</strong> <span>Invite/kick residents, claim/unclaim land</span></div>
-        <div class="spec-item"><strong>helper</strong> <span>Set permissions on town/plots</span></div>
-        <div class="spec-item"><strong>jailer</strong> <span>Jail players within town</span></div>
+        <div class="spec-item"><strong>assistant</strong> <span>Full management: invite/kick, claim/unclaim, set permissions. Unkickable by default.</span></div>
+        <div class="spec-item"><strong>helper</strong> <span>Can set permissions on town and plots</span></div>
+        <div class="spec-item"><strong>jailer</strong> <span>Can jail players within town</span></div>
         <div class="spec-item"><strong>taxexempt</strong> <span>Exempt from town taxes</span></div>
+      </div>
+      
+      <h3>Mayoral Succession</h3>
+      <p>If a mayor is inactive, assistants are given preference in succession order (config: global_town_settings.order_of_mayoral_succession).</p>
+      
+      <h3>Resident Limits</h3>
+      <table class="specs-table">
+        <tr><td>Max Residents per Town</td><td>Unlimited (config: 0 = no limit)</td></tr>
+        <tr><td>Max Plots per Resident</td><td>999,999,999 (effectively unlimited)</td></tr>
+        <tr><td>Min Time to Join Town</td><td>No wait (config: 0m)</td></tr>
+      </table>
+      
+      <div class="notice-box tip">
+        <i class="fas fa-lightbulb"></i> <strong>Note:</strong> Assistants cannot be kicked from town—they must resign or be demoted first.
       </div>
     </div>
 
-    <!-- Section 4 - Tabular data -->
+    <!-- Section 4 - Taxes & Upkeep (UPDATED with config values) -->
     <div class="guide-section" id="section4">
       <h2><span class="section-number">4</span> Taxes & Upkeep</h2>
-      <p>Manage your town's economy to ensure long-term survival and growth.</p>
+      <p>Daily taxes and upkeep are collected each "Towny day" (config: plugin.day_timer.day_interval: 24h).</p>
       
       <h3>Tax Commands</h3>
       <div class="command-definitions">
         <dl>
           <dt>/town set tax &lt;amount&gt;</dt>
-          <dd>Sets daily tax collected from each resident</dd>
+          <dd>Sets daily tax (max $1,000 or 15% with $10,000 cap)</dd>
           <dt>/town set plottax &lt;amount&gt;</dt>
-          <dd>Sets tax for individual plot owners</dd>
+          <dd>Sets tax for individual plot owners (max $1,000)</dd>
           <dt>/town withdraw &lt;amount&gt;</dt>
-          <dd>Withdraws money from town bank to yourself</dd>
+          <dd>Withdraws money from town bank</dd>
+          <dt>/town deposit &lt;amount&gt;</dt>
+          <dd>Deposits money to town bank</dd>
         </dl>
       </div>
       
-      <h3>Upkeep Calculation</h3>
+      <h3>Tax Limits</h3>
       <table class="specs-table">
-        <tr><td>Base Upkeep</td><td>$25.00 daily</td></tr>
-        <tr><td>Plot-Based</td><td>Number of claimed plots × $40.00</td></tr>
-        <tr><td>Overclaim Penalty</td><td>$100.00 per day per plot over limit</td></tr>
-        <tr><td>Overclaim Formula</td><td>(plots over limit × $100.00)</td></tr>
+        <tr><th>Tax Type</th><th>Maximum</th></tr>
+        <tr><td>Flat Town Tax</td><td>$1,000 per resident</td></tr>
+        <tr><td>Percentage Town Tax</td><td>15% of resident balance (max $10,000 per payment)</td></tr>
+        <tr><td>Plot Tax</td><td>$1,000 per plot</td></tr>
+        <tr><td>Nation Tax (flat)</td><td>$1,000 per town</td></tr>
+        <tr><td>Nation Tax (percentage)</td><td>15% (max $10,000 per town)</td></tr>
       </table>
       
+      <h3>Upkeep Calculation</h3>
+      <table class="specs-table">
+        <tr><td>Base Town Upkeep</td><td>$15.00 daily (config: economy.daily_taxes.price_town_upkeep)</td></tr>
+        <tr><td>Upkeep Type</td><td>Plot-based: number of claimed plots × $15.00</td></tr>
+        <tr><td>Overclaim Penalty</td><td>$100 per plot over limit (config: economy.daily_taxes.price_town_overclaimed_upkeep_penalty)</td></tr>
+        <tr><td>Penalty Calculation</td><td>Plot-based: (plots over limit × $100)</td></tr>
+        <tr><td>Nation Upkeep</td><td>$1,000 daily (config: economy.daily_taxes.price_nation_upkeep)</td></tr>
+      </table>
+      
+      <h3>Bankruptcy System</h3>
+      <p>If a town cannot pay upkeep, it enters bankruptcy. After 7 days bankrupt, chunks are unclaimed and town is deleted (config: economy.bankruptcy.enabled).</p>
+      
       <div class="notice-box warning">
-        <i class="fas fa-exclamation-triangle"></i> <strong>Bankruptcy:</strong> If your town bank cannot pay daily upkeep, your town enters "bankrupt" status. After 7 days bankrupt, chunks will be unclaimed automatically.
+        <i class="fas fa-exclamation-triangle"></i> <strong>Warning:</strong> Towns that cannot pay upkeep enter bankruptcy. After 7 days at debt cap, the town will be deleted (economy.bankruptcy.debt_cap.allowed_days: 7).
       </div>
       
       <div class="notice-box tip">
-        <i class="fas fa-lightbulb"></i> <strong>Strategy:</strong> Balance taxes to cover upkeep without driving residents away. Use <code>/town</code> to check your town's daily costs and current balance.
+        <i class="fas fa-lightbulb"></i> <strong>Strategy:</strong> Balance taxes to cover upkeep without driving residents away. Use <code>/town</code> to check daily costs and current balance.
       </div>
     </div>
 
-    <!-- Section 5 - Definition lists for permissions -->
+    <!-- Section 5 - Town Permissions (UPDATED with config defaults) -->
     <div class="guide-section" id="section5">
       <h2><span class="section-number">5</span> Town Permissions</h2>
-      <p>Control what players can do within your town's borders for security and organization.</p>
+      <p>Control what players can do within your town's borders.</p>
       
-      <p><strong>Command:</strong> <code>/town set perm &lt;who&gt; &lt;type&gt; &lt;on/off&gt;</code> — Sets town-wide permissions for different groups.</p>
+      <h3>Permission Command</h3>
+      <div class="command-definitions">
+        <dl>
+          <dt>/town set perm &lt;who&gt; &lt;type&gt; &lt;on/off&gt;</dt>
+          <dd>Sets permissions for groups (resident, nation, ally, outsider)</dd>
+        </dl>
+      </div>
       
-      <h3>Permission Groups</h3>
+      <h3>Default Town Permissions</h3>
+      <table class="specs-table">
+        <tr><th>Group</th><th>Build</th><th>Destroy</th><th>Switch</th><th>Item Use</th></tr>
+        <tr><td>Residents</td><td>✅ ON</td><td>✅ ON</td><td>✅ ON</td><td>✅ ON</td></tr>
+        <tr><td>Nation Members</td><td>❌ OFF</td><td>❌ OFF</td><td>❌ OFF</td><td>❌ OFF</td></tr>
+        <tr><td>Allies</td><td>❌ OFF</td><td>❌ OFF</td><td>❌ OFF</td><td>❌ OFF</td></tr>
+        <tr><td>Outsiders</td><td>❌ OFF</td><td>❌ OFF</td><td>❌ OFF</td><td>❌ OFF</td></tr>
+      </table>
+      
+      <h3>Default Town Flags</h3>
       <ul>
-        <li><strong>resident</strong> — Town members</li>
-        <li><strong>ally</strong> — Members of allied nations</li>
-        <li><strong>outsider</strong> — Everyone else</li>
-        <li><strong>nation</strong> — Members of your nation</li>
+        <li><strong>PVP:</strong> ON (default)</li>
+        <li><strong>Fire:</strong> OFF</li>
+        <li><strong>Explosions:</strong> OFF</li>
+        <li><strong>Mobs:</strong> OFF</li>
       </ul>
       
-      <h3>Permission Types</h3>
+      <h3>Outlaw System</h3>
       <ul>
-        <li><strong>build</strong> — Place blocks</li>
-        <li><strong>destroy</strong> — Break blocks</li>
-        <li><strong>switch</strong> — Use buttons, levers, doors</li>
-        <li><strong>itemuse</strong> — Use items (buckets, flint & steel)</li>
-        <li><strong>pvp</strong> — Player vs player combat</li>
+        <li>Outlaws can always be harmed in towns they're outlawed in (force_pvp_on_outlaws: true)</li>
+        <li>Outlaws cannot enter towns where outlawed (allow_outlaws_to_enter_town: false)</li>
+        <li>Outlaws cannot use teleport items (Ender Pearls/Chorus Fruit) while outlawed</li>
+        <li>Outlaws are teleported away after 5 seconds if found in town</li>
       </ul>
       
-      <h4>Common configurations</h4>
-      <ul>
-        <li><code>/town set perm outsider build off</code> — Prevents outsiders from building</li>
-        <li><code>/town set perm resident pvp off</code> — Prevents PvP between residents</li>
-        <li><code>/town set perm ally switch on</code> — Allows allies to use switches</li>
-      </ul>
+      <div class="notice-box tip">
+        <i class="fas fa-lightbulb"></i> <strong>Common configurations:</strong><br>
+        <code>/town set perm outsider build off</code> — Prevent outsiders building<br>
+        <code>/town set perm resident pvp off</code> — Disable PvP between residents
+      </div>
     </div>
 
-    <!-- Section 6 - Plot types as compact cards -->
+    <!-- Section 6 - Plot Management (UPDATED with embassy costs and wilds type) -->
     <div class="guide-section" id="section6">
       <h2><span class="section-number">6</span> Plot Management</h2>
-      <p>Divide your town into specialized districts and manage individual land plots.</p>
+      <p>Specialize your town's districts with different plot types, each with unique permissions and costs.</p>
       
       <h3>Plot Commands</h3>
       <div class="command-definitions">
@@ -616,33 +742,51 @@
           <dt>/plot claim</dt>
           <dd>Claims a plot that's for sale</dd>
           <dt>/plot set type &lt;type&gt;</dt>
-          <dd>Sets the plot type (affects permissions)</dd>
+          <dd>Sets plot type (costs may apply)</dd>
           <dt>/plot set perm &lt;who&gt; &lt;type&gt; &lt;on/off&gt;</dt>
           <dd>Sets permissions for specific plot</dd>
         </dl>
       </div>
       
-      <h3>Plot Types</h3>
+      <h3>Plot Types & Specifications</h3>
       <table class="specs-table">
-        <tr><th>Type</th><th>Map Icon</th><th>Description</th></tr>
-        <tr><td>default</td><td>—</td><td>Standard town plot</td></tr>
-        <tr><td>shop</td><td>[C]</td><td>Commercial area (blue on map)</td></tr>
-        <tr><td>arena</td><td>[A]</td><td>PvP enabled combat zone</td></tr>
-        <tr><td>embassy</td><td>[E]</td><td>Diplomatic zone ($1,000 to create)</td></tr>
-        <tr><td>inn</td><td>[I]</td><td>Hospitality area</td></tr>
-        <tr><td>jail</td><td>[J]</td><td>Prison facility</td></tr>
-        <tr><td>farm</td><td>[F]</td><td>Agricultural zone</td></tr>
+        <tr><th>Type</th><th>Map Key</th><th>Creation Cost</th><th>Purpose</th></tr>
+        <tr><td>default</td><td>+</td><td>$0</td><td>Standard residential plot</td></tr>
+        <tr><td>shop</td><td>C (blue)</td><td>$0</td><td>Commercial district</td></tr>
+        <tr><td>arena</td><td>A</td><td>$0</td><td>PvP-enabled combat zone</td></tr>
+        <tr><td><strong>embassy</strong></td><td>E</td><td><strong>$5,000</strong></td><td>Diplomatic zone for foreign teleportation</td></tr>
+        <tr><td>wilds</td><td>W</td><td>$0</td><td>Resource harvesting (ores, logs, plants)</td></tr>
+        <tr><td>inn</td><td>I</td><td>$0</td><td>Hospitality area</td></tr>
+        <tr><td>jail</td><td>J</td><td>$0</td><td>Prison facility</td></tr>
+        <tr><td>farm</td><td>F</td><td>$0</td><td>Agricultural zone (crops, animals)</td></tr>
+        <tr><td>bank</td><td>B</td><td>$0</td><td>Banking district (limited functionality)</td></tr>
       </table>
       
+      <h3>Wilds Plot (Special Resource Type)</h3>
+      <p>Wilds plots allow harvesting of natural resources while preventing building. Allowed blocks include:</p>
+      <ul>
+        <li><strong>Ores:</strong> All overworld and nether ores</li>
+        <li><strong>Logs:</strong> All wood types</li>
+        <li><strong>Plants:</strong> Flowers, mushrooms, crops</li>
+        <li><strong>Other:</strong> Clay, glowstone, vines, cocoa</li>
+      </ul>
+      
+      <h3>Plot Taxes</h3>
+      <ul>
+        <li>Plot taxes are collected daily along with town taxes</li>
+        <li>If a resident cannot pay plot tax, the plot becomes town land (config: town.default_taxes.does_non-payment_place_plot_for_sale: false)</li>
+        <li>Embassy plots have default 10% tax rate</li>
+      </ul>
+      
       <div class="notice-box tip">
-        <i class="fas fa-lightbulb"></i> <strong>Zoning strategy:</strong> Create commercial districts with shop plots near town spawn, residential areas with build permissions for residents only, and embassy plots near borders for diplomatic relations.
+        <i class="fas fa-lightbulb"></i> <strong>Zoning strategy:</strong> Create commercial districts near spawn, wilds plots for resource gathering on the outskirts, and embassy plots near borders for diplomatic relations.
       </div>
     </div>
 
-    <!-- Section 7 - Nations with inline specs -->
+    <!-- Section 7 - Joining a Nation (UPDATED with config values and bonuses) -->
     <div class="guide-section" id="section7">
       <h2><span class="section-number">7</span> Joining a Nation</h2>
-      <p>Forge alliances and gain protection by forming or joining a nation with other towns.</p>
+      <p>Nations provide significant bonuses to member towns, including additional claim blocks and reduced upkeep.</p>
       
       <h3>Nation Commands</h3>
       <div class="command-definitions">
@@ -651,129 +795,229 @@
           <dd>Creates nation with your town as capital ($10,000)</dd>
           <dt>/nation join &lt;Nation&gt;</dt>
           <dd>Requests to join an existing nation</dd>
-          <dt>/nation ally &lt;Nation&gt;</dt>
-          <dd>Proposes alliance with another nation</dd>
+          <dt>/nation leave</dt>
+          <dd>Leave current nation (if not capital)</dd>
         </dl>
       </div>
       
-      <h3>Nation Features</h3>
-      <ul>
-        <li><strong>Neutrality:</strong> Declare neutrality for $1,000 (excludes you from wars)</li>
-        <li><strong>Town Merging:</strong> Free base cost + 50% of claim cost per plot</li>
-        <li><strong>Shared Protection:</strong> Allied towns ignore claim distance restrictions</li>
-        <li><strong>Collective Defense:</strong> Attackers jailed in any town are imprisoned for the nation</li>
-      </ul>
+      <h3>Nation Requirements</h3>
+      <table class="specs-table">
+        <tr><td>Creation Cost</td><td>$10,000 (economy.new_expand.price_new_nation)</td></tr>
+        <tr><td>Minimum Residents to Create</td><td>5 (global_town_settings.required_number_residents_create_nation)</td></tr>
+        <tr><td>Maximum Residents Without Nation</td><td>14 (global_town_settings.maximum_number_residents_without_nation)</td></tr>
+        <tr><td>Max Towns per Nation</td><td>Unlimited (config: 0)</td></tr>
+        <tr><td>Max Allies</td><td>Unlimited (config: -1)</td></tr>
+      </table>
       
-      <h4>Nation Benefits</h4>
-      <ul>
-        <li>Shared protection and military support</li>
-        <li>Reduced upkeep costs for towns</li>
-        <li>Ability to declare war and conduct diplomacy</li>
-        <li>Access to nation-only chat channels</li>
-        <li>Collective bargaining power</li>
-      </ul>
+      <h3>Nation Benefits</h3>
+      <table class="specs-table">
+        <tr><th>Nation Size</th><th>Town Block Bonus</th><th>Upkeep Modifier</th><th>Nation Zones</th></tr>
+        <tr><td>Band (1 resident)</td><td>+20</td><td>1.0x</td><td>1 chunk</td></tr>
+        <tr><td>Clan (10)</td><td>+30</td><td>1.0x</td><td>1 chunk</td></tr>
+        <tr><td>Tribe (25)</td><td>+75</td><td>1.0x</td><td>1 chunk</td></tr>
+        <tr><td>Federation (50)</td><td>+150</td><td>0.95x (5% off)</td><td>2 chunks</td></tr>
+        <tr><td>Kingdom (100)</td><td>+250</td><td>0.85x (15% off)</td><td>2 chunks</td></tr>
+        <tr><td>Empire (200)</td><td>+400</td><td>0.75x (25% off)</td><td>6 chunks</td></tr>
+      </table>
+      
+      <h3>Nation Zones</h3>
+      <p>Nation zones are protected wilderness areas surrounding nation towns. Members can build/break in these zones; non-members cannot. Currently disabled (global_nation_settings.nationzone.enable: false).</p>
       
       <div style="text-align: center; margin: 25px 0 10px;">
         <a href="guide-nation.html" class="btn"><i class="fas fa-book"></i> Full Nation Guide</a>
       </div>
     </div>
 
-    <!-- Section 8 - All commands in definition list -->
+    <!-- Section 8 - Useful Commands (UPDATED with spawn restrictions) -->
     <div class="guide-section" id="section8">
       <h2><span class="section-number">8</span> Useful Commands</h2>
-      <p>Essential commands for daily town management and navigation.</p>
       
+      <h3>Essential Commands</h3>
       <div class="command-definitions">
         <dl>
           <dt>/town</dt>
           <dd>Opens town management interface</dd>
           <dt>/resident</dt>
           <dd>Shows your resident information</dd>
-          <dt>/town spawn</dt>
-          <dd>Teleports to your town spawn point</dd>
-          <dt>/town set spawn</dt>
-          <dd>Sets town spawn to your location</dd>
-          <dt>/town here</dt>
-          <dd>Shows information about current town</dd>
           <dt>/town list</dt>
           <dd>Lists all towns on the server</dd>
+          <dt>/town here</dt>
+          <dd>Shows information about current town</dd>
+          <dt>/town toggle pvp</dt>
+          <dd>Toggles PvP (20 second cooldown)</dd>
           <dt>/town toggle fire</dt>
-          <dd>Toggles fire spread in your town</dd>
+          <dd>Toggles fire spread</dd>
           <dt>/town toggle explosion</dt>
           <dd>Toggles explosion damage</dd>
-          <dt>/town ?</dt>
-          <dd>Shows all available town commands</dd>
+          <dt>/town toggle public</dt>
+          <dd>Makes town spawn public/private</dd>
         </dl>
       </div>
       
+      <h3>Teleport Commands & Restrictions</h3>
+      <table class="specs-table">
+        <tr><th>Command</th><th>Cooldown</th><th>Cost</th><th>Restrictions</th></tr>
+        <tr><td>/town spawn</td><td>30s</td><td>Free for own town</td><td>Only your own town</td></tr>
+        <tr><td>/town spawn [town] (own nation)</td><td>30s</td><td>$5.00</td><td>Target town must be public</td></tr>
+        <tr><td>/town spawn [town] (other)</td><td>30s</td><td>Up to $10.00</td><td><strong>DISABLED</strong> (config: spawning.town_spawn.allow_town_spawn_travel: false)</td></tr>
+        <tr><td>/town spawn (enemy/outlaw)</td><td>—</td><td>—</td><td>Prevented (config: spawning.town_spawn.prevent_town_spawn_in: enemy,outlaw)</td></tr>
+      </table>
+      
+      <div class="notice-box warning">
+        <i class="fas fa-exclamation-triangle"></i> <strong>Critical Spawn Restriction:</strong> Town spawns are disabled for all towns NOT in your nation. Even allied nations cannot teleport to each other's towns directly. Use the Embassy System for cross-nation teleportation.
+      </div>
+      
+      <h3>Cooldowns</h3>
+      <ul>
+        <li><strong>/town spawn:</strong> 30 seconds (own town)</li>
+        <li><strong>Nation member town spawn:</strong> 30 seconds</li>
+        <li><strong>PvP toggle:</strong> 20 seconds</li>
+        <li><strong>Peaceful toggle:</strong> 60 seconds</li>
+        <li><strong>Spawn warmup:</strong> 5 seconds (movement/damage cancels)</li>
+      </ul>
+      
       <div class="notice-box tip">
-        <i class="fas fa-lightbulb"></i> <strong>Pro Tip:</strong> Many commands have tab-completion — press TAB to see options!
+        <i class="fas fa-lightbulb"></i> <strong>Pro Tip:</strong> Use <code>/town ?</code> to see all commands. Tab-completion works for most commands.
       </div>
     </div>
     
-    <!-- Section 9: Death & PvP Economics -->
+    <!-- Section 9 - Death & PvP Economics (UPDATED with config caps) -->
     <div class="guide-section" id="section9">
       <h2><span class="section-number">9</span> Death & PvP Economics</h2>
-      <p>Understand the financial consequences of death and player combat.</p>
       
-      <h3>Death Costs (PvP only)</h3>
+      <h3>Death Costs</h3>
       <table class="specs-table">
-        <tr><td>Loss Percentage</td><td>5% of personal balance when killed by player</td></tr>
-        <tr><td>Maximum Loss</td><td>Capped at $1,000 per death</td></tr>
-        <tr><td>Payment</td><td>Lost amount paid to your killer</td></tr>
-        <tr><td>Environmental Deaths</td><td>No cost (falls, mobs, etc.)</td></tr>
+        <tr><td>Type</td><td>Percentage-based (config: economy.death.price_death_type: percent)</td></tr>
+        <tr><td>PvP Only?</td><td>Yes (price_death_pvp_only: true)</td></tr>
+        <tr><td>Loss Percentage</td><td>5% of personal balance</td></tr>
+        <tr><td>Maximum Loss</td><td>$1,000 per death (percentage_cap)</td></tr>
+        <tr><td>Payment</td><td>Lost amount paid to killer</td></tr>
       </table>
       
       <h4>Examples</h4>
       <ul>
         <li>$10,000 balance → Lose $500 (paid to killer)</li>
-        <li>$50,000 balance → Lose $1,000 (capped, paid to killer)</li>
-        <li>$5,000 balance → Lose $250 (paid to killer)</li>
+        <li>$50,000 balance → Lose $1,000 (capped)</li>
+        <li>$2,000 balance → Lose $100</li>
+      </ul>
+      
+      <h3>Additional Death Costs (Configurable)</h3>
+      <ul>
+        <li><strong>Town Payment:</strong> 0% (config: economy.death.price_death_town)</li>
+        <li><strong>Nation Payment:</strong> 0% (config: economy.death.price_death_nation)</li>
       </ul>
       
       <div class="notice-box warning">
-        <i class="fas fa-exclamation-triangle"></i> <strong>Combat strategy:</strong> Consider your bank balance before engaging in PvP. High-wealth players risk significant losses even with the $1,000 cap!
+        <i class="fas fa-exclamation-triangle"></i> <strong>Combat Strategy:</strong> High-wealth players risk significant losses even with the $1,000 cap. Environmental deaths (falls, mobs) cost nothing.
       </div>
     </div>
 
-    <!-- Section 10: Jail System -->
+    <!-- Section 10 - Jail System (UPDATED with config values) -->
     <div class="guide-section" id="section10">
-      <h2><span class="section-number">10</span> Jail & Justice System</h2>
-      <p>Towns can establish jails to imprison enemies and outlaws who attack their territory.</p>
+      <h2><span class="section-number">10</span> Jail System</h2>
       
       <h3>Automatic Imprisonment</h3>
       <ul>
-        <li><strong>Outlaws:</strong> Players with outlaw status killed in your town are automatically jailed for 1 hour</li>
-        <li><strong>Jail Requirements:</strong> Town must have a plot set as "jail" type</li>
+        <li><strong>Outlaws:</strong> Killed in town → 2 hours jail (jail.outlaw_jail_hours)</li>
+        <li><strong>Enemies (POW):</strong> Killed in town → 5 hours jail (jail.pow_jail_hours)</li>
+        <li><strong>Requirement:</strong> Town must have a jail plot</li>
       </ul>
       
       <h3>Jail Management</h3>
       <table class="specs-table">
-        <tr><td>Initial Fee</td><td>$1,000</td></tr>
-        <tr><td>Hourly Cost</td><td>$250 per prisoner (paid from town bank)</td></tr>
-        <tr><td>Maximum Sentence</td><td>12 hours (set by mayors)</td></tr>
-        <tr><td>Escape Prevention</td><td>Jailed players cannot use <code>/town leave</code></td></tr>
-        <tr><td>Teleport Items</td><td>Ender Pearls and Chorus Fruit <em>can</em> be used</td></tr>
+        <tr><td>Initial Fee</td><td>$1,000 (paid from town bank)</td></tr>
+        <tr><td>Hourly Cost</td><td>$250 per prisoner</td></tr>
+        <tr><td>Maximum Sentence</td><td>12 hours (config: jail.maximum_jail_hours)</td></tr>
+        <tr><td>Max Prisoners per Town</td><td>Unlimited (config: -1)</td></tr>
+        <tr><td>Escape Prevention</td><td>/town leave disabled (jail_denies_town_leave: true)</td></tr>
+        <tr><td>Teleport Items</td><td>Ender Pearls/Chorus Fruit ALLOWED (jail_allows_teleport_items: true)</td></tr>
       </table>
-      
-      <div class="notice-box warning">
-        <i class="fas fa-exclamation-triangle"></i> <strong>Security:</strong> Build your jail cells secure! Prisoners can use teleport items, so consider obsidian boxes, lava barriers, or other creative containment methods.
-      </div>
       
       <h3>Bail System</h3>
       <table class="specs-table">
         <tr><td>Standard Bail</td><td>$1,000</td></tr>
-        <tr><td>Mayor Bail</td><td>$10,000</td></tr>
-        <tr><td>King Bail</td><td>$25,000</td></tr>
-        <tr><td>Maximum Bail Set</td><td>$1,000 for regular crimes</td></tr>
+        <tr><td>Mayor Bail</td><td>$5,000</td></tr>
+        <tr><td>King Bail</td><td>$10,000</td></tr>
+        <tr><td>Max Mayor-Set Bail</td><td>$1,000</td></tr>
       </table>
       
-      <div class="notice-box tip">
-        <i class="fas fa-lightbulb"></i> <strong>Economic warfare:</strong> Capturing enemy leaders can be highly profitable through bail payments, but requires secure holding facilities!
+      <h3>Jail Security Notes</h3>
+      <ul>
+        <li>Jailed players can use Ender Pearls and Chorus Fruit</li>
+        <li>Build cells with obsidian, lava barriers, or other containment</li>
+        <li>New players have 1 hour immunity from jailing (new_player_immunity)</li>
+      </ul>
+      
+      <div class="notice-box warning">
+        <i class="fas fa-exclamation-triangle"></i> <strong>Security:</strong> Prisoners can use teleport items! Build secure cells with obsidian and consider anti-enderpearl barriers.
       </div>
     </div>
     
-    <!-- Navigation Footer (unchanged) -->
+    <!-- Section 11 - NEW: Embassy System (CRITICAL GAMEPLAY INFO) -->
+    <div class="guide-section" id="section11">
+      <h2><span class="section-number">11</span> Embassy System</h2>
+      <p>Since outposts are disabled and cross-nation teleportation is restricted, the Embassy System is the ONLY way to establish teleport links between towns in different nations.</p>
+      
+      <div class="embassy-info">
+        <h4><i class="fas fa-passport"></i> How Embassy Teleportation Works</h4>
+        <p>Towns cannot teleport to other towns outside their nation—even allies must use the embassy system. To establish a teleport link:</p>
+        
+        <div class="embassy-step">
+          <span class="step-number">1</span>
+          <span><strong>Travel to target town</strong> — Physically journey to the town you want to establish an embassy with.</span>
+        </div>
+        <div class="embassy-step">
+          <span class="step-number">2</span>
+          <span><strong>Purchase embassy plot</strong> — The recipient town must have an embassy plot available. Cost: <strong>$5,000</strong> creation fee (paid by recipient when setting plot type). Default tax: <strong>10%</strong>.</span>
+        </div>
+        <div class="embassy-step">
+          <span class="step-number">3</span>
+          <span><strong>Build embassy structure</strong> — Construct a government-style building on the embassy plot that looks appropriate for diplomatic purposes.</span>
+        </div>
+        <div class="embassy-step">
+          <span class="step-number">4</span>
+          <span><strong>Apply in Discord</strong> — Submit your embassy build for approval. Include screenshots and coordinates.</span>
+        </div>
+        <div class="embassy-step">
+          <span class="step-number">5</span>
+          <span><strong>Staff review</strong> — Once approved, staff will configure the embassy as a valid teleport destination.</span>
+        </div>
+      </div>
+      
+      <h3>Embassy Plot Specifications</h3>
+      <table class="specs-table">
+        <tr><td>Creation Cost</td><td>$5,000 (config: townblocktypes.types.embassy.cost)</td></tr>
+        <tr><td>Default Tax</td><td>10% (town.default_taxes.embassy_tax)</td></tr>
+        <tr><td>Map Key</td><td>E (visible on /towny map)</td></tr>
+        <tr><td>Command</td><td><code>/plot set type embassy</code> (must be run by recipient town)</td></tr>
+      </table>
+      
+      <h3>Teleportation Rules</h3>
+      <ul>
+        <li><strong>Only your nation:</strong> /town spawn works only for towns in your own nation</li>
+        <li><strong>Allies cannot teleport:</strong> Even allied nations must use embassies</li>
+        <li><strong>Embassy teleport:</strong> Once approved, your town can teleport directly to your embassy in the foreign town</li>
+        <li><strong>No outposts:</strong> Traditional outpost claiming is disabled</li>
+      </ul>
+      
+      <h3>Embassy Benefits</h3>
+      <ul>
+        <li>Establish diplomatic presence in foreign cities</li>
+        <li>Quick travel between allied nations without walking</li>
+        <li>Safe haven in foreign territory (embassy plots retain your build permissions)</li>
+        <li>Visible symbol of international relations</li>
+      </ul>
+      
+      <div class="notice-box warning">
+        <i class="fas fa-exclamation-triangle"></i> <strong>Critical:</strong> Without an approved embassy, you CANNOT teleport to towns outside your nation—even if they're allied. Plan your diplomatic infrastructure accordingly.
+      </div>
+      
+      <div class="notice-box tip">
+        <i class="fas fa-lightbulb"></i> <strong>Strategy:</strong> Major trading hubs should establish embassies with key partner towns. Consider a "embassy district" near your town spawn for foreign delegations.
+      </div>
+    </div>
+    
+    <!-- Navigation Footer -->
     <div style="display: flex; justify-content: space-between; margin: 50px 0 30px; padding: 20px; background: rgba(30, 41, 59, 0.5); border-radius: 12px;">
       <a href="index.html" class="btn btn-outline">
         <i class="fas fa-home"></i> Back to Home
@@ -790,9 +1034,8 @@
   <!-- Load component loader -->
   <script src="js/components-loader.js"></script>
   
-  <!-- Page-specific JavaScript (unchanged) -->
+  <!-- Page-specific JavaScript -->
   <script>
-    // Initialize the page
     document.addEventListener('DOMContentLoaded', async () => {
       await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
       await window.ComponentLoader.loadComponent('header', 'header-container');
