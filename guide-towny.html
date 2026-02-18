@@ -507,10 +507,6 @@
         <li><strong>Consider joining a nation</strong> — Nations provide claim bonuses (see Section 7)</li>
       </ol>
       
-      <div class="notice-box warning">
-        <i class="fas fa-exclamation-triangle"></i> <strong>Requirements:</strong> You must be in unclaimed territory, at least 4 chunks from any existing town's homeblock, and have $200 in your personal balance.
-      </div>
-      
       <div class="notice-box tip">
         <i class="fas fa-lightbulb"></i> <strong>Strategic tip:</strong> Choose a location near resources (wood, stone, water) but defensible. Flat terrain is easier to build on, while mountains offer natural protection. Consider proximity to other towns for future alliances.
       </div>
@@ -574,14 +570,14 @@
       <p>Ranks grant special permissions to trusted residents. Assign them with <code>/town rank add [player] [rank]</code>:</p>
       
       <div class="specs-grid">
-        <div class="spec-item"><strong>assistant</strong> <span>Full management powers: can invite/kick residents, claim/unclaim land, and set permissions. Second-in-command.</span></div>
-        <div class="spec-item"><strong>co-mayor</strong> <span>Shares mayoral duties. Can perform most administrative tasks except deleting the town.</span></div>
-        <div class="spec-item"><strong>sheriff</strong> <span>Manages law enforcement: can jail players within town and manage outlaws.</span></div>
+        <div class="spec-item"><strong>co-mayor</strong> <span>2nd in command. Shares full powers with the mayor except deletion of town.</span></div>
+        <div class="spec-item"><strong>assistant</strong> <span>Management powers: can invite/kick residents, claim/unclaim land, and set permissions.</span></div>
+        <div class="spec-item"><strong>sheriff</strong> <span>MLaw enforcement: can jail players within town and manage outlaws.</span></div>
         <div class="spec-item"><strong>helper</strong> <span>Can assist with permissions: allowed to set permissions on town and individual plots.</span></div>
       </div>
       
       <h3>Mayoral Succession</h3>
-      <p>If a mayor becomes inactive, assistants are first in line to inherit the town. The order of succession can be configured by server staff.</p>
+      <p>If a mayor becomes inactive for 30 days without announcing any notices or permenantly banned, a co-mayor can open a ticket and request to be transferred ownership.</p>
       
       <h3>Resident Limits</h3>
       <ul>
@@ -706,7 +702,11 @@
       <h3>Plot Taxes</h3>
       <p>Plot owners pay daily taxes based on the town's plot tax setting. If a resident cannot pay, the plot reverts to town ownership. Embassy plots have a default <strong>10% tax rate</strong>.</p>
     </div>
-
+    
+      <div class="notice-box tip">
+        <i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Setting plots to "Shop" then selling them allows you to make a market district and charge shop-owners tax.
+      </div>
+  
     <!-- Section 7 - Joining a Nation (UPDATED - removed nation zones) -->
     <div class="guide-section" id="section7">
       <h2><span class="section-number">7</span> Joining a Nation</h2>
@@ -817,9 +817,9 @@
       
       <h4>Examples</h4>
       <ul>
+        <li><strong>$2,000 balance</strong> — Lose $100, killer receives $100</li>
         <li><strong>$10,000 balance</strong> — Lose $500, killer receives $500</li>
         <li><strong>$50,000 balance</strong> — Lose $1,000 (capped), killer receives $1,000</li>
-        <li><strong>$2,000 balance</strong> — Lose $100, killer receives $100</li>
       </ul>
       
       <div class="notice-box warning">
@@ -890,7 +890,7 @@
         </div>
         <div class="embassy-step">
           <span class="step-number">5</span>
-          <span><strong>Staff approval</strong> — Once approved, your town can teleport to your embassy using <code>/town spawn [town]</code>.</span>
+          <span><strong>Staff approval</strong> — Once approved, your town can teleport to your embassy using <code>/town outpost [name of plot]</code>.</span>
         </div>
       </div>
       
@@ -925,7 +925,7 @@
       </div>
       
       <div class="notice-box tip">
-        <i class="fas fa-lightbulb"></i> <strong>Strategy:</strong> Create an "embassy district" near your town spawn with multiple embassy plots available. This makes your town a diplomatic hub and encourages trade partnerships.
+        <i class="fas fa-lightbulb"></i> <strong>Strategy:</strong> Create an "embassy district" near your town spawn with multiple embassy plots available. This makes your town a diplomatic hub and encourages trade partnerships. Consider placing your market district nearby.
       </div>
     </div>
     
