@@ -10,10 +10,10 @@ window.townsOfTheMonth = [
   },
   {
     month: "August 2025",
-    name: "Houston",
+    name: "Egypt",
     image: "images/valemont.jpg",
     description: "Wealthiest",
-    leader: "N/A",
+    leader: "Arabian",
     population: 5,
     ideology: "Dictatorship"
   }
