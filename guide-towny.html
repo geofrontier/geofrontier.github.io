@@ -405,31 +405,42 @@
       margin-top: 2px;
     }
 
-    /* Milestone card styling */
-    .milestone-card {
-      background: rgba(15, 23, 42, 0.7);
-      border-left: 4px solid var(--accent-gold);
-      border-radius: 6px;
-      padding: 18px 22px;
-      margin-bottom: 15px;
+    /* Milestone table styling - Wikipedia style */
+    .milestone-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      font-size: 0.95rem;
     }
-    .milestone-card h4 {
-      margin: 0 0 10px 0;
+    .milestone-table th {
+      background: rgba(212, 175, 55, 0.2);
       color: var(--accent-gold);
       font-family: 'Cinzel', serif;
-      font-size: 1.3rem;
+      font-weight: 600;
+      padding: 12px 10px;
+      border-bottom: 2px solid var(--accent-gold);
+      text-align: left;
     }
-    .milestone-card p {
-      margin: 5px 0;
+    .milestone-table td {
+      padding: 12px 10px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      color: var(--text-light);
+      vertical-align: top;
     }
-    .milestone-req {
-      display: inline-block;
-      background: rgba(212, 175, 55, 0.15);
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-right: 8px;
-      margin-bottom: 6px;
+    .milestone-table tr:last-child td {
+      border-bottom: none;
+    }
+    .milestone-table .claim-reward {
+      color: var(--accent-teal);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .milestone-table .req-detail {
+      display: block;
       font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 4px;
     }
     
     @media (max-width: 768px) {
@@ -539,7 +550,7 @@
       </div>
     </div>
 
-    <!-- Section 2 - Claiming Land (UPDATED with chronological milestone evaluation) -->
+    <!-- Section 2 - Claiming Land (UPDATED with clear milestone table) -->
     <div class="guide-section" id="section2">
       <h2><span class="section-number">2</span> Claiming Land</h2>
       
@@ -566,42 +577,78 @@
         <tr><td>100</td><td>1,000</td></tr>
       </table>
 
-      <!-- Milestone subsection moved here with improved chronological wording -->
+      <!-- Milestone subsection with Wikipedia-style table -->
       <h3>Milestone Claims – extra blocks via staff review</h3>
       <p>To gain extra claims beyond the resident-based limit, your town can be reviewed by staff. Open a support ticket in Discord to request a milestone evaluation. Staff will visit your town and assess it <strong>step by step, starting from M1 and progressing upward</strong>. You cannot skip a milestone—for example, to qualify for M3 your town must first meet all the requirements of M1 and M2 (including the port or factory from M2).</p>
       
-      <p>Staff will check M1, then M2, then M3, and so on, stopping at the highest milestone your town fully satisfies. You receive the claim blocks for every milestone you pass. This ensures that towns are rewarded for their cumulative development, not just their most advanced feature.</p>
+      <p>Staff will check M1, then M2, then M3, and so on, stopping at the highest milestone your town fully satisfies. You receive the claim blocks for every milestone you pass.</p>
       
-      <div class="milestone-card">
-        <h4>🏅 M1: +150 claims</h4>
-        <p><span class="milestone-req">10 buildings</span> <span class="milestone-req">1 large building (≥8 chunks)</span></p>
-        <p class="notice-box tip" style="margin:10px 0 0; padding:8px;"><i class="fas fa-info-circle"></i> A regular building must be more than a small hut; a large building occupies at least 8 contiguous chunks.</p>
-      </div>
+      <table class="milestone-table">
+        <thead>
+          <tr>
+            <th>Milestone</th>
+            <th>Claim reward</th>
+            <th>Requirements</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>M1</strong></td>
+            <td class="claim-reward">+150 claims</td>
+            <td>
+              <ul style="margin:0; padding-left:20px;">
+                <li>10 buildings <span class="req-detail">each must be more than a small hut</span></li>
+                <li>1 large building <span class="req-detail">occupies at least 8 contiguous chunks</span></li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>M2</strong></td>
+            <td class="claim-reward">+300 claims</td>
+            <td>
+              <ul style="margin:0; padding-left:20px;">
+                <li>20 buildings</li>
+                <li>1 large building (≥8 chunks)</li>
+                <li>1 port OR factory <span class="req-detail">must also be large building size (≥8 chunks)</span></li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>M3</strong></td>
+            <td class="claim-reward">+500 claims</td>
+            <td>
+              <ul style="margin:0; padding-left:20px;">
+                <li>30 buildings</li>
+                <li>3 large buildings</li>
+                <li>1 capital building <span class="req-detail">large administrative building: town hall, parliament, courthouse, etc.</span></li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>M4</strong></td>
+            <td class="claim-reward">+700 claims</td>
+            <td>
+              <ul style="margin:0; padding-left:20px;">
+                <li>40 buildings</li>
+                <li>3 large buildings</li>
+                <li>1 armoury <span class="req-detail">must be a large building (≥8 chunks)</span></li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>M5</strong></td>
+            <td class="claim-reward">+1200 claims</td>
+            <td>
+              <ul style="margin:0; padding-left:20px;">
+                <li>50 buildings</li>
+                <li>4 large buildings</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       
-      <div class="milestone-card">
-        <h4>🏅 M2: +300 claims</h4>
-        <p><span class="milestone-req">20 buildings</span> <span class="milestone-req">1 large building</span> <span class="milestone-req">1 port OR factory</span></p>
-        <p><em>Port/factory must be the size of a large building (≥8 chunks).</em></p>
-      </div>
-      
-      <div class="milestone-card">
-        <h4>🏅 M3: +500 claims</h4>
-        <p><span class="milestone-req">30 buildings</span> <span class="milestone-req">3 large buildings</span> <span class="milestone-req">1 capital build</span></p>
-        <p><em>Capital building: a large building designed for administration (town hall, parliament, court house).</em></p>
-      </div>
-      
-      <div class="milestone-card">
-        <h4>🏅 M4: +700 claims</h4>
-        <p><span class="milestone-req">40 buildings</span> <span class="milestone-req">3 large buildings</span> <span class="milestone-req">1 armoury</span></p>
-        <p><em>Armoury must be a large building (≥8 chunks).</em></p>
-      </div>
-      
-      <div class="milestone-card">
-        <h4>🏅 M5: +1200 claims</h4>
-        <p><span class="milestone-req">50 buildings</span> <span class="milestone-req">4 large buildings</span></p>
-      </div>
-      
-      <p><strong>Total possible from milestones:</strong> 150 + 300 + 500 + 700 + 1200 = 2,850 claim blocks.</p>
+      <p style="margin-top:20px;"><strong>Total possible from milestones:</strong> 150 + 300 + 500 + 700 + 1200 = 2,850 claim blocks.</p>
       
       <div class="notice-box tip">
         <i class="fas fa-lightbulb"></i> <strong>How to apply:</strong> Build your town, then go to our Discord, open a support ticket, and request a milestone review. Staff will evaluate your town chronologically (M1 → M2 → M3 …) and award all milestones you have earned. You cannot claim a higher milestone without meeting the prerequisites of all previous ones.
