@@ -404,6 +404,33 @@
       flex-shrink: 0;
       margin-top: 2px;
     }
+
+    /* Milestone card styling */
+    .milestone-card {
+      background: rgba(15, 23, 42, 0.7);
+      border-left: 4px solid var(--accent-gold);
+      border-radius: 6px;
+      padding: 18px 22px;
+      margin-bottom: 15px;
+    }
+    .milestone-card h4 {
+      margin: 0 0 10px 0;
+      color: var(--accent-gold);
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+    }
+    .milestone-card p {
+      margin: 5px 0;
+    }
+    .milestone-req {
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.15);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-right: 8px;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+    }
     
     @media (max-width: 768px) {
       .guide-header {
@@ -481,7 +508,7 @@
       </div>
     </div>
 
-    <!-- Section 1 - Creating a Town (COMPLETELY REWRITTEN with explanatory text) -->
+    <!-- Section 1 - Creating a Town -->
     <div class="guide-section" id="section1">
       <h2><span class="section-number">1</span> Creating a Town</h2>
       
@@ -512,7 +539,7 @@
       </div>
     </div>
 
-    <!-- Section 2 - Claiming Land (UPDATED with nation bonus clarification) -->
+    <!-- Section 2 - Claiming Land (UPDATED with 5 base, 2% increase, $175 cap, milestone subsection) -->
     <div class="guide-section" id="section2">
       <h2><span class="section-number">2</span> Claiming Land</h2>
       
@@ -522,24 +549,63 @@
       <p>To claim the chunk you're standing in, simply use <code>/town claim</code>. The cost will be deducted from your town bank (deposit money with <code>/town deposit [amount]</code>). For larger expansions, <code>/town claim auto [number]</code> claims multiple adjacent chunks outward from your existing territory.</p>
       
       <h3>How Claiming Costs Work</h3>
-      <p>The first chunk you claim costs <strong>$5.00</strong>. Each subsequent claim costs <strong>5% more</strong> than the previous one, up to a maximum of <strong>$300 per chunk</strong>. This means early expansion is cheap, but claiming very large territories becomes expensive. If you later unclaim land, you receive a <strong>15% refund</strong> of the original cost.</p>
-      
-      <p>You can also purchase <strong>bonus claim blocks</strong> beyond your natural limit using <code>/town buy bonus [amount]</code>. These cost <strong>$50 each</strong>, increasing by <strong>20% per purchase</strong> up to <strong>$5,000 maximum</strong> per block.</p>
+      <p>The first chunk you claim costs <strong>$5.00</strong>. Each subsequent claim costs <strong>2% more</strong> than the previous one, up to a maximum of <strong>$175 per chunk</strong>. This means early expansion is cheap, but claiming very large territories becomes expensive. If you later unclaim land, you receive a <strong>15% refund</strong> of the original cost.</p>
       
       <h3>Claim Limits by Town Size</h3>
-      <p>Every resident in your town contributes <strong>10 claim blocks</strong> to your total capacity. Additionally, you can purchase bonus blocks up to the limits shown below. <strong>Note:</strong> These figures do not include additional claim bonuses from joining a nation (see Section 7).</p>
+      <p>Every resident in your town contributes <strong>10 claim blocks</strong> to your total capacity. There is no bonus purchase limit; the table below shows the base claims from residents only.</p>
       
       <table class="specs-table">
-        <tr><th>Residents</th><th>Base Claims (from residents)</th><th>Bonus Purchase Limit</th><th>Total Possible (without nation)</th></tr>
-        <tr><td>0 (new town)</td><td>8</td><td>0</td><td>8</td></tr>
-        <tr><td>1</td><td>10</td><td>20</td><td>30</td></tr>
-        <tr><td>5</td><td>50</td><td>40</td><td>90</td></tr>
-        <tr><td>15</td><td>150</td><td>80</td><td>230</td></tr>
-        <tr><td>30</td><td>300</td><td>150</td><td>450</td></tr>
-        <tr><td>50</td><td>500</td><td>250</td><td>750</td></tr>
-        <tr><td>75</td><td>750</td><td>400</td><td>1,150</td></tr>
-        <tr><td>100</td><td>1,000</td><td>600</td><td>1,600</td></tr>
+        <tr><th>Residents</th><th>Base Claims (from residents)</th></tr>
+        <tr><td>0 (new town)</td><td>8</td></tr>
+        <tr><td>1</td><td>10</td></tr>
+        <tr><td>5</td><td>50</td></tr>
+        <tr><td>15</td><td>150</td></tr>
+        <tr><td>30</td><td>300</td></tr>
+        <tr><td>50</td><td>500</td></tr>
+        <tr><td>75</td><td>750</td></tr>
+        <tr><td>100</td><td>1,000</td></tr>
       </table>
+
+      <!-- Milestone subsection moved here -->
+      <h3>Milestone Claims – extra blocks via staff review</h3>
+      <p>To gain extra claims beyond the resident-based limit, your town can be reviewed by staff. Simply build, then open a support ticket in Discord to request a milestone evaluation. Staff will visit your town and award the corresponding milestone if the requirements are met.</p>
+      
+      <p><strong>Milestones stack.</strong> If you qualify for M3, you receive the sum of M1 + M2 + M3.</p>
+      
+      <div class="milestone-card">
+        <h4>🏅 M1: +150 claims</h4>
+        <p><span class="milestone-req">10 buildings</span> <span class="milestone-req">1 large building (≥8 chunks)</span></p>
+        <p class="notice-box tip" style="margin:10px 0 0; padding:8px;"><i class="fas fa-info-circle"></i> A regular building must be more than a small hut; a large building occupies at least 8 contiguous chunks.</p>
+      </div>
+      
+      <div class="milestone-card">
+        <h4>🏅 M2: +300 claims</h4>
+        <p><span class="milestone-req">20 buildings</span> <span class="milestone-req">1 large building</span> <span class="milestone-req">1 port OR factory</span></p>
+        <p><em>Port/factory must be the size of a large building (≥8 chunks).</em></p>
+      </div>
+      
+      <div class="milestone-card">
+        <h4>🏅 M3: +500 claims</h4>
+        <p><span class="milestone-req">30 buildings</span> <span class="milestone-req">3 large buildings</span> <span class="milestone-req">1 capital build</span></p>
+        <p><em>Capital building: a large building designed for administration (town hall, parliament, court house).</em></p>
+      </div>
+      
+      <div class="milestone-card">
+        <h4>🏅 M4: +700 claims</h4>
+        <p><span class="milestone-req">40 buildings</span> <span class="milestone-req">3 large buildings</span> <span class="milestone-req">1 armoury</span></p>
+        <p><em>Armoury must be a large building (≥8 chunks).</em></p>
+      </div>
+      
+      <div class="milestone-card">
+        <h4>🏅 M5: +1200 claims</h4>
+        <p><span class="milestone-req">50 buildings</span> <span class="milestone-req">4 large buildings</span></p>
+      </div>
+      
+      <p><strong>Total possible from milestones:</strong> 150 + 300 + 500 + 700 + 1200 = 2,850 claim blocks.</p>
+      
+      <div class="notice-box tip">
+        <i class="fas fa-lightbulb"></i> <strong>How to apply:</strong> Build your town, then go to our Discord, open a support ticket, and request a milestone review. Staff will visit, evaluate, and grant the appropriate milestone(s). Each milestone is awarded only once per town.
+      </div>
       
       <h3>Distance Rules</h3>
       <ul>
@@ -552,12 +618,9 @@
         <i class="fas fa-exclamation-triangle"></i> <strong>Outposts disabled:</strong> Traditional outpost creation (claiming disconnected chunks) is not available. Use the Embassy System (Section 11) for remote teleportation.
       </div>
       
-      <div class="notice-box tip">
-        <i class="fas fa-lightbulb"></i> <strong>Growth strategy:</strong> Each new resident adds 10 claim blocks at no cost. Recruiting members is often cheaper than buying bonus blocks. Nations provide significant claim bonuses—consider joining one early.
-      </div>
     </div>
 
-    <!-- Section 3 - Managing Residents (UPDATED with correct ranks) -->
+    <!-- Section 3 - Managing Residents -->
     <div class="guide-section" id="section3">
       <h2><span class="section-number">3</span> Managing Residents</h2>
       
@@ -572,7 +635,7 @@
       <div class="specs-grid">
         <div class="spec-item"><strong>co-mayor</strong> <span>2nd in command. Shares full powers with the mayor except deletion of town.</span></div>
         <div class="spec-item"><strong>assistant</strong> <span>Management powers: can invite/kick residents, claim/unclaim land, and set permissions.</span></div>
-        <div class="spec-item"><strong>sheriff</strong> <span>MLaw enforcement: can jail players within town and manage outlaws.</span></div>
+        <div class="spec-item"><strong>sheriff</strong> <span>Law enforcement: can jail players within town and manage outlaws.</span></div>
         <div class="spec-item"><strong>helper</strong> <span>Can assist with permissions: allowed to set permissions on town and individual plots.</span></div>
       </div>
       
@@ -587,7 +650,7 @@
       </ul>
     </div>
 
-    <!-- Section 4 - Taxes & Upkeep (SIMPLIFIED) -->
+    <!-- Section 4 - Taxes & Upkeep (UPDATED with $2/chunk) -->
     <div class="guide-section" id="section4">
       <h2><span class="section-number">4</span> Taxes & Upkeep</h2>
       
@@ -610,7 +673,7 @@
       </div>
       
       <h3>Upkeep Costs</h3>
-      <p>Towns pay <strong>$15.00 per claimed chunk</strong> each day. For example, a town with 50 claimed chunks pays $750 daily. Nations also pay upkeep: <strong>$1,000 per day</strong> for the nation itself (not per town).</p>
+      <p>Towns pay <strong>$2.00 per claimed chunk</strong> each day. For example, a town with 50 claimed chunks pays $100 daily. Nations also pay upkeep: <strong>$1,000 per day</strong> for the nation itself (not per town).</p>
       
       <p>If your town has claimed more land than your resident count allows (overclaiming), you pay an additional <strong>$100 per extra chunk per day</strong>.</p>
       
@@ -622,11 +685,11 @@
       </div>
       
       <div class="notice-box tip">
-        <i class="fas fa-lightbulb"></i> <strong>Strategy:</strong> Balance taxes to cover upkeep without driving residents away. Use <code>/town</code> to check your daily costs and current balance. Larger nations receive upkeep discounts (see Section 7).
+        <i class="fas fa-lightbulb"></i> <strong>Strategy:</strong> Balance taxes to cover upkeep without driving residents away. Use <code>/town</code> to check your daily costs and current balance.
       </div>
     </div>
 
-    <!-- Section 5 - Town Permissions (SIMPLIFIED - removed defaults) -->
+    <!-- Section 5 - Town Permissions -->
     <div class="guide-section" id="section5">
       <h2><span class="section-number">5</span> Town Permissions</h2>
       
@@ -661,7 +724,7 @@
       <p>Individual plots can override town-wide permissions using <code>/plot set perm [group] [type] on/off</code>. This is useful for giving a resident control over their own property while keeping the rest of town secure.</p>
     </div>
 
-    <!-- Section 6 - Plot Management (UPDATED) -->
+    <!-- Section 6 - Plot Management -->
     <div class="guide-section" id="section6">
       <h2><span class="section-number">6</span> Plot Management</h2>
       
@@ -701,17 +764,17 @@
       
       <h3>Plot Taxes</h3>
       <p>Plot owners pay daily taxes based on the town's plot tax setting. If a resident cannot pay, the plot reverts to town ownership. Embassy plots have a default <strong>10% tax rate</strong>.</p>
-    </div>
-    
+
       <div class="notice-box tip">
         <i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Setting plots to "Shop" then selling them allows you to make a market district and charge shop-owners tax.
       </div>
+    </div>
   
-    <!-- Section 7 - Joining a Nation (UPDATED - removed nation zones) -->
+    <!-- Section 7 - Joining a Nation (Claim bonuses REMOVED) -->
     <div class="guide-section" id="section7">
       <h2><span class="section-number">7</span> Joining a Nation</h2>
       
-      <p>Nations are alliances of towns that provide significant benefits: additional claim blocks, reduced upkeep costs, and collective defense. Towns with 5 or more residents can form their own nation; towns with up to 14 residents can remain independent, but joining a nation is highly recommended for growth.</p>
+      <p>Nations are alliances of towns that provide significant benefits: collective defense and shared resources. Towns with 5 or more residents can form their own nation; towns with up to 14 residents can remain independent, but joining a nation is highly recommended for growth.</p>
       
       <h3>Creating or Joining a Nation</h3>
       <p>To create a nation, your town must have at least 5 residents and $10,000 in the town bank. Stand in your town and run:</p>
@@ -727,24 +790,12 @@
       </div>
       
       <h3>Nation Benefits</h3>
-      <p>Larger nations provide greater bonuses. These bonuses apply to every member town:</p>
-      
-      <table class="specs-table">
-        <tr><th>Nation Size</th><th>Additional Claim Blocks</th><th>Upkeep Discount</th></tr>
-        <tr><td>Band (1-9 residents)</td><td>+20</td><td>None</td></tr>
-        <tr><td>Clan (10-24)</td><td>+30</td><td>None</td></tr>
-        <tr><td>Tribe (25-49)</td><td>+75</td><td>None</td></tr>
-        <tr><td>Federation (50-99)</td><td>+150</td><td>5% off</td></tr>
-        <tr><td>Kingdom (100-199)</td><td>+250</td><td>15% off</td></tr>
-        <tr><td>Empire (200+)</td><td>+400</td><td>25% off</td></tr>
-      </table>
-      
-      <h3>Additional Nation Features</h3>
       <ul>
         <li><strong>Shared protection:</strong> Towns in the same nation can claim directly adjacent (ignoring distance rules)</li>
         <li><strong>Collective defense:</strong> Attackers killed in any town are jailed for the entire nation</li>
         <li><strong>Nation chat:</strong> Use <code>/nc [message]</code> to communicate with all nation members</li>
         <li><strong>Nation spawn:</strong> Teleport to the capital with <code>/nation spawn</code></li>
+        <li><strong>Upkeep discounts:</strong> Larger nations receive a discount on nation upkeep (not town upkeep)</li>
       </ul>
       
       <div style="text-align: center; margin: 25px 0 10px;">
@@ -752,7 +803,7 @@
       </div>
     </div>
 
-    <!-- Section 8 - Useful Commands (UPDATED with teleport info) -->
+    <!-- Section 8 - Useful Commands -->
     <div class="guide-section" id="section8">
       <h2><span class="section-number">8</span> Useful Commands</h2>
       
@@ -862,7 +913,7 @@
       <p>New players have 1 hour of immunity from being jailed, giving them time to learn the server.</p>
     </div>
     
-    <!-- Section 11 - Embassy System (UPDATED with 1hr cooldown, $500 cost) -->
+    <!-- Section 11 - Embassy System -->
     <div class="guide-section" id="section11">
       <h2><span class="section-number">11</span> Embassy System</h2>
       
