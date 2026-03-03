@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Factories Guide — GeoFrontier Minecraft Server</title>
+  <title>Factories & Extraction Sites — GeoFrontier</title>
   
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,14 +14,14 @@
   <!-- Main CSS -->
   <link rel="stylesheet" href="css/styles.css">
   
-  <!-- Page-specific styles -->
+  <!-- Page-specific styles (same theme as Towny guide) -->
   <style>
-    /* Guide-specific styles - Same as guide-nation.html */
+    /* Wikipedia-style information sections – identical to guide-towny */
     .guide-header {
       position: relative;
       background: 
         linear-gradient(rgba(11, 17, 32, 0.9), rgba(11, 17, 32, 0.95)),
-        url('/images/factory-bg.jpg') center/cover no-repeat;
+        url('/images/MapChart_Map.png') center/cover no-repeat;
       color: white;
       text-align: center;
       padding: 80px 20px;
@@ -69,19 +69,12 @@
     
     .guide-section {
       background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-      padding: 35px;
-      border-radius: 16px;
+      padding: 30px 35px;
+      border-radius: 8px;
       box-shadow: var(--shadow-heavy);
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      margin-bottom: 30px;
-      transition: transform 0.3s ease;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      margin-bottom: 25px;
       position: relative;
-      overflow: hidden;
-    }
-    
-    .guide-section:hover {
-      transform: translateY(-3px);
-      border-color: rgba(212, 175, 55, 0.4);
     }
     
     .guide-section::before {
@@ -89,168 +82,165 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 6px;
+      width: 4px;
       height: 100%;
       background: linear-gradient(to bottom, var(--accent-gold), var(--accent-rust));
     }
     
     .guide-section h2 {
       font-family: 'Cinzel', serif;
-      font-size: 1.8rem;
+      font-size: 2rem;
       margin-top: 0;
       margin-bottom: 20px;
       color: var(--accent-gold);
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      padding-bottom: 10px;
+      font-weight: 600;
     }
     
-    .guide-section h2 i {
+    .guide-section h3 {
+      font-family: 'Cinzel', serif;
       font-size: 1.4rem;
-      opacity: 0.8;
+      margin: 25px 0 15px 0;
+      color: var(--accent-teal);
+      font-weight: 500;
+    }
+    
+    .guide-section h4 {
+      font-size: 1.1rem;
+      margin: 20px 0 10px 0;
+      color: var(--text-light);
+      font-weight: 600;
     }
     
     .guide-section p {
       line-height: 1.7;
       color: var(--text-muted);
-      margin-bottom: 15px;
+      margin-bottom: 16px;
+      font-size: 1rem;
     }
     
     .guide-section ul, .guide-section ol {
-      padding-left: 25px;
-      margin-bottom: 20px;
+      padding-left: 20px;
+      margin: 15px 0 20px 0;
     }
     
     .guide-section li {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       color: var(--text-light);
       line-height: 1.6;
     }
     
     .guide-section li strong {
       color: var(--accent-teal);
+      font-weight: 600;
     }
     
-    .command-box {
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      border-radius: 10px;
-      padding: 20px;
+    .command-definitions {
       margin: 20px 0;
-      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 6px;
+      padding: 15px;
+    }
+    
+    .command-definitions dl {
+      margin: 0;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 8px 20px;
+      align-items: baseline;
+    }
+    
+    .command-definitions dt {
+      font-family: 'Consolas', 'Monaco', monospace;
+      color: var(--accent-teal);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    
+    .command-definitions dd {
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+    
+    .command-definitions dd::before {
+      content: "—";
+      color: var(--accent-gold);
+      margin-right: 8px;
+      opacity: 0.7;
+    }
+    
+    .notice-box {
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      background: rgba(15, 23, 42, 0.7);
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 4px;
       position: relative;
     }
     
-    .command-box:before {
-      content: '$';
-      position: absolute;
-      left: 10px;
-      top: 20px;
-      color: var(--accent-gold);
-      font-weight: bold;
+    .notice-box.warning {
+      border-color: var(--accent-rust);
     }
     
-    .command {
-      color: var(--accent-teal);
-      font-size: 1.1rem;
-      padding-left: 15px;
-      display: block;
-      margin-bottom: 8px;
-    }
-    
-    .command-desc {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      padding-left: 15px;
-      margin-bottom: 5px;
-    }
-    
-    .example-box {
-      background: rgba(45, 212, 191, 0.05);
-      border-left: 3px solid var(--accent-teal);
-      padding: 15px 20px;
-      margin: 15px 0;
-      border-radius: 0 8px 8px 0;
-    }
-    
-    .example-box p {
-      margin: 0;
-      color: var(--text-light);
-    }
-    
-    .example-box code {
-      background: rgba(45, 212, 191, 0.1);
-      color: var(--accent-teal);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-family: 'Consolas', monospace;
-    }
-    
-    .warning-box {
-      background: rgba(183, 65, 14, 0.1);
-      border-left: 3px solid var(--accent-rust);
-      padding: 15px 20px;
-      margin: 15px 0;
-      border-radius: 0 8px 8px 0;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    
-    .warning-box i {
+    .notice-box.warning strong {
       color: var(--accent-rust);
-      font-size: 1.2rem;
-      margin-top: 2px;
     }
     
-    .warning-box p {
-      margin: 0;
-      color: var(--text-light);
+    .notice-box.tip {
+      border-color: var(--accent-teal);
     }
     
-    .tip-box {
-      background: rgba(212, 175, 55, 0.1);
-      border-left: 3px solid var(--accent-gold);
-      padding: 15px 20px;
-      margin: 15px 0;
-      border-radius: 0 8px 8px 0;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
+    .notice-box.tip strong {
+      color: var(--accent-teal);
     }
     
-    .tip-box i {
+    .notice-box i {
+      margin-right: 10px;
       color: var(--accent-gold);
-      font-size: 1.2rem;
-      margin-top: 2px;
     }
     
-    .tip-box p {
-      margin: 0;
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.95rem;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    
+    .specs-table th {
+      text-align: left;
+      padding: 12px 15px;
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--accent-gold);
+      font-weight: 600;
+      border-bottom: 2px solid var(--accent-gold);
+    }
+    
+    .specs-table td {
+      padding: 10px 15px;
       color: var(--text-light);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
     }
     
-    .section-number {
-      display: inline-block;
-      background: var(--accent-gold);
-      color: var(--primary-dark);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 36px;
-      font-weight: 700;
-      margin-right: 12px;
-      font-family: 'Cinzel', serif;
+    .specs-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .specs-table td:first-child {
+      font-weight: 600;
+      color: var(--accent-teal);
+      width: 40%;
     }
     
     .table-of-contents {
       background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
-      padding: 30px;
-      border-radius: 16px;
+      padding: 25px 30px;
+      border-radius: 8px;
       box-shadow: var(--shadow-heavy);
       border: 1px solid rgba(212, 175, 55, 0.2);
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
     
     .table-of-contents h3 {
@@ -259,247 +249,107 @@
       margin-top: 0;
       margin-bottom: 20px;
       font-size: 1.5rem;
-      display: flex;
-      align-items: center;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding-bottom: 10px;
+    }
+    
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 10px;
     }
     
-    .toc-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 15px;
-    }
-    
-    .toc-item {
-      padding: 12px 15px;
-      background: rgba(15, 23, 42, 0.5);
-      border-radius: 8px;
-      border: 1px solid rgba(212, 175, 55, 0.1);
-      transition: all 0.3s ease;
-    }
-    
-    .toc-item:hover {
-      border-color: var(--accent-gold);
-      background: rgba(212, 175, 55, 0.05);
-      transform: translateX(5px);
-    }
-    
-    .toc-item a {
+    .toc-grid a {
       color: var(--text-light);
       text-decoration: none;
+      padding: 8px 12px;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 4px;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      transition: all 0.2s ease;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      font-size: 0.95rem;
     }
     
-    .toc-item i {
+    .toc-grid a:hover {
+      border-color: var(--accent-gold);
+      background: rgba(212, 175, 55, 0.05);
+    }
+    
+    .toc-grid i {
       color: var(--accent-gold);
-      font-size: 0.9rem;
+      font-size: 0.8rem;
+      width: 16px;
     }
     
-    .factory-recipes {
-      margin: 25px 0;
-    }
-    
-    .recipe-category {
-      margin-bottom: 30px;
-    }
-    
-    .recipe-category h4 {
-      color: var(--accent-teal);
-      font-family: 'Cinzel', serif;
-      margin-bottom: 15px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-    }
-    
-    .recipe-item {
-      background: rgba(15, 23, 42, 0.5);
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      border: 1px solid rgba(212, 175, 55, 0.1);
-    }
-    
-    .recipe-item strong {
-      color: var(--accent-gold);
+    .section-number {
       display: inline-block;
-      min-width: 180px;
-    }
-    
-    .recipe-item span {
-      color: var(--text-light);
-    }
-    
-    .registration-steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin: 25px 0;
-    }
-    
-    .step-card {
-      background: rgba(15, 23, 42, 0.5);
-      padding: 20px;
-      border-radius: 10px;
-      border: 1px solid rgba(212, 175, 55, 0.2);
+      background: var(--accent-gold);
+      color: var(--primary-dark);
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
       text-align: center;
-      transition: transform 0.3s ease;
-    }
-    
-    .step-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent-gold);
-    }
-    
-    .step-card i {
-      font-size: 2rem;
-      color: var(--accent-gold);
-      margin-bottom: 15px;
-    }
-    
-    .step-card h4 {
-      color: var(--accent-teal);
-      margin-bottom: 10px;
+      line-height: 32px;
+      font-weight: 700;
+      margin-right: 12px;
       font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
     }
     
-    .step-card p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin: 0;
-    }
-    
-    .factory-types {
+    .extraction-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin: 25px 0;
-    }
-    
-    .factory-card {
-      background: rgba(15, 23, 42, 0.5);
-      padding: 20px;
-      border-radius: 10px;
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-    
-    .factory-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent-gold);
-    }
-    
-    .factory-card i {
-      font-size: 2rem;
-      color: var(--accent-gold);
-      margin-bottom: 15px;
-    }
-    
-    .factory-card h4 {
-      color: var(--accent-teal);
-      margin-bottom: 10px;
-      font-family: 'Cinzel', serif;
-    }
-    
-    .factory-card p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin: 0;
-    }
-    
-    .factory-card .cost {
-      color: var(--accent-rust);
-      font-weight: bold;
-      margin-top: 8px;
-    }
-    
-    .factory-card .time {
-      color: var(--accent-teal);
-      font-weight: bold;
-      margin-top: 5px;
-    }
-    
-    .factory-table {
-      width: 100%;
-      border-collapse: collapse;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
       margin: 20px 0;
     }
     
-    .factory-table th {
+    .extraction-card {
       background: rgba(15, 23, 42, 0.7);
+      border-left: 3px solid var(--accent-teal);
+      border-radius: 6px;
+      padding: 18px 15px;
+    }
+    
+    .extraction-card h4 {
       color: var(--accent-gold);
-      padding: 12px;
-      text-align: left;
-      border: 1px solid rgba(212, 175, 55, 0.3);
+      margin: 0 0 8px 0;
       font-family: 'Cinzel', serif;
     }
     
-    .factory-table td {
-      padding: 12px;
-      border: 1px solid rgba(212, 175, 55, 0.2);
+    .extraction-card p {
+      margin: 5px 0;
       color: var(--text-light);
     }
     
-    .factory-table tr:nth-child(even) {
-      background: rgba(15, 23, 42, 0.3);
-    }
-    
-    .factory-table tr:hover {
-      background: rgba(212, 175, 55, 0.05);
+    .extraction-card i {
+      color: var(--accent-teal);
+      margin-right: 6px;
     }
     
     @media (max-width: 768px) {
-      .guide-header {
-        padding: 60px 20px;
-      }
-      
-      .guide-header h1 {
-        font-size: 2.2rem;
-      }
-      
-      .guide-section {
-        padding: 25px;
-      }
-      
-      .registration-steps {
-        grid-template-columns: 1fr;
-      }
-      
-      .factory-types {
-        grid-template-columns: 1fr;
-      }
-      
-      .toc-list {
-        grid-template-columns: 1fr;
-      }
-      
-      .factory-table {
-        display: block;
-        overflow-x: auto;
-      }
+      .guide-header h1 { font-size: 2.2rem; }
+      .guide-section { padding: 20px; }
+      .command-definitions dl { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <!-- Navbar container -->
+  <!-- Navbar placeholder -->
   <div id="navbar-container"></div>
-  
-  <!-- Header container -->
   <div id="header-container"></div>
 
   <!-- Guide Header -->
   <header class="guide-header">
     <div class="guide-header-content">
-      <div class="guide-icon">
-        <i class="fas fa-industry"></i>
-      </div>
-      <h1>Factories Guide</h1>
-      <p>Craft weapons, ammunition, artillery, and siege equipment for your nation's military-industrial complex</p>
+      <div class="guide-icon"><i class="fas fa-industry"></i></div>
+      <h1>Factories & Extraction Sites</h1>
+      <p>From raw resource extraction to mass production – build, apply, and automate your industry</p>
       <div style="margin-top: 25px;">
-        <a href="#toc" class="btn btn-outline" style="margin: 5px;">Jump to Sections</a>
-        <a href="guide-movecraft.html" class="btn" style="margin: 5px;">Movecraft Guide →</a>
+        <a href="#toc" class="btn btn-outline" style="margin:5px;"><i class="fas fa-list"></i> Jump to sections</a>
+        <a href="guide-towny.html" class="btn" style="margin:5px;">Towny Guide →</a>
       </div>
     </div>
   </header>
@@ -509,461 +359,242 @@
     
     <!-- Table of Contents -->
     <div class="table-of-contents" id="toc">
-      <h3><i class="fas fa-list-ol"></i> Table of Contents</h3>
-      <div class="toc-list">
-        <div class="toc-item">
-          <a href="#section1">
-            <i class="fas fa-plus-circle"></i>
-            <span>1. Creating Factories</span>
-          </a>
-        </div>
-        <div class="toc-item">
-          <a href="#section2">
-            <i class="fas fa-clipboard-check"></i>
-            <span>2. Factory Types & Costs</span>
-          </a>
-        </div>
-        <div class="toc-item">
-          <a href="#section3">
-            <i class="fas fa-cogs"></i>
-            <span>3. Factory Commands</span>
-          </a>
-        </div>
-        <div class="toc-item">
-          <a href="#section4">
-            <i class="fas fa-book"></i>
-            <span>4. Factory Recipes</span>
-          </a>
-        </div>
-        <div class="toc-item">
-          <a href="#section5">
-            <i class="fas fa-exclamation-triangle"></i>
-            <span>5. Rules & Limits</span>
-          </a>
-        </div>
+      <h3><i class="fas fa-list-ol"></i> Contents</h3>
+      <div class="toc-grid">
+        <a href="#overview"><i class="fas fa-industry"></i> 1. Overview</a>
+        <a href="#application"><i class="fas fa-clipboard-check"></i> 2. Applying for a site</a>
+        <a href="#building-req"><i class="fas fa-hammer"></i> 3. Building requirements</a>
+        <a href="#extraction"><i class="fas fa-mountain"></i> 4. Extraction sites</a>
+        <a href="#factories"><i class="fas fa-cogs"></i> 5. Factories</a>
+        <a href="#commands"><i class="fas fa-terminal"></i> 6. Commands</a>
       </div>
     </div>
 
-    <!-- Factory Types Overview -->
-    <div class="guide-section">
-      <h2><i class="fas fa-industry"></i> Factory System</h2>
-      <p>Factories are specialized production facilities that allow mass crafting of weapons, ammunition, artillery, and siege equipment for your nation's military and economy.</p>
+    <!-- Section 1: Overview -->
+    <div class="guide-section" id="overview">
+      <h2><span class="section-number">1</span> Factories & extraction sites: how they work</h2>
+      <p>On GeoFrontier, factories and extraction sites are the backbone of your town's economy. They allow you to convert raw materials into useful goods (factories) or passively generate resources from the environment (extraction sites). Both systems require a staff‑reviewed application and a properly constructed building.</p>
       
-      <div class="factory-types">
-        <div class="factory-card">
-          <i class="fas fa-gun"></i>
-          <h4>Armory</h4>
-          <p>Produces firearms and melee weapons</p>
-          <div class="cost">Cost: $5,000</div>
-          <div class="time">Production: 60s</div>
-        </div>
-        
-        <div class="factory-card">
-          <i class="fas fa-cannons"></i>
-          <h4>Foundry</h4>
-          <p>Produces artillery pieces</p>
-          <div class="cost">Cost: $10,000</div>
-          <div class="time">Production: 120s</div>
-        </div>
-        
-        <div class="factory-card">
-          <i class="fas fa-bullseye"></i>
-          <h4>Munitions</h4>
-          <p>Produces ammunition</p>
-          <div class="cost">Cost: $3,000</div>
-          <div class="time">Production: 30s</div>
-        </div>
-        
-        <div class="factory-card">
-          <i class="fas fa-catapult"></i>
-          <h4>Siege Works</h4>
-          <p>Produces siege equipment</p>
-          <div class="cost">Cost: $15,000</div>
-          <div class="time">Production: 180s</div>
-        </div>
-        
-        <div class="factory-card">
-          <i class="fas fa-wagon"></i>
-          <h4>Wagon Works</h4>
-          <p>Produces wagons & transports</p>
-          <div class="cost">Cost: $8,000</div>
-          <div class="time">Production: 150s</div>
-        </div>
-      </div>
+      <p><strong>Shared principles:</strong></p>
+      <ul>
+        <li>You must <strong>apply on Discord</strong> – staff will review your build and activate the site.</li>
+        <li>Every site requires a building of at least <strong>6 chunks total volume</strong> (not just a 6‑chunk width – the entire structure must occupy the space of six chunks).</li>
+        <li>The building must be <strong>visually distinguishable</strong> as a factory or an extraction site – a simple hole in the ground or a single chest will not be accepted.</li>
+        <li>Once approved, you use commands to operate them.</li>
+      </ul>
       
-      <div class="tip-box">
-        <i class="fas fa-lightbulb"></i>
-        <p><strong>Important:</strong> All factory commands must be executed while looking at the factory chest. Stand close to the chest and face it when running factory commands.</p>
+      <div class="notice-box tip">
+        <i class="fas fa-info-circle"></i> <strong>Key difference:</strong> Factories <em>consume</em> materials to produce other items; extraction sites <em>passively generate</em> ores, wood, or crops over time.
       </div>
     </div>
 
-    <!-- Section 1 -->
-    <div class="guide-section" id="section1">
-      <h2><span class="section-number">1</span> <i class="fas fa-plus-circle"></i> Creating Factories</h2>
-      <p>Factories are created from chests that become specialized production stations for your town. Each factory type has different costs and production times.</p>
+    <!-- Section 2: Application process -->
+    <div class="guide-section" id="application">
+      <h2><span class="section-number">2</span> Applying for a factory or extraction site</h2>
+      <p>You cannot simply place a chest and run a command – every industrial site must be reviewed and approved by staff. This ensures that all factories and extraction sites are properly integrated into the world and meet the server's quality standards.</p>
       
-      <div class="command-box">
-        <span class="command">/factory create &lt;type&gt;</span>
-        <span class="command-desc">Creates a factory from the chest you're looking at. Must be looking at the chest!</span>
-      </div>
-      
-      <div class="example-box">
-        <p><strong>Example:</strong> To create an Armory factory for making muskets and swords:<br>
-          <code>/factory create armory</code><br>
-          <em>Costs $5,000 from your town bank. Production time: 60 seconds per item.</em></p>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/factory remove</span>
-        <span class="command-desc">Removes/deletes the factory you're looking at</span>
-      </div>
-      
-      <div class="warning-box">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p><strong>Important:</strong> All factories must be approved by admins before they become functional. Factories cannot be chests laying in the open - they must be inside proper factory buildings (blacksmith, armory, etc.). See Section 5 for building requirements.</p>
-      </div>
-      
-      <div class="tip-box">
-        <i class="fas fa-lightbulb"></i>
-        <p><strong>Factory Placement:</strong> Stand directly in front of the chest you want to turn into a factory. Look directly at it and make sure you're within 5 blocks. The chest will become the factory interface for that production type.</p>
-      </div>
-    </div>
-
-    <!-- Section 2 -->
-    <div class="guide-section" id="section2">
-      <h2><span class="section-number">2</span> <i class="fas fa-clipboard-check"></i> Factory Types & Costs</h2>
-      <p>Each factory type specializes in different products and has unique creation costs and production times.</p>
-      
-      <table class="factory-table">
-        <thead>
-          <tr>
-            <th>Factory Type</th>
-            <th>Creation Cost</th>
-            <th>Production Time</th>
-            <th>Specialization</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>armory</strong></td>
-            <td>$5,000</td>
-            <td>60 seconds</td>
-            <td>Firearms & melee weapons (muskets, swords, etc.)</td>
-          </tr>
-          <tr>
-            <td><strong>foundry</strong></td>
-            <td>$10,000</td>
-            <td>120 seconds</td>
-            <td>Artillery pieces (cannons, mortars, culverins)</td>
-          </tr>
-          <tr>
-            <td><strong>munitions</strong></td>
-            <td>$3,000</td>
-            <td>30 seconds</td>
-            <td>Ammunition (cannonballs, gunpowder barrels)</td>
-          </tr>
-          <tr>
-            <td><strong>siege_works</strong></td>
-            <td>$15,000</td>
-            <td>180 seconds</td>
-            <td>Siege equipment (battering rams, siege towers, etc.)</td>
-          </tr>
-          <tr>
-            <td><strong>wagon_works</strong></td>
-            <td>$8,000</td>
-            <td>150 seconds</td>
-            <td>Wagons & transport vehicles</td>
-          </tr>
-        </tbody>
-      </table>
-      
-      <div class="tip-box">
-        <i class="fas fa-lightbulb"></i>
-        <p><strong>Cost Management:</strong> Factory creation costs are deducted from your town bank. Ensure your town has sufficient funds before attempting to create factories. Production times are per item - plan your military production accordingly.</p>
-      </div>
-      
-      <div class="warning-box">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p><strong>Type Limitations:</strong> Certain items can only be produced in specific factory types. For example, maces can only be made in armories, while cannons can only be made in foundries. Use <code>/factory recipes &lt;item&gt;</code> to check where an item can be produced.</p>
-      </div>
-    </div>
-
-    <!-- Section 3 -->
-    <div class="guide-section" id="section3">
-      <h2><span class="section-number">3</span> <i class="fas fa-cogs"></i> Factory Commands</h2>
-      <p>Once your factory is built and approved, use these commands to manage production.</p>
-      
-      <div class="command-box">
-        <span class="command">/factory produce &lt;item&gt;</span>
-        <span class="command-desc">Starts production of a specific item. Must be looking at the factory chest!</span>
-      </div>
-      
-      <div class="example-box">
-        <p><strong>Production Example:</strong><br>
-          1. Look at your Armory factory chest<br>
-          2. Type: <code>/factory produce musket</code><br>
-          3. Factory checks for 5 Iron Ingot, 2 Stick, 1 Flint in the chest<br>
-          4. If materials are present, begins 60-second production of muskets</p>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/factory recipes &lt;item&gt;</span>
-        <span class="command-desc">Shows the recipe for a specific item and which factory type can produce it</span>
-      </div>
-      
-      <div class="example-box">
-        <p><strong>Recipe Check Example:</strong><br>
-          <code>/factory recipes cannon</code><br>
-          Shows: "Cannon recipe: 8 Iron Block, 4 Iron Ingot, 4 Oak Log - Can be produced in: foundry"</p>
-      </div>
-      
-      <div class="command-box">
-        <span class="command">/factory stop</span>
-        <span class="command-desc">Stops production in the factory you're looking at</span>
-      </div>
-      
-      <p><strong>Production Process:</strong></p>
+      <h3>Step‑by‑step application</h3>
       <ol>
-        <li>Place required raw materials in the factory chest</li>
-        <li>Use <code>/factory produce &lt;item&gt;</code> while looking at the chest</li>
-        <li>Factory consumes materials and begins production timer (60s, 120s, etc.)</li>
-        <li>When timer completes, produced items appear in the chest</li>
-        <li>Use <code>/factory stop</code> to halt production if needed</li>
+        <li><strong>Build your structure</strong> – construct a building that meets the size and appearance requirements (see section 3).</li>
+        <li><strong>Take screenshots</strong> – capture the exterior and interior, showing the chest that will serve as the factory/extraction interface.</li>
+        <li><strong>Open a ticket in Discord</strong> – go to the #support channel and open a ticket with the title “Factory application” or “Extraction site application”.</li>
+        <li><strong>Provide coordinates and screenshots</strong> – staff will visit your town to inspect the build.</li>
+        <li><strong>Staff approval</strong> – if the build is acceptable, staff will activate the site. You will receive a confirmation message.</li>
       </ol>
       
-      <div class="tip-box">
-        <i class="fas fa-lightbulb"></i>
-        <p><strong>Production Strategy:</strong> Keep your factory chests stocked with common materials. For efficient production, create supply chains from mining operations to your factories. Use <code>/factory recipes</code> to plan resource gathering.</p>
+      <div class="notice-box warning">
+        <i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> Unapproved sites will not function – attempting to use commands on an unapproved chest will do nothing. Do not build a factory or extraction site without applying first; it will be removed.
       </div>
     </div>
 
-    <!-- Section 4 -->
-    <div class="guide-section" id="section4">
-      <h2><span class="section-number">4</span> <i class="fas fa-book"></i> Factory Recipes</h2>
-      <p>Each factory type produces specific items. Here are all available recipes:</p>
+    <!-- Section 3: Building requirements -->
+    <div class="guide-section" id="building-req">
+      <h2><span class="section-number">3</span> Building requirements (size & appearance)</h2>
+      <p>To maintain immersion and fairness, every factory or extraction site must be housed in a proper building. The rules are the same for both types.</p>
       
-      <div class="factory-recipes">
-        
-        <div class="recipe-category">
-          <h4><i class="fas fa-cannons"></i> Artillery (Foundry Factory)</h4>
-          <div class="recipe-item">
-            <strong>cannon:</strong> <span>8 Iron Block, 4 Iron Ingot, 4 Oak Log</span>
-          </div>
-          <div class="recipe-item">
-            <strong>mortar:</strong> <span>4 Iron Block, 2 Iron Ingot</span>
-          </div>
-          <div class="recipe-item">
-            <strong>culverin:</strong> <span>12 Iron Block, 6 Iron Ingot, 6 Oak Log</span>
-          </div>
-        </div>
-        
-        <div class="recipe-category">
-          <h4><i class="fas fa-bullseye"></i> Ammunition (Munitions Factory)</h4>
-          <div class="recipe-item">
-            <strong>cannonball:</strong> <span>1 Iron Ingot</span>
-          </div>
-          <div class="recipe-item">
-            <strong>gunpowder_barrel:</strong> <span>8 Gunpowder, 1 Barrel</span>
-          </div>
-        </div>
-        
-        <div class="recipe-category">
-          <h4><i class="fas fa-gun"></i> Flintlock Weapons (Armory Factory)</h4>
-          <div class="recipe-item">
-            <strong>musket:</strong> <span>5 Iron Ingot, 2 Stick, 1 Flint</span>
-          </div>
-          <div class="recipe-item">
-            <strong>blunderbuss:</strong> <span>6 Iron Ingot, 2 Stick, 1 Flint</span>
-          </div>
-          <div class="recipe-item">
-            <strong>flintlock_pistol:</strong> <span>3 Iron Ingot, 1 Stick, 1 Flint</span>
-          </div>
-          <div class="recipe-item">
-            <strong>handcannon:</strong> <span>3 Iron Block, 2 Iron Ingot, 1 Flint</span>
-          </div>
-        </div>
-        
-        <div class="recipe-category">
-          <h4><i class="fas fa-sword"></i> Melee Weapons (Armory Factory)</h4>
-          <div class="recipe-item">
-            <strong>dagger:</strong> <span>2 Iron Ingot, 1 Stick</span>
-          </div>
-          <div class="recipe-item">
-            <strong>cutlass:</strong> <span>3 Iron Ingot, 1 Stick</span>
-          </div>
-          <div class="recipe-item">
-            <strong>cavalry_sword:</strong> <span>2 Diamond, 1 Iron Ingot, 1 Stick</span>
-          </div>
-          <div class="recipe-item">
-            <strong>greatsword:</strong> <span>3 Diamond, 2 Iron Ingot, 1 Stick</span>
-          </div>
-          <div class="recipe-item">
-            <strong>race:</strong> <span>1 Iron Block, 1 Iron Ingot, 2 Stick</span>
-          </div>
-          <div class="recipe-item">
-            <strong>battleaxe:</strong> <span>4 Iron Ingot, 2 Stick</span>
-          </div>
-          <div class="recipe-item">
-            <strong>spear:</strong> <span>1 Iron Ingot, 3 Stick</span>
-          </div>
-          <div class="recipe-item">
-            <strong>pike:</strong> <span>2 Iron Ingot, 4 Stick</span>
-          </div>
-          <div class="recipe-item">
-            <strong>halberd:</strong> <span>3 Iron Ingot, 3 Stick</span>
-          </div>
-          <div class="recipe-item">
-            <strong>barbeque:</strong> <span>2 Diamond, 1 Iron Ingot, 2 Stick</span>
-          </div>
-        </div>
-      </div>
+      <h3>Size requirement</h3>
+      <p>The building must occupy at least <strong>6 chunks in total volume</strong>. This does not mean 6 chunks in a single dimension – it means the three‑dimensional space of six chunks. For example:</p>
+      <ul>
+        <li>A building 3 chunks long × 2 chunks wide × 1 chunk high (3×2×1 = 6 chunks) meets the requirement.</li>
+        <li>A tall tower 2×2×2 (8 chunks) also qualifies.</li>
+        <li>A small shack (1×1×1) does not.</li>
+      </ul>
       
-      <div class="tip-box">
-        <i class="fas fa-lightbulb"></i>
-        <p><strong>Recipe Names:</strong> Use the exact recipe names shown above (lowercase with underscores) when producing. For example: <code>/factory produce musket</code> or <code>/factory produce gunpowder_barrel</code>. Use <code>/factory recipes cannonball</code> to check any recipe.</p>
-      </div>
+      <h3>Appearance requirement</h3>
+      <p>The building must be <strong>visually distinguishable</strong> as an industrial or extractive facility. Staff look for:</p>
+      <ul>
+        <li><strong>Factories:</strong> Smokestacks, large furnaces, anvils, mechanical details, storage lofts, conveyor‑like designs.</li>
+        <li><strong>Extraction sites:</strong> Mine entrances with supports, quarry pits with scaffolding, lumber camps with sawmills, farm complexes with silos and irrigation.</li>
+      </ul>
+      <p>A simple wooden box with a chest inside will be rejected. Take inspiration from real‑world industrial buildings – show that you put effort into the design.</p>
       
-      <div class="warning-box">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p><strong>Factory Type Restrictions:</strong> Items can only be produced in their designated factory types. For example, you cannot produce cannons in an armory or muskets in a foundry. Check which factory type produces each item before attempting production.</p>
+      <div class="notice-box tip">
+        <i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Use a variety of blocks (wood, stone, metal) and add details like trapdoors, fences, and slabs to give your building character. Label the chest with a sign (e.g. “Armory” or “Quarry Output”).
       </div>
     </div>
 
-    <!-- Section 5 -->
-    <div class="guide-section" id="section5">
-      <h2><span class="section-number">5</span> <i class="fas fa-exclamation-triangle"></i> Rules & Limits</h2>
-      <p>Follow these rules to ensure fair factory usage and avoid penalties.</p>
+    <!-- Section 4: Extraction sites (passive resource generation) -->
+    <div class="guide-section" id="extraction">
+      <h2><span class="section-number">4</span> Extraction sites – passive resource generation</h2>
+      <p>Extraction sites do not require input materials. Instead, they passively produce resources over time. You must create the site, then toggle it on.</p>
       
-      <div class="registration-steps">
-        <div class="step-card">
-          <i class="fas fa-hammer"></i>
-          <h4>Building Requirements</h4>
-          <p>Factories cannot be chests laying in the open. Must be inside proper factory buildings (blacksmith, armory, etc.)</p>
+      <h3>Types of extraction sites</h3>
+      <div class="extraction-grid">
+        <div class="extraction-card">
+          <h4><i class="fas fa-mountain"></i> Quarry</h4>
+          <p>Produces: <strong>ores</strong> (coal, iron, gold, etc.)</p>
+          <p><em>Build a mine entrance, a quarry pit, or a mining headframe.</em></p>
         </div>
-        
-        <div class="step-card">
-          <i class="fas fa-clipboard-list"></i>
-          <h4>Factory Limits</h4>
-          <p>Only 14 factory chests per town including all types. First offense: warning + deletion. Second: treasury wipe + blacklist.</p>
+        <div class="extraction-card">
+          <h4><i class="fas fa-tree"></i> Logging camp</h4>
+          <p>Produces: <strong>wood</strong> (logs of all types)</p>
+          <p><em>A lumber mill with saws, log piles, and a woodland setting.</em></p>
         </div>
-        
-        <div class="step-card">
-          <i class="fas fa-bug"></i>
-          <h4>Bug Abuse</h4>
-          <p>Trying to dupe or exploit factory bugs = 2 nation warnings + half of nation's treasury wiped.</p>
-        </div>
-        
-        <div class="step-card">
-          <i class="fas fa-ship"></i>
-          <h4>Placement Rules</h4>
-          <p>You may NOT place a factory on a ship. Factories must be in permanent structures.</p>
+        <div class="extraction-card">
+          <h4><i class="fas fa-tractor"></i> Farm</h4>
+          <p>Produces: <strong>crops</strong> (wheat, carrots, potatoes, etc.)</p>
+          <p><em>Large fields, barns, silos – a proper agricultural complex.</em></p>
         </div>
       </div>
       
-      <div class="tip-box">
-        <i class="fas fa-lightbulb"></i>
-        <p><strong>Good Factory Layout:</strong> 
-          <ul>
-            <li><strong>Armory:</strong> Inside a blacksmith building with anvils, furnaces, weapon racks</li>
-            <li><strong>Foundry:</strong> Industrial building with blast furnaces, lava cauldrons, molds</li>
-            <li><strong>Munitions:</strong> Powder magazine with barrels, sandbags, safety signs</li>
-            <li><strong>Siege Works:</strong> Workshop with cranes, winches, large construction areas</li>
-            <li><strong>Wagon Works:</strong> Carpenter shop with wood piles, wheels, tools</li>
-            <li><strong>Label factories</strong> with signs for better organization (recommended for town rankings)</li>
-          </ul>
-        </p>
+      <h3>Creating and operating an extraction site</h3>
+      <p>Once your building is approved, you use the following commands (looking at the chest that serves as the site's interface):</p>
+      
+      <div class="command-definitions">
+        <dl>
+          <dt>/extract create &lt;quarry/logging/farm&gt;</dt>
+          <dd>Creates the extraction site. The chest becomes the output container – resources will appear inside it.</dd>
+          <dt>/extract toggle</dt>
+          <dd>Turns the site on or off. When on, it will passively generate resources at a set interval (e.g. every hour).</dd>
+        </dl>
       </div>
       
-      <div class="warning-box">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p><strong>Penalty System:</strong> 
-          <ul>
-            <li><strong>Over 14 factories:</strong> First offense = warning + deletion of extra factories. Second offense = half of treasury wiped + national blacklist</li>
-            <li><strong>Bug Abuse:</strong> 2 nation warnings + half of nation's treasury wiped</li>
-            <li><strong>Poor Factory Buildings:</strong> Factory destroyed + town warning</li>
-            <li><strong>Factory on Ship:</strong> Immediate deletion + warning</li>
-          </ul>
-        </p>
+      <div class="example-box" style="background: rgba(45,212,191,0.05); border-left:3px solid var(--accent-teal); padding:10px 15px; margin:15px 0;">
+        <p><strong>Example workflow:</strong></p>
+        <ol style="margin-bottom:0;">
+          <li>Build a quarry building (≥6 chunks, looks like a mine).</li>
+          <li>Apply on Discord, get approved.</li>
+          <li>Stand in front of your chest and type <code>/extract create quarry</code>.</li>
+          <li>Type <code>/extract toggle</code> to start production.</li>
+          <li>Come back later – ores will have appeared in the chest.</li>
+        </ol>
       </div>
       
-      <div class="example-box">
-        <p><strong>Approval Process:</strong> After building your factory structure, you must apply for approval in the Discord #factory-apply channel. Post coordinates + screenshots. Only properly built factories will be approved and made functional by staff.</p>
+      <div class="notice-box tip">
+        <i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Extraction sites are ideal for towns that want a steady income of basic resources without constant manual labor. Place them in appropriate biomes – a farm in a plains biome, a quarry in a mountainous area.
+      </div>
+    </div>
+
+    <!-- Section 5: Factories (material conversion) -->
+    <div class="guide-section" id="factories">
+      <h2><span class="section-number">5</span> Factories – turning materials into goods</h2>
+      <p>Factories work similarly but <strong>consume</strong> materials from their chest to produce advanced items. They do not generate resources out of nothing.</p>
+      
+      <h3>Creating a factory</h3>
+      <p>After your building is approved, use:</p>
+      <div class="command-definitions">
+        <dl>
+          <dt>/factory create &lt;type&gt;</dt>
+          <dd>Creates a factory of the specified type (e.g. armory, sawmill, refinery).</dd>
+          <dt>/factory remove</dt>
+          <dd>Deletes the factory (use only if you intend to replace it).</dd>
+        </dl>
+      </div>
+      
+      <h3>Production</h3>
+      <p>Factories follow a recipe system. Place the required ingredients in the chest, then run:</p>
+      <div class="command-definitions">
+        <dl>
+          <dt>/factory produce &lt;item&gt;</dt>
+          <dd>Starts production. The materials are consumed, and after a short delay the product appears in the chest.</dd>
+          <dt>/factory stop</dt>
+          <dd>Halts current production (materials are <strong>not</strong> refunded – use with caution).</dd>
+        </dl>
+      </div>
+      
+      <h3>Example factory types (illustrative)</h3>
+      <table class="specs-table">
+        <tr><th>Factory type</th><th>Possible products</th></tr>
+        <tr><td>Armory</td><td>Swords, armor, tools</td></tr>
+        <tr><td>Sawmill</td><td>Planks, fences, doors (from logs)</td></tr>
+        <tr><td>Refinery</td><td>Iron/gold ingots from ore blocks, nether quartz</td></tr>
+        <tr><td>Bakery</td><td>Bread, cake, cookies (from farm products)</td></tr>
+      </table>
+      
+      <div class="notice-box warning">
+        <i class="fas fa-exclamation-triangle"></i> <strong>Note:</strong> Factories do not automatically restock. You must keep the chest supplied with raw materials. Production speed depends on the factory type – some are faster than others.
+      </div>
+    </div>
+
+    <!-- Section 6: Command summary -->
+    <div class="guide-section" id="commands">
+      <h2><span class="section-number">6</span> Command reference</h2>
+      <p>All commands require you to be looking at the chest that serves as the site's interface.</p>
+      
+      <h3>Extraction sites</h3>
+      <div class="command-definitions">
+        <dl>
+          <dt>/extract create quarry</dt>
+          <dd>Turns the chest into a quarry (produces ores).</dd>
+          <dt>/extract create logging</dt>
+          <dd>Turns the chest into a logging camp (produces wood).</dd>
+          <dt>/extract create farm</dt>
+          <dd>Turns the chest into a farm (produces crops).</dd>
+          <dt>/extract toggle</dt>
+          <dd>Starts or stops passive generation.</dd>
+        </dl>
+      </div>
+      
+      <h3>Factories</h3>
+      <div class="command-definitions">
+        <dl>
+          <dt>/factory create &lt;type&gt;</dt>
+          <dd>Creates a factory (type must be a valid factory type).</dd>
+          <dt>/factory remove</dt>
+          <dd>Deletes the factory.</dd>
+          <dt>/factory produce &lt;item&gt;</dt>
+          <dd>Begins production of the specified item (requires materials in chest).</dd>
+          <dt>/factory stop</dt>
+          <dd>Stops current production.</dd>
+        </dl>
+      </div>
+      
+      <div class="notice-box tip" style="margin-top:20px;">
+        <i class="fas fa-lightbulb"></i> <strong>Remember:</strong> None of these commands will work until your build has been approved by staff via a Discord ticket. Plan your construction carefully, apply, and then start producing.
+      </div>
+      
+      <div class="notice-box warning">
+        <i class="fas fa-exclamation-triangle"></i> <strong>Building size reminder:</strong> The structure must occupy at least <strong>6 chunks total</strong> (volume) and look the part – a chest in a 2×2 hut will be rejected.
       </div>
     </div>
     
-    <!-- Navigation Footer -->
+    <!-- Navigation footer -->
     <div style="display: flex; justify-content: space-between; margin: 50px 0 30px; padding: 20px; background: rgba(30, 41, 59, 0.5); border-radius: 12px;">
-      <a href="guide-movecraft.html" class="btn">
-        <i class="fas fa-arrow-left"></i> Back to Movecraft Guide
-      </a>
-      <a href="guide-war.html" class="btn">
-        Next: War Guide <i class="fas fa-arrow-right"></i>
-      </a>
+      <a href="guide-towny.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back to Towny Guide</a>
+      <a href="extra-info.html" class="btn">Extra Info (Banned Items) <i class="fas fa-arrow-right"></i></a>
     </div>
   </div>
 
-  <!-- Footer container -->
+  <!-- Footer -->
   <div id="footer-container"></div>
 
-  <!-- Load component loader -->
+  <!-- Component loader -->
   <script src="js/components-loader.js"></script>
-  
-  <!-- Page-specific JavaScript -->
   <script>
-    // Initialize the page
     document.addEventListener('DOMContentLoaded', async () => {
-      console.log('DOM loaded, starting component loading...');
-      
-      try {
-        // Load components using ComponentLoader if available
-        if (window.ComponentLoader) {
-          console.log('Using ComponentLoader...');
-          
-          // Load navbar first
-          await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
-          console.log('Navbar loaded');
-          
-          // Initialize dropdowns after navbar loads
-          setTimeout(() => {
-            if (window.initializeDropdowns) {
-              window.initializeDropdowns();
-            }
-          }, 100);
-          
-          // Load other components
-          await window.ComponentLoader.loadComponent('header', 'header-container');
-          console.log('Header loaded');
-          
-          await window.ComponentLoader.loadComponent('footer', 'footer-container');
-          console.log('Footer loaded');
-          
-          // Set active navigation for this page
-          setTimeout(() => {
-            const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
-            navLinks.forEach(link => {
-              if (link.getAttribute('href') === 'guide-factories.html' || 
-                  link.getAttribute('data-nav') === 'guides') {
-                link.classList.add('active');
-              }
-            });
-            
-            // Also highlight the specific guide link in dropdown
-            const guideLinks = document.querySelectorAll('.dropdown-menu a[href="guide-factories.html"]');
-            guideLinks.forEach(link => {
-              link.classList.add('active');
-            });
-          }, 500);
-          
-        } else {
-          console.log('ComponentLoader not found, loading manually');
-          // Fallback manual loading would go here
-        }
-        
-        console.log('Factories guide initialization complete!');
-        
-      } catch (error) {
-        console.error('Error during page initialization:', error);
-      }
+      await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
+      await window.ComponentLoader.loadComponent('header', 'header-container');
+      await window.ComponentLoader.loadComponent('footer', 'footer-container');
+      window.ComponentLoader.setActiveNav('guides');
+
+      // Smooth scroll for TOC
+      document.querySelectorAll('.toc-grid a').forEach(anchor => {
+        anchor.addEventListener('click', e => {
+          e.preventDefault();
+          const target = document.querySelector(anchor.getAttribute('href'));
+          if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+        });
+      });
     });
   </script>
 </body>
