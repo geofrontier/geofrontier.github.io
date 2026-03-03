@@ -328,6 +328,26 @@
       color: var(--accent-teal);
       margin-right: 6px;
     }
+
+    .factory-card {
+      background: rgba(15, 23, 42, 0.7);
+      border-left: 3px solid var(--accent-gold);
+      border-radius: 6px;
+      padding: 15px;
+      margin-bottom: 12px;
+    }
+    .factory-card h4 {
+      color: var(--accent-gold);
+      margin: 0 0 5px 0;
+      font-family: 'Cinzel', serif;
+    }
+    .factory-card p {
+      margin: 4px 0;
+    }
+    .factory-card .cost {
+      color: var(--accent-rust);
+      font-weight: 600;
+    }
     
     @media (max-width: 768px) {
       .guide-header h1 { font-size: 2.2rem; }
@@ -365,8 +385,8 @@
         <a href="#application"><i class="fas fa-clipboard-check"></i> 2. Applying for a site</a>
         <a href="#building-req"><i class="fas fa-hammer"></i> 3. Building requirements</a>
         <a href="#extraction"><i class="fas fa-mountain"></i> 4. Extraction sites</a>
-        <a href="#factories"><i class="fas fa-cogs"></i> 5. Factories</a>
-        <a href="#commands"><i class="fas fa-terminal"></i> 6. Commands</a>
+        <a href="#factories"><i class="fas fa-cogs"></i> 5. Factories (types & recipes)</a>
+        <a href="#commands"><i class="fas fa-terminal"></i> 6. Commands (chest-based)</a>
       </div>
     </div>
 
@@ -380,7 +400,7 @@
         <li>You must <strong>apply on Discord</strong> – staff will review your build and activate the site.</li>
         <li>Every site requires a building of at least <strong>6 chunks total volume</strong> (not just a 6‑chunk width – the entire structure must occupy the space of six chunks).</li>
         <li>The building must be <strong>visually distinguishable</strong> as a factory or an extraction site – a simple hole in the ground or a single chest will not be accepted.</li>
-        <li>Once approved, you use commands to operate them.</li>
+        <li><strong>All commands are chest‑based:</strong> you must look directly at the chest that serves as the site's interface when typing <code>/factory create</code> or <code>/extract create</code>.</li>
       </ul>
       
       <div class="notice-box tip">
@@ -458,14 +478,18 @@
       </div>
       
       <h3>Creating and operating an extraction site</h3>
-      <p>Once your building is approved, you use the following commands (looking at the chest that serves as the site's interface):</p>
+      <p>Once your building is approved, you use the following commands <strong>while looking at the chest</strong> that will serve as the output container:</p>
       
       <div class="command-definitions">
         <dl>
-          <dt>/extract create &lt;quarry/logging/farm&gt;</dt>
-          <dd>Creates the extraction site. The chest becomes the output container – resources will appear inside it.</dd>
+          <dt>/extract create quarry</dt>
+          <dd>Creates a quarry extraction site (produces ores).</dd>
+          <dt>/extract create logging</dt>
+          <dd>Creates a logging camp (produces wood).</dd>
+          <dt>/extract create farm</dt>
+          <dd>Creates a farm (produces crops).</dd>
           <dt>/extract toggle</dt>
-          <dd>Turns the site on or off. When on, it will passively generate resources at a set interval (e.g. every hour).</dd>
+          <dd>Turns the site on or off. When on, resources will appear in the chest at regular intervals.</dd>
         </dl>
       </div>
       
@@ -485,61 +509,108 @@
       </div>
     </div>
 
-    <!-- Section 5: Factories (material conversion) -->
+    <!-- Section 5: Factories – types, costs, and recipes -->
     <div class="guide-section" id="factories">
-      <h2><span class="section-number">5</span> Factories – turning materials into goods</h2>
-      <p>Factories work similarly but <strong>consume</strong> materials from their chest to produce advanced items. They do not generate resources out of nothing.</p>
+      <h2><span class="section-number">5</span> Factories – types, creation costs, and recipes</h2>
+      <p>Factories <strong>consume</strong> materials from their chest to produce advanced items. Each factory type has a specific creation cost (paid from your town bank) and a list of items it can produce. All commands are performed while looking at the factory chest.</p>
       
-      <h3>Creating a factory</h3>
-      <p>After your building is approved, use:</p>
+      <h3>Factory types and creation costs</h3>
+      <div class="factory-card">
+        <h4><i class="fas fa-gun"></i> Armory</h4>
+        <p><strong>Creation cost:</strong> <span class="cost">$5,000</span></p>
+        <p>Produces firearms, melee weapons, and tools.</p>
+      </div>
+      <div class="factory-card">
+        <h4><i class="fas fa-cannons"></i> Foundry</h4>
+        <p><strong>Creation cost:</strong> <span class="cost">$10,000</span></p>
+        <p>Produces artillery pieces (cannons, mortars, culverins).</p>
+      </div>
+      <div class="factory-card">
+        <h4><i class="fas fa-bullseye"></i> Munitions</h4>
+        <p><strong>Creation cost:</strong> <span class="cost">$3,000</span></p>
+        <p>Produces ammunition (cannonballs, gunpowder barrels).</p>
+      </div>
+      <div class="factory-card">
+        <h4><i class="fas fa-catapult"></i> Siege Works</h4>
+        <p><strong>Creation cost:</strong> <span class="cost">$15,000</span></p>
+        <p>Produces siege equipment (battering rams, siege towers).</p>
+      </div>
+      <div class="factory-card">
+        <h4><i class="fas fa-wagon"></i> Wagon Works</h4>
+        <p><strong>Creation cost:</strong> <span class="cost">$8,000</span></p>
+        <p>Produces wagons and transport vehicles.</p>
+      </div>
+      
+      <h3>Factory recipes (what each factory produces)</h3>
+      <p>The following table shows all available items, their ingredients, and which factory type can produce them. Use <code>/factory produce &lt;item&gt;</code> while looking at the chest.</p>
+      
+      <table class="specs-table">
+        <thead>
+          <tr><th>Factory type</th><th>Item</th><th>Ingredients</th></tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="6"><strong>Armory</strong></td><td>musket</td><td>5 Iron Ingot, 2 Stick, 1 Flint</td></tr>
+          <tr><td>blunderbuss</td><td>6 Iron Ingot, 2 Stick, 1 Flint</td></tr>
+          <tr><td>flintlock_pistol</td><td>3 Iron Ingot, 1 Stick, 1 Flint</td></tr>
+          <tr><td>handcannon</td><td>3 Iron Block, 2 Iron Ingot, 1 Flint</td></tr>
+          <tr><td>cutlass</td><td>3 Iron Ingot, 1 Stick</td></tr>
+          <tr><td>cavalry_sword</td><td>2 Diamond, 1 Iron Ingot, 1 Stick</td></tr>
+          <tr><td><strong>Foundry</strong></td><td>cannon</td><td>8 Iron Block, 4 Iron Ingot, 4 Oak Log</td></tr>
+          <tr><td><strong>Foundry</strong></td><td>mortar</td><td>4 Iron Block, 2 Iron Ingot</td></tr>
+          <tr><td><strong>Foundry</strong></td><td>culverin</td><td>12 Iron Block, 6 Iron Ingot, 6 Oak Log</td></tr>
+          <tr><td><strong>Munitions</strong></td><td>cannonball</td><td>1 Iron Ingot</td></tr>
+          <tr><td><strong>Munitions</strong></td><td>gunpowder_barrel</td><td>8 Gunpowder, 1 Barrel</td></tr>
+          <tr><td><strong>Siege Works</strong></td><td>battering_ram</td><td>6 Iron Block, 20 Oak Log, 4 Chain</td></tr>
+          <tr><td><strong>Siege Works</strong></td><td>siege_tower</td><td>30 Oak Log, 10 Iron Ingot, 4 Ladder</td></tr>
+          <tr><td><strong>Wagon Works</strong></td><td>supply_wagon</td><td>8 Oak Log, 2 Iron Ingot, 1 Chest</td></tr>
+        </tbody>
+      </table>
+      
+      <h3>Creating a factory (chest-based)</h3>
       <div class="command-definitions">
         <dl>
           <dt>/factory create &lt;type&gt;</dt>
-          <dd>Creates a factory of the specified type (e.g. armory, sawmill, refinery).</dd>
+          <dd>Creates a factory of the specified type (e.g. <code>armory</code>, <code>foundry</code>). Must look at the chest.</dd>
+          <dt>/factory produce &lt;item&gt;</dt>
+          <dd>Starts production of the given item. Requires ingredients in the chest.</dd>
+          <dt>/factory stop</dt>
+          <dd>Halts current production (materials are not refunded).</dd>
           <dt>/factory remove</dt>
           <dd>Deletes the factory (use only if you intend to replace it).</dd>
         </dl>
       </div>
       
-      <h3>Production</h3>
-      <p>Factories follow a recipe system. Place the required ingredients in the chest, then run:</p>
-      <div class="command-definitions">
-        <dl>
-          <dt>/factory produce &lt;item&gt;</dt>
-          <dd>Starts production. The materials are consumed, and after a short delay the product appears in the chest.</dd>
-          <dt>/factory stop</dt>
-          <dd>Halts current production (materials are <strong>not</strong> refunded – use with caution).</dd>
-        </dl>
+      <div class="example-box" style="background: rgba(45,212,191,0.05); border-left:3px solid var(--accent-teal); padding:10px 15px; margin:15px 0;">
+        <p><strong>Example: producing a musket</strong></p>
+        <ol>
+          <li>Build an armory building (≥6 chunks, looks like a weapons workshop).</li>
+          <li>Apply on Discord, get approved.</li>
+          <li>Stand in front of your chest and type <code>/factory create armory</code> ($5,000 deducted from town bank).</li>
+          <li>Place 5 Iron Ingot, 2 Stick, and 1 Flint in the chest.</li>
+          <li>Type <code>/factory produce musket</code> while looking at the chest.</li>
+          <li>After a short delay, a musket appears in the chest.</li>
+        </ol>
       </div>
       
-      <h3>Example factory types (illustrative)</h3>
-      <table class="specs-table">
-        <tr><th>Factory type</th><th>Possible products</th></tr>
-        <tr><td>Armory</td><td>Swords, armor, tools</td></tr>
-        <tr><td>Sawmill</td><td>Planks, fences, doors (from logs)</td></tr>
-        <tr><td>Refinery</td><td>Iron/gold ingots from ore blocks, nether quartz</td></tr>
-        <tr><td>Bakery</td><td>Bread, cake, cookies (from farm products)</td></tr>
-      </table>
-      
       <div class="notice-box warning">
-        <i class="fas fa-exclamation-triangle"></i> <strong>Note:</strong> Factories do not automatically restock. You must keep the chest supplied with raw materials. Production speed depends on the factory type – some are faster than others.
+        <i class="fas fa-exclamation-triangle"></i> <strong>Note:</strong> Factories do not automatically restock. You must keep the chest supplied with raw materials. Production speed varies by item.
       </div>
     </div>
 
-    <!-- Section 6: Command summary -->
+    <!-- Section 6: Command summary (chest‑based) -->
     <div class="guide-section" id="commands">
-      <h2><span class="section-number">6</span> Command reference</h2>
-      <p>All commands require you to be looking at the chest that serves as the site's interface.</p>
+      <h2><span class="section-number">6</span> Command reference (all chest‑based)</h2>
+      <p><strong>All commands require you to be looking directly at the chest</strong> that serves as the site's interface. If you are not looking at a valid, approved chest, the command will fail.</p>
       
       <h3>Extraction sites</h3>
       <div class="command-definitions">
         <dl>
           <dt>/extract create quarry</dt>
-          <dd>Turns the chest into a quarry (produces ores).</dd>
+          <dd>Creates a quarry (produces ores).</dd>
           <dt>/extract create logging</dt>
-          <dd>Turns the chest into a logging camp (produces wood).</dd>
+          <dd>Creates a logging camp (produces wood).</dd>
           <dt>/extract create farm</dt>
-          <dd>Turns the chest into a farm (produces crops).</dd>
+          <dd>Creates a farm (produces crops).</dd>
           <dt>/extract toggle</dt>
           <dd>Starts or stops passive generation.</dd>
         </dl>
@@ -548,14 +619,14 @@
       <h3>Factories</h3>
       <div class="command-definitions">
         <dl>
-          <dt>/factory create &lt;type&gt;</dt>
-          <dd>Creates a factory (type must be a valid factory type).</dd>
-          <dt>/factory remove</dt>
-          <dd>Deletes the factory.</dd>
+          <dt>/factory create armory|foundry|munitions|siege_works|wagon_works</dt>
+          <dd>Creates a factory of the given type (cost deducted from town bank).</dd>
           <dt>/factory produce &lt;item&gt;</dt>
           <dd>Begins production of the specified item (requires materials in chest).</dd>
           <dt>/factory stop</dt>
           <dd>Stops current production.</dd>
+          <dt>/factory remove</dt>
+          <dd>Deletes the factory.</dd>
         </dl>
       </div>
       
