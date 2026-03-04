@@ -10,6 +10,7 @@
 <body>
 
 <section class="section">
+
   <!-- Left: Simulation & Graph -->
   <div>
     <h1>Extraction Simulator</h1>
@@ -45,39 +46,74 @@
   <!-- Right: Editable Config -->
   <div>
     <div class="card">
-      <h2>Edit Extraction Config</h2>
-      <p>Modify numbers and prices below, then click "Simulate" to see effects.</p>
-      <textarea id="configEditor" style="width:100%; height:500px; background:#1e293b; color:#f1f5f9; border-radius:12px; padding:10px;">
-{
-  "quarry": {
-    "cycleMinutes": 10,
-    "ores": {
-      "RAW_IRON": [4,12],
-      "COAL": [8,16],
-      "RAW_COPPER": [4,10],
-      "RAW_GOLD": [1,4]
-    },
-    "prices": { "COAL":22, "RAW_GOLD":22, "RAW_IRON":0, "RAW_COPPER":0 }
-  },
-  "mining_outpost": {
-    "cycleMinutes": 15,
-    "ores": {
-      "RAW_IRON": [8,20],
-      "COAL": [12,24],
-      "RAW_COPPER": [6,15],
-      "RAW_GOLD": [2,8],
-      "REDSTONE":[2,6],
-      "LAPIS_LAZULI":[1,4],
-      "DIAMOND":[0,1],
-      "EMERALD":[0,1]
-    },
-    "prices": { 
-      "COAL":22, "RAW_GOLD":22, "REDSTONE":7.5, "LAPIS_LAZULI":7.5,
-      "DIAMOND":50, "EMERALD":22, "RAW_IRON":0, "RAW_COPPER":0
-    }
-  }
-}
-      </textarea>
+      <h2>Edit Config</h2>
+      <p>Change the numbers and prices below. Simulation uses these values.</p>
+
+      <!-- Quarry Config -->
+      <div class="card">
+        <h3>Quarry Config</h3>
+        <label>Cycle Time (seconds):</label>
+        <input type="number" id="quarryCycle" value="600"><br>
+
+        <label>RAW_IRON Min/Max:</label>
+        <input type="number" id="quarryIronMin" value="4" style="width:50px"> /
+        <input type="number" id="quarryIronMax" value="12" style="width:50px"><br>
+
+        <label>COAL Min/Max:</label>
+        <input type="number" id="quarryCoalMin" value="8" style="width:50px"> /
+        <input type="number" id="quarryCoalMax" value="16" style="width:50px"><br>
+
+        <label>RAW_GOLD Min/Max:</label>
+        <input type="number" id="quarryGoldMin" value="1" style="width:50px"> /
+        <input type="number" id="quarryGoldMax" value="4" style="width:50px"><br>
+
+        <label>Prices ($):</label><br>
+        COAL: <input type="number" id="quarryCoalPrice" value="22" style="width:60px"><br>
+        RAW_GOLD: <input type="number" id="quarryGoldPrice" value="22" style="width:60px"><br>
+      </div>
+
+      <!-- Mining Outpost Config -->
+      <div class="card" style="margin-top:20px">
+        <h3>Mining Outpost Config</h3>
+        <label>Cycle Time (seconds):</label>
+        <input type="number" id="outpostCycle" value="900"><br>
+
+        <label>RAW_IRON Min/Max:</label>
+        <input type="number" id="outpostIronMin" value="8" style="width:50px"> /
+        <input type="number" id="outpostIronMax" value="20" style="width:50px"><br>
+
+        <label>COAL Min/Max:</label>
+        <input type="number" id="outpostCoalMin" value="12" style="width:50px"> /
+        <input type="number" id="outpostCoalMax" value="24" style="width:50px"><br>
+
+        <label>RAW_GOLD Min/Max:</label>
+        <input type="number" id="outpostGoldMin" value="2" style="width:50px"> /
+        <input type="number" id="outpostGoldMax" value="8" style="width:50px"><br>
+
+        <label>REDSTONE Min/Max:</label>
+        <input type="number" id="outpostRedMin" value="2" style="width:50px"> /
+        <input type="number" id="outpostRedMax" value="6" style="width:50px"><br>
+
+        <label>LAPIS Min/Max:</label>
+        <input type="number" id="outpostLapisMin" value="1" style="width:50px"> /
+        <input type="number" id="outpostLapisMax" value="4" style="width:50px"><br>
+
+        <label>DIAMOND Min/Max:</label>
+        <input type="number" id="outpostDiamondMin" value="0" style="width:50px"> /
+        <input type="number" id="outpostDiamondMax" value="1" style="width:50px"><br>
+
+        <label>EMERALD Min/Max:</label>
+        <input type="number" id="outpostEmeraldMin" value="0" style="width:50px"> /
+        <input type="number" id="outpostEmeraldMax" value="1" style="width:50px"><br>
+
+        <label>Prices ($):</label><br>
+        COAL: <input type="number" id="outpostCoalPrice" value="22" style="width:60px"><br>
+        RAW_GOLD: <input type="number" id="outpostGoldPrice" value="22" style="width:60px"><br>
+        REDSTONE: <input type="number" id="outpostRedPrice" value="7.5" style="width:60px"><br>
+        LAPIS_LAZULI: <input type="number" id="outpostLapisPrice" value="7.5" style="width:60px"><br>
+        DIAMOND: <input type="number" id="outpostDiamondPrice" value="50" style="width:60px"><br>
+        EMERALD: <input type="number" id="outpostEmeraldPrice" value="22" style="width:60px"><br>
+      </div>
     </div>
   </div>
 </section>
@@ -86,20 +122,24 @@
 let chart;
 
 function simulate() {
-  let config;
-  try {
-    config = JSON.parse(document.getElementById('configEditor').value);
-  } catch(e) {
-    alert("Invalid JSON in config editor!");
-    return;
-  }
-
-  const quarrySites = parseInt(document.getElementById('quarryCount').value);
-  const outpostSites = parseInt(document.getElementById('outpostCount').value);
+  const quarryCount = parseInt(document.getElementById('quarryCount').value);
+  const outpostCount = parseInt(document.getElementById('outpostCount').value);
 
   const siteData = [
-    { name: "Quarry", config: config.quarry, count: quarrySites },
-    { name: "Mining Outpost", config: config.mining_outpost, count: outpostSites }
+    { name:'Quarry', count: quarryCount, cycleSec: parseFloat(document.getElementById('quarryCycle').value), ores:[
+      {name:'RAW_IRON', min: parseFloat(document.getElementById('quarryIronMin').value), max: parseFloat(document.getElementById('quarryIronMax').value), price:0},
+      {name:'COAL', min: parseFloat(document.getElementById('quarryCoalMin').value), max: parseFloat(document.getElementById('quarryCoalMax').value), price: parseFloat(document.getElementById('quarryCoalPrice').value)},
+      {name:'RAW_GOLD', min: parseFloat(document.getElementById('quarryGoldMin').value), max: parseFloat(document.getElementById('quarryGoldMax').value), price: parseFloat(document.getElementById('quarryGoldPrice').value)}
+    ]},
+    { name:'Mining Outpost', count: outpostCount, cycleSec: parseFloat(document.getElementById('outpostCycle').value), ores:[
+      {name:'RAW_IRON', min: parseFloat(document.getElementById('outpostIronMin').value), max: parseFloat(document.getElementById('outpostIronMax').value), price:0},
+      {name:'COAL', min: parseFloat(document.getElementById('outpostCoalMin').value), max: parseFloat(document.getElementById('outpostCoalMax').value), price: parseFloat(document.getElementById('outpostCoalPrice').value)},
+      {name:'RAW_GOLD', min: parseFloat(document.getElementById('outpostGoldMin').value), max: parseFloat(document.getElementById('outpostGoldMax').value), price: parseFloat(document.getElementById('outpostGoldPrice').value)},
+      {name:'REDSTONE', min: parseFloat(document.getElementById('outpostRedMin').value), max: parseFloat(document.getElementById('outpostRedMax').value), price: parseFloat(document.getElementById('outpostRedPrice').value)},
+      {name:'LAPIS_LAZULI', min: parseFloat(document.getElementById('outpostLapisMin').value), max: parseFloat(document.getElementById('outpostLapisMax').value), price: parseFloat(document.getElementById('outpostLapisPrice').value)},
+      {name:'DIAMOND', min: parseFloat(document.getElementById('outpostDiamondMin').value), max: parseFloat(document.getElementById('outpostDiamondMax').value), price: parseFloat(document.getElementById('outpostDiamondPrice').value)},
+      {name:'EMERALD', min: parseFloat(document.getElementById('outpostEmeraldMin').value), max: parseFloat(document.getElementById('outpostEmeraldMax').value), price: parseFloat(document.getElementById('outpostEmeraldPrice').value)}
+    ]}
   ];
 
   const labels = [];
@@ -107,61 +147,51 @@ function simulate() {
   const maxValues = [];
   const avgValues = [];
 
-  let totalMin = 0;
-  let totalMax = 0;
-  let totalAvg = 0;
+  let totalMin = 0, totalMax=0, totalAvg=0;
 
-  for (const site of siteData) {
-    if (site.count === 0) continue;
+  siteData.forEach(site=>{
+    if(site.count===0) return;
+    const cyclesPerHour = 3600 / site.cycleSec;
+    site.ores.forEach(ore=>{
+      const oreMin = ore.min * cyclesPerHour * site.count;
+      const oreMax = ore.max * cyclesPerHour * site.count;
+      const oreAvg = ((ore.min+ore.max)/2) * cyclesPerHour * site.count;
 
-    const cyclesPerHour = 60 / site.config.cycleMinutes;
-    const ores = site.config.ores;
-    const prices = site.config.prices;
-
-    for (let ore in ores) {
-      const [min, max] = ores[ore];
-      const oreMin = min * cyclesPerHour * site.count;
-      const oreMax = max * cyclesPerHour * site.count;
-      const oreAvg = ((min + max)/2) * cyclesPerHour * site.count;
-
-      labels.push(`${site.name} - ${ore}`);
+      labels.push(`${site.name} - ${ore.name}`);
       minValues.push(oreMin);
       maxValues.push(oreMax);
       avgValues.push(oreAvg);
 
-      const price = prices[ore] || 0;
-      totalMin += oreMin * price;
-      totalMax += oreMax * price;
-      totalAvg += oreAvg * price;
-    }
-  }
+      totalMin += oreMin*ore.price;
+      totalMax += oreMax*ore.price;
+      totalAvg += oreAvg*ore.price;
+    });
+  });
 
   const ctx = document.getElementById('oreChart').getContext('2d');
   if(chart) chart.destroy();
 
-  chart = new Chart(ctx, {
-    type: 'bar',
-    data: {
+  chart = new Chart(ctx,{
+    type:'bar',
+    data:{
       labels: labels,
-      datasets: [
-        { label: 'Min Ore/hr', data: minValues, backgroundColor: 'rgba(54, 162, 235, 0.5)' },
-        { label: 'Max Ore/hr', data: maxValues, backgroundColor: 'rgba(255, 99, 132, 0.5)' },
-        { label: 'Avg Ore/hr', data: avgValues, backgroundColor: 'rgba(75, 192, 192, 0.5)' }
+      datasets:[
+        {label:'Min Ore/hr', data:minValues, backgroundColor:'rgba(54, 162, 235, 0.5)'},
+        {label:'Max Ore/hr', data:maxValues, backgroundColor:'rgba(255, 99, 132, 0.5)'},
+        {label:'Avg Ore/hr', data:avgValues, backgroundColor:'rgba(75, 192, 192, 0.5)'}
       ]
     },
-    options: {
-      responsive: true,
-      plugins: {
-        title: { display:true, text:'Ore Production & Value Simulation' },
-        tooltip: {
-          callbacks: {
-            afterBody: function() {
-              return `Estimated $ range: $${totalMin.toFixed(2)} - $${totalMax.toFixed(2)}, Avg $${totalAvg.toFixed(2)}`;
-            }
+    options:{
+      responsive:true,
+      plugins:{
+        title:{display:true, text:'Ore Production & Value Simulation'},
+        tooltip:{
+          callbacks:{
+            afterBody:()=>`Estimated $ range: $${totalMin.toFixed(2)} - $${totalMax.toFixed(2)}, Avg $${totalAvg.toFixed(2)}`
           }
         }
       },
-      scales: { y: { beginAtZero:true, title:{display:true, text:'Ore Count'} } }
+      scales:{y:{beginAtZero:true, title:{display:true,text:'Ore Count'}}}
     }
   });
 }
