@@ -14,7 +14,7 @@
   <!-- Main CSS -->
   <link rel="stylesheet" href="css/styles.css">
   
-  <!-- Page-specific styles (same theme as Towny guide) -->
+  <!-- Page-specific styles -->
   <style>
     /* Wikipedia-style information sections – identical to guide-towny */
     .guide-header {
@@ -301,7 +301,7 @@
     
     .extraction-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 15px;
       margin: 20px 0;
     }
@@ -348,6 +348,19 @@
       color: var(--accent-rust);
       font-weight: 600;
     }
+
+    .yield-table {
+      width: 100%;
+      margin: 10px 0;
+      border-collapse: collapse;
+      background: rgba(15, 23, 42, 0.4);
+      font-size: 0.9rem;
+    }
+    .yield-table td {
+      padding: 4px 8px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    }
+    .yield-table tr:last-child td { border-bottom: none; }
     
     @media (max-width: 768px) {
       .guide-header h1 { font-size: 2.2rem; }
@@ -366,7 +379,7 @@
     <div class="guide-header-content">
       <div class="guide-icon"><i class="fas fa-industry"></i></div>
       <h1>Factories & Extraction Sites</h1>
-      <p>From raw resource extraction to mass production – build, apply, and automate your industry</p>
+      <p>Build, apply, and automate your industry – from quarries to armories</p>
       <div style="margin-top: 25px;">
         <a href="#toc" class="btn btn-outline" style="margin:5px;"><i class="fas fa-list"></i> Jump to sections</a>
         <a href="guide-towny.html" class="btn" style="margin:5px;">Towny Guide →</a>
@@ -401,6 +414,7 @@
         <li>Every site requires a building of at least <strong>6 chunks total volume</strong> (not just a 6‑chunk width – the entire structure must occupy the space of six chunks).</li>
         <li>The building must be <strong>visually distinguishable</strong> as a factory or an extraction site – a simple hole in the ground or a single chest will not be accepted.</li>
         <li><strong>All commands are chest‑based:</strong> you must look directly at the chest that serves as the site's interface when typing <code>/factory create</code> or <code>/extract create</code>.</li>
+        <li>Extraction sites are currently <strong>enabled</strong>; basic factories (armory, foundry, munitions) are enabled; siege and wagon factories are currently <strong>disabled</strong>.</li>
       </ul>
       
       <div class="notice-box tip">
@@ -453,63 +467,115 @@
       </div>
     </div>
 
-    <!-- Section 4: Extraction sites (passive resource generation) -->
+    <!-- Section 4: Extraction sites – with new data, costs, yields, and hourly estimates -->
     <div class="guide-section" id="extraction">
       <h2><span class="section-number">4</span> Extraction sites – passive resource generation</h2>
       <p>Extraction sites do not require input materials. Instead, they passively produce resources over time. You must create the site, then toggle it on.</p>
       
-      <h3>Types of extraction sites</h3>
+      <h3>Types of extraction sites, costs, and production times</h3>
       <div class="extraction-grid">
         <div class="extraction-card">
           <h4><i class="fas fa-mountain"></i> Quarry</h4>
-          <p>Produces: <strong>ores</strong> (coal, iron, gold, etc.)</p>
-          <p><em>Build a mine entrance, a quarry pit, or a mining headframe.</em></p>
+          <p><strong>Creation cost:</strong> $10,000</p>
+          <p><strong>Extraction time:</strong> 600s (10 min)</p>
+          <p><strong>Radius:</strong> 16 blocks</p>
+          <p><em>Produces stone, ores, and related minerals.</em></p>
         </div>
         <div class="extraction-card">
-          <h4><i class="fas fa-tree"></i> Logging camp</h4>
-          <p>Produces: <strong>wood</strong> (logs of all types)</p>
-          <p><em>A lumber mill with saws, log piles, and a woodland setting.</em></p>
+          <h4><i class="fas fa-tree"></i> Logging Camp</h4>
+          <p><strong>Creation cost:</strong> $8,000</p>
+          <p><strong>Extraction time:</strong> 300s (5 min)</p>
+          <p><strong>Radius:</strong> 24 blocks</p>
+          <p><em>Produces various logs, sticks, apples, saplings.</em></p>
         </div>
         <div class="extraction-card">
           <h4><i class="fas fa-tractor"></i> Farm</h4>
-          <p>Produces: <strong>crops</strong> (wheat, carrots, potatoes, etc.)</p>
-          <p><em>Large fields, barns, silos – a proper agricultural complex.</em></p>
+          <p><strong>Creation cost:</strong> $5,000</p>
+          <p><strong>Extraction time:</strong> 300s (5 min)</p>
+          <p><strong>Radius:</strong> 20 blocks</p>
+          <p><em>Produces crops and melons.</em></p>
+        </div>
+        <div class="extraction-card">
+          <h4><i class="fas fa-hard-hat"></i> Mining Outpost</h4>
+          <p><strong>Creation cost:</strong> $15,000</p>
+          <p><strong>Extraction time:</strong> 900s (15 min)</p>
+          <p><strong>Radius:</strong> 12 blocks</p>
+          <p><em>Rich ore extraction – iron, gold, redstone, even diamonds.</em></p>
         </div>
       </div>
       
+      <h3>Extraction yields (per cycle) and estimated hourly value</h3>
+      <p>The following tables show what each site produces per extraction cycle, with a rough estimate of market value per hour (assuming one site, using approximate sell prices). Actual profits depend on market rates.</p>
+      
+      <table class="specs-table">
+        <thead><tr><th>Site</th><th>Cycle time</th><th>Typical yield (range per cycle)</th><th>Est. hourly value</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Quarry</strong></td>
+            <td>10 min</td>
+            <td>32-64 Cobblestone, 16-32 Stone, 4-12 Raw Iron, 8-16 Coal, 4-10 Raw Copper, 1-4 Raw Gold, plus granite/diorite/andesite</td>
+            <td>$1,500 – $2,500</td>
+          </tr>
+          <tr>
+            <td><strong>Logging Camp</strong></td>
+            <td>5 min</td>
+            <td>16-32 Oak, 8-16 Birch, 8-16 Spruce, 8-16 Dark Oak, 4-12 Jungle, 4-12 Acacia, plus sticks, apples, saplings</td>
+            <td>$1,200 – $2,000</td>
+          </tr>
+          <tr>
+            <td><strong>Farm</strong></td>
+            <td>5 min</td>
+            <td>24-48 Wheat, 16-32 Carrots, 16-32 Potatoes, 8-16 Beetroot, 8-16 Sugar Cane, 4-8 Pumpkin, 8-16 Melon Slice</td>
+            <td>$800 – $1,400</td>
+          </tr>
+          <tr>
+            <td><strong>Mining Outpost</strong></td>
+            <td>15 min</td>
+            <td>8-20 Raw Iron, 12-24 Coal, 6-15 Raw Copper, 2-8 Raw Gold, 2-6 Redstone, 1-4 Lapis, 0-1 Diamond, 0-1 Emerald</td>
+            <td>$2,500 – $4,000</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="notice-box tip">
+        <i class="fas fa-lightbulb"></i> Estimates based on typical server shop prices. Mining outpost yields rare ores and has the highest potential, but takes longer per cycle.
+      </div>
+      
       <h3>Creating and operating an extraction site</h3>
-      <p>Once your building is approved, you use the following commands <strong>while looking at the chest</strong> that will serve as the output container:</p>
+      <p>Once your building is approved, use the following commands <strong>while looking at the chest</strong> that will serve as the output container:</p>
       
       <div class="command-definitions">
         <dl>
           <dt>/extract create quarry</dt>
-          <dd>Creates a quarry extraction site (produces ores).</dd>
-          <dt>/extract create logging</dt>
-          <dd>Creates a logging camp (produces wood).</dd>
+          <dd>Creates a quarry extraction site ($10,000).</dd>
+          <dt>/extract create logging_camp</dt>
+          <dd>Creates a logging camp ($8,000).</dd>
           <dt>/extract create farm</dt>
-          <dd>Creates a farm (produces crops).</dd>
+          <dd>Creates a farm ($5,000).</dd>
+          <dt>/extract create mining_outpost</dt>
+          <dd>Creates a mining outpost ($15,000).</dd>
           <dt>/extract toggle</dt>
           <dd>Turns the site on or off. When on, resources will appear in the chest at regular intervals.</dd>
         </dl>
       </div>
       
       <div class="example-box" style="background: rgba(45,212,191,0.05); border-left:3px solid var(--accent-teal); padding:10px 15px; margin:15px 0;">
-        <p><strong>Example workflow:</strong></p>
+        <p><strong>Example workflow – mining outpost:</strong></p>
         <ol style="margin-bottom:0;">
-          <li>Build a quarry building (≥6 chunks, looks like a mine).</li>
+          <li>Build a mining outpost building (≥6 chunks, looks like a mine head).</li>
           <li>Apply on Discord, get approved.</li>
-          <li>Stand in front of your chest and type <code>/extract create quarry</code>.</li>
+          <li>Stand in front of your chest and type <code>/extract create mining_outpost</code> ($15,000 deducted).</li>
           <li>Type <code>/extract toggle</code> to start production.</li>
-          <li>Come back later – ores will have appeared in the chest.</li>
+          <li>After 15 minutes, ores appear in the chest – up to 20 iron, 24 coal, and occasionally diamonds.</li>
         </ol>
       </div>
       
       <div class="notice-box tip">
-        <i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Extraction sites are ideal for towns that want a steady income of basic resources without constant manual labor. Place them in appropriate biomes – a farm in a plains biome, a quarry in a mountainous area.
+        <i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Extraction sites work best when placed in suitable biomes – farms on plains, quarries in mountains, logging camps in forests. The radius gives a rough idea of the area the site “works” – build your structure accordingly.
       </div>
     </div>
 
-    <!-- Section 5: Factories – types, costs, and recipes -->
+    <!-- Section 5: Factories – types, costs, and recipes (updated with full recipe list) -->
     <div class="guide-section" id="factories">
       <h2><span class="section-number">5</span> Factories – types, creation costs, and recipes</h2>
       <p>Factories <strong>consume</strong> materials from their chest to produce advanced items. Each factory type has a specific creation cost (paid from your town bank) and a list of items it can produce. All commands are performed while looking at the factory chest.</p>
@@ -517,31 +583,31 @@
       <h3>Factory types and creation costs</h3>
       <div class="factory-card">
         <h4><i class="fas fa-gun"></i> Armory</h4>
-        <p><strong>Creation cost:</strong> <span class="cost">$5,000</span></p>
-        <p>Produces firearms, melee weapons, and tools.</p>
+        <p><strong>Creation cost:</strong> <span class="cost">$5,000</span> | <strong>Base production time:</strong> 60s</p>
+        <p>Produces flintlock firearms, melee weapons, and tools.</p>
       </div>
       <div class="factory-card">
         <h4><i class="fas fa-cannons"></i> Foundry</h4>
-        <p><strong>Creation cost:</strong> <span class="cost">$10,000</span></p>
+        <p><strong>Creation cost:</strong> <span class="cost">$10,000</span> | <strong>Base production time:</strong> 120s</p>
         <p>Produces artillery pieces (cannons, mortars, culverins).</p>
       </div>
       <div class="factory-card">
         <h4><i class="fas fa-bullseye"></i> Munitions</h4>
-        <p><strong>Creation cost:</strong> <span class="cost">$3,000</span></p>
+        <p><strong>Creation cost:</strong> <span class="cost">$3,000</span> | <strong>Base production time:</strong> 30s</p>
         <p>Produces ammunition (cannonballs, gunpowder barrels).</p>
       </div>
       <div class="factory-card">
         <h4><i class="fas fa-catapult"></i> Siege Works</h4>
-        <p><strong>Creation cost:</strong> <span class="cost">$15,000</span></p>
-        <p>Produces siege equipment (battering rams, siege towers).</p>
+        <p><strong>Creation cost:</strong> <span class="cost">$15,000</span> | <strong>Currently disabled</strong></p>
+        <p>Would produce siege equipment (ballistae, catapults, trebuchets).</p>
       </div>
       <div class="factory-card">
         <h4><i class="fas fa-wagon"></i> Wagon Works</h4>
-        <p><strong>Creation cost:</strong> <span class="cost">$8,000</span></p>
-        <p>Produces wagons and transport vehicles.</p>
+        <p><strong>Creation cost:</strong> <span class="cost">$8,000</span> | <strong>Currently disabled</strong></p>
+        <p>Would produce wagons (conestoga, armored, royal).</p>
       </div>
       
-      <h3>Factory recipes (what each factory produces)</h3>
+      <h3>Factory recipes – full list (enabled types only)</h3>
       <p>The following table shows all available items, their ingredients, and which factory type can produce them. Use <code>/factory produce &lt;item&gt;</code> while looking at the chest.</p>
       
       <table class="specs-table">
@@ -549,28 +615,34 @@
           <tr><th>Factory type</th><th>Item</th><th>Ingredients</th></tr>
         </thead>
         <tbody>
-          <tr><td rowspan="6"><strong>Armory</strong></td><td>musket</td><td>5 Iron Ingot, 2 Stick, 1 Flint</td></tr>
+          <tr><td rowspan="12"><strong>Armory</strong></td><td>musket</td><td>5 Iron Ingot, 2 Stick, 1 Flint</td></tr>
           <tr><td>blunderbuss</td><td>6 Iron Ingot, 2 Stick, 1 Flint</td></tr>
           <tr><td>flintlock_pistol</td><td>3 Iron Ingot, 1 Stick, 1 Flint</td></tr>
-          <tr><td>handcannon</td><td>3 Iron Block, 2 Iron Ingot, 1 Flint</td></tr>
-          <tr><td>cutlass</td><td>3 Iron Ingot, 1 Stick</td></tr>
-          <tr><td>cavalry_sword</td><td>2 Diamond, 1 Iron Ingot, 1 Stick</td></tr>
-          <tr><td><strong>Foundry</strong></td><td>cannon</td><td>8 Iron Block, 4 Iron Ingot, 4 Oak Log</td></tr>
-          <tr><td><strong>Foundry</strong></td><td>mortar</td><td>4 Iron Block, 2 Iron Ingot</td></tr>
-          <tr><td><strong>Foundry</strong></td><td>culverin</td><td>12 Iron Block, 6 Iron Ingot, 6 Oak Log</td></tr>
-          <tr><td><strong>Munitions</strong></td><td>cannonball</td><td>1 Iron Ingot</td></tr>
-          <tr><td><strong>Munitions</strong></td><td>gunpowder_barrel</td><td>8 Gunpowder, 1 Barrel</td></tr>
-          <tr><td><strong>Siege Works</strong></td><td>battering_ram</td><td>6 Iron Block, 20 Oak Log, 4 Chain</td></tr>
-          <tr><td><strong>Siege Works</strong></td><td>siege_tower</td><td>30 Oak Log, 10 Iron Ingot, 4 Ladder</td></tr>
-          <tr><td><strong>Wagon Works</strong></td><td>supply_wagon</td><td>8 Oak Log, 2 Iron Ingot, 1 Chest</td></tr>
+          <tr><td>handcannon</td><td>8 Iron Ingot, 2 Stick, 4 Gunpowder</td></tr>
+          <tr><td>cutlass</td><td>4 Iron Ingot, 1 Stick</td></tr>
+          <tr><td>cavalry_sword</td><td>5 Iron Ingot, 1 Stick, 1 Gold Ingot</td></tr>
+          <tr><td>dagger</td><td>2 Iron Ingot, 1 Stick</td></tr>
+          <tr><td>greatsword</td><td>8 Iron Ingot, 2 Stick</td></tr>
+          <tr><td>battleaxe</td><td>6 Iron Ingot, 2 Stick</td></tr>
+          <tr><td>mace</td><td>5 Iron Ingot, 1 Stick</td></tr>
+          <tr><td>spear</td><td>2 Iron Ingot, 3 Stick</td></tr>
+          <tr><td>pike</td><td>3 Iron Ingot, 4 Stick</td></tr>
+          <tr><td>halberd</td><td>4 Iron Ingot, 3 Stick</td></tr>
+          <tr><td>bardeche</td><td>5 Iron Ingot, 2 Stick</td></tr>
+          <tr><td rowspan="3"><strong>Foundry</strong></td><td>cannon</td><td>8 Iron Block, 4 Iron Ingot, 4 Oak Log</td></tr>
+          <tr><td>mortar</td><td>4 Iron Block, 6 Iron Ingot, 2 Oak Log</td></tr>
+          <tr><td>culverin</td><td>6 Iron Block, 8 Iron Ingot, 4 Oak Log, 2 Gold Ingot</td></tr>
+          <tr><td rowspan="2"><strong>Munitions</strong></td><td>cannonball</td><td>4 Iron Ingot</td></tr>
+          <tr><td>gunpowder_barrel</td><td>8 Gunpowder, 4 Oak Planks</td></tr>
+          <tr><td colspan="3" style="color: var(--accent-rust); text-align: center;"><em>Siege Works and Wagon Works recipes are present but currently disabled server-side.</em></td></tr>
         </tbody>
       </table>
       
       <h3>Creating a factory (chest-based)</h3>
       <div class="command-definitions">
         <dl>
-          <dt>/factory create &lt;type&gt;</dt>
-          <dd>Creates a factory of the specified type (e.g. <code>armory</code>, <code>foundry</code>). Must look at the chest.</dd>
+          <dt>/factory create armory|foundry|munitions|siege_works|wagon_works</dt>
+          <dd>Creates a factory of the specified type (cost deducted from town bank). Note: siege_works and wagon_works are disabled.</dd>
           <dt>/factory produce &lt;item&gt;</dt>
           <dd>Starts production of the given item. Requires ingredients in the chest.</dd>
           <dt>/factory stop</dt>
@@ -585,19 +657,19 @@
         <ol>
           <li>Build an armory building (≥6 chunks, looks like a weapons workshop).</li>
           <li>Apply on Discord, get approved.</li>
-          <li>Stand in front of your chest and type <code>/factory create armory</code> ($5,000 deducted from town bank).</li>
+          <li>Stand in front of your chest and type <code>/factory create armory</code> ($5,000 deducted).</li>
           <li>Place 5 Iron Ingot, 2 Stick, and 1 Flint in the chest.</li>
           <li>Type <code>/factory produce musket</code> while looking at the chest.</li>
-          <li>After a short delay, a musket appears in the chest.</li>
+          <li>After 60 seconds, a musket appears in the chest.</li>
         </ol>
       </div>
       
       <div class="notice-box warning">
-        <i class="fas fa-exclamation-triangle"></i> <strong>Note:</strong> Factories do not automatically restock. You must keep the chest supplied with raw materials. Production speed varies by item.
+        <i class="fas fa-exclamation-triangle"></i> <strong>Note:</strong> Siege and wagon factories are currently disabled (vehicles-enabled: false, siege-factories-enabled: false). Only armory, foundry, and munitions are operational.
       </div>
     </div>
 
-    <!-- Section 6: Command summary (chest‑based) -->
+    <!-- Section 6: Command summary -->
     <div class="guide-section" id="commands">
       <h2><span class="section-number">6</span> Command reference (all chest‑based)</h2>
       <p><strong>All commands require you to be looking directly at the chest</strong> that serves as the site's interface. If you are not looking at a valid, approved chest, the command will fail.</p>
@@ -606,11 +678,13 @@
       <div class="command-definitions">
         <dl>
           <dt>/extract create quarry</dt>
-          <dd>Creates a quarry (produces ores).</dd>
-          <dt>/extract create logging</dt>
-          <dd>Creates a logging camp (produces wood).</dd>
+          <dd>Creates a quarry ($10,000).</dd>
+          <dt>/extract create logging_camp</dt>
+          <dd>Creates a logging camp ($8,000).</dd>
           <dt>/extract create farm</dt>
-          <dd>Creates a farm (produces crops).</dd>
+          <dd>Creates a farm ($5,000).</dd>
+          <dt>/extract create mining_outpost</dt>
+          <dd>Creates a mining outpost ($15,000).</dd>
           <dt>/extract toggle</dt>
           <dd>Starts or stops passive generation.</dd>
         </dl>
@@ -620,7 +694,7 @@
       <div class="command-definitions">
         <dl>
           <dt>/factory create armory|foundry|munitions|siege_works|wagon_works</dt>
-          <dd>Creates a factory of the given type (cost deducted from town bank).</dd>
+          <dd>Creates a factory of the given type (siege_works/wagon_works disabled).</dd>
           <dt>/factory produce &lt;item&gt;</dt>
           <dd>Begins production of the specified item (requires materials in chest).</dd>
           <dt>/factory stop</dt>
@@ -631,7 +705,7 @@
       </div>
       
       <div class="notice-box tip" style="margin-top:20px;">
-        <i class="fas fa-lightbulb"></i> <strong>Remember:</strong> None of these commands will work until your build has been approved by staff via a Discord ticket. Plan your construction carefully, apply, and then start producing.
+        <i class="fas fa-lightbulb"></i> <strong>Remember:</strong> None of these commands will work until your build has been approved by staff. Plan your construction carefully, apply, and then start producing.
       </div>
       
       <div class="notice-box warning">
