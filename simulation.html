@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extraction Simulation</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    label { margin-right: 10px; }
+    input, select, button { margin-bottom: 10px; }
+    canvas { max-width: 800px; margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <h2>Extraction Simulation</h2>
+  
+  <label for="siteType">Extraction Site:</label>
+  <select id="siteType">
+    <option value="quarry">Quarry</option>
+    <option value="mining_outpost">Mining Outpost</option>
+  </select><br>
+
+  <label for="numSites">Number of Sites:</label>
+  <input type="number" id="numSites" value="1" min="1"><br>
+
+  <button onclick="simulate()">Simulate</button>
+
+  <canvas id="oreChart"></canvas>
+
+  <script>
+    const extractionData = {
+      quarry: {
+        cycleMinutes: 10,
+        cyclesPerHour: 6,
+        ores: {
+          "RAW_IRON": [4,12],
+          "COAL": [8,16],
+          "RAW_COPPER": [4,10],
+          "RAW_GOLD": [1,4]
+        },
+        prices: { "COAL":22, "RAW_GOLD":22, "RAW_IRON":0, "RAW_COPPER":0 }
+      },
+      mining_outpost: {
+        cycleMinutes: 15,
+        cyclesPerHour: 4,
+        ores: {
+          "RAW_IRON": [8,20],
+          "COAL": [12,24],
+          "RAW_COPPER": [6,15],
+          "RAW_GOLD": [2,8],
+          "REDSTONE":[2,6],
+          "LAPIS_LAZULI":[1,4],
+          "DIAMOND":[0,1],
+          "EMERALD":[0,1]
+        },
+        prices: { 
+          "COAL":22, "RAW_GOLD":22, "REDSTONE":7.5, "LAPIS_LAZULI":7.5,
+          "DIAMOND":50, "EMERALD":22, "RAW_IRON":0, "RAW_COPPER":0
+        }
+      }
+    };
+
+    let chart; // global chart
+
+    function simulate() {
+      const siteType = document.getElementById("siteType").value;
+      const numSites = parseInt(document.getElementById("numSites").value);
+
+      const site = extractionData[siteType];
+      const ores = site.ores;
+      const prices = site.prices;
+      const cycles = site.cyclesPerHour;
+
+      let labels = [];
+      let minValues = [];
+      let maxValues = [];
+      let avgValues = [];
+
+      let totalMin = 0;
+      let totalMax = 0;
+      let totalAvg = 0;
+
+      for (let ore in ores) {
+        const [min, max] = ores[ore];
+        const oreMin = min * cycles * numSites;
+        const oreMax = max * cycles * numSites;
+        const oreAvg = (min+max)/2 * cycles * numSites;
+
+        labels.push(ore);
+        minValues.push(oreMin);
+        maxValues.push(oreMax);
+        avgValues.push(oreAvg);
+
+        const price = prices[ore] || 0;
+        totalMin += oreMin * price;
+        totalMax += oreMax * price;
+        totalAvg += oreAvg * price;
+      }
+
+      const ctx = document.getElementById('oreChart').getContext('2d');
+
+      if (chart) chart.destroy();
+
+      chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: 'Min Ore/hour',
+              data: minValues,
+              backgroundColor: 'rgba(54, 162, 235, 0.5)'
+            },
+            {
+              label: 'Max Ore/hour',
+              data: maxValues,
+              backgroundColor: 'rgba(255, 99, 132, 0.5)'
+            },
+            {
+              label: 'Average Ore/hour',
+              data: avgValues,
+              backgroundColor: 'rgba(75, 192, 192, 0.5)'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: `Ore Production for ${numSites} ${siteType.replace("_"," ")}(s) per Hour`
+            },
+            tooltip: {
+              callbacks: {
+                afterBody: function() {
+                  return `Est. $ Range: $${totalMin.toFixed(2)} - $${totalMax.toFixed(2)}, Avg $${totalAvg.toFixed(2)}`;
+                }
+              }
+            }
+          },
+          scales: {
+            y: { beginAtZero: true, title: { display: true, text: 'Ore Count' } },
+            x: { title: { display: true, text: 'Ore Type' } }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
