@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Towny Quick-Start — GeoFrontier Minecraft Server</title>
+  <title>Towny Guide — GeoFrontier Minecraft Server</title>
   
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +16,7 @@
   
   <!-- Page-specific styles -->
   <style>
-    /* Preserving original theme with some adjustments for clarity */
+    /* Preserving original theme */
     .guide-header {
       position: relative;
       background: 
@@ -94,7 +94,7 @@
       color: var(--accent-teal);
     }
     
-    /* Main guide sections - cleaner */
+    /* Main guide sections */
     .guide-section {
       background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
       padding: 30px;
@@ -114,21 +114,26 @@
       margin-bottom: 20px;
     }
     
-    /* Command boxes - more compact */
+    .guide-section h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      margin: 25px 0 15px 0;
+      color: var(--accent-teal);
+    }
+    
+    /* Command boxes */
     .command-box {
       background: rgba(15, 23, 42, 0.7);
       border-radius: 6px;
       padding: 15px;
       margin: 15px 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 10px;
     }
     
     .command-item {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      margin-bottom: 8px;
     }
     
     .command-item code {
@@ -137,11 +142,11 @@
       padding: 4px 8px;
       border-radius: 4px;
       font-family: 'Consolas', monospace;
+      min-width: 140px;
     }
     
     .command-item span {
       color: var(--text-muted);
-      font-size: 0.9rem;
     }
     
     /* Notice boxes */
@@ -166,29 +171,82 @@
       color: var(--accent-gold);
     }
     
-    /* Compact tables for reference section */
-    .ref-table {
+    /* Tables */
+    .specs-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 15px 0;
-      font-size: 0.9rem;
+      margin: 20px 0;
+      background: rgba(15, 23, 42, 0.5);
     }
     
-    .ref-table th {
+    .specs-table th {
       text-align: left;
-      padding: 10px;
+      padding: 12px;
       background: rgba(212, 175, 55, 0.15);
       color: var(--accent-gold);
       border-bottom: 2px solid var(--accent-gold);
     }
     
-    .ref-table td {
-      padding: 8px 10px;
+    .specs-table td {
+      padding: 10px 12px;
       color: var(--text-light);
       border-bottom: 1px solid rgba(212, 175, 55, 0.1);
     }
     
-    /* Reference section - technical data */
+    /* Milestone table */
+    .milestone-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      margin: 20px 0;
+    }
+    
+    .milestone-table th {
+      background: rgba(212, 175, 55, 0.2);
+      color: var(--accent-gold);
+      padding: 12px;
+      border-bottom: 2px solid var(--accent-gold);
+      text-align: left;
+    }
+    
+    .milestone-table td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      color: var(--text-light);
+    }
+    
+    .milestone-table .reward {
+      color: var(--accent-teal);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    
+    /* Building definition boxes */
+    .building-def {
+      background: rgba(212, 175, 55, 0.1);
+      border-left: 3px solid var(--accent-teal);
+      padding: 12px 18px;
+      margin: 15px 0;
+    }
+    
+    .specialty-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 8px;
+      margin: 15px 0;
+    }
+    
+    .specialty-tag {
+      background: rgba(45, 212, 191, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 5px 10px;
+      border-radius: 20px;
+      text-align: center;
+      color: var(--text-light);
+    }
+    
+    /* Reference section */
     .reference-section {
       background: rgba(15, 23, 42, 0.8);
       padding: 30px;
@@ -204,37 +262,14 @@
       margin-bottom: 20px;
     }
     
-    .reference-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-    
-    .ref-block {
-      background: rgba(30, 41, 59, 0.5);
-      padding: 20px;
-      border-radius: 6px;
-      border-left: 3px solid var(--accent-teal);
-    }
-    
-    .ref-block h3 {
-      color: var(--accent-teal);
-      margin-top: 0;
-      margin-bottom: 15px;
-      font-size: 1.2rem;
-    }
-    
     @media (max-width: 768px) {
-      .guide-header h1 {
-        font-size: 2.2rem;
-      }
-      
       .quick-grid {
         grid-template-columns: 1fr;
       }
       
-      .command-box {
-        grid-template-columns: 1fr;
+      .command-item {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
@@ -252,11 +287,11 @@
       <div class="guide-icon">
         <i class="fas fa-city"></i>
       </div>
-      <h1>Towny Quick-Start</h1>
-      <p>What you actually need to know to start and run a town</p>
+      <h1>Towny Guide</h1>
+      <p>Everything you need to run a successful town on GeoFrontier</p>
       <div style="margin-top: 25px;">
-        <a href="#essentials" class="btn btn-outline" style="margin: 5px;">Essentials</a>
-        <a href="#quick-start" class="btn" style="margin: 5px;">Quick Start Guide</a>
+        <a href="#quick-start" class="btn btn-outline" style="margin: 5px;">Quick Start</a>
+        <a href="#claim-mechanics" class="btn" style="margin: 5px;">Claim System →</a>
       </div>
     </div>
   </header>
@@ -264,219 +299,297 @@
   <!-- Main Content -->
   <div class="guide-container">
     
-    <!-- ESSENTIALS SECTION - What you need right now -->
-    <div class="quick-grid" id="essentials">
+    <!-- QUICK START CARDS - Essential commands at a glance -->
+    <div class="quick-grid" id="quick-start">
       <div class="quick-card">
         <h3><i class="fas fa-bolt"></i> Create a Town</h3>
         <ul>
           <li><code>/town new [name]</code> — $200</li>
-          <li>Stand in the chunk you want as your spawn</li>
-          <li>Must be 4 chunks away from other towns</li>
-          <li><code>/town set spawn</code> — set your return point</li>
+          <li>Stand in spawn chunk</li>
+          <li>Must be 4 chunks from others</li>
+          <li><code>/town set spawn</code> after</li>
         </ul>
       </div>
       
       <div class="quick-card">
         <h3><i class="fas fa-expand-alt"></i> Claim Land</h3>
         <ul>
-          <li><code>/town claim</code> — claim current chunk</li>
-          <li><code>/town claim auto 5</code> — claim 5 chunks outward</li>
-          <li><code>/town unclaim</code> — remove claim</li>
-          <li>Money comes from town bank</li>
+          <li><code>/town claim</code> — current chunk</li>
+          <li><code>/town claim auto [#]</code> — outward</li>
+          <li><code>/town unclaim</code> — remove</li>
+          <li><code>/town deposit [amt]</code> — add funds</li>
         </ul>
       </div>
       
       <div class="quick-card">
-        <h3><i class="fas fa-users"></i> Manage People</h3>
+        <h3><i class="fas fa-users"></i> Residents</h3>
         <ul>
           <li><code>/town invite [player]</code></li>
           <li><code>/town kick [player]</code></li>
-          <li><code>/town rank add [player] assistant</code></li>
-          <li><code>/town outlaw add [player]</code> — ban from town</li>
+          <li><code>/town rank add [p] assistant</code></li>
+          <li><code>/town outlaw add [p]</code> — ban</li>
         </ul>
       </div>
       
       <div class="quick-card">
-        <h3><i class="fas fa-coins"></i> Town Money</h3>
+        <h3><i class="fas fa-coins"></i> Town Bank</h3>
         <ul>
-          <li><code>/town deposit [amount]</code> — add money</li>
-          <li><code>/town withdraw [amount]</code> — take money</li>
-          <li><code>/town set tax [amount]</code> — daily resident tax</li>
-          <li><code>/town</code> — check balance and upkeep</li>
+          <li><code>/town</code> — check balance</li>
+          <li><code>/town deposit [amt]</code></li>
+          <li><code>/town set tax [amt]</code></li>
+          <li><code>/town withdraw [amt]</code></li>
         </ul>
       </div>
     </div>
 
-    <!-- QUICK START PATH - 5 minutes to read, 10 minutes to do -->
-    <div class="guide-section" id="quick-start">
+    <!-- YOUR FIRST 15 MINUTES -->
+    <div class="guide-section">
       <h2><i class="fas fa-rocket"></i> Your First 15 Minutes</h2>
-      
       <ol style="font-size: 1.1rem; line-height: 2;">
-        <li><strong>Find unclaimed land</strong> — Walk until chat says "Wilderness" or use <code>/towny map</code></li>
-        <li><strong>Create town</strong> — <code>/town new YourName</code> (costs $200, check with <code>/balance</code>)</li>
-        <li><strong>Set your spawn</strong> — Stand somewhere safe, type <code>/town set spawn</code></li>
-        <li><strong>Claim your first chunks</strong> — <code>/town claim auto 3</code> to claim 3 chunks around you</li>
+        <li><strong>Find wilderness</strong> — Walk until chat says "Wilderness" or use <code>/towny map</code></li>
+        <li><strong>Create town</strong> — <code>/town new YourName</code> ($200, check with <code>/balance</code>)</li>
+        <li><strong>Set spawn</strong> — Stand somewhere safe, <code>/town set spawn</code></li>
+        <li><strong>Claim surrounding chunks</strong> — <code>/town claim auto 3</code> (claims 3 chunks outward)</li>
         <li><strong>Invite friends</strong> — <code>/town invite PlayerName</code> (they type <code>/town accept</code>)</li>
-        <li><strong>Set basic permissions</strong> — <code>/town set perm outsider build off</code> (stops randoms building)</li>
+        <li><strong>Set basic permissions</strong> — <code>/town set perm outsider build off</code> (stops randoms)</li>
         <li><strong>Deposit money</strong> — <code>/town deposit 500</code> to cover first few days of upkeep</li>
       </ol>
-      
-      <div class="notice-box tip">
-        <i class="fas fa-check-circle"></i> <strong>Done.</strong> You have a functioning town. Everything else is optional optimization.
-      </div>
     </div>
 
-    <!-- SECTION 1 - Creating a Town (condensed) -->
-    <div class="guide-section" id="section1">
+    <!-- SECTION 1 - Creating a Town -->
+    <div class="guide-section">
       <h2>1. Creating a Town</h2>
-      
-      <p><strong>Requirements:</strong> $200, unclaimed land at least 4 chunks from another town's homeblock.</p>
+      <p><strong>Requirements:</strong> $200 in your personal balance. Stand in the chunk you want as your town center (homeblock). Must be at least 4 chunks away from any other town's homeblock.</p>
       
       <div class="command-box">
         <div class="command-item"><code>/town new YourTown</code> <span>Creates town where you stand</span></div>
-        <div class="command-item"><code>/town set spawn</code> <span>Sets return point</span></div>
-        <div class="command-item"><code>/town set board [msg]</code> <span>Sets town message</span></div>
+        <div class="command-item"><code>/town set spawn</code> <span>Sets your town's return point</span></div>
+        <div class="command-item"><code>/town set board [message]</code> <span>Sets town message</span></div>
+        <div class="command-item"><code>/town</code> <span>View town info and stats</span></div>
       </div>
       
-      <p><strong>What happens next:</strong> You're now mayor. Your town has 8 claim blocks and can invite residents. That's it.</p>
+      <p><strong>After creation:</strong> You're now mayor. Your town starts with 8 claim blocks (enough for 8 chunks) and can invite unlimited residents. Every new resident adds 10 claim blocks to your total capacity.</p>
     </div>
 
-    <!-- SECTION 2 - Claiming Land (just the mechanics) -->
-    <div class="guide-section" id="section2">
-      <h2>2. Claiming Land</h2>
+    <!-- SECTION 2 - Claiming Land (COMPREHENSIVE) -->
+    <div class="guide-section" id="claim-mechanics">
+      <h2>2. Claiming Land: How to Get More Chunks</h2>
       
-      <p><strong>How it works:</strong> Each chunk (16×16 blocks) costs money. First chunk $5, then +2% per chunk up to $175 max.</p>
+      <p><strong>There are FIVE ways to increase your town's claim limit:</strong></p>
+      
+      <h3>Method 1: Residents (Base Claims)</h3>
+      <p>Each resident in your town contributes <strong>10 claim blocks</strong> to your total capacity. This is your baseline. More residents = more land you can claim.</p>
+      <table class="specs-table">
+        <tr><th>Residents</th><th>Base Claim Blocks</th><th>Max Chunks</th></tr>
+        <tr><td>1 (new town)</td><td>10</td><td>10</td></tr>
+        <tr><td>5</td><td>50</td><td>50</td></tr>
+        <tr><td>10</td><td>100</td><td>100</td></tr>
+        <tr><td>25</td><td>250</td><td>250</td></tr>
+        <tr><td>50</td><td>500</td><td>500</td></tr>
+      </table>
+
+      <h3>Method 2: Nation Bonuses</h3>
+      <p>Being part of a nation grants bonus claim blocks based on nation size. Larger nations give bigger bonuses.</p>
+      <ul>
+        <li><strong>Small nation (3-5 towns):</strong> +50 claim blocks</li>
+        <li><strong>Medium nation (6-10 towns):</strong> +150 claim blocks</li>
+        <li><strong>Large nation (11+ towns):</strong> +300 claim blocks</li>
+      </ul>
+      <p>Use <code>/nation</code> to check your nation's current bonus.</p>
+
+      <h3>Method 3: Milestone Rewards (Staff-Reviewed)</h3>
+      <p>As your town grows and builds, you can apply for milestone reviews in Discord. Staff evaluate your town <strong>sequentially from M1 upward</strong> — you must complete earlier milestones before applying for later ones. Each milestone grants bonus claim blocks.</p>
+      
+      <table class="milestone-table">
+        <thead>
+          <tr><th>Milestone</th><th>Reward</th><th>Requirements</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>M1</strong></td><td class="reward">+150 blocks</td>
+            <td>10 standard buildings · 1 large building</td>
+          </tr>
+          <tr><td><strong>M2</strong></td><td class="reward">+300 blocks</td>
+            <td>20 standard buildings · 1 large building · <strong>1 specialty building</strong></td>
+          </tr>
+          <tr><td><strong>M3</strong></td><td class="reward">+500 blocks</td>
+            <td>30 standard buildings · 3 large buildings · <strong>2 specialty buildings</strong> (different types)</td>
+          </tr>
+          <tr><td><strong>M4</strong></td><td class="reward">+700 blocks</td>
+            <td>40 standard buildings · 3 large buildings · <strong>3 specialty buildings</strong> (all distinct)</td>
+          </tr>
+          <tr><td><strong>M5</strong></td><td class="reward">+1200 blocks</td>
+            <td>50 standard buildings · 4 large buildings · <strong>Capital building</strong> (town hall, parliament, etc. — does not count as specialty)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="building-def">
+        <strong>Building Definitions:</strong>
+        <ul style="margin: 10px 0 0 20px;">
+          <li><strong>Standard:</strong> 8×8 minimum footprint, fully enclosed (walls + roof)</li>
+          <li><strong>Large:</strong> 16×16 minimum (1 full chunk), visually prominent</li>
+          <li><strong>Specialty:</strong> 8+ chunks total, civic/military/economic/industrial/maritime function, visually distinct. Examples: Port, Armoury, University, Grand Market, Cathedral. <em>Factories and Capital buildings excluded.</em></li>
+        </ul>
+      </div>
+
+      <div class="specialty-grid">
+        <span class="specialty-tag">Port</span>
+        <span class="specialty-tag">Lighthouse</span>
+        <span class="specialty-tag">Shipyard</span>
+        <span class="specialty-tag">Armoury</span>
+        <span class="specialty-tag">Barracks</span>
+        <span class="specialty-tag">Training Grounds</span>
+        <span class="specialty-tag">Cathedral</span>
+        <span class="specialty-tag">University</span>
+        <span class="specialty-tag">Grand Market</span>
+        <span class="specialty-tag">Bank</span>
+        <span class="specialty-tag">Refinery</span>
+        <span class="specialty-tag">Engineering Hall</span>
+      </div>
+
+      <p><strong>How to apply:</strong> Open a Discord support ticket and request milestone evaluation. Staff will check your builds and award all completed milestones at once.</p>
+
+      <h3>Method 4: Weekly Rankings</h3>
+      <p>Every week, the server runs ranking events (check Discord for details). Winning towns receive <strong>bonus claim blocks</strong> as prizes. Amounts vary weekly — participate to earn extra land!</p>
+
+      <h3>Method 5: Purchasing Bonus Claims</h3>
+      <p>You can directly buy additional claim blocks using town money:</p>
+      <div class="command-item"><code>/town buy bonus [#]</code> <span>Purchase bonus claim blocks</span></div>
+      <p>Cost scales with each purchase. Check current price with <code>/town</code>.</p>
+
+      <h3>The Claiming Process Itself</h3>
+      <p>Once you have claim blocks available, claiming chunks costs money from your town bank:</p>
+      <ul>
+        <li>First chunk: <strong>$5.00</strong></li>
+        <li>Each subsequent claim: <strong>+2%</strong> more than previous</li>
+        <li>Maximum cost: <strong>$175 per chunk</strong></li>
+        <li>Unclaim refund: <strong>15%</strong> of original cost</li>
+      </ul>
       
       <div class="command-box">
         <div class="command-item"><code>/town claim</code> <span>Claim current chunk</span></div>
-        <div class="command-item"><code>/town claim auto [num]</code> <span>Claim outward automatically</span></div>
-        <div class="command-item"><code>/town unclaim</code> <span>Unclaim (15% refund)</span></div>
-        <div class="command-item"><code>/town deposit [amount]</code> <span>Add money for claims</span></div>
+        <div class="command-item"><code>/town claim auto [num]</code> <span>Claim multiple chunks outward</span></div>
+        <div class="command-item"><code>/town unclaim</code> <span>Remove claim (refunds 15%)</span></div>
+        <div class="command-item"><code>/town deposit [amt]</code> <span>Add money for claiming</span></div>
       </div>
       
-      <p><strong>Claim limits:</strong> Each resident = 10 claim blocks. That's the only limit. No outposts (use embassies instead).</p>
-      
-      <div class="notice-box tip">
-        <i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Claim in a circle around your homeblock, not a line. Makes your town harder to bypass.
-      </div>
+      <p><strong>Distance rules:</strong> Your homeblock has a 4-chunk protection buffer — no one can claim within 4 chunks of it. Towns in the same nation can claim directly adjacent (no buffer).</p>
     </div>
 
-    <!-- SECTION 3 - Permissions (what matters) -->
-    <div class="guide-section" id="section3">
-      <h2>3. Permissions (Who can do what)</h2>
+    <!-- SECTION 3 - Permissions -->
+    <div class="guide-section">
+      <h2>3. Permissions (Who Can Build/Fight)</h2>
       
       <p><strong>Groups:</strong> resident (town members), nation, ally, outsider</p>
-      <p><strong>Actions:</strong> build, destroy, switch (buttons/doors), itemuse, pvp</p>
+      <p><strong>Actions:</strong> build, destroy, switch (buttons/doors/levers), itemuse, pvp</p>
       
       <div class="command-box">
-        <div class="command-item"><code>/town set perm outsider build off</code> <span>Most common setting</span></div>
+        <div class="command-item"><code>/town set perm outsider build off</code> <span>Stop randoms building</span></div>
         <div class="command-item"><code>/town set perm resident pvp off</code> <span>No friendly fire</span></div>
         <div class="command-item"><code>/town set perm ally switch on</code> <span>Allies can use doors</span></div>
       </div>
       
-      <h3>Outlaws (problem players)</h3>
-      <p><code>/town outlaw add [player]</code> — They can't enter your town, can be killed anywhere inside, and get jailed 2h if killed here.</p>
+      <h3>Outlaws</h3>
+      <p><code>/town outlaw add [player]</code> — They can't enter your town, can be attacked anywhere inside, and are jailed for 2 hours if killed here.</p>
     </div>
 
-    <!-- SECTIONS 4-7 Condensed -->
-    <div class="guide-section" id="section4">
-      <h2>4. Taxes & Upkeep (The bills)</h2>
-      <p><strong>Daily cost:</strong> $2 per claimed chunk. Paid from town bank. If bank hits $0, town enters bankruptcy and is deleted after 7 days.</p>
-      <p><strong>Income:</strong> Set resident tax (<code>/town set tax 50</code>) or plot tax. Players pay automatically each day.</p>
-    </div>
-
-    <div class="guide-section" id="section5">
-      <h2>5. Plot Types (Special zones)</h2>
-      <p><code>/plot set type [type]</code> — Changes the current chunk's purpose:</p>
-      <ul>
-        <li><strong>shop</strong> — Commercial (blue C on map)</li>
-        <li><strong>arena</strong> — PvP always on</li>
-        <li><strong>embassy</strong> — $5k, allows foreign teleport (requires staff approval)</li>
-        <li><strong>jail</strong> — Prison cells</li>
-        <li><strong>wilds</strong> — Harvest only, no building</li>
-      </ul>
-    </div>
-
-    <div class="guide-section" id="section6">
-      <h2>6. Nations (Join or start one)</h2>
-      <p><strong>Joining:</strong> <code>/nation join [name]</code> — Request to join existing nation.</p>
-      <p><strong>Creating:</strong> Need 5 residents, $10k in bank. <code>/nation new [name]</code></p>
-      <p><strong>Benefits:</strong> Nation chat (/nc), share land borders, mutual defense.</p>
-    </div>
-
-    <div class="guide-section" id="section7">
-      <h2>7. Teleportation (How to move)</h2>
-      <ul>
-        <li><strong>Your town:</strong> <code>/town spawn</code> — Free, 30s cooldown</li>
-        <li><strong>Nation capital:</strong> <code>/nation spawn</code> — $5, 30s cooldown</li>
-        <li><strong>Other towns:</strong> ❌ Not allowed directly — must use embassies</li>
-        <li><strong>Your embassy:</strong> <code>/town outpost</code> — $500, 1h cooldown</li>
-      </ul>
-    </div>
-
-    <!-- REFERENCE SECTION - All stats, technical data, and "nice to knows" moved here -->
-    <div class="reference-section" id="reference">
-      <h2><i class="fas fa-book"></i> Technical Reference & Advanced Stats</h2>
-      <p><em>For players who want the exact numbers. Not required reading to play the game.</em></p>
+    <!-- SECTION 4 - Taxes & Upkeep -->
+    <div class="guide-section">
+      <h2>4. Taxes & Upkeep</h2>
+      <p><strong>Daily upkeep:</strong> $2 per claimed chunk, paid from town bank at midnight EST. If bank hits $0, town enters bankruptcy and is deleted after 7 days.</p>
+      <p><strong>Overclaiming penalty:</strong> If you claim more land than your resident count allows, pay $100 per extra chunk per day.</p>
       
-      <div class="reference-grid">
-        <div class="ref-block">
-          <h3>Claim Costs</h3>
-          <table class="ref-table">
+      <h3>Income Sources</h3>
+      <div class="command-box">
+        <div class="command-item"><code>/town set tax [amount]</code> <span>Per-resident daily tax (max $1k)</span></div>
+        <div class="command-item"><code>/town set plottax [amount]</code> <span>Tax on claimed plots</span></div>
+        <div class="command-item"><code>/town deposit [amount]</code> <span>Add personal money</span></div>
+      </div>
+    </div>
+
+    <!-- SECTION 5 - Plot Types -->
+    <div class="guide-section">
+      <h2>5. Plot Types</h2>
+      <p><code>/plot set type [type]</code> — Changes current chunk's purpose:</p>
+      <ul>
+        <li><strong>shop</strong> — Commercial district (blue C on map)</li>
+        <li><strong>arena</strong> — PvP always on</li>
+        <li><strong>embassy</strong> — $5k cost, allows foreign teleport (requires staff approval)</li>
+        <li><strong>jail</strong> — Prison cells (see jail section)</li>
+        <li><strong>farm</strong> — Agricultural zone</li>
+        <li><strong>wilds</strong> — Harvest only, no building</li>
+        <li><strong>inn</strong> — Visitors can set bed here</li>
+      </ul>
+    </div>
+
+    <!-- SECTION 6 - Nations -->
+    <div class="guide-section">
+      <h2>6. Nations</h2>
+      <p><strong>Join:</strong> <code>/nation join [name]</code> — Request to join existing nation.</p>
+      <p><strong>Create:</strong> Need 5 residents, $10k in town bank. <code>/nation new [name]</code></p>
+      <p><strong>Benefits:</strong> Nation chat (<code>/nc</code>), share borders, claim bonuses, mutual defense.</p>
+    </div>
+
+    <!-- SECTION 7 - Jail System -->
+    <div class="guide-section">
+      <h2>7. Jail System</h2>
+      <p>Set a jail plot with <code>/plot set type jail</code>. When outlaws or enemies die in your town, they're automatically jailed here.</p>
+      <ul>
+        <li><strong>Setup cost:</strong> $1,000 one-time</li>
+        <li><strong>Prisoner cost:</strong> $250 per hour (paid by town)</li>
+        <li><strong>Bail amounts:</strong> $1k standard / $5k mayor / $10k king</li>
+        <li><strong>Max sentence:</strong> 12 hours</li>
+      </ul>
+      <p><strong>Note:</strong> Jailed players can still use ender pearls — build cells accordingly.</p>
+    </div>
+
+    <!-- SECTION 8 - Embassy System -->
+    <div class="guide-section">
+      <h2>8. Embassy System (Cross-Nation Travel)</h2>
+      <p>Since you can't directly teleport to towns outside your nation, embassies are the only way to establish fast travel between different nations.</p>
+      
+      <h3>Process:</h3>
+      <ol>
+        <li>Travel to target town (physically)</li>
+        <li>They set a plot to embassy: <code>/plot set type embassy</code> (costs them $5,000)</li>
+        <li>Build an embassy structure (government-style building)</li>
+        <li>Apply for staff approval in Discord with screenshots</li>
+        <li>Once approved, use <code>/town outpost</code> to teleport there ($500, 1h cooldown)</li>
+      </ol>
+    </div>
+
+    <!-- REFERENCE SECTION - All technical data -->
+    <div class="reference-section">
+      <h2><i class="fas fa-calculator"></i> Technical Reference</h2>
+      <p><em>Detailed numbers for those who want them. Not required reading.</em></p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        <div>
+          <h3 style="color: var(--accent-teal);">Claim Cost Progression</h3>
+          <table class="specs-table">
             <tr><th>Chunk #</th><th>Cost</th></tr>
             <tr><td>1</td><td>$5.00</td></tr>
             <tr><td>10</td><td>$6.10</td></tr>
+            <tr><td>25</td><td>$8.21</td></tr>
             <tr><td>50</td><td>$13.45</td></tr>
-            <tr><td>100</td><td>$36.10</td></tr>
-            <tr><td>150+</td><td>$175 (max)</td></tr>
-          </table>
-          <p>Unclaim refund: 15%</p>
-        </div>
-        
-        <div class="ref-block">
-          <h3>Building Standards</h3>
-          <ul style="margin: 0; padding-left: 20px;">
-            <li><strong>Standard:</strong> 8×8 min, enclosed</li>
-            <li><strong>Large:</strong> 16×16 min, prominent</li>
-            <li><strong>Specialty:</strong> 8+ chunks, unique function (port, uni, etc.)</li>
-          </ul>
-        </div>
-        
-        <div class="ref-block">
-          <h3>Milestone Rewards</h3>
-          <table class="ref-table">
-            <tr><th>Milestone</th><th>Bonus Claims</th></tr>
-            <tr><td>M1</td><td>+150</td></tr>
-            <tr><td>M2</td><td>+300</td></tr>
-            <tr><td>M3</td><td>+500</td></tr>
-            <tr><td>M4</td><td>+700</td></tr>
-            <tr><td>M5</td><td>+1200</td></tr>
+            <tr><td>75</td><td>$22.05</td></tr>
+            <tr><td>100+</td><td>$175 (max)</td></tr>
           </table>
         </div>
         
-        <div class="ref-block">
-          <h3>Jail System</h3>
-          <ul style="margin: 0; padding-left: 20px;">
-            <li>Setup: $1,000</li>
-            <li>Prisoner cost: $250/hour</li>
-            <li>Max sentence: 12 hours</li>
-            <li>Bail: $1k standard / $5k mayor / $10k king</li>
-          </ul>
-        </div>
-        
-        <div class="ref-block">
-          <h3>Ranks & Permissions</h3>
-          <ul style="margin: 0; padding-left: 20px;">
-            <li><strong>co-mayor:</strong> All powers except delete town</li>
+        <div>
+          <h3 style="color: var(--accent-teal);">Ranks</h3>
+          <ul>
+            <li><strong>co-mayor:</strong> All but delete town</li>
             <li><strong>assistant:</strong> Invite/kick, claim/unclaim</li>
             <li><strong>sheriff:</strong> Jail management</li>
             <li><strong>helper:</strong> Set permissions</li>
           </ul>
         </div>
         
-        <div class="ref-block">
-          <h3>PvP Death Costs</h3>
-          <p>Lose 5% of personal balance (max $1,000) to killer. PvP only — monsters don't cost money.</p>
+        <div>
+          <h3 style="color: var(--accent-teal);">PvP Death</h3>
+          <p>Lose 5% of personal balance (max $1,000) to killer. PvP only — monsters free.</p>
         </div>
       </div>
     </div>
