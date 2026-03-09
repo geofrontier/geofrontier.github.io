@@ -287,11 +287,48 @@
       color: var(--accent-teal);
       padding: 4px 8px;
       border-radius: 4px;
-      min-width: 180px;
+      min-width: 200px;
+      font-family: 'Consolas', monospace;
     }
 
     .command-item span {
       color: var(--text-muted);
+    }
+
+    /* Walkthrough boxes */
+    .walkthrough-box {
+      background: rgba(45, 212, 191, 0.08);
+      border: 1px solid var(--accent-teal);
+      border-radius: 8px;
+      padding: 20px 25px;
+      margin: 25px 0;
+    }
+
+    .walkthrough-box h4 {
+      color: var(--accent-teal);
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-family: 'Cinzel', serif;
+    }
+
+    .walkthrough-step {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+      align-items: flex-start;
+    }
+
+    .walkthrough-step .step-num {
+      background: var(--accent-gold);
+      color: var(--primary-dark);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
     }
 
     /* Image Styles */
@@ -416,6 +453,11 @@
         flex-direction: column;
         align-items: flex-start;
       }
+      
+      .walkthrough-step {
+        flex-direction: column;
+        gap: 5px;
+      }
     }
   </style>
 </head>
@@ -473,8 +515,8 @@
         <ul>
           <li><strong>3 Army Groups</strong> per nation</li>
           <li><strong>3 Regiments</strong> per group</li>
+          <li><strong>Must be in a regiment</strong> to damage Nexus</li>
           <li>Kills earn <strong>Regiment Points (RP)</strong></li>
-          <li>RP buys <strong>formations</strong> (combat buffs)</li>
         </ul>
       </div>
       
@@ -538,7 +580,7 @@
       </div>
     </section>
 
-    <!-- Section 2: Army System -->
+    <!-- Section 2: Army System (RESTORED with full mechanics) -->
     <section class="guide-section" id="army-system">
       <h2><i class="fas fa-users"></i> 2. Army System</h2>
 
@@ -547,36 +589,73 @@
         <figcaption>Regiment management interface</figcaption>
       </div>
       
-      <p>To wage war, you need an organized military. The army system provides structure, chain of command, and tactical advantages through Regiment Points.</p>
+      <p><strong>Critical rule:</strong> To damage an enemy Nexus during a siege, you <strong>must be a member of a regiment</strong>. Players not in a regiment cannot deal damage to Nexuses.</p>
 
       <h3>Army Hierarchy</h3>
       <ul>
         <li><strong>3 Army Groups</strong> maximum per nation</li>
-        <li><strong>3 Regiments</strong> maximum per army group</li>
+        <li><strong>3 Regiments</strong> maximum per army group (Regiments 1, 2, and 3)</li>
         <li><strong>General</strong> leads each army group</li>
-        <li><strong>Regiment Leader</strong> leads each regiment</li>
+        <li><strong>Regiment Leader</strong> leads each individual regiment</li>
       </ul>
 
-      <h3>Creating an Army</h3>
-      <p>The nation leader starts by joining a regiment:</p>
-      <div class="command-item"><code>/army join (regiment)</code> <span>First use creates the army group and regiment</span></div>
-      <p>After creation, appoint leaders:</p>
+      <h3>Joining a Regiment</h3>
+      <p>Any nation member can join a regiment using:</p>
+      <div class="command-box">
+        <div class="command-item"><code>/army join 1</code> <span>Join Regiment 1</span></div>
+        <div class="command-item"><code>/army join 2</code> <span>Join Regiment 2</span></div>
+        <div class="command-item"><code>/army join 3</code> <span>Join Regiment 3</span></div>
+      </div>
+      <p>The first person to join a regiment (usually the nation leader) automatically creates that regiment and becomes its leader.</p>
+
+      <h3>Appointing Leaders</h3>
+      <p>Once regiments exist, leaders can be appointed through the Nexus GUI or commands:</p>
       <ul>
-        <li>Leader appoints <strong>Generals</strong> for each army group</li>
-        <li>Generals appoint <strong>Regiment Leaders</strong> for their three regiments</li>
+        <li><strong>Nation Leader</strong> can appoint Generals for each Army Group</li>
+        <li><strong>Generals</strong> can appoint Regiment Leaders for the three regiments under them</li>
       </ul>
+      
+      <div class="command-box">
+        <div class="command-item"><code>/army leader set [player] 1</code> <span>Set player as Regiment 1 leader</span></div>
+        <div class="command-item"><code>/army leader remove [player]</code> <span>Remove regiment leader status</span></div>
+      </div>
 
       <h3>Regiment Points (RP) & Formations</h3>
-      <p>When a regiment member kills an enemy during war or raids, the regiment earns <strong>Regiment Points (RP)</strong>. These are pooled and can be spent by regiment leaders on <strong>formations</strong>—temporary buffs for all regiment members.</p>
+      <p>When a regiment member kills an enemy player during war or raids, their regiment earns <strong>Regiment Points (RP)</strong>. These are pooled at the regiment level and can be spent by regiment leaders on <strong>formations</strong>—temporary buffs for all regiment members.</p>
+
+      <div class="walkthrough-box">
+        <h4>How Formations Work</h4>
+        <div class="walkthrough-step">
+          <div class="step-num">1</div>
+          <div class="step-content">Regiment earns RP from player kills during conflicts</div>
+        </div>
+        <div class="walkthrough-step">
+          <div class="step-num">2</div>
+          <div class="step-content">Regiment leader opens Nexus GUI and selects a formation to purchase</div>
+        </div>
+        <div class="walkthrough-step">
+          <div class="step-num">3</div>
+          <div class="step-content">Formation activates, granting combat buffs to all regiment members in the area</div>
+        </div>
+        <div class="walkthrough-step">
+          <div class="step-num">4</div>
+          <div class="step-content">Buffs last for a limited duration — use strategically!</div>
+        </div>
+      </div>
 
       <div class="figure">
         <img src="images/defensiveformation.png" alt="Defensive Formation">
-        <figcaption>Purchase formations for combat buffs</figcaption>
+        <figcaption>Purchase formations through the Nexus GUI for tactical advantages</figcaption>
       </div>
 
       <div class="callout tip">
         <i class="fas fa-lightbulb"></i>
-        <p><strong>Leadership tip:</strong> Appoint regiment leaders so they can purchase formations in real-time during battle, without needing to contact the General.</p>
+        <p><strong>Leadership tip:</strong> Appoint regiment leaders so they can purchase formations in real-time during battle, without needing to contact the General. This creates a more responsive fighting force.</p>
+      </div>
+      
+      <div class="callout warning">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Remember:</strong> If you're not in a regiment, you cannot damage the enemy Nexus during sieges. Join a regiment before war is declared.</p>
       </div>
     </section>
 
@@ -591,6 +670,7 @@
         <li><strong>PvP:</strong> Forced between warring parties</li>
         <li><strong>Block destruction:</strong> Enabled — attackers can breach walls</li>
         <li><strong>Nexus:</strong> Vulnerable (1,000 HP becomes the target)</li>
+        <li><strong>Nexus damage:</strong> Only regiment members can damage the Nexus</li>
         <li><strong>Duration:</strong> No time limit — continues until decisive conclusion</li>
       </ul>
 
