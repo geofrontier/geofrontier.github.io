@@ -4,45 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shop — GeoFrontier Minecraft Server</title>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <link rel="stylesheet" href="css/styles.css">
-  
+
   <style>
-    /* ─── Currency Selector ─── */
-    .currency-selector-bar {
-      background: rgba(15, 23, 42, 0.85);
-      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-      padding: 10px 20px;
+    /* ── Currency Bar ── */
+    .currency-bar {
+      background: rgba(2, 6, 23, 0.92);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      padding: 9px 24px;
       display: flex;
       justify-content: flex-end;
       align-items: center;
       gap: 10px;
+      font-family: 'Inter', sans-serif;
     }
 
-    .currency-selector-bar label {
+    .currency-bar label {
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    .currency-selector-bar label i {
+    .currency-bar label i {
       color: var(--accent-gold);
+      font-size: 0.8rem;
     }
 
     .currency-select {
-      background: rgba(30, 41, 59, 0.9);
+      background: rgba(30, 41, 59, 0.95);
       color: var(--text-light);
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      border-radius: 8px;
-      padding: 6px 14px 6px 10px;
-      font-size: 0.9rem;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 6px;
+      padding: 5px 28px 5px 10px;
+      font-size: 0.82rem;
       font-family: 'Inter', sans-serif;
       cursor: pointer;
       outline: none;
@@ -51,8 +53,7 @@
       appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23d4af37'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 10px center;
-      padding-right: 28px;
+      background-position: right 9px center;
     }
 
     .currency-select:hover,
@@ -60,83 +61,131 @@
       border-color: var(--accent-gold);
     }
 
-    /* ─── Shop Header ─── */
-    .shop-header {
+    /* ── Shop Hero ── */
+    .shop-hero {
       position: relative;
-      background: 
-        linear-gradient(rgba(11, 17, 32, 0.88), rgba(11, 17, 32, 0.96)),
+      background:
+        linear-gradient(rgba(11, 17, 32, 0.87), rgba(11, 17, 32, 0.95)),
         url('/images/MapChart_Map.png') center/cover no-repeat;
       color: white;
       text-align: center;
-      padding: 90px 20px 70px;
+      padding: 110px 20px 80px;
       border-bottom: 2px solid var(--accent-gold);
       overflow: hidden;
     }
 
-    .shop-header::before {
+    .shop-hero::before {
       content: '';
       position: absolute;
       inset: 0;
       background:
         radial-gradient(circle at 20% 50%, rgba(45, 212, 191, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 80% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+        radial-gradient(circle at 80% 25%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
       z-index: 0;
     }
 
-    .shop-header-content {
+    .shop-hero-content {
       max-width: 820px;
       margin: 0 auto;
       position: relative;
       z-index: 1;
     }
 
-    .shop-header h1 {
-      font-family: 'Cinzel', serif;
+    .shop-hero-icon {
       font-size: 3.2rem;
+      color: var(--accent-gold);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .shop-hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
       margin-bottom: 14px;
       background: linear-gradient(to right, #f5e6ca, #d4af37);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      text-shadow: none;
     }
 
-    .shop-header p {
+    .shop-hero p {
       font-size: 1.15rem;
-      opacity: 0.9;
+      color: var(--text-light);
+      opacity: 0.88;
       max-width: 580px;
       margin: 0 auto 28px;
-      color: var(--text-light);
+      line-height: 1.65;
     }
 
-    .shop-icon {
-      font-size: 3.5rem;
-      margin-bottom: 20px;
-      color: var(--accent-gold);
+    .hero-subtitle {
+      font-size: 1rem;
+      color: var(--accent-teal);
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 32px;
     }
 
-    /* ─── Layout ─── */
-    .shop-container {
+    /* ── Page container ── */
+    .shop-wrap {
       max-width: 1100px;
-      margin: 56px auto;
+      margin: 60px auto;
       padding: 0 20px;
     }
 
-    /* ─── Ranks Grid ─── */
+    /* ── Section heading ── */
+    .section-heading {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-heading h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.4rem;
+      color: var(--accent-gold);
+      margin-bottom: 12px;
+    }
+
+    .section-heading p {
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+      line-height: 1.7;
+      font-size: 0.97rem;
+    }
+
+    /* ── Donation-only badge ── */
+    .donation-notice {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      color: var(--accent-gold);
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+    }
+
+    /* ── Ranks grid ── */
     .ranks-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
       gap: 36px;
       margin-bottom: 70px;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 960px) {
       .ranks-grid { grid-template-columns: 1fr; }
+      .shop-hero h1 { font-size: 2.5rem; }
     }
 
-    /* ─── Rank Cards ─── */
+    /* ── Rank Card ── */
     .rank-card {
-      background: linear-gradient(150deg, rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.97));
-      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
+      border-radius: 16px;
       overflow: hidden;
       box-shadow: var(--shadow-heavy);
       border: 1px solid rgba(212, 175, 55, 0.18);
@@ -144,279 +193,232 @@
       position: relative;
     }
 
+    /* Top accent bar — mirrors .card::before in styles.css */
+    .rank-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      z-index: 2;
+    }
+
+    .sponsor-card::before {
+      background: linear-gradient(90deg, #9b2dca, #d966ff);
+    }
+
+    .sponsorplus-card::before {
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-rust));
+    }
+
     .rank-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(212, 175, 55, 0.45);
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     }
 
-    /* Sponsor accent */
-    .rank-card.sponsor-card {
-      border-color: rgba(212, 0, 255, 0.22);
-    }
-    .rank-card.sponsor-card:hover {
-      border-color: rgba(212, 0, 255, 0.55);
-    }
+    .sponsor-card:hover     { border-color: rgba(217, 102, 255, 0.4); }
+    .sponsorplus-card:hover { border-color: rgba(212, 175, 55, 0.5); }
 
-    /* Sponsor+ accent */
-    .rank-card.sponsorplus-card {
-      border-color: rgba(255, 170, 0, 0.28);
-    }
-    .rank-card.sponsorplus-card:hover {
-      border-color: rgba(255, 170, 0, 0.6);
-      box-shadow: 0 24px 48px rgba(255, 170, 0, 0.12);
-    }
-
-    /* "Best Value" ribbon for Sponsor+ */
+    /* Best Value ribbon */
     .ribbon {
       position: absolute;
-      top: 18px;
-      right: -10px;
-      background: linear-gradient(135deg, #ffaa00, #d4af37);
-      color: #0f1726;
-      font-size: 0.72rem;
+      top: 20px; right: 0;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-rust));
+      color: #fff;
+      font-size: 0.7rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 5px 18px 5px 12px;
+      padding: 5px 14px 5px 12px;
       border-radius: 4px 0 0 4px;
       z-index: 5;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      box-shadow: -2px 2px 10px rgba(0,0,0,0.4);
     }
 
-    .ribbon::after {
-      content: '';
-      position: absolute;
-      right: -10px;
-      top: 0;
-      border-width: 13px 10px 13px 0;
-      border-style: solid;
-      border-color: transparent;
-      border-left-color: #d4af37;
-    }
-
-    /* ─── Rank Header ─── */
+    /* ── Rank Header ── */
     .rank-header {
-      padding: 32px 28px 24px;
+      padding: 36px 28px 26px;
       text-align: center;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
       position: relative;
-      overflow: hidden;
-    }
-
-    .rank-header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.04), transparent);
-      z-index: 0;
     }
 
     .rank-icon {
-      font-size: 3.2rem;
+      font-size: 3rem;
       margin-bottom: 14px;
-      position: relative;
-      z-index: 1;
       display: block;
+      line-height: 1;
     }
 
     .rank-title {
       font-family: 'Cinzel', serif;
-      font-size: 2.1rem;
-      margin: 0 0 10px;
-      position: relative;
-      z-index: 1;
+      font-size: 2.2rem;
+      margin: 0 0 6px;
     }
 
-    .rank-subtitle {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin: 0 0 14px;
-      position: relative;
-      z-index: 1;
-      letter-spacing: 0.06em;
+    .rank-tier {
+      font-size: 0.78rem;
       text-transform: uppercase;
-    }
-
-    .rank-price {
-      font-size: 2.4rem;
-      font-weight: 700;
-      margin: 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    .rank-price .currency-sym {
-      font-size: 1.3rem;
-      vertical-align: super;
-      margin-right: 2px;
-    }
-
-    .rank-price .price-note {
-      font-size: 0.85rem;
-      font-weight: 400;
+      letter-spacing: 0.12em;
       color: var(--text-muted);
-      display: block;
-      margin-top: 4px;
+      margin-bottom: 18px;
+    }
+
+    .rank-price-display {
+      font-size: 2.6rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .rank-price-note {
+      font-size: 0.82rem;
+      color: var(--text-muted);
     }
 
     /* Sponsor colours */
-    .sponsor-card .rank-title { color: #d966ff; }
-    .sponsor-card .rank-icon  { color: #d966ff; }
-    .sponsor-card .rank-price { color: #d966ff; }
+    .sponsor-card .rank-title         { color: #d966ff; }
+    .sponsor-card .rank-icon          { color: #d966ff; }
+    .sponsor-card .rank-price-display { color: #d966ff; }
 
     /* Sponsor+ colours */
-    .sponsorplus-card .rank-title { color: #ffaa00; }
-    .sponsorplus-card .rank-icon  { color: #ffaa00; }
-    .sponsorplus-card .rank-price { color: #ffaa00; }
+    .sponsorplus-card .rank-title         { color: var(--accent-gold); }
+    .sponsorplus-card .rank-icon          { color: var(--accent-gold); }
+    .sponsorplus-card .rank-price-display { color: var(--accent-gold); }
 
-    /* ─── Rank Body ─── */
+    /* ── Rank Body ── */
     .rank-body {
-      padding: 28px 30px;
+      padding: 28px 30px 10px;
     }
 
-    .rank-section {
-      margin-bottom: 24px;
-    }
-
-    .rank-section h4 {
-      color: var(--accent-gold);
-      margin: 0 0 14px;
+    .perks-label {
       font-family: 'Cinzel', serif;
-      font-size: 1.05rem;
+      font-size: 1rem;
+      color: var(--accent-gold);
       display: flex;
       align-items: center;
       gap: 9px;
+      margin-bottom: 16px;
     }
 
     .rank-perks {
       list-style: none;
       padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 9px;
+      margin: 0 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
     }
 
     .rank-perks li {
-      padding: 10px 14px 10px 38px;
-      position: relative;
-      color: var(--text-light);
-      line-height: 1.55;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 14px;
       background: rgba(255,255,255,0.03);
       border-radius: 8px;
-      font-size: 0.93rem;
+      border: 1px solid rgba(255,255,255,0.04);
+      color: var(--text-light);
+      font-size: 0.91rem;
+      line-height: 1.5;
+      transition: background 0.2s;
     }
 
-    .rank-perks li::before {
-      content: '✦';
-      position: absolute;
-      left: 13px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 0.7rem;
+    .rank-perks li:hover {
+      background: rgba(255,255,255,0.055);
     }
 
-    .sponsor-card .rank-perks li::before  { color: #d966ff; }
-    .sponsorplus-card .rank-perks li::before { color: #ffaa00; }
-
-    .perk-cmd {
-      font-family: 'Courier New', monospace;
-      font-size: 0.88em;
-      background: rgba(0,0,0,0.3);
-      padding: 1px 5px;
-      border-radius: 4px;
-      letter-spacing: -0.01em;
-    }
-
-    .perk-cooldown {
-      font-size: 0.78em;
-      opacity: 0.65;
-      margin-left: 4px;
-    }
-
-    /* Donation-only badge */
-    .donation-badge {
-      display: inline-flex;
+    .perk-bullet {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
       align-items: center;
-      gap: 6px;
-      margin-top: 20px;
-      padding: 7px 14px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      justify-content: center;
+      font-size: 0.45rem;
+      margin-top: 2px;
     }
 
-    .sponsor-card .donation-badge {
-      background: rgba(217, 102, 255, 0.1);
-      border: 1px solid rgba(217, 102, 255, 0.35);
+    .sponsor-card .perk-bullet {
+      background: rgba(217, 102, 255, 0.14);
       color: #d966ff;
     }
 
-    .sponsorplus-card .donation-badge {
-      background: rgba(255, 170, 0, 0.1);
-      border: 1px solid rgba(255, 170, 0, 0.35);
-      color: #ffaa00;
+    .sponsorplus-card .perk-bullet {
+      background: rgba(212, 175, 55, 0.14);
+      color: var(--accent-gold);
     }
 
-    /* ─── Buy Button ─── */
+    .perk-cmd {
+      font-family: 'Courier New', monospace;
+      font-size: 0.87em;
+      background: rgba(0,0,0,0.35);
+      padding: 1px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.07);
+      color: var(--text-light);
+    }
+
+    .perk-cd {
+      font-size: 0.78em;
+      color: var(--text-muted);
+      margin-left: 3px;
+    }
+
+    /* ── Rank Footer ── */
     .rank-footer {
-      padding: 6px 30px 32px;
-      text-align: center;
+      padding: 6px 30px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
     }
 
     .buy-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       padding: 15px 36px;
-      border-radius: 10px;
+      border-radius: 8px;
       font-weight: 700;
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       border: none;
       cursor: pointer;
       transition: all 0.3s ease;
       width: 100%;
-      max-width: 320px;
       text-decoration: none;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
       color: #fff;
     }
 
     .sponsor-card .buy-btn {
-      background: linear-gradient(135deg, #9b27b8, #d966ff);
-      box-shadow: 0 5px 20px rgba(217, 102, 255, 0.35);
+      background: linear-gradient(135deg, #7b1fa2, #d966ff);
+      box-shadow: 0 5px 18px rgba(217, 102, 255, 0.3);
     }
+
     .sponsor-card .buy-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 28px rgba(217, 102, 255, 0.55);
+      box-shadow: 0 10px 26px rgba(217, 102, 255, 0.5);
     }
 
     .sponsorplus-card .buy-btn {
-      background: linear-gradient(135deg, #b87800, #ffaa00);
-      box-shadow: 0 5px 20px rgba(255, 170, 0, 0.35);
-      color: #0f1726;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-rust));
+      box-shadow: 0 5px 18px rgba(183, 65, 14, 0.4);
     }
+
     .sponsorplus-card .buy-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 28px rgba(255, 170, 0, 0.55);
+      box-shadow: 0 10px 26px rgba(183, 65, 14, 0.6);
     }
 
-    /* ─── Comparison table ─── */
-    .compare-section {
-      margin: 0 0 70px;
+    /* ── Comparison Table ── */
+    .compare-wrap {
+      margin-bottom: 70px;
     }
 
-    .compare-section h2 {
-      font-family: 'Cinzel', serif;
-      color: var(--accent-gold);
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .compare-table-wrap {
+    .compare-table-scroll {
       overflow-x: auto;
       border-radius: 14px;
       border: 1px solid rgba(212, 175, 55, 0.18);
@@ -425,16 +427,21 @@
     .compare-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.92rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .compare-table thead tr {
+      background: rgba(11, 17, 32, 0.98);
     }
 
     .compare-table th {
-      padding: 16px 20px;
+      padding: 18px 22px;
       text-align: center;
       font-family: 'Cinzel', serif;
-      font-size: 1rem;
-      background: rgba(15, 23, 42, 0.95);
-      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      font-size: 0.95rem;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+      white-space: nowrap;
     }
 
     .compare-table th:first-child {
@@ -442,100 +449,127 @@
       color: var(--text-muted);
     }
 
-    .compare-table th.th-sponsor { color: #d966ff; }
-    .compare-table th.th-sponsorplus { color: #ffaa00; }
+    .compare-table th.col-sponsor     { color: #d966ff; }
+    .compare-table th.col-sponsorplus { color: var(--accent-gold); }
+
+    .compare-table tbody tr {
+      background: rgba(15, 23, 42, 0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: background 0.2s;
+    }
+
+    .compare-table tbody tr:last-child { border-bottom: none; }
+
+    .compare-table tbody tr:hover {
+      background: rgba(212, 175, 55, 0.04);
+    }
 
     .compare-table td {
-      padding: 12px 20px;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
+      padding: 13px 22px;
       color: var(--text-light);
-      background: rgba(20, 30, 50, 0.6);
+      text-align: center;
+      vertical-align: middle;
     }
-
-    .compare-table tr:last-child td { border-bottom: none; }
 
     .compare-table td:first-child {
+      text-align: left;
       color: var(--text-muted);
-      font-size: 0.88rem;
+      font-size: 0.86rem;
     }
 
-    .compare-table td:not(:first-child) {
-      text-align: center;
-    }
+    .yes-mark { color: var(--accent-teal); font-size: 1rem; }
+    .no-mark  { color: rgba(148, 163, 184, 0.3); font-size: 1rem; }
 
-    .check-yes { color: #2dd4bf; font-size: 1.1rem; }
-    .check-no  { color: rgba(255,255,255,0.18); font-size: 1.1rem; }
+    .price-row td           { font-weight: 700; font-size: 1rem; }
+    .price-sponsor          { color: #d966ff; }
+    .price-sponsorplus      { color: var(--accent-gold); }
 
-    .compare-table tr:hover td {
-      background: rgba(212, 175, 55, 0.05);
-    }
-
-    /* ─── Benefits ─── */
+    /* ── Benefits ── */
     .benefits-section {
-      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
       padding: 50px 40px;
-      border-radius: 18px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-heavy);
       border: 1px solid rgba(212, 175, 55, 0.2);
-      margin: 20px 0 60px;
+      margin-bottom: 60px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .benefits-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-rust));
     }
 
     .benefits-section h2 {
       font-family: 'Cinzel', serif;
       font-size: 2rem;
       color: var(--accent-gold);
-      margin: 0 0 12px;
+      margin-bottom: 12px;
+    }
+
+    .benefits-section > p {
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+      font-size: 0.95rem;
     }
 
     .benefits-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 28px;
-      margin-top: 36px;
     }
 
     .benefit-item i {
-      font-size: 2.2rem;
+      font-size: 2rem;
       color: var(--accent-teal);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
+      display: block;
     }
 
     .benefit-item h4 {
-      color: var(--accent-teal);
-      margin: 0 0 8px;
       font-family: 'Cinzel', serif;
-      font-size: 1rem;
+      color: var(--accent-teal);
+      font-size: 0.95rem;
+      margin-bottom: 8px;
     }
 
     .benefit-item p {
       color: var(--text-muted);
-      margin: 0;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       line-height: 1.6;
+      margin: 0;
     }
 
-    /* ─── Payment row ─── */
+    /* ── Payment box ── */
     .payment-box {
       background: rgba(30, 41, 59, 0.5);
-      padding: 28px 30px;
+      border: 1px solid rgba(212, 175, 55, 0.18);
       border-radius: 14px;
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      max-width: 580px;
+      padding: 30px;
+      max-width: 560px;
       margin: 0 auto 60px;
       text-align: center;
     }
 
     .payment-box h3 {
-      color: var(--accent-gold);
-      margin: 0 0 10px;
       font-family: 'Cinzel', serif;
-      font-size: 1.2rem;
+      color: var(--accent-gold);
+      font-size: 1.15rem;
+      margin-bottom: 10px;
     }
 
     .payment-box p {
       color: var(--text-muted);
-      margin: 0 0 20px;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
     }
 
     .payment-icons {
@@ -546,30 +580,31 @@
     }
 
     .payment-icons i {
-      font-size: 2rem;
+      font-size: 1.9rem;
       color: var(--text-muted);
       transition: color 0.2s;
     }
 
     .payment-icons i:hover { color: var(--accent-gold); }
 
-    /* ─── Responsive ─── */
+    /* ── Responsive ── */
     @media (max-width: 640px) {
-      .shop-header h1 { font-size: 2.3rem; }
-      .rank-body { padding: 20px; }
-      .rank-header { padding: 24px 20px 18px; }
-      .rank-footer { padding: 4px 20px 26px; }
-      .benefits-section { padding: 30px 20px; }
+      .shop-hero h1     { font-size: 2rem; }
+      .rank-body        { padding: 20px 18px 8px; }
+      .rank-header      { padding: 28px 18px 20px; }
+      .rank-footer      { padding: 6px 18px 24px; }
+      .benefits-section { padding: 32px 20px; }
+      .compare-table th,
+      .compare-table td { padding: 11px 14px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
   <div id="navbar-container"></div>
 
-  <!-- Currency selector bar -->
-  <div class="currency-selector-bar">
+  <!-- Currency bar -->
+  <div class="currency-bar">
     <label for="currency-select">
       <i class="fas fa-coins"></i> Display currency:
     </label>
@@ -580,218 +615,229 @@
     </select>
   </div>
 
-  <!-- Header container -->
   <div id="header-container"></div>
 
-  <!-- Shop Header -->
-  <header class="shop-header">
-    <div class="shop-header-content">
-      <div class="shop-icon">
-        <i class="fas fa-crown"></i>
-      </div>
+  <!-- Hero -->
+  <header class="shop-hero">
+    <div class="shop-hero-content">
+      <span class="shop-hero-icon"><i class="fas fa-crown"></i></span>
       <h1>GeoFrontier Shop</h1>
-      <p>Support the server and unlock exclusive donor perks. All purchases are one-time and permanent.</p>
-      <div style="margin-top: 28px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-        <a href="#ranks" class="btn">View Ranks</a>
+      <p>Support the server and unlock exclusive donor perks that fuel the world's wars, events, and custom development.</p>
+      <div class="hero-subtitle">Donation-Only Ranks &nbsp;·&nbsp; One-Time Purchase &nbsp;·&nbsp; Permanent Perks</div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="#ranks" class="btn">View Donor Ranks</a>
         <a href="index.html" class="btn btn-outline">Back to Home</a>
       </div>
     </div>
   </header>
 
-  <!-- Main content -->
-  <div class="shop-container">
+  <div class="shop-wrap">
 
     <!-- Section heading -->
-    <div style="text-align: center; margin-bottom: 48px;" id="ranks">
-      <h2 style="font-family: 'Cinzel', serif; color: var(--accent-gold); font-size: 2.5rem; margin-bottom: 14px;">
-        Donor Ranks
-      </h2>
-      <p style="color: var(--text-muted); max-width: 620px; margin: 0 auto; line-height: 1.7;">
-        GeoFrontier offers two exclusive donor ranks. These ranks are <strong style="color: var(--text-light);">donation-only</strong> — 
-        they cannot be unlocked through gameplay and directly fund server hosting, development, and events.
+    <div class="section-heading" id="ranks">
+      <h2>Donor Ranks</h2>
+      <p>
+        GeoFrontier has two exclusive donor ranks. They are
+        <strong style="color:var(--text-light);">donation-only</strong> —
+        no gameplay path unlocks them. Every dollar goes directly to server hosting,
+        custom plugin development, and community events.
       </p>
+      <div style="margin-top:16px;">
+        <span class="donation-notice"><i class="fas fa-lock"></i> Cannot be earned in-game</span>
+      </div>
     </div>
 
     <!-- Rank Cards -->
     <div class="ranks-grid">
 
       <!-- SPONSOR -->
-      <div class="rank-card sponsor-card">
+      <div class="rank-card sponsor-card fade-in">
         <div class="rank-header">
-          <span class="rank-icon"><i class="fas fa-totem-pole" style="color:#d966ff"></i>
-            <!-- fallback icon in case fa-totem-pole is unavailable -->
-          </span>
+          <span class="rank-icon"><i class="fas fa-gem"></i></span>
           <h3 class="rank-title">Sponsor</h3>
-          <p class="rank-subtitle">Donor Rank · Tier I</p>
-          <p class="rank-price">
-            <span class="currency-sym" data-sym="$">$</span><span class="price-val" data-usd="10" data-cad="13.99" data-eur="9.29">10</span>
-            <span class="price-note">One-time donation · USD</span>
-          </p>
+          <p class="rank-tier">Donor Rank · Tier I</p>
+          <div class="rank-price-display">
+            <span class="price-val" data-usd="$10" data-cad="CA$13.99" data-eur="€9.29">$10</span>
+          </div>
+          <p class="rank-price-note">One-time donation &nbsp;·&nbsp; <span class="currency-label">USD</span></p>
         </div>
 
         <div class="rank-body">
-          <div class="rank-section">
-            <h4><i class="fas fa-star"></i> Perks &amp; Commands</h4>
-            <ul class="rank-perks">
-              <li>
-                <span class="perk-cmd">/kit sponsor</span>
-                <span class="perk-cooldown">(24h cooldown)</span>
-              </li>
-              <li>
-                <span class="perk-cmd">/keyall war</span>
-                <span class="perk-cooldown">(48h cooldown)</span>
-              </li>
-              <li>
-                <span class="perk-cmd">/globalbuff</span>
-                <span class="perk-cooldown">(48h cooldown)</span>
-              </li>
-              <li>
-                <span class="perk-cmd">/vanity</span> — Glowing particle effect
-              </li>
-              <li>Sponsor badge displayed in chat</li>
-              <li>1.5× XP gain on the Battle Pass <span class="perk-cmd">/pass</span></li>
-              <li>1.5× rewards from <span class="perk-cmd">/playtime</span></li>
-            </ul>
-
-            <div style="display: flex; justify-content: center;">
-              <span class="donation-badge">
-                <i class="fas fa-lock"></i> Donation-only rank
-              </span>
-            </div>
-          </div>
+          <p class="perks-label"><i class="fas fa-star"></i> Perks &amp; Commands</p>
+          <ul class="rank-perks">
+            <li>
+              <span class="perk-bullet"><i class="fas fa-circle"></i></span>
+              <span><span class="perk-cmd">/kit sponsor</span><span class="perk-cd">(24h cooldown)</span></span>
+            </li>
+            <li>
+              <span class="perk-bullet"><i class="fas fa-circle"></i></span>
+              <span><span class="perk-cmd">/keyall war</span><span class="perk-cd">(48h cooldown)</span></span>
+            </li>
+            <li>
+              <span class="perk-bullet"><i class="fas fa-circle"></i></span>
+              <span><span class="perk-cmd">/globalbuff</span><span class="perk-cd">(48h cooldown)</span></span>
+            </li>
+            <li>
+              <span class="perk-bullet"><i class="fas fa-circle"></i></span>
+              <span><span class="perk-cmd">/vanity</span> — Glowing particle effect</span>
+            </li>
+            <li>
+              <span class="perk-bullet"><i class="fas fa-circle"></i></span>
+              <span>Sponsor badge displayed in chat</span>
+            </li>
+            <li>
+              <span class="perk-bullet"><i class="fas fa-circle"></i></span>
+              <span>1.5× XP on Battle Pass <span class="perk-cmd">/pass</span></span>
+            </li>
+            <li>
+              <span class="perk-bullet"><i class="fas fa-circle"></i></span>
+              <span>1.5× rewards from <span class="perk-cmd">/playtime</span></span>
+            </li>
+          </ul>
         </div>
 
         <div class="rank-footer">
           <a href="https://buy.geofrontier.net/sponsor" class="buy-btn" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-shopping-cart"></i>
-            <span>Purchase Sponsor — <span class="btn-price" data-usd="$10" data-cad="CA$13.99" data-eur="€9.29">$10</span></span>
+            Purchase Sponsor — <span class="btn-price" data-usd="$10" data-cad="CA$13.99" data-eur="€9.29">$10</span>
           </a>
+          <span class="donation-notice" style="font-size:0.78rem;padding:5px 14px;">
+            <i class="fas fa-lock"></i> Donation-only rank
+          </span>
         </div>
       </div>
 
       <!-- SPONSOR+ -->
-      <div class="rank-card sponsorplus-card">
+      <div class="rank-card sponsorplus-card fade-in delayed-1">
         <div class="ribbon">Best Value</div>
         <div class="rank-header">
-          <span class="rank-icon"><i class="fas fa-star" style="color:#ffaa00"></i></span>
-          <h3 class="rank-title">Sponsor<span style="color:#e03030;">+</span></h3>
-          <p class="rank-subtitle">Donor Rank · Tier II</p>
-          <p class="rank-price">
-            <span class="currency-sym" data-sym="$">$</span><span class="price-val" data-usd="20" data-cad="27.99" data-eur="18.59">20</span>
-            <span class="price-note">One-time donation · USD</span>
-          </p>
+          <span class="rank-icon"><i class="fas fa-fire"></i></span>
+          <h3 class="rank-title">Sponsor<span style="color:var(--accent-rust);">+</span></h3>
+          <p class="rank-tier">Donor Rank · Tier II</p>
+          <div class="rank-price-display">
+            <span class="price-val" data-usd="$20" data-cad="CA$27.99" data-eur="€18.59">$20</span>
+          </div>
+          <p class="rank-price-note">One-time donation &nbsp;·&nbsp; <span class="currency-label">USD</span></p>
         </div>
 
         <div class="rank-body">
-          <div class="rank-section">
-            <h4><i class="fas fa-star"></i> All Sponsor Perks, Plus:</h4>
-            <ul class="rank-perks">
-              <li>
-                <span class="perk-cmd">/kit sponsor+</span>
-                <span class="perk-cooldown">(24h cooldown)</span>
-              </li>
-              <li>
-                <span class="perk-cmd">/events</span>
-                <span class="perk-cooldown">(72h cooldown)</span> — trigger server events
-              </li>
-              <li>
-                <span class="perk-cmd">/holiday</span>
-                <span class="perk-cooldown">(1-week cooldown)</span> — seasonal world effects
-              </li>
-              <li>Immortalized with a sign / plaque at spawn</li>
-              <li>Sponsor<span style="color:#e03030; font-weight:700;">+</span> badge in chat</li>
-              <li>2× XP gain on the Battle Pass <span class="perk-cmd">/pass</span></li>
-              <li>2× rewards from <span class="perk-cmd">/playtime</span></li>
-            </ul>
-
-            <div style="display: flex; justify-content: center;">
-              <span class="donation-badge">
-                <i class="fas fa-lock"></i> Donation-only rank
-              </span>
-            </div>
-          </div>
+          <p class="perks-label"><i class="fas fa-star"></i> All Sponsor Perks, Plus:</p>
+          <ul class="rank-perks">
+            <li>
+              <span class="perk-bullet"><i class="fas fa-circle"></i></span>
+              <span><span class="perk-cmd">/kit sponsor+</span><span class="perk-cd">(24h cooldown)</span></span>
+            </li>
+            <li>
+              <span class="perk-bullet"><i class="fas fa-circle"></i></span>
+              <span><span class="perk-cmd">/events</span><span class="perk-cd">(72h cooldown)</span> — Trigger server events</span>
+            </li>
+            <li>
+              <span class="perk-bullet"><i class="fas fa-circle"></i></span>
+              <span><span class="perk-cmd">/holiday</span><span class="perk-cd">(1-week cooldown)</span> — Seasonal world effects</span>
+            </li>
+            <li>
+              <span class="perk-bullet"><i class="fas fa-circle"></i></span>
+              <span>Immortalized with a plaque at spawn</span>
+            </li>
+            <li>
+              <span class="perk-bullet"><i class="fas fa-circle"></i></span>
+              <span>Sponsor<strong style="color:var(--accent-rust);">+</strong> badge in chat</span>
+            </li>
+            <li>
+              <span class="perk-bullet"><i class="fas fa-circle"></i></span>
+              <span>2× XP on Battle Pass <span class="perk-cmd">/pass</span></span>
+            </li>
+            <li>
+              <span class="perk-bullet"><i class="fas fa-circle"></i></span>
+              <span>2× rewards from <span class="perk-cmd">/playtime</span></span>
+            </li>
+          </ul>
         </div>
 
         <div class="rank-footer">
           <a href="https://buy.geofrontier.net/sponsorplus" class="buy-btn" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-shopping-cart"></i>
-            <span>Purchase Sponsor+ — <span class="btn-price" data-usd="$20" data-cad="CA$27.99" data-eur="€18.59">$20</span></span>
+            Purchase Sponsor+ — <span class="btn-price" data-usd="$20" data-cad="CA$27.99" data-eur="€18.59">$20</span>
           </a>
+          <span class="donation-notice" style="font-size:0.78rem;padding:5px 14px;">
+            <i class="fas fa-lock"></i> Donation-only rank
+          </span>
         </div>
       </div>
 
-    </div>
-    <!-- End Rank Cards -->
+    </div><!-- end ranks-grid -->
 
     <!-- Comparison Table -->
-    <div class="compare-section">
-      <h2>Rank Comparison</h2>
-      <div class="compare-table-wrap">
+    <div class="compare-wrap">
+      <div class="section-heading" style="margin-bottom:30px;">
+        <h2>Rank Comparison</h2>
+      </div>
+      <div class="compare-table-scroll">
         <table class="compare-table">
           <thead>
             <tr>
               <th>Perk</th>
-              <th class="th-sponsor"><i class="fas fa-totem-pole"></i> Sponsor</th>
-              <th class="th-sponsorplus"><i class="fas fa-star"></i> Sponsor+</th>
+              <th class="col-sponsor"><i class="fas fa-gem" style="margin-right:6px;"></i>Sponsor</th>
+              <th class="col-sponsorplus"><i class="fas fa-fire" style="margin-right:6px;"></i>Sponsor+</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>/kit (24h)</td>
-              <td><span class="check-yes">✦</span></td>
-              <td><span class="check-yes">✦</span></td>
+              <td>/kit (24h cooldown)</td>
+              <td><span class="yes-mark">✦</span></td>
+              <td><span class="yes-mark">✦</span></td>
             </tr>
             <tr>
-              <td>/keyall war (48h)</td>
-              <td><span class="check-yes">✦</span></td>
-              <td><span class="check-yes">✦</span></td>
+              <td>/keyall war (48h cooldown)</td>
+              <td><span class="yes-mark">✦</span></td>
+              <td><span class="yes-mark">✦</span></td>
             </tr>
             <tr>
-              <td>/globalbuff (48h)</td>
-              <td><span class="check-yes">✦</span></td>
-              <td><span class="check-yes">✦</span></td>
+              <td>/globalbuff (48h cooldown)</td>
+              <td><span class="yes-mark">✦</span></td>
+              <td><span class="yes-mark">✦</span></td>
             </tr>
             <tr>
-              <td>/vanity (glowing effect)</td>
-              <td><span class="check-yes">✦</span></td>
-              <td><span class="check-yes">✦</span></td>
+              <td>/vanity — glowing effect</td>
+              <td><span class="yes-mark">✦</span></td>
+              <td><span class="yes-mark">✦</span></td>
             </tr>
             <tr>
               <td>Chat badge</td>
-              <td><span class="check-yes">✦</span></td>
-              <td><span class="check-yes">✦</span></td>
+              <td><span class="yes-mark">✦</span></td>
+              <td><span class="yes-mark">✦</span></td>
             </tr>
             <tr>
               <td>XP multiplier (/pass)</td>
-              <td style="color:#d966ff; font-weight:600;">1.5×</td>
-              <td style="color:#ffaa00; font-weight:600;">2×</td>
+              <td style="color:#d966ff;font-weight:600;">1.5×</td>
+              <td style="color:var(--accent-gold);font-weight:600;">2×</td>
             </tr>
             <tr>
-              <td>/playtime rewards multiplier</td>
-              <td style="color:#d966ff; font-weight:600;">1.5×</td>
-              <td style="color:#ffaa00; font-weight:600;">2×</td>
+              <td>/playtime reward multiplier</td>
+              <td style="color:#d966ff;font-weight:600;">1.5×</td>
+              <td style="color:var(--accent-gold);font-weight:600;">2×</td>
             </tr>
             <tr>
-              <td>/events (72h)</td>
-              <td><span class="check-no">—</span></td>
-              <td><span class="check-yes">✦</span></td>
+              <td>/events (72h cooldown)</td>
+              <td><span class="no-mark">—</span></td>
+              <td><span class="yes-mark">✦</span></td>
             </tr>
             <tr>
-              <td>/holiday (1-week)</td>
-              <td><span class="check-no">—</span></td>
-              <td><span class="check-yes">✦</span></td>
+              <td>/holiday (1-week cooldown)</td>
+              <td><span class="no-mark">—</span></td>
+              <td><span class="yes-mark">✦</span></td>
             </tr>
             <tr>
               <td>Immortalized at spawn</td>
-              <td><span class="check-no">—</span></td>
-              <td><span class="check-yes">✦</span></td>
+              <td><span class="no-mark">—</span></td>
+              <td><span class="yes-mark">✦</span></td>
             </tr>
-            <tr>
-              <td style="font-weight: 600; color: var(--text-light);">Price</td>
-              <td style="color:#d966ff; font-weight: 700;">
+            <tr class="price-row">
+              <td style="color:var(--text-light);font-weight:600;">Price</td>
+              <td class="price-sponsor">
                 <span class="price-val-table" data-usd="$10" data-cad="CA$13.99" data-eur="€9.29">$10</span>
               </td>
-              <td style="color:#ffaa00; font-weight: 700;">
+              <td class="price-sponsorplus">
                 <span class="price-val-table" data-usd="$20" data-cad="CA$27.99" data-eur="€18.59">$20</span>
               </td>
             </tr>
@@ -801,40 +847,37 @@
     </div>
 
     <!-- Why Support -->
-    <div class="benefits-section">
-      <h2><i class="fas fa-heart" style="color: #e03030; margin-right: 10px;"></i> Why Support GeoFrontier?</h2>
-      <p style="color: var(--text-muted); max-width: 660px; margin: 0 auto; line-height: 1.7;">
-        Every donation goes directly toward keeping the server online, funding custom development, 
-        and running in-game events for the community.
-      </p>
+    <div class="benefits-section fade-in">
+      <h2><i class="fas fa-heart" style="color:var(--accent-rust);margin-right:10px;"></i>Why Support GeoFrontier?</h2>
+      <p>Every donation keeps the world running — funding the infrastructure and development that makes GeoFrontier's custom geopolitical experience possible.</p>
       <div class="benefits-grid">
         <div class="benefit-item">
           <i class="fas fa-server"></i>
           <h4>Server Uptime</h4>
-          <p>High-performance hosting so the geopolitical world never goes dark.</p>
+          <p>High-performance hosting so the geopolitical world never goes dark mid-war.</p>
         </div>
         <div class="benefit-item">
           <i class="fas fa-code"></i>
           <h4>Custom Development</h4>
-          <p>Funding for bespoke plugins, nation mechanics, and world-building tools.</p>
+          <p>Funds bespoke plugins — warfare mechanics, factory systems, dangerous oceans and more.</p>
         </div>
         <div class="benefit-item">
           <i class="fas fa-flag"></i>
           <h4>Events &amp; Wars</h4>
-          <p>Resources for staff-run geopolitical events, diplomacy servers, and world wars.</p>
+          <p>Resources for staff-run world wars, diplomacy events, and seasonal content.</p>
         </div>
         <div class="benefit-item">
           <i class="fas fa-shield-alt"></i>
           <h4>Staff &amp; Moderation</h4>
-          <p>Maintain an active team keeping the world fair, balanced, and enjoyable.</p>
+          <p>Keeps an active team in-game ensuring fair play and a healthy community.</p>
         </div>
       </div>
     </div>
 
     <!-- Payment -->
     <div class="payment-box">
-      <h3><i class="fas fa-credit-card"></i> Secure Payments via Tebex</h3>
-      <p>All transactions are processed securely. Prices shown in your selected currency are approximate — final billing is in USD via Tebex.</p>
+      <h3><i class="fas fa-credit-card" style="margin-right:8px;"></i>Secure Payments via Tebex</h3>
+      <p>All transactions are processed securely. Non-USD prices are approximate — final billing is in USD through Tebex's secure checkout.</p>
       <div class="payment-icons">
         <i class="fab fa-cc-visa"></i>
         <i class="fab fa-cc-mastercard"></i>
@@ -843,68 +886,42 @@
       </div>
     </div>
 
-  </div>
-  <!-- End shop-container -->
+  </div><!-- end shop-wrap -->
 
-  <!-- Footer -->
   <div id="footer-container"></div>
+
+  <!-- Compass back-to-top (matches index.html) -->
+  <div class="compass" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fas fa-compass"></i>
+  </div>
 
   <script src="js/components-loader.js"></script>
 
   <script>
-    /* ─── Currency Switcher ─── */
-    const currencySelect = document.getElementById('currency-select');
-
-    const RATES = {
-      USD: { sym: '$',    label: 'USD' },
-      CAD: { sym: 'CA$',  label: 'CAD' },
-      EUR: { sym: '€',    label: 'EUR' }
-    };
-
+    /* ── Currency Switcher ── */
     function applyCurrency(cur) {
-      const info = RATES[cur];
-
-      // Update big price displays
+      const c = cur.toLowerCase();
       document.querySelectorAll('.price-val').forEach(el => {
-        const val = el.getAttribute('data-' + cur.toLowerCase());
-        el.textContent = val;
+        el.textContent = el.dataset[c];
       });
-
-      // Update price notes
-      document.querySelectorAll('.price-note').forEach(el => {
-        el.textContent = 'One-time donation · ' + cur;
-      });
-
-      // Update currency symbols
-      document.querySelectorAll('.currency-sym').forEach(el => {
-        el.textContent = '';        // sym already in price-val for CAD/EUR
-      });
-      // For USD we want $XX, for others we already include the sym in data attrs
-      // Actually let's just zero out the sym span since data already has it for CAD/EUR
-      // and USD. Simplify: hide the sym span — we store full prefix in data attrs.
-      document.querySelectorAll('.currency-sym').forEach(el => {
-        el.style.display = 'none';
-      });
-
-      // Update button prices
-      document.querySelectorAll('.btn-price').forEach(el => {
-        el.textContent = el.getAttribute('data-' + cur.toLowerCase());
-      });
-
-      // Update comparison table prices
       document.querySelectorAll('.price-val-table').forEach(el => {
-        el.textContent = el.getAttribute('data-' + cur.toLowerCase());
+        el.textContent = el.dataset[c];
+      });
+      document.querySelectorAll('.btn-price').forEach(el => {
+        el.textContent = el.dataset[c];
+      });
+      document.querySelectorAll('.currency-label').forEach(el => {
+        el.textContent = cur;
       });
     }
 
-    currencySelect.addEventListener('change', function() {
+    document.getElementById('currency-select').addEventListener('change', function () {
       applyCurrency(this.value);
     });
 
-    // Initialize with USD (symbol spans hidden since data attrs include prefix)
     applyCurrency('USD');
 
-    /* ─── Component Loading ─── */
+    /* ── Component Loading ── */
     document.addEventListener('DOMContentLoaded', async () => {
       try {
         if (window.ComponentLoader) {
@@ -912,7 +929,6 @@
           setTimeout(() => { if (window.initializeDropdowns) window.initializeDropdowns(); }, 100);
           await window.ComponentLoader.loadComponent('header', 'header-container');
           await window.ComponentLoader.loadComponent('footer', 'footer-container');
-
           setTimeout(() => {
             document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]').forEach(link => {
               if (link.getAttribute('href') === 'shop.html' || link.getAttribute('data-nav') === 'shop') {
@@ -926,21 +942,32 @@
       }
     });
 
-    /* ─── Scroll-in animation ─── */
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
+    /* ── Scroll fade-in (mirrors index.html pattern) ── */
+    document.querySelectorAll('.fade-in').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+
+    document.querySelectorAll('.delayed-1').forEach(el => {
+      el.style.transitionDelay = '0.15s';
+    });
+
+    function checkFade() {
+      document.querySelectorAll('.fade-in').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
         }
       });
-    }, { threshold: 0.08 });
+    }
 
-    document.querySelectorAll('.rank-card').forEach(card => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(22px)';
-      card.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
-      observer.observe(card);
+    checkFade();
+    let fadeTimer;
+    window.addEventListener('scroll', () => {
+      if (!fadeTimer) {
+        fadeTimer = setTimeout(() => { checkFade(); fadeTimer = null; }, 80);
+      }
     });
   </script>
 </body>
