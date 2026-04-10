@@ -5,508 +5,581 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shop — GeoFrontier Minecraft Server</title>
   
-  <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Main CSS -->
   <link rel="stylesheet" href="css/styles.css">
   
-  <!-- Page-specific styles -->
   <style>
-    /* Shop-specific styles */
+    /* ─── Currency Selector ─── */
+    .currency-selector-bar {
+      background: rgba(15, 23, 42, 0.85);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .currency-selector-bar label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .currency-selector-bar label i {
+      color: var(--accent-gold);
+    }
+
+    .currency-select {
+      background: rgba(30, 41, 59, 0.9);
+      color: var(--text-light);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 8px;
+      padding: 6px 14px 6px 10px;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23d4af37'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 28px;
+    }
+
+    .currency-select:hover,
+    .currency-select:focus {
+      border-color: var(--accent-gold);
+    }
+
+    /* ─── Shop Header ─── */
     .shop-header {
       position: relative;
       background: 
-        linear-gradient(rgba(11, 17, 32, 0.9), rgba(11, 17, 32, 0.95)),
+        linear-gradient(rgba(11, 17, 32, 0.88), rgba(11, 17, 32, 0.96)),
         url('/images/MapChart_Map.png') center/cover no-repeat;
       color: white;
       text-align: center;
-      padding: 80px 20px;
+      padding: 90px 20px 70px;
       border-bottom: 2px solid var(--accent-gold);
       overflow: hidden;
     }
-    
+
     .shop-header::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 20% 50%, rgba(45, 212, 191, 0.15) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 30%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(45, 212, 191, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 80% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
       z-index: 0;
     }
-    
+
     .shop-header-content {
-      max-width: 800px;
+      max-width: 820px;
       margin: 0 auto;
       position: relative;
       z-index: 1;
     }
-    
+
     .shop-header h1 {
       font-family: 'Cinzel', serif;
       font-size: 3.2rem;
-      margin-bottom: 15px;
+      margin-bottom: 14px;
       background: linear-gradient(to right, #f5e6ca, #d4af37);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
-    
+
     .shop-header p {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       opacity: 0.9;
-      max-width: 600px;
-      margin: 0 auto 25px;
+      max-width: 580px;
+      margin: 0 auto 28px;
       color: var(--text-light);
-      font-weight: 500;
     }
-    
+
     .shop-icon {
       font-size: 3.5rem;
       margin-bottom: 20px;
       color: var(--accent-gold);
     }
-    
+
+    /* ─── Layout ─── */
     .shop-container {
-      max-width: 1200px;
-      margin: 50px auto;
+      max-width: 1100px;
+      margin: 56px auto;
       padding: 0 20px;
     }
-    
-    /* Shop Navigation */
-    .shop-nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-bottom: 50px;
-      padding: 20px;
-      background: rgba(30, 41, 59, 0.5);
-      border-radius: 16px;
-      border: 1px solid rgba(212, 175, 55, 0.2);
-    }
-    
-    .shop-nav-btn {
-      padding: 12px 24px;
-      background: rgba(15, 23, 42, 0.7);
-      color: var(--text-light);
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .shop-nav-btn:hover {
-      background: rgba(212, 175, 55, 0.1);
-      border-color: var(--accent-gold);
-      transform: translateY(-2px);
-    }
-    
-    .shop-nav-btn.active {
-      background: var(--accent-gold);
-      color: var(--primary-dark);
-      border-color: var(--accent-gold);
-    }
-    
-    /* Ranks Grid */
+
+    /* ─── Ranks Grid ─── */
     .ranks-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 30px;
-      margin-bottom: 60px;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 36px;
+      margin-bottom: 70px;
     }
-    
-    @media (max-width: 768px) {
-      .ranks-grid {
-        grid-template-columns: 1fr;
-      }
+
+    @media (max-width: 900px) {
+      .ranks-grid { grid-template-columns: 1fr; }
     }
-    
-    /* Rank Cards */
+
+    /* ─── Rank Cards ─── */
     .rank-card {
-      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
-      border-radius: 16px;
+      background: linear-gradient(150deg, rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.97));
+      border-radius: 18px;
       overflow: hidden;
       box-shadow: var(--shadow-heavy);
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      transition: all 0.3s ease;
+      border: 1px solid rgba(212, 175, 55, 0.18);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       position: relative;
     }
-    
+
     .rank-card:hover {
       transform: translateY(-8px);
-      border-color: rgba(212, 175, 55, 0.4);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      border-color: rgba(212, 175, 55, 0.45);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
     }
-    
+
+    /* Sponsor accent */
+    .rank-card.sponsor-card {
+      border-color: rgba(212, 0, 255, 0.22);
+    }
+    .rank-card.sponsor-card:hover {
+      border-color: rgba(212, 0, 255, 0.55);
+    }
+
+    /* Sponsor+ accent */
+    .rank-card.sponsorplus-card {
+      border-color: rgba(255, 170, 0, 0.28);
+    }
+    .rank-card.sponsorplus-card:hover {
+      border-color: rgba(255, 170, 0, 0.6);
+      box-shadow: 0 24px 48px rgba(255, 170, 0, 0.12);
+    }
+
+    /* "Best Value" ribbon for Sponsor+ */
+    .ribbon {
+      position: absolute;
+      top: 18px;
+      right: -10px;
+      background: linear-gradient(135deg, #ffaa00, #d4af37);
+      color: #0f1726;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 18px 5px 12px;
+      border-radius: 4px 0 0 4px;
+      z-index: 5;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .ribbon::after {
+      content: '';
+      position: absolute;
+      right: -10px;
+      top: 0;
+      border-width: 13px 10px 13px 0;
+      border-style: solid;
+      border-color: transparent;
+      border-left-color: #d4af37;
+    }
+
+    /* ─── Rank Header ─── */
     .rank-header {
-      padding: 25px;
+      padding: 32px 28px 24px;
       text-align: center;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
       position: relative;
       overflow: hidden;
     }
-    
+
     .rank-header::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.04), transparent);
       z-index: 0;
     }
-    
+
     .rank-icon {
-      font-size: 3rem;
-      margin-bottom: 15px;
-      z-index: 1;
+      font-size: 3.2rem;
+      margin-bottom: 14px;
       position: relative;
+      z-index: 1;
+      display: block;
     }
-    
+
     .rank-title {
       font-family: 'Cinzel', serif;
-      font-size: 2rem;
-      margin: 0 0 10px 0;
-      z-index: 1;
+      font-size: 2.1rem;
+      margin: 0 0 10px;
       position: relative;
-    }
-    
-    .rank-price {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--accent-teal);
-      margin: 0;
       z-index: 1;
-      position: relative;
     }
-    
-    .rank-price span {
-      font-size: 1rem;
+
+    .rank-subtitle {
+      font-size: 0.9rem;
       color: var(--text-muted);
-      font-weight: normal;
+      margin: 0 0 14px;
+      position: relative;
+      z-index: 1;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
-    
+
+    .rank-price {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .rank-price .currency-sym {
+      font-size: 1.3rem;
+      vertical-align: super;
+      margin-right: 2px;
+    }
+
+    .rank-price .price-note {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 4px;
+    }
+
+    /* Sponsor colours */
+    .sponsor-card .rank-title { color: #d966ff; }
+    .sponsor-card .rank-icon  { color: #d966ff; }
+    .sponsor-card .rank-price { color: #d966ff; }
+
+    /* Sponsor+ colours */
+    .sponsorplus-card .rank-title { color: #ffaa00; }
+    .sponsorplus-card .rank-icon  { color: #ffaa00; }
+    .sponsorplus-card .rank-price { color: #ffaa00; }
+
+    /* ─── Rank Body ─── */
     .rank-body {
-      padding: 30px;
+      padding: 28px 30px;
     }
-    
+
     .rank-section {
-      margin-bottom: 25px;
+      margin-bottom: 24px;
     }
-    
+
     .rank-section h4 {
       color: var(--accent-gold);
-      margin-bottom: 15px;
+      margin: 0 0 14px;
       font-family: 'Cinzel', serif;
-      font-size: 1.2rem;
+      font-size: 1.05rem;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 9px;
     }
-    
+
     .rank-perks {
       list-style: none;
       padding: 0;
       margin: 0;
+      display: grid;
+      gap: 9px;
     }
-    
+
     .rank-perks li {
-      margin-bottom: 10px;
-      padding-left: 25px;
+      padding: 10px 14px 10px 38px;
       position: relative;
       color: var(--text-light);
-      line-height: 1.6;
+      line-height: 1.55;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      font-size: 0.93rem;
     }
-    
+
     .rank-perks li::before {
-      content: '✓';
+      content: '✦';
       position: absolute;
-      left: 0;
-      color: var(--accent-teal);
-      font-weight: bold;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.7rem;
     }
-    
-    .rank-requirements {
-      background: rgba(183, 65, 14, 0.1);
-      padding: 20px;
-      border-radius: 10px;
-      border-left: 3px solid var(--accent-rust);
-      margin-top: 20px;
+
+    .sponsor-card .rank-perks li::before  { color: #d966ff; }
+    .sponsorplus-card .rank-perks li::before { color: #ffaa00; }
+
+    .perk-cmd {
+      font-family: 'Courier New', monospace;
+      font-size: 0.88em;
+      background: rgba(0,0,0,0.3);
+      padding: 1px 5px;
+      border-radius: 4px;
+      letter-spacing: -0.01em;
     }
-    
-    .rank-requirements h5 {
-      color: var(--accent-rust);
-      margin: 0 0 10px 0;
-      font-size: 1rem;
-      display: flex;
+
+    .perk-cooldown {
+      font-size: 0.78em;
+      opacity: 0.65;
+      margin-left: 4px;
+    }
+
+    /* Donation-only badge */
+    .donation-badge {
+      display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      margin-top: 20px;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
-    
-    .rank-requirements ul {
-      margin: 0;
-      padding-left: 20px;
-      color: var(--text-muted);
+
+    .sponsor-card .donation-badge {
+      background: rgba(217, 102, 255, 0.1);
+      border: 1px solid rgba(217, 102, 255, 0.35);
+      color: #d966ff;
     }
-    
-    .rank-requirements li {
-      margin-bottom: 5px;
-      font-size: 0.9rem;
+
+    .sponsorplus-card .donation-badge {
+      background: rgba(255, 170, 0, 0.1);
+      border: 1px solid rgba(255, 170, 0, 0.35);
+      color: #ffaa00;
     }
-    
+
+    /* ─── Buy Button ─── */
     .rank-footer {
-      padding: 20px 30px 30px;
+      padding: 6px 30px 32px;
       text-align: center;
     }
-    
+
     .buy-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
-      padding: 16px 40px;
-      background: linear-gradient(135deg, var(--accent-gold), var(--accent-rust));
-      color: white;
-      text-decoration: none;
+      padding: 15px 36px;
       border-radius: 10px;
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       border: none;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(183, 65, 14, 0.4);
       width: 100%;
-      max-width: 300px;
+      max-width: 320px;
+      text-decoration: none;
+      color: #fff;
     }
-    
-    .buy-btn:hover {
+
+    .sponsor-card .buy-btn {
+      background: linear-gradient(135deg, #9b27b8, #d966ff);
+      box-shadow: 0 5px 20px rgba(217, 102, 255, 0.35);
+    }
+    .sponsor-card .buy-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(183, 65, 14, 0.6);
-      background: linear-gradient(135deg, #e0b530, #d65316);
+      box-shadow: 0 10px 28px rgba(217, 102, 255, 0.55);
     }
-    
-    .buy-btn i {
-      font-size: 1.2rem;
+
+    .sponsorplus-card .buy-btn {
+      background: linear-gradient(135deg, #b87800, #ffaa00);
+      box-shadow: 0 5px 20px rgba(255, 170, 0, 0.35);
+      color: #0f1726;
     }
-    
-    /* Rank-specific colors */
-    .rank-pro .rank-title { color: #2a9d8f; }
-    .rank-pro .rank-icon { color: #2a9d8f; }
-    
-    .rank-envoy .rank-title { color: #4cc9f0; }
-    .rank-envoy .rank-icon { color: #4cc9f0; }
-    
-    .rank-ultra .rank-title { color: #ffaa00; }
-    .rank-ultra .rank-icon { color: #ffaa00; }
-    
-    .rank-mvp .rank-title { color: #7209b7; }
-    .rank-mvp .rank-icon { color: #7209b7; }
-    
-    .rank-apex .rank-title { color: #d4af37; }
-    .rank-apex .rank-icon { color: #d4af37; }
-    
-    /* Other Shop Categories (Hidden by default) */
-    .shop-category {
-      display: none;
+    .sponsorplus-card .buy-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(255, 170, 0, 0.55);
     }
-    
-    .shop-category.active {
-      display: block;
+
+    /* ─── Comparison table ─── */
+    .compare-section {
+      margin: 0 0 70px;
     }
-    
-    /* Currency Packages */
-    .currency-packages {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      margin-top: 30px;
-    }
-    
-    .currency-card {
-      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
-      padding: 30px;
-      border-radius: 16px;
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    
-    .currency-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent-gold);
-    }
-    
-    .currency-card i {
-      font-size: 2.5rem;
-      color: var(--accent-gold);
-      margin-bottom: 15px;
-    }
-    
-    .currency-card h3 {
-      color: var(--accent-teal);
-      margin-bottom: 10px;
+
+    .compare-section h2 {
       font-family: 'Cinzel', serif;
-    }
-    
-    .currency-amount {
-      font-size: 1.8rem;
       color: var(--accent-gold);
-      font-weight: 700;
-      margin-bottom: 15px;
-    }
-    
-    /* Bundle Grid */
-    .bundles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 30px;
-      margin-top: 30px;
-    }
-    
-    .bundle-card {
-      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
-      padding: 30px;
-      border-radius: 16px;
-      border: 1px solid rgba(212, 175, 55, 0.2);
+      font-size: 2rem;
       text-align: center;
-      transition: all 0.3s ease;
+      margin-bottom: 30px;
     }
-    
-    .bundle-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent-gold);
+
+    .compare-table-wrap {
+      overflow-x: auto;
+      border-radius: 14px;
+      border: 1px solid rgba(212, 175, 55, 0.18);
     }
-    
-    .bundle-card i {
-      font-size: 2.5rem;
-      color: var(--accent-gold);
-      margin-bottom: 15px;
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
     }
-    
-    .bundle-card h3 {
-      color: var(--accent-teal);
-      margin-bottom: 15px;
+
+    .compare-table th {
+      padding: 16px 20px;
+      text-align: center;
       font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
     }
-    
-    .bundle-features {
+
+    .compare-table th:first-child {
       text-align: left;
-      margin-bottom: 20px;
+      color: var(--text-muted);
     }
-    
-    .bundle-features li {
-      margin-bottom: 8px;
+
+    .compare-table th.th-sponsor { color: #d966ff; }
+    .compare-table th.th-sponsorplus { color: #ffaa00; }
+
+    .compare-table td {
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
       color: var(--text-light);
-      padding-left: 20px;
-      position: relative;
+      background: rgba(20, 30, 50, 0.6);
     }
-    
-    .bundle-features li::before {
-      content: '★';
-      position: absolute;
-      left: 0;
-      color: var(--accent-gold);
+
+    .compare-table tr:last-child td { border-bottom: none; }
+
+    .compare-table td:first-child {
+      color: var(--text-muted);
+      font-size: 0.88rem;
     }
-    
-    /* Benefits Section */
+
+    .compare-table td:not(:first-child) {
+      text-align: center;
+    }
+
+    .check-yes { color: #2dd4bf; font-size: 1.1rem; }
+    .check-no  { color: rgba(255,255,255,0.18); font-size: 1.1rem; }
+
+    .compare-table tr:hover td {
+      background: rgba(212, 175, 55, 0.05);
+    }
+
+    /* ─── Benefits ─── */
     .benefits-section {
       background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: var(--shadow-heavy);
+      padding: 50px 40px;
+      border-radius: 18px;
       border: 1px solid rgba(212, 175, 55, 0.2);
-      margin: 60px 0;
+      margin: 20px 0 60px;
       text-align: center;
     }
-    
+
     .benefits-section h2 {
       font-family: 'Cinzel', serif;
-      font-size: 2.2rem;
+      font-size: 2rem;
       color: var(--accent-gold);
-      margin: 0 0 30px 0;
+      margin: 0 0 12px;
     }
-    
+
     .benefits-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      margin-top: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 28px;
+      margin-top: 36px;
     }
-    
-    .benefit-item {
-      text-align: center;
-    }
-    
+
     .benefit-item i {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       color: var(--accent-teal);
-      margin-bottom: 15px;
+      margin-bottom: 14px;
     }
-    
+
     .benefit-item h4 {
       color: var(--accent-teal);
-      margin-bottom: 10px;
+      margin: 0 0 8px;
       font-family: 'Cinzel', serif;
+      font-size: 1rem;
     }
-    
+
     .benefit-item p {
       color: var(--text-muted);
       margin: 0;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
     }
-    
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .shop-header h1 {
-        font-size: 2.5rem;
-      }
-      
-      .shop-nav {
-        padding: 15px;
-      }
-      
-      .shop-nav-btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-      }
-      
-      .rank-header {
-        padding: 20px;
-      }
-      
-      .rank-body {
-        padding: 20px;
-      }
-      
-      .benefits-section {
-        padding: 25px;
-      }
-      
-      .currency-packages,
-      .bundles-grid {
-        grid-template-columns: 1fr;
-      }
+
+    /* ─── Payment row ─── */
+    .payment-box {
+      background: rgba(30, 41, 59, 0.5);
+      padding: 28px 30px;
+      border-radius: 14px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      max-width: 580px;
+      margin: 0 auto 60px;
+      text-align: center;
+    }
+
+    .payment-box h3 {
+      color: var(--accent-gold);
+      margin: 0 0 10px;
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+    }
+
+    .payment-box p {
+      color: var(--text-muted);
+      margin: 0 0 20px;
+      font-size: 0.92rem;
+    }
+
+    .payment-icons {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .payment-icons i {
+      font-size: 2rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .payment-icons i:hover { color: var(--accent-gold); }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 640px) {
+      .shop-header h1 { font-size: 2.3rem; }
+      .rank-body { padding: 20px; }
+      .rank-header { padding: 24px 20px 18px; }
+      .rank-footer { padding: 4px 20px 26px; }
+      .benefits-section { padding: 30px 20px; }
     }
   </style>
 </head>
 <body>
-  <!-- Navbar container -->
+
+  <!-- Navbar -->
   <div id="navbar-container"></div>
-  
+
+  <!-- Currency selector bar -->
+  <div class="currency-selector-bar">
+    <label for="currency-select">
+      <i class="fas fa-coins"></i> Display currency:
+    </label>
+    <select class="currency-select" id="currency-select">
+      <option value="USD">🇺🇸 USD — US Dollar</option>
+      <option value="CAD">🇨🇦 CAD — Canadian Dollar</option>
+      <option value="EUR">🇪🇺 EUR — Euro</option>
+    </select>
+  </div>
+
   <!-- Header container -->
   <div id="header-container"></div>
 
@@ -514,576 +587,361 @@
   <header class="shop-header">
     <div class="shop-header-content">
       <div class="shop-icon">
-        <i class="fas fa-gem"></i>
+        <i class="fas fa-crown"></i>
       </div>
       <h1>GeoFrontier Shop</h1>
-      <p>Support the server and unlock exclusive perks, ranks, and rewards</p>
-      <div style="margin-top: 25px;">
-        <a href="#ranks" class="btn" style="margin: 5px;">View Ranks</a>
-        <a href="index.html" class="btn btn-outline" style="margin: 5px;">Back to Home</a>
+      <p>Support the server and unlock exclusive donor perks. All purchases are one-time and permanent.</p>
+      <div style="margin-top: 28px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <a href="#ranks" class="btn">View Ranks</a>
+        <a href="index.html" class="btn btn-outline">Back to Home</a>
       </div>
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main content -->
   <div class="shop-container">
-    
-    <!-- Shop Navigation -->
-    <div class="shop-nav">
-      <button class="shop-nav-btn active" data-category="ranks">
-        <i class="fas fa-crown"></i> Ranks
-      </button>
-      <button class="shop-nav-btn" data-category="currency">
-        <i class="fas fa-coins"></i> Currency
-      </button>
-      <button class="shop-nav-btn" data-category="bundles">
-        <i class="fas fa-gift"></i> Bundles
-      </button>
-      <button class="shop-nav-btn" data-category="cosmetics">
-        <i class="fas fa-palette"></i> Cosmetics
-      </button>
-    </div>
 
-    <!-- Ranks Category (Default) -->
-    <div class="shop-category active" id="ranks-category">
-      <div style="text-align: center; margin-bottom: 40px;">
-        <h2 style="font-family: 'Cinzel', serif; color: var(--accent-gold); font-size: 2.5rem; margin-bottom: 15px;">
-          Server Ranks
-        </h2>
-        <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
-          Progress through ranks with gameplay or unlock instantly with donations. All ranks include previous rank perks.
-        </p>
-      </div>
-
-      <div class="ranks-grid" id="ranks">
-        
-        <!-- PRO RANK -->
-        <div class="rank-card rank-pro">
-          <div class="rank-header">
-            <div class="rank-icon">
-              <i class="fas fa-copper"></i>
-            </div>
-            <h3 class="rank-title">PRO</h3>
-            <p class="rank-price">$4.99<span> (or earn in-game)</span></p>
-          </div>
-          
-          <div class="rank-body">
-            <div class="rank-section">
-              <h4><i class="fas fa-star"></i> Perks</h4>
-              <ul class="rank-perks">
-                <li>1.15x /sell multiplier</li>
-                <li>/sethome (1 home)</li>
-                <li>/seen command</li>
-                <li>/hat command</li>
-                <li>Pro rank tag in chat</li>
-                <li>Access to Pro-only channels</li>
-              </ul>
-            </div>
-            
-            <div class="rank-requirements">
-              <h5><i class="fas fa-tasks"></i> In-Game Requirements</h5>
-              <ul>
-                <li>$50,000 in-game money</li>
-                <li>XP Level 30</li>
-                <li>1 Day Playtime</li>
-                <li>500 Mob Kills</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="rank-footer">
-            <a href="https://buy.geofrontier.net/pro" class="buy-btn" target="_blank" rel="noopener noreferrer">
-              <i class="fas fa-shopping-cart"></i> Purchase Now
-            </a>
-          </div>
-        </div>
-        
-        <!-- ENVOY RANK -->
-        <div class="rank-card rank-envoy">
-          <div class="rank-header">
-            <div class="rank-icon">
-              <i class="fas fa-shield"></i>
-            </div>
-            <h3 class="rank-title">ENVOY</h3>
-            <p class="rank-price">$12.99<span> (or earn in-game)</span></p>
-          </div>
-          
-          <div class="rank-body">
-            <div class="rank-section">
-              <h4><i class="fas fa-star"></i> All Pro Perks, Plus:</h4>
-              <ul class="rank-perks">
-                <li>1.2x /sell multiplier</li>
-                <li>Chat emojis & formatting</li>
-                <li>2 homes with /sethome</li>
-                <li>/shout command (global chat)</li>
-                <li>/nick command (basic)</li>
-                <li>Envoy rank tag & color</li>
-              </ul>
-            </div>
-            
-            <div class="rank-requirements">
-              <h5><i class="fas fa-tasks"></i> In-Game Requirements</h5>
-              <ul>
-                <li>$125,000 in-game money</li>
-                <li>XP Level 55</li>
-                <li>3 Days Playtime</li>
-                <li>2,500 Blocks Mined</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="rank-footer">
-            <a href="https://buy.geofrontier.net/envoy" class="buy-btn" target="_blank" rel="noopener noreferrer">
-              <i class="fas fa-shopping-cart"></i> Purchase Now
-            </a>
-          </div>
-        </div>
-        
-        <!-- ULTRA RANK -->
-        <div class="rank-card rank-ultra">
-          <div class="rank-header">
-            <div class="rank-icon">
-              <i class="fas fa-bolt"></i>
-            </div>
-            <h3 class="rank-title">ULTRA</h3>
-            <p class="rank-price">$24.99<span> (or earn in-game)</span></p>
-          </div>
-          
-          <div class="rank-body">
-            <div class="rank-section">
-              <h4><i class="fas fa-star"></i> All Envoy Perks, Plus:</h4>
-              <ul class="rank-perks">
-                <li>1.25x /sell multiplier</li>
-                <li>3 homes with /sethome</li>
-                <li>Coloured /nick (select colors)</li>
-                <li>/tpa command</li>
-                <li>Access to Beta features</li>
-                <li>Ultra-only cosmetics</li>
-              </ul>
-            </div>
-            
-            <div class="rank-requirements">
-              <h5><i class="fas fa-tasks"></i> In-Game Requirements</h5>
-              <ul>
-                <li>$350,000 in-game money</li>
-                <li>XP Level 75</li>
-                <li>6 Days Playtime</li>
-                <li>1,500 Mob Kills</li>
-                <li>75,000 Blocks Travelled</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="rank-footer">
-            <a href="https://buy.geofrontier.net/ultra" class="buy-btn" target="_blank" rel="noopener noreferrer">
-              <i class="fas fa-shopping-cart"></i> Purchase Now
-            </a>
-          </div>
-        </div>
-        
-        <!-- MVP RANK -->
-        <div class="rank-card rank-mvp">
-          <div class="rank-header">
-            <div class="rank-icon">
-              <i class="fas fa-gem"></i>
-            </div>
-            <h3 class="rank-title">MVP</h3>
-            <p class="rank-price">$49.99<span> (or earn in-game)</span></p>
-          </div>
-          
-          <div class="rank-body">
-            <div class="rank-section">
-              <h4><i class="fas fa-star"></i> All Ultra Perks, Plus:</h4>
-              <ul class="rank-perks">
-                <li>1.3x /sell multiplier</li>
-                <li>4 homes with /sethome</li>
-                <li>Gold /nick color</li>
-                <li>Custom join message</li>
-                <li>/town fly (in claims)</li>
-                <li>Priority support queue</li>
-              </ul>
-            </div>
-            
-            <div class="rank-requirements">
-              <h5><i class="fas fa-tasks"></i> In-Game Requirements</h5>
-              <ul>
-                <li>$2,000,000 in-game money</li>
-                <li>XP Level 120</li>
-                <li>12 Days Playtime</li>
-                <li>7,500 Mob Kills</li>
-                <li>7,500 Blocks Mined</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="rank-footer">
-            <a href="https://buy.geofrontier.net/mvp" class="buy-btn" target="_blank" rel="noopener noreferrer">
-              <i class="fas fa-shopping-cart"></i> Purchase Now
-            </a>
-          </div>
-        </div>
-        
-        <!-- APEX RANK -->
-        <div class="rank-card rank-apex">
-          <div class="rank-header">
-            <div class="rank-icon">
-              <i class="fas fa-fire"></i>
-            </div>
-            <h3 class="rank-title">APEX</h3>
-            <p class="rank-price">$99.99<span> (or earn in-game)</span></p>
-          </div>
-          
-          <div class="rank-body">
-            <div class="rank-section">
-              <h4><i class="fas fa-star"></i> All MVP Perks, Plus:</h4>
-              <ul class="rank-perks">
-                <li>1.5x /sell multiplier</li>
-                <li>5 homes with /sethome</li>
-                <li>/near command</li>
-                <li>/repair hand command</li>
-                <li>Exclusive particle effects</li>
-                <li>Apex-only tag & cosmetics</li>
-                <li>Vote on server features</li>
-              </ul>
-            </div>
-            
-            <div class="rank-requirements">
-              <h5><i class="fas fa-tasks"></i> In-Game Requirements</h5>
-              <ul>
-                <li>$7,500,000 in-game money</li>
-                <li>XP Level 200</li>
-                <li>22 Days Playtime</li>
-                <li>300,000 Blocks Travelled</li>
-                <li>30,000 Blocks Mined</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="rank-footer">
-            <a href="https://buy.geofrontier.net/apex" class="buy-btn" target="_blank" rel="noopener noreferrer">
-              <i class="fas fa-shopping-cart"></i> Purchase Now
-            </a>
-          </div>
-        </div>
-        
-      </div> <!-- End Ranks Grid -->
-    </div>
-
-    <!-- Currency Category -->
-    <div class="shop-category" id="currency-category">
-      <div style="text-align: center; margin-bottom: 40px;">
-        <h2 style="font-family: 'Cinzel', serif; color: var(--accent-gold); font-size: 2.5rem; margin-bottom: 15px;">
-          In-Game Currency
-        </h2>
-        <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
-          Purchase server currency to speed up your progress, claim land, and buy items from other players
-        </p>
-      </div>
-
-      <div class="currency-packages">
-        <div class="currency-card">
-          <i class="fas fa-coins"></i>
-          <h3>Starter Pack</h3>
-          <div class="currency-amount">$10,000</div>
-          <p style="color: var(--text-muted); margin-bottom: 20px;">Perfect for new players</p>
-          <a href="https://buy.geofrontier.net/currency1" class="buy-btn" style="max-width: 200px;" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-shopping-cart"></i> $2.99
-          </a>
-        </div>
-        
-        <div class="currency-card">
-          <i class="fas fa-money-bill-wave"></i>
-          <h3>Trader Pack</h3>
-          <div class="currency-amount">$50,000</div>
-          <p style="color: var(--text-muted); margin-bottom: 20px;">Great for active traders</p>
-          <a href="https://buy.geofrontier.net/currency2" class="buy-btn" style="max-width: 200px;" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-shopping-cart"></i> $9.99
-          </a>
-        </div>
-        
-        <div class="currency-card">
-          <i class="fas fa-gem"></i>
-          <h3>Tycoon Pack</h3>
-          <div class="currency-amount">$250,000</div>
-          <p style="color: var(--text-muted); margin-bottom: 20px;">For serious investors</p>
-          <a href="https://buy.geofrontier.net/currency3" class="buy-btn" style="max-width: 200px;" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-shopping-cart"></i> $39.99
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bundles Category -->
-    <div class="shop-category" id="bundles-category">
-      <div style="text-align: center; margin-bottom: 40px;">
-        <h2 style="font-family: 'Cinzel', serif; color: var(--accent-gold); font-size: 2.5rem; margin-bottom: 15px;">
-          Value Bundles
-        </h2>
-        <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
-          Special packages that combine multiple items for maximum value
-        </p>
-      </div>
-
-      <div class="bundles-grid">
-        <div class="bundle-card">
-          <i class="fas fa-star"></i>
-          <h3>Starter Bundle</h3>
-          <p style="color: var(--text-muted); margin-bottom: 20px;">Everything a new player needs</p>
-          <div class="bundle-features">
-            <ul>
-              <li>Pro Rank</li>
-              <li>$25,000 in-game currency</li>
-              <li>Starter tool kit</li>
-              <li>3x Vote Keys</li>
-            </ul>
-          </div>
-          <a href="https://buy.geofrontier.net/bundle1" class="buy-btn" style="max-width: 250px;" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-shopping-cart"></i> $9.99 (Save 25%)
-          </a>
-        </div>
-        
-        <div class="bundle-card">
-          <i class="fas fa-crown"></i>
-          <h3>Royal Bundle</h3>
-          <p style="color: var(--text-muted); margin-bottom: 20px;">For serious players</p>
-          <div class="bundle-features">
-            <ul>
-              <li>Ultra Rank</li>
-              <li>$100,000 in-game currency</li>
-              <li>Enchanted diamond tools</li>
-              <li>10x Vote Keys</li>
-              <li>Exclusive particle effect</li>
-            </ul>
-          </div>
-          <a href="https://buy.geofrontier.net/bundle2" class="buy-btn" style="max-width: 250px;" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-shopping-cart"></i> $34.99 (Save 30%)
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Cosmetics Category -->
-    <div class="shop-category" id="cosmetics-category">
-      <div style="text-align: center; margin-bottom: 40px;">
-        <h2 style="font-family: 'Cinzel', serif; color: var(--accent-gold); font-size: 2.5rem; margin-bottom: 15px;">
-          Cosmetics
-        </h2>
-        <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
-          Customize your player experience with unique visual effects and items
-        </p>
-      </div>
-
-      <div class="currency-packages">
-        <div class="currency-card">
-          <i class="fas fa-hat-wizard"></i>
-          <h3>Particle Pack</h3>
-          <p style="color: var(--text-muted); margin-bottom: 20px;">15 unique particle effects</p>
-          <a href="https://buy.geofrontier.net/cosmetic1" class="buy-btn" style="max-width: 200px;" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-shopping-cart"></i> $4.99
-          </a>
-        </div>
-        
-        <div class="currency-card">
-          <i class="fas fa-palette"></i>
-          <h3>Color Pack</h3>
-          <p style="color: var(--text-muted); margin-bottom: 20px;">Unlock all nickname colors</p>
-          <a href="https://buy.geofrontier.net/cosmetic2" class="buy-btn" style="max-width: 200px;" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-shopping-cart"></i> $3.99
-          </a>
-        </div>
-        
-        <div class="currency-card">
-          <i class="fas fa-dragon"></i>
-          <h3>Pet Pack</h3>
-          <p style="color: var(--text-muted); margin-bottom: 20px;">Special cosmetic pets</p>
-          <a href="https://buy.geofrontier.net/cosmetic3" class="buy-btn" style="max-width: 200px;" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-shopping-cart"></i> $7.99
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Benefits Section -->
-    <div class="benefits-section">
-      <h2><i class="fas fa-heart"></i> Why Support GeoFrontier?</h2>
-      <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto 30px;">
-        Your purchases directly support server maintenance, development, and the creation of new features
+    <!-- Section heading -->
+    <div style="text-align: center; margin-bottom: 48px;" id="ranks">
+      <h2 style="font-family: 'Cinzel', serif; color: var(--accent-gold); font-size: 2.5rem; margin-bottom: 14px;">
+        Donor Ranks
+      </h2>
+      <p style="color: var(--text-muted); max-width: 620px; margin: 0 auto; line-height: 1.7;">
+        GeoFrontier offers two exclusive donor ranks. These ranks are <strong style="color: var(--text-light);">donation-only</strong> — 
+        they cannot be unlocked through gameplay and directly fund server hosting, development, and events.
       </p>
-      
+    </div>
+
+    <!-- Rank Cards -->
+    <div class="ranks-grid">
+
+      <!-- SPONSOR -->
+      <div class="rank-card sponsor-card">
+        <div class="rank-header">
+          <span class="rank-icon"><i class="fas fa-totem-pole" style="color:#d966ff"></i>
+            <!-- fallback icon in case fa-totem-pole is unavailable -->
+          </span>
+          <h3 class="rank-title">Sponsor</h3>
+          <p class="rank-subtitle">Donor Rank · Tier I</p>
+          <p class="rank-price">
+            <span class="currency-sym" data-sym="$">$</span><span class="price-val" data-usd="10" data-cad="13.99" data-eur="9.29">10</span>
+            <span class="price-note">One-time donation · USD</span>
+          </p>
+        </div>
+
+        <div class="rank-body">
+          <div class="rank-section">
+            <h4><i class="fas fa-star"></i> Perks &amp; Commands</h4>
+            <ul class="rank-perks">
+              <li>
+                <span class="perk-cmd">/kit sponsor</span>
+                <span class="perk-cooldown">(24h cooldown)</span>
+              </li>
+              <li>
+                <span class="perk-cmd">/keyall war</span>
+                <span class="perk-cooldown">(48h cooldown)</span>
+              </li>
+              <li>
+                <span class="perk-cmd">/globalbuff</span>
+                <span class="perk-cooldown">(48h cooldown)</span>
+              </li>
+              <li>
+                <span class="perk-cmd">/vanity</span> — Glowing particle effect
+              </li>
+              <li>Sponsor badge displayed in chat</li>
+              <li>1.5× XP gain on the Battle Pass <span class="perk-cmd">/pass</span></li>
+              <li>1.5× rewards from <span class="perk-cmd">/playtime</span></li>
+            </ul>
+
+            <div style="display: flex; justify-content: center;">
+              <span class="donation-badge">
+                <i class="fas fa-lock"></i> Donation-only rank
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rank-footer">
+          <a href="https://buy.geofrontier.net/sponsor" class="buy-btn" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Purchase Sponsor — <span class="btn-price" data-usd="$10" data-cad="CA$13.99" data-eur="€9.29">$10</span></span>
+          </a>
+        </div>
+      </div>
+
+      <!-- SPONSOR+ -->
+      <div class="rank-card sponsorplus-card">
+        <div class="ribbon">Best Value</div>
+        <div class="rank-header">
+          <span class="rank-icon"><i class="fas fa-star" style="color:#ffaa00"></i></span>
+          <h3 class="rank-title">Sponsor<span style="color:#e03030;">+</span></h3>
+          <p class="rank-subtitle">Donor Rank · Tier II</p>
+          <p class="rank-price">
+            <span class="currency-sym" data-sym="$">$</span><span class="price-val" data-usd="20" data-cad="27.99" data-eur="18.59">20</span>
+            <span class="price-note">One-time donation · USD</span>
+          </p>
+        </div>
+
+        <div class="rank-body">
+          <div class="rank-section">
+            <h4><i class="fas fa-star"></i> All Sponsor Perks, Plus:</h4>
+            <ul class="rank-perks">
+              <li>
+                <span class="perk-cmd">/kit sponsor+</span>
+                <span class="perk-cooldown">(24h cooldown)</span>
+              </li>
+              <li>
+                <span class="perk-cmd">/events</span>
+                <span class="perk-cooldown">(72h cooldown)</span> — trigger server events
+              </li>
+              <li>
+                <span class="perk-cmd">/holiday</span>
+                <span class="perk-cooldown">(1-week cooldown)</span> — seasonal world effects
+              </li>
+              <li>Immortalized with a sign / plaque at spawn</li>
+              <li>Sponsor<span style="color:#e03030; font-weight:700;">+</span> badge in chat</li>
+              <li>2× XP gain on the Battle Pass <span class="perk-cmd">/pass</span></li>
+              <li>2× rewards from <span class="perk-cmd">/playtime</span></li>
+            </ul>
+
+            <div style="display: flex; justify-content: center;">
+              <span class="donation-badge">
+                <i class="fas fa-lock"></i> Donation-only rank
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rank-footer">
+          <a href="https://buy.geofrontier.net/sponsorplus" class="buy-btn" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Purchase Sponsor+ — <span class="btn-price" data-usd="$20" data-cad="CA$27.99" data-eur="€18.59">$20</span></span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <!-- End Rank Cards -->
+
+    <!-- Comparison Table -->
+    <div class="compare-section">
+      <h2>Rank Comparison</h2>
+      <div class="compare-table-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Perk</th>
+              <th class="th-sponsor"><i class="fas fa-totem-pole"></i> Sponsor</th>
+              <th class="th-sponsorplus"><i class="fas fa-star"></i> Sponsor+</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>/kit (24h)</td>
+              <td><span class="check-yes">✦</span></td>
+              <td><span class="check-yes">✦</span></td>
+            </tr>
+            <tr>
+              <td>/keyall war (48h)</td>
+              <td><span class="check-yes">✦</span></td>
+              <td><span class="check-yes">✦</span></td>
+            </tr>
+            <tr>
+              <td>/globalbuff (48h)</td>
+              <td><span class="check-yes">✦</span></td>
+              <td><span class="check-yes">✦</span></td>
+            </tr>
+            <tr>
+              <td>/vanity (glowing effect)</td>
+              <td><span class="check-yes">✦</span></td>
+              <td><span class="check-yes">✦</span></td>
+            </tr>
+            <tr>
+              <td>Chat badge</td>
+              <td><span class="check-yes">✦</span></td>
+              <td><span class="check-yes">✦</span></td>
+            </tr>
+            <tr>
+              <td>XP multiplier (/pass)</td>
+              <td style="color:#d966ff; font-weight:600;">1.5×</td>
+              <td style="color:#ffaa00; font-weight:600;">2×</td>
+            </tr>
+            <tr>
+              <td>/playtime rewards multiplier</td>
+              <td style="color:#d966ff; font-weight:600;">1.5×</td>
+              <td style="color:#ffaa00; font-weight:600;">2×</td>
+            </tr>
+            <tr>
+              <td>/events (72h)</td>
+              <td><span class="check-no">—</span></td>
+              <td><span class="check-yes">✦</span></td>
+            </tr>
+            <tr>
+              <td>/holiday (1-week)</td>
+              <td><span class="check-no">—</span></td>
+              <td><span class="check-yes">✦</span></td>
+            </tr>
+            <tr>
+              <td>Immortalized at spawn</td>
+              <td><span class="check-no">—</span></td>
+              <td><span class="check-yes">✦</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600; color: var(--text-light);">Price</td>
+              <td style="color:#d966ff; font-weight: 700;">
+                <span class="price-val-table" data-usd="$10" data-cad="CA$13.99" data-eur="€9.29">$10</span>
+              </td>
+              <td style="color:#ffaa00; font-weight: 700;">
+                <span class="price-val-table" data-usd="$20" data-cad="CA$27.99" data-eur="€18.59">$20</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Why Support -->
+    <div class="benefits-section">
+      <h2><i class="fas fa-heart" style="color: #e03030; margin-right: 10px;"></i> Why Support GeoFrontier?</h2>
+      <p style="color: var(--text-muted); max-width: 660px; margin: 0 auto; line-height: 1.7;">
+        Every donation goes directly toward keeping the server online, funding custom development, 
+        and running in-game events for the community.
+      </p>
       <div class="benefits-grid">
         <div class="benefit-item">
           <i class="fas fa-server"></i>
-          <h4>Server Maintenance</h4>
-          <p>Keep the server running smoothly with high performance and minimal downtime</p>
+          <h4>Server Uptime</h4>
+          <p>High-performance hosting so the geopolitical world never goes dark.</p>
         </div>
-        
         <div class="benefit-item">
           <i class="fas fa-code"></i>
-          <h4>New Features</h4>
-          <p>Fund development of custom plugins, events, and gameplay systems</p>
+          <h4>Custom Development</h4>
+          <p>Funding for bespoke plugins, nation mechanics, and world-building tools.</p>
         </div>
-        
         <div class="benefit-item">
-          <i class="fas fa-users"></i>
-          <h4>Community Growth</h4>
-          <p>Support advertising and community events to grow our player base</p>
+          <i class="fas fa-flag"></i>
+          <h4>Events &amp; Wars</h4>
+          <p>Resources for staff-run geopolitical events, diplomacy servers, and world wars.</p>
         </div>
-        
         <div class="benefit-item">
           <i class="fas fa-shield-alt"></i>
-          <h4>Staff Support</h4>
-          <p>Maintain an active staff team for moderation and player support</p>
+          <h4>Staff &amp; Moderation</h4>
+          <p>Maintain an active team keeping the world fair, balanced, and enjoyable.</p>
         </div>
       </div>
     </div>
 
-    <!-- Payment Methods -->
-    <div style="text-align: center; margin: 60px 0 30px;">
-      <div style="background: rgba(30, 41, 59, 0.5); padding: 25px; border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.2); max-width: 600px; margin: 0 auto;">
-        <h3 style="color: var(--accent-gold); margin-bottom: 15px; font-family: 'Cinzel', serif;">
-          <i class="fas fa-credit-card"></i> Secure Payments
-        </h3>
-        <p style="color: var(--text-muted); margin-bottom: 20px;">
-          We accept all major payment methods through our secure Tebex payment processor
-        </p>
-        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
-          <i class="fab fa-cc-visa" style="font-size: 2rem; color: var(--text-muted);"></i>
-          <i class="fab fa-cc-mastercard" style="font-size: 2rem; color: var(--text-muted);"></i>
-          <i class="fab fa-cc-paypal" style="font-size: 2rem; color: var(--text-muted);"></i>
-          <i class="fab fa-cc-stripe" style="font-size: 2rem; color: var(--text-muted);"></i>
-        </div>
+    <!-- Payment -->
+    <div class="payment-box">
+      <h3><i class="fas fa-credit-card"></i> Secure Payments via Tebex</h3>
+      <p>All transactions are processed securely. Prices shown in your selected currency are approximate — final billing is in USD via Tebex.</p>
+      <div class="payment-icons">
+        <i class="fab fa-cc-visa"></i>
+        <i class="fab fa-cc-mastercard"></i>
+        <i class="fab fa-cc-paypal"></i>
+        <i class="fab fa-cc-stripe"></i>
       </div>
     </div>
-    
+
   </div>
+  <!-- End shop-container -->
 
-  <!-- Footer container -->
+  <!-- Footer -->
   <div id="footer-container"></div>
 
-  <!-- Load component loader -->
   <script src="js/components-loader.js"></script>
-  
-  <!-- Page-specific JavaScript -->
+
   <script>
-    // Initialize the page
+    /* ─── Currency Switcher ─── */
+    const currencySelect = document.getElementById('currency-select');
+
+    const RATES = {
+      USD: { sym: '$',    label: 'USD' },
+      CAD: { sym: 'CA$',  label: 'CAD' },
+      EUR: { sym: '€',    label: 'EUR' }
+    };
+
+    function applyCurrency(cur) {
+      const info = RATES[cur];
+
+      // Update big price displays
+      document.querySelectorAll('.price-val').forEach(el => {
+        const val = el.getAttribute('data-' + cur.toLowerCase());
+        el.textContent = val;
+      });
+
+      // Update price notes
+      document.querySelectorAll('.price-note').forEach(el => {
+        el.textContent = 'One-time donation · ' + cur;
+      });
+
+      // Update currency symbols
+      document.querySelectorAll('.currency-sym').forEach(el => {
+        el.textContent = '';        // sym already in price-val for CAD/EUR
+      });
+      // For USD we want $XX, for others we already include the sym in data attrs
+      // Actually let's just zero out the sym span since data already has it for CAD/EUR
+      // and USD. Simplify: hide the sym span — we store full prefix in data attrs.
+      document.querySelectorAll('.currency-sym').forEach(el => {
+        el.style.display = 'none';
+      });
+
+      // Update button prices
+      document.querySelectorAll('.btn-price').forEach(el => {
+        el.textContent = el.getAttribute('data-' + cur.toLowerCase());
+      });
+
+      // Update comparison table prices
+      document.querySelectorAll('.price-val-table').forEach(el => {
+        el.textContent = el.getAttribute('data-' + cur.toLowerCase());
+      });
+    }
+
+    currencySelect.addEventListener('change', function() {
+      applyCurrency(this.value);
+    });
+
+    // Initialize with USD (symbol spans hidden since data attrs include prefix)
+    applyCurrency('USD');
+
+    /* ─── Component Loading ─── */
     document.addEventListener('DOMContentLoaded', async () => {
-      console.log('DOM loaded, starting component loading...');
-      
       try {
-        // Load components using ComponentLoader if available
         if (window.ComponentLoader) {
-          console.log('Using ComponentLoader...');
-          
-          // Load navbar first
           await window.ComponentLoader.loadComponent('navbar', 'navbar-container');
-          console.log('Navbar loaded');
-          
-          // Initialize dropdowns after navbar loads
-          setTimeout(() => {
-            if (window.initializeDropdowns) {
-              window.initializeDropdowns();
-            }
-          }, 100);
-          
-          // Load other components
+          setTimeout(() => { if (window.initializeDropdowns) window.initializeDropdowns(); }, 100);
           await window.ComponentLoader.loadComponent('header', 'header-container');
-          console.log('Header loaded');
-          
           await window.ComponentLoader.loadComponent('footer', 'footer-container');
-          console.log('Footer loaded');
-          
-          // Set active navigation for this page
+
           setTimeout(() => {
-            const navLinks = document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]');
-            navLinks.forEach(link => {
-              if (link.getAttribute('href') === 'shop.html' || 
-                  link.getAttribute('data-nav') === 'shop') {
+            document.querySelectorAll('.main-nav a[data-nav], nav a[data-nav]').forEach(link => {
+              if (link.getAttribute('href') === 'shop.html' || link.getAttribute('data-nav') === 'shop') {
                 link.classList.add('active');
               }
             });
           }, 500);
-          
-        } else {
-          console.log('ComponentLoader not found, loading manually');
-          // Fallback manual loading would go here
         }
-        
-        // Initialize shop navigation
-        initShopNavigation();
-        
-        console.log('Shop page initialization complete!');
-        
-      } catch (error) {
-        console.error('Error during page initialization:', error);
+      } catch (e) {
+        console.error('Component load error:', e);
       }
     });
-    
-    // Shop navigation functionality
-    function initShopNavigation() {
-      const navButtons = document.querySelectorAll('.shop-nav-btn');
-      const categories = document.querySelectorAll('.shop-category');
-      
-      navButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          // Remove active class from all buttons
-          navButtons.forEach(btn => btn.classList.remove('active'));
-          
-          // Add active class to clicked button
-          this.classList.add('active');
-          
-          const category = this.getAttribute('data-category');
-          
-          // Hide all categories
-          categories.forEach(cat => {
-            cat.classList.remove('active');
-          });
-          
-          // Show selected category
-          const selectedCategory = document.getElementById(`${category}-category`);
-          if (selectedCategory) {
-            selectedCategory.classList.add('active');
-            
-            // Smooth scroll to category
-            selectedCategory.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        });
+
+    /* ─── Scroll-in animation ─── */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
       });
-    }
-    
-    // Global dropdown initialization function (if not already defined)
-    if (typeof initializeDropdowns !== 'function') {
-      window.initializeDropdowns = function() {
-        console.log('Initializing dropdowns...');
-        // Implementation from index.html
-      };
-    }
-    
-    // Add animation to rank cards on scroll
-    function animateRankCards() {
-      const rankCards = document.querySelectorAll('.rank-card');
-      
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-          }
-        });
-      }, { threshold: 0.1 });
-      
-      rankCards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        observer.observe(card);
-      });
-    }
-    
-    // Initialize animations after page loads
-    setTimeout(animateRankCards, 1000);
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.rank-card').forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(22px)';
+      card.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+      observer.observe(card);
+    });
   </script>
 </body>
 </html>
